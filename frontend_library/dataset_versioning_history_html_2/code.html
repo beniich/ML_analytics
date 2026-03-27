@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dataset Versioning &amp; History - DataForge</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="layout-utilities">
+    .timeline-line {
+      position: absolute;
+      left: 23px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #E5E7EB;
+      z-index: 0;
+    }
+    .timeline-dot {
+      position: relative;
+      z-index: 10;
+      width: 12px;
+      height: 12px;
+      border-radius: 9999px;
+      border: 2px solid #E5E7EB;
+      background-color: #fff;
+      margin-top: 32px;
+    }
+    .timeline-dot.active {
+      background-color: #3B82F6;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-900 min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<!-- Logo and Nav -->
+<div class="flex items-center space-x-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+<span class="text-white font-bold text-xl">D</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-800">DataForge</span>
+</div>
+<nav class="hidden md:flex space-x-8">
+<a class="text-slate-500 hover:text-slate-900 font-medium" href="#">Projects</a>
+<a class="text-blue-600 border-b-2 border-blue-600 px-1 pt-1 font-medium" href="#">Datasets</a>
+<a class="text-slate-500 hover:text-slate-900 font-medium" href="#">Analysis</a>
+<a class="text-slate-500 hover:text-slate-900 font-medium" href="#">Team</a>
+</nav>
+</div>
+<!-- User Profile -->
+<div class="flex items-center gap-3">
+<img alt="Sarah Chen" class="w-8 h-8 rounded-full border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTpmw-J1n8aKadBb65ViovBZtkAAmWaVCMKFAWjPopyCkDstF23KskEijUkRBN-97_Bl9ULAZhQ4MyPVaohB5f4W-qnCSBodffmD1b4UF8Z3nLsKva5h6j_9_aKzzsgY6ay8Vdu16pxOFaZlMCEvkzmJdzISCE4vGpBIVI7ThJr8wUQm4WgBU1NW1EwDQ2w_rR5_Tol_AVmzsbniiBX0mQ9EUrLWb3JHW3hmFgws476dNuCXDFnQfd6C9BDXVGcFCE7fy443x58is"/>
+<button class="flex items-center text-sm font-medium text-slate-700 hover:text-slate-900">
+            Sarah Chen
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- BEGIN: Breadcrumbs & PageTitle -->
+<nav aria-label="Breadcrumb" class="flex text-sm text-slate-500 mb-4">
+<ol class="flex items-center space-x-2">
+<li><a class="hover:text-blue-600" href="#">Projects</a></li>
+<li><svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path></svg></li>
+<li><a class="hover:text-blue-600" href="#">Alpha Analysis - Genomic Data</a></li>
+<li><svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path></svg></li>
+<li class="font-medium text-slate-900">Dataset Versioning &amp; History</li>
+</ol>
+</nav>
+<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+<div>
+<h1 class="text-3xl font-bold text-slate-900">Dataset Versioning &amp; History</h1>
+<p class="text-slate-600 mt-1">Manage and review historical dataset versions for the Alpha Analysis project.</p>
+</div>
+<div class="mt-4 md:mt-0">
+<button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow-sm transition-colors">
+          Upload New Version
+        </button>
+</div>
+</div>
+<!-- END: Breadcrumbs & PageTitle -->
+<!-- BEGIN: VersionListSection -->
+<section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+<!-- Toolbar -->
+<div class="p-4 border-b border-slate-100 flex justify-end gap-3 bg-slate-50/50">
+<button class="p-2 text-slate-600 hover:bg-white hover:shadow-sm rounded-md border border-transparent hover:border-slate-200 transition-all">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="bg-slate-100 text-slate-400 px-4 py-2 rounded-lg font-medium cursor-not-allowed">
+          Compare Selected Versions
+        </button>
+</div>
+<div class="relative p-6 sm:p-8">
+<!-- Vertical Timeline Line -->
+<div class="timeline-line ml-6 sm:ml-8"></div>
+<div class="space-y-8">
+<!-- BEGIN: VersionItem (Current) -->
+<div class="relative flex gap-6 group" data-purpose="version-row">
+<div class="timeline-dot active shrink-0"></div>
+<div class="flex-1 bg-white border-2 border-blue-100 rounded-xl p-6 shadow-sm ring-1 ring-blue-50">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h3 class="text-lg font-bold text-slate-900">Version 4 (Current)</h3>
+<span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Active</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 26, 2023, 10:45 AM</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<div class="flex items-center gap-1.5">
+<img alt="Sarah Chen" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqw8gfAIKP4auK6xkvMgaCOu4bEaqhSbPNIb_0DjvS7ZJU0ZgRGrzXlQeYn7FgON_vHCd3z4x5LJxykIoCejLpL7HZEOc7lekLWnsxIs25Okr_GrIYaQExaO2ARoeS3FmEtPC73QsfeH7dKqrCmE50kBfwserOW0h_zUrHme4q5DEH9-BA_XTWwj_6thver3-PSUn53JTtdtF9ku2Ons9ONywicgc6LdYuR3Z_IA3IsX3o3hXl7kIcB2UaQOCXV8h4GxoMaFuJY7Y"/>
+<span class="font-medium text-slate-700">Sarah Chen</span>
+</div>
+</div>
+<p class="text-slate-600 leading-relaxed">Updated genomic sequence data for cohort B. Includes fix for variant calling.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-start md:self-center">
+<button class="px-4 py-2 text-slate-400 font-semibold bg-slate-50 rounded-lg cursor-not-allowed border border-slate-200">Restore</button>
+<button class="px-6 py-2 text-blue-600 font-semibold border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors">Compare</button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: VersionItem -->
+<!-- BEGIN: VersionItem (Archived 3) -->
+<div class="relative flex gap-6 group" data-purpose="version-row">
+<div class="timeline-dot shrink-0"></div>
+<div class="flex-1 bg-white border border-slate-200 rounded-xl p-6 hover:border-slate-300 transition-colors">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h3 class="text-lg font-bold text-slate-900">Version 3</h3>
+<span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Archived</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 24, 2023, 3:30 PM</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<div class="flex items-center gap-1.5">
+<img alt="David Miller" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY3ioO0dY4yRgKZzHCSzhvRuiszsOXlJDDhIPQqmMS96H7i7qIl1OzkOqDOoFHiUYNA7awYPEsmQtBV2oNsQITJf2luoXXDCuw7BgVDQFavGM0jDdMZGP456W3mjzHQ322hPBeqWWLzLp02g-MSx28x_SwIUOZ6EGK2F90VVP0wS-yED9NtmZM3PqvQ1YvJ262Kqq6ADZV9vrwmzPqjmjY1X_SZ0mavYSQV1CLKJYwOK3t_JUAhaNJRm1JduGReUw8uqiMDDeY9Ew"/>
+<span class="font-medium text-slate-700">David Miller</span>
+</div>
+</div>
+<p class="text-slate-600 leading-relaxed">Initial cohort B sequence data. Pending variant calling fix.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-start md:self-center">
+<button class="px-4 py-2 text-slate-700 font-semibold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Restore</button>
+<button class="px-6 py-2 text-slate-700 font-semibold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Compare</button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: VersionItem -->
+<!-- BEGIN: VersionItem (Archived 2) -->
+<div class="relative flex gap-6 group" data-purpose="version-row">
+<div class="timeline-dot shrink-0"></div>
+<div class="flex-1 bg-white border border-slate-200 rounded-xl p-6 hover:border-slate-300 transition-colors">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h3 class="text-lg font-bold text-slate-900">Version 2</h3>
+<span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Archived</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 20, 2023, 9:15 AM</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<div class="flex items-center gap-1.5">
+<img alt="Sarah Chen" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ0iQR4sYR9iu5QXkq7RiGlXCOEGcnSsRj91a0LHpY1wuNP4k3q-UVJSn_zqZGo-L5-rAPLp3ZQWMWV9s7YVidCgOyP_GY7-lmnLKSEmXbi5c-VS7FqzOJLszluJUG90wce9yOda20FwZn6fs17y5sDj_MKXGwvdFbBoO9acmANlQnIsWGXZ_K2RT6w7hZZt5SEHEccNJgtpsJI8Z862Apxbt66jGs6vxNOaSFnRd3a66jkS7PigRKo_HnwDx7YPTQJrDZPBDT-Co"/>
+<span class="font-medium text-slate-700">Sarah Chen</span>
+</div>
+</div>
+<p class="text-slate-600 leading-relaxed">Refined cohort A data with additional metadata.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-start md:self-center">
+<button class="px-4 py-2 text-slate-700 font-semibold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Restore</button>
+<button class="px-6 py-2 text-slate-700 font-semibold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Compare</button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: VersionItem -->
+<!-- BEGIN: VersionItem (Baseline) -->
+<div class="relative flex gap-6 group" data-purpose="version-row">
+<div class="timeline-dot shrink-0"></div>
+<div class="flex-1 bg-white border border-slate-200 rounded-xl p-6 hover:border-slate-300 transition-colors">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h3 class="text-lg font-bold text-slate-900">Version 1 (Baseline)</h3>
+<span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Archived</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 15, 2023, 11:00 AM</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<div class="flex items-center gap-1.5">
+<img alt="Emily Davis" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS-mWEiljfdiS1h0c2DNDiC8Wj5kb2QbqLi7r8bIK3M4wv-0JcB0TONkNfECs22qriD44frLXpLeHbDSi-UFDGh1HZ0mwyaC1ViQt3LJcvbSsIqch8sqHimSfKAYL1HR7ysGIu45j0ds9kyp2q7aDR3mZrmGkKDScXLtw_U0Lym7JpaywKWAG39Ih97aYjDwJedjc9xhMB_fbP-9gx8tdg3ssrPm9KxIjhCiFKmQFiFNLyNS0llQsbi4GZnIu6tghDnAUn2zmYJDE"/>
+<span class="font-medium text-slate-700">Emily Davis</span>
+</div>
+</div>
+<p class="text-slate-600 leading-relaxed">Original raw genomic data upload from sequencing facility.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-start md:self-center">
+<button class="px-4 py-2 text-slate-700 font-semibold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Restore</button>
+<button class="px-6 py-2 text-slate-700 font-semibold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Compare</button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: VersionItem -->
+</div>
+</div>
+</section>
+<!-- END: VersionListSection -->
+</main>
+<!-- END: MainContent -->
+</body></html>

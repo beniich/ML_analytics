@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support Center | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed": "#00201c",
+              "on-tertiary": "#003731",
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "secondary-container": "#304b68",
+              "surface-bright": "#37393d",
+              "surface-dim": "#111317",
+              "surface-variant": "#333539",
+              "tertiary-fixed-dim": "#67d9c9",
+              "inverse-primary": "#9f412d",
+              "tertiary-container": "#006f64",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-fixed": "#3e0500",
+              "background": "#111317",
+              "outline": "#8d9198",
+              "on-secondary-container": "#9fbbdd",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e2e2e7",
+              "on-tertiary-container": "#81f2e2",
+              "surface-container": "#1e2024",
+              "error-container": "#93000a",
+              "surface": "#111317",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-primary": "#601305",
+              "surface-container-lowest": "#0c0e12",
+              "tertiary": "#67d9c9",
+              "secondary-fixed-dim": "#adc9eb",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-fixed-variant": "#7f2a18",
+              "outline-variant": "#43474d",
+              "primary-fixed": "#ffdad3",
+              "surface-tint": "#ffb4a4",
+              "on-error": "#690005",
+              "surface-container-high": "#282a2e",
+              "primary-container": "#a44531",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-highest": "#333539",
+              "error": "#ffb4ab",
+              "secondary": "#adc9eb",
+              "on-secondary": "#15324e",
+              "inverse-on-surface": "#2e3035",
+              "tertiary-fixed": "#85f6e5",
+              "inverse-surface": "#e2e2e7",
+              "primary": "#ffb4a4",
+              "on-surface-variant": "#c3c6ce"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #43474d; border-radius: 10px; }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#111317]/80 backdrop-blur-xl shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#E2E2E7] tracking-tighter font-headline">Insight Curator</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] font-headline font-semibold tracking-tight transition-all duration-300" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] font-headline font-semibold tracking-tight transition-all duration-300" href="#">Analytics</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] font-headline font-semibold tracking-tight transition-all duration-300" href="#">Export</a>
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1 font-headline font-semibold tracking-tight" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-[#1E2024] p-2 rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-[#1E2024] p-2 rounded-full transition-all">settings</button>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full border border-outline-variant/20" data-alt="close-up portrait of a professional woman with a minimalist modern background, soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0nnInvBiWQuhvdtYVpgBm5a5yKDXksMf0iCiXS9MSnoIANjiFtQrou19s3SQpH965z9mnyl7_qAFPgTqxoGV3cGtQhwhMxOJAvYkZkBKzPC1h0AgvO1F8qrWBdl6UNhen_jj1uDCM5CpdXcoNIpCkwEIp9w0qNshTqZg_puLR7vNi-_SF5L4Je8PjD2FqwJ2NFdJzWoMXFZzMlNrdhY2A330b4_10XPzxZu9MYa3IOsC7Yq7blC84qJnbBBxwy_zrj5_ctmYrKtk"/>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden lg:flex flex-col h-screen w-64 left-0 top-0 fixed bg-[#111317]/50 backdrop-blur-2xl p-4 gap-y-2 z-40 pt-20 bg-gradient-to-r from-[#1A1C20] to-transparent">
+<div class="px-4 py-2 mb-4">
+<div class="text-[#ffb4a4] font-black uppercase tracking-widest text-xs">ML Curator</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Enterprise Tier</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">memory</span>
+<span class="text-sm font-medium">Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">ios_share</span>
+<span class="text-sm font-medium">Exports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="text-sm font-medium">Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] font-bold bg-[#1E2024] rounded-lg" href="#">
+<span class="material-symbols-outlined">help_center</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pb-4">
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold rounded-xl active:scale-95 duration-200 shadow-lg shadow-primary/10">
+                New Analysis
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 px-6 pb-24 min-h-screen">
+<header class="mb-10">
+<h1 class="text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-2">Resolution Hub</h1>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">System-wide technical assistance and machine learning model validation queries. Our curators are active 24/7.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Active Tickets (Editorial Style) -->
+<div class="lg:col-span-4 space-y-6">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-xl font-bold font-headline text-on-surface">Active Requests</h2>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">3 Open</span>
+</div>
+<div class="space-y-4">
+<!-- Ticket Card 1 (Active) -->
+<div class="bg-surface-container rounded-xl p-5 border-l-4 border-primary shadow-sm hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">ID: ML-8291</span>
+<span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-bold">Urgent</span>
+</div>
+<h3 class="text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Neural Kernel Optimization failure in Production</h3>
+<p class="text-on-surface-variant text-xs line-clamp-2 leading-normal mb-4">Requesting deep dive into the latency spikes observed during the 2.4.0 model deployment in Tokyo-1 region.</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="Agent avatar" class="w-6 h-6 rounded-full border-2 border-surface-container" data-alt="professional male agent headshot with dark hair and glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCApIHN0o2X5ShZbxC6C_e0K7TqcrNQHpJu6l6wFihG-Mdb7hQgRY7F5sMTSGq5SV7NHzcRPxRI1BN36XF7uSY5Bdzy5PpOUpeiRgjk7FEBGsxx__OC07h43qbywB2t72_6L9y2Off6RywmpVuO4HDyG3mKXToKnNFvquWX5MokaPxfvQjjW_rStuMtd554qsch8RkoW_n9h4H1PAKNe-2Lf01VpLqAv_Z8z_JhJuk6Ya0ioVlSwLHy-3CSnJubssb3evLJ_yI6a-A"/>
+<img alt="User avatar" class="w-6 h-6 rounded-full border-2 border-surface-container" data-alt="professional woman headshot with bright lighting and corporate attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs--GVMsD-fivdaDjYaP4gdrIXd4BvrhukgMqhmDIyxdo-PGdVW07Y7Wy3exGEn5q2fA_SfOMgP8NoggBReL_EXOpkf6Ib93hlCphWx3Nksiui5cMSBLG6nn_IvT7drx1e_g24qYs4dW1xzEOvuIG6U0YOw2u0_3XoqvgvRMcKoLrzqm-c3-4srC7gXQwzAHl4MtpjDbP0ki6XNg2ZGz8wn6AZkC5Rh2OlBlzkKQpR6qWEaf4gG6xc87DkVae6OVgmn8xO_K-QCLY"/>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">Last active: 12m ago</span>
+</div>
+</div>
+<!-- Ticket Card 2 -->
+<div class="bg-surface-container-low rounded-xl p-5 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">ID: ML-7742</span>
+<span class="text-[10px] bg-secondary/20 text-secondary px-2 py-0.5 rounded-full font-bold">In Review</span>
+</div>
+<h3 class="text-on-surface font-semibold mb-2">Dataset bias detection threshold adjustment</h3>
+<p class="text-on-surface-variant text-xs line-clamp-2 leading-normal mb-4">The fairness module is flagging non-biased data points in the North America demographics slice.</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="Agent avatar" class="w-6 h-6 rounded-full border-2 border-surface-container" data-alt="calm professional male headshot with neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfqmFzuaImchxQLhhHCQnOPpUCSADJG7hDJ_KMd5J607FEer2tJOB3RQTRhW8hhgt2F3v_kDkMHGcS1kygUK6IBgzynXMtpR3ahksOIQ6Cf118fa4CIaXTrK3uRIuF1FBST0Jh6aR77e01xUxwkzTemjpfdiZoqfv2kp5Q3mREoOi9jPIFDgE1GVym9biZj6jv8cLPegbdl9GU-Hfs-cO8u9NrSOOrBhmJxk6yhmPWQHjTmWDV2wNPLzFkc4REdPCoL484atcqQyc"/>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">Last active: 4h ago</span>
+</div>
+</div>
+<!-- Ticket Card 3 -->
+<div class="bg-surface-container-low rounded-xl p-5 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">ID: ML-7601</span>
+<span class="text-[10px] bg-tertiary/20 text-tertiary px-2 py-0.5 rounded-full font-bold">Planned</span>
+</div>
+<h3 class="text-on-surface font-semibold mb-2">Export format request: Parquet Support</h3>
+<p class="text-on-surface-variant text-xs line-clamp-2 leading-normal mb-4">Need native Parquet support for large-scale data lake ingestions from the ML Curator export engine.</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="Agent avatar" class="w-6 h-6 rounded-full border-2 border-surface-container" data-alt="smiling female support agent with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG06psJigGrLfz-X24xZMgOepPe6C_0_-_udHAfzO_w9Pk4WhxkCu_Ejfnc4vNJVMs9fN5TXiWdr6Rv4Q6CzKGKFophwd-2Y6ASXsqayVmsCs7SZQkg21nu9Z-F9L1wWg7uBqodHUmS5dsMRKxuW_VaLDGf9_pOioj_58jpzICndTkWn5N8A8xsIZH67nPTK4qAiXmq4k9IHdmDkyBebxrqbd7RNLvWjs4__F2XhhYvrUIs5j1MUDn9dEIMzmv-cUTurDOW06AsxA"/>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">Last active: 1d ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Chat History & Creation Form -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Chat Interface (Glassmorphism) -->
+<div class="glass-card rounded-2xl flex flex-col h-[500px] border border-outline-variant/10">
+<div class="p-6 border-b border-outline-variant/10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Lead Curator" class="w-12 h-12 rounded-xl" data-alt="professional male profile photo with focused expression and tech background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Qp_YJ8wxWioUKWJ6KsKQ7m50iDrdSV3PPuRdURWiui5s1GrbGQnEuP48oQPVD7cyH45BE5wVeiCwAQBPtHHYV9_10_w6qPocLZ2AOTFKIBsRQc2sp3enNf3w1J7aeXc7SLuLUypDVaYDIvO5tY3YAWNIOKe-F4XatncwxaxxrDcnjs3mtPz56FPW_dpbP9BVjcVEXDPADXYPhWzLO6HUtEvyxR9lbGWCWneRV_PJK0E8cSH8K8HVzRZAhzJvCF1LPg6CMsOiLls"/>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-tertiary border-2 border-surface rounded-full"></div>
+</div>
+<div>
+<h3 class="text-lg font-bold font-headline text-on-surface leading-none mb-1">Marcus Thorne</h3>
+<p class="text-xs text-on-surface-variant">Lead Systems Architect • Senior Curator</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors material-symbols-outlined text-on-surface-variant">phone_in_talk</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors material-symbols-outlined text-on-surface-variant">videocam</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors material-symbols-outlined text-on-surface-variant">more_vert</button>
+</div>
+</div>
+<!-- Conversation -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Message - Agent -->
+<div class="flex gap-4 max-w-[85%]">
+<img alt="Marcus" class="w-8 h-8 rounded-full self-end" data-alt="blurred portrait of a smiling professional agent" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQwXTg0uj7UsLsDG4xxX0WiYIzFGX78KWHwpbrX8KrZeDBUWfgmAuOwmjqrlpFjjo7CZnLT1Y7Ie-7hm932c3chyw5yTbIr8Atgnk2IqKD3iWtL96vTFbBQd2xs9vcMJXxuKD0pdlW8LPfo8xppjYQEGBab4ZiGUcqSKS8QLEe4AIfTNojHa3aCVOnvMmatSlOZvYykgZO7ojGpLHJ-WVJne5hUpriYYVPsTvomwgOHnkU-sBW7IrbeF_Fxh6XWcFiUdOXW7Fqfn0"/>
+<div class="bg-surface-container-high p-4 rounded-2xl rounded-bl-none">
+<p class="text-sm text-on-surface leading-relaxed">I've analyzed the logs for ticket ML-8291. It appears the Tokyo-1 cluster is experiencing a cold-start latency issue due to a misconfigured layer-cache in the 2.4.0 image. Can you verify if you're using the optimized CUDA drivers?</p>
+<span class="text-[10px] text-on-surface-variant mt-2 block">10:12 AM</span>
+</div>
+</div>
+<!-- Message - User -->
+<div class="flex gap-4 max-w-[85%] ml-auto flex-row-reverse">
+<img alt="User" class="w-8 h-8 rounded-full self-end" data-alt="blurred portrait of a woman in a modern tech office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjHBcrRDNs2YQY252I7k0ANp8a-LcAgec_ReWUcwPfFN15oeb2LgbpnRryHcLegCMdAGnggeaCHw-oT7konBvmUq5WbVqpeQppFhAvDwSVcUI22bGF_p9L9MXUlcP0AwwWGK8l0srfdJE8k6R7AATfeuBOfhuWZwiixR6gt2fsek0vaoRAMJcHOd7FjctLNI2YiB5IA_vSjTfWMM1X9yMWFhdTkLYKSWJLAfyYTDNa7MkLL3uh3asEhfyLrDu0wlubZiBPvZmVvCQ"/>
+<div class="bg-primary/10 border border-primary/20 p-4 rounded-2xl rounded-br-none">
+<p class="text-sm text-on-surface leading-relaxed">Checking now. Yes, we are on version 12.2. The issue persists even after a cluster restart. Should we roll back to 2.3.5 for now?</p>
+<span class="text-[10px] text-on-primary-container mt-2 block">10:15 AM</span>
+</div>
+</div>
+<!-- Message - Agent -->
+<div class="flex gap-4 max-w-[85%]">
+<img alt="Marcus" class="w-8 h-8 rounded-full self-end" data-alt="professional male agent portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhnG6ieUtFOrj3EQYWggD9Ku9AOkOjP8c7SrDPDQkgFEJrDvQy830xrKEDQa6inls30WHxfnTm9cA1rVPiak1dq4taq0ObG1qocwZ9ZjGnbsnZgmxQSY6ByFvtOGomUBos-s5sR5j18w3kL1Po4ZjCV9iZcQZIljrrJoOr2ipDGFlDndK-TsBo-T6qRKwDhSCr70lJKh_jk5hMV7YnO8vELuHt5IbR1PVFxg4CKZ221NJ_PaFEvKfCr6Li35ZQT_ZrMbiGj9V4Dec"/>
+<div class="bg-surface-container-high p-4 rounded-2xl rounded-bl-none">
+<p class="text-sm text-on-surface leading-relaxed">I've pushed a temporary patch to your staging environment. Please run the validation script `curator_verify.sh` and let me know the output. If it fails, roll back immediately.</p>
+<div class="mt-3 flex items-center gap-3 p-2 bg-surface-container rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">description</span>
+<div class="flex-1 min-w-0">
+<div class="text-[10px] font-bold text-on-surface truncate uppercase">curator_verify.sh</div>
+<div class="text-[10px] text-on-surface-variant">2.4 KB • Script</div>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">download</button>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-2 block">10:18 AM</span>
+</div>
+</div>
+</div>
+<!-- Message Input -->
+<div class="p-4 bg-surface-container-low border-t border-outline-variant/10">
+<div class="flex items-center gap-3 bg-surface-container-highest rounded-xl px-4 py-2 border border-outline-variant/20 focus-within:border-primary/50 transition-all">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">attach_file</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2 placeholder:text-on-surface-variant" placeholder="Type your response..." type="text"/>
+<button class="bg-primary text-on-primary p-2 rounded-lg material-symbols-outlined active:scale-95 duration-200">send</button>
+</div>
+</div>
+</div>
+<!-- New Ticket Form (Editorial Form Design) -->
+<div class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10">
+<div class="mb-8">
+<h2 class="text-2xl font-bold font-headline text-on-surface mb-1">Initialize New Request</h2>
+<p class="text-sm text-on-surface-variant">Please provide specific technical context to ensure rapid routing to the correct curator.</p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="md:col-span-2">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Subject</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm transition-all" placeholder="E.g., Anomaly detection accuracy drop in Production" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Priority Level</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm transition-all">
+<option>Low - General Inquiry</option>
+<option>Medium - Performance Issue</option>
+<option>High - Partial Outage</option>
+<option>Critical - System Failure</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">ML Model Version</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm transition-all">
+<option>v2.4.0 (Stable)</option>
+<option>v2.3.5 (LTS)</option>
+<option>v3.0.0-beta (Experimental)</option>
+<option>Custom Model</option>
+</select>
+</div>
+<div class="md:col-span-2">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Technical Description</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm transition-all" placeholder="Detail the observed behavior, include error codes or log snippets if possible..." rows="4"></textarea>
+</div>
+<div class="md:col-span-2 flex justify-end gap-4 mt-2">
+<button class="px-6 py-3 text-sm font-bold text-on-surface-variant hover:text-on-surface transition-colors" type="button">Discard</button>
+<button class="px-8 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold rounded-xl active:scale-95 duration-200 shadow-xl shadow-primary/20" type="submit">Submit Ticket</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-[#111317]/90 backdrop-blur-lg border-t border-[#43474D]/15 shadow-2xl">
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Inter'] text-[10px] font-medium">Models</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="font-['Inter'] text-[10px] font-medium">Admin</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#ffb4a4]/10 text-[#ffb4a4] rounded-xl px-4 py-1 active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">contact_support</span>
+<span class="font-['Inter'] text-[10px] font-medium">Help</span>
+</a>
+</nav>
+</body></html>

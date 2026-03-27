@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Anomaly Alerts &amp; Monitoring - Synthesis ML</title>
+<!-- Load Manrope Font -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              slate: '#4A6583',
+              dark: '#0F172A',
+              card: '#1E293B',
+              border: '#334155',
+            },
+            severity: {
+              high: '#FCA5A5', // Soft Coral/Red for dark mode
+              medium: '#FDBA74', // Soft Orange
+              low: '#86EFAC', // Soft Green
+            }
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '0.125rem',
+            DEFAULT: '4px', // ROUND_FOUR as per design system
+            'md': '0.375rem',
+            'lg': '0.5rem',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout-styles">
+    body {
+      background-color: #0F172A; /* Synthesis ML Dark Theme */
+      color: #E2E8F0;
+      font-family: 'Manrope', sans-serif;
+    }
+    .chart-container {
+      height: 200px;
+      position: relative;
+    }
+    .alert-row:hover {
+      background-color: rgba(74, 101, 131, 0.1);
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10">
+<!-- BEGIN: PageHeader -->
+<header class="flex justify-between items-center mb-8" data-purpose="page-header">
+<h1 class="text-2xl font-bold tracking-tight text-slate-100">Anomaly Alerts &amp; Monitoring</h1>
+<div class="flex items-center space-x-2 bg-brand-card px-3 py-1 rounded border border-brand-border">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+<span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Variant 12 of 20</span>
+</div>
+</header>
+<!-- END: PageHeader -->
+<main class="space-y-6">
+<!-- BEGIN: ChartSection -->
+<section class="bg-brand-card rounded p-6 border border-brand-border shadow-lg" data-purpose="alert-frequency-chart">
+<h2 class="text-lg font-semibold mb-6 text-slate-200">Alert Frequency Over Time (Last 30 Days)</h2>
+<!-- Chart Visual Placeholder -->
+<div class="chart-container w-full" id="alertChartContainer">
+<canvas class="w-full h-full" id="alertFrequencyChart"></canvas>
+</div>
+<!-- Chart Labels -->
+<div class="flex justify-between mt-4 text-xs font-medium text-slate-500 uppercase tracking-tighter">
+<span>May 1</span>
+<span>May 5</span>
+<span>May 10</span>
+<span>May 15</span>
+<span>May 20</span>
+<span>May 25</span>
+<span>May 30</span>
+</div>
+</section>
+<!-- END: ChartSection -->
+<!-- BEGIN: AlertsSection -->
+<section class="bg-brand-card rounded border border-brand-border shadow-lg overflow-hidden" data-purpose="recent-alerts-list">
+<div class="p-6 border-b border-brand-border">
+<h2 class="text-lg font-semibold text-slate-200">Recent Alerts</h2>
+</div>
+<div class="divide-y divide-brand-border">
+<!-- Row 1: High -->
+<article class="alert-row flex items-center p-4 transition-colors">
+<div class="flex items-center space-x-4 flex-1">
+<div class="flex items-center justify-center w-24 h-8 bg-red-900/30 border border-red-500/50 rounded-full px-3">
+<svg class="w-4 h-4 text-red-400 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-xs font-bold text-red-400 uppercase tracking-wide">High</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-100">Model Performance Drop: 'Fraud Detection Model v3' F1-score decreased significantly.</h3>
+<p class="text-xs text-slate-400 mt-0.5">Affected Dataset: Transaction Logs - May 29, 2024, 09:15 AM</p>
+</div>
+</div>
+<button class="bg-brand-slate hover:bg-slate-500 text-white text-xs font-bold py-2 px-4 rounded transition-all">View Details</button>
+</article>
+<!-- Row 2: Medium -->
+<article class="alert-row flex items-center p-4 transition-colors">
+<div class="flex items-center space-x-4 flex-1">
+<div class="flex items-center justify-center w-24 h-8 bg-orange-900/30 border border-orange-500/50 rounded-full px-3">
+<svg class="w-4 h-4 text-orange-400 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-xs font-bold text-orange-400 uppercase tracking-wide">Medium</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-100">Data Anomaly: Unusual spike in 'Login Attempts' detected.</h3>
+<p class="text-xs text-slate-400 mt-0.5">Affected Dataset: User Access Logs - May 28, 2024, 04:30 PM</p>
+</div>
+</div>
+<button class="bg-brand-slate hover:bg-slate-500 text-white text-xs font-bold py-2 px-4 rounded transition-all">View Details</button>
+</article>
+<!-- Row 3: Low -->
+<article class="alert-row flex items-center p-4 transition-colors">
+<div class="flex items-center space-x-4 flex-1">
+<div class="flex items-center justify-center w-24 h-8 bg-green-900/30 border border-green-500/50 rounded-full px-3">
+<svg class="w-4 h-4 text-green-400 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-xs font-bold text-green-400 uppercase tracking-wide">Low</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-100">Data Quality Issue: Missing values in 'Customer Demographics' exceed threshold.</h3>
+<p class="text-xs text-slate-400 mt-0.5">Affected Dataset: Customer Records - May 27, 2024, 11:45 AM</p>
+</div>
+</div>
+<button class="bg-brand-slate hover:bg-slate-500 text-white text-xs font-bold py-2 px-4 rounded transition-all">View Details</button>
+</article>
+<!-- Row 4: High -->
+<article class="alert-row flex items-center p-4 transition-colors">
+<div class="flex items-center space-x-4 flex-1">
+<div class="flex items-center justify-center w-24 h-8 bg-red-900/30 border border-red-500/50 rounded-full px-3">
+<svg class="w-4 h-4 text-red-400 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-xs font-bold text-red-400 uppercase tracking-wide">High</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-100">Drift Detected: 'Recommendation Engine' input data distribution has shifted.</h3>
+<p class="text-xs text-slate-400 mt-0.5">Affects: Product Interaction Data - May 26, 2024, 02:00 PM</p>
+</div>
+</div>
+<button class="bg-brand-slate hover:bg-slate-500 text-white text-xs font-bold py-2 px-4 rounded transition-all">View Details</button>
+</article>
+<!-- Row 5: Medium -->
+<article class="alert-row flex items-center p-4 transition-colors">
+<div class="flex items-center space-x-4 flex-1">
+<div class="flex items-center justify-center w-24 h-8 bg-orange-900/30 border border-orange-500/50 rounded-full px-3">
+<svg class="w-4 h-4 text-orange-400 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-xs font-bold text-orange-400 uppercase tracking-wide">Medium</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-100">Latency Warning: Real-time inference response time above SLA.</h3>
+<p class="text-xs text-slate-400 mt-0.5">Affects: API Gateway Metrics - May 25, 2024, 10:10 AM</p>
+</div>
+</div>
+<button class="bg-brand-slate hover:bg-slate-500 text-white text-xs font-bold py-2 px-4 rounded transition-all">View Details</button>
+</article>
+<!-- Row 6: Low -->
+<article class="alert-row flex items-center p-4 transition-colors border-b-0">
+<div class="flex items-center space-x-4 flex-1">
+<div class="flex items-center justify-center w-24 h-8 bg-green-900/30 border border-green-500/50 rounded-full px-3">
+<svg class="w-4 h-4 text-green-400 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-xs font-bold text-green-400 uppercase tracking-wide">Low</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-100">Pattern Alert: Recurring access pattern identified outside business hours.</h3>
+<p class="text-xs text-slate-400 mt-0.5">Affects: Security Events - May 24, 2024, 08:00 AM</p>
+</div>
+</div>
+<button class="bg-brand-slate hover:bg-slate-500 text-white text-xs font-bold py-2 px-4 rounded transition-all">View Details</button>
+</article>
+</div>
+</section>
+<!-- END: AlertsSection -->
+</main>
+<script data-purpose="canvas-chart-setup">
+    /**
+     * Renders a simplified line chart to mimic the visualization in the prompt image
+     */
+    window.onload = function() {
+      const canvas = document.getElementById('alertFrequencyChart');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const container = document.getElementById('alertChartContainer');
+      
+      // Set canvas resolution for crisp lines
+      const width = container.offsetWidth;
+      const height = container.offsetHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      // Data Points (Approximated from Image)
+      const dataPoints = [0, 8, 5, 13, 6, 8, 8, 9, 2, 14, 9, 8, 13, 10, 2, 20, 11, 13, 6, 14, 10, 13, 7, 9, 18, 7, 18, 6, 11, 6];
+      const maxVal = 20;
+      const stepX = width / (dataPoints.length - 1);
+      const stepY = height / maxVal;
+
+      // Draw Grid Lines (Horizontal)
+      ctx.strokeStyle = '#334155'; // border-brand-border
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for(let i = 0; i <= 4; i++) {
+        const y = height - (i * (height / 4));
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+      }
+      ctx.stroke();
+
+      // Draw Gradient Path
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
+      gradient.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      dataPoints.forEach((val, i) => {
+        ctx.lineTo(i * stepX, height - (val * stepY));
+      });
+      ctx.lineTo(width, height);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Draw Main Line
+      ctx.beginPath();
+      ctx.strokeStyle = '#3b82f6'; // Bright Blue
+      ctx.lineWidth = 2;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      
+      dataPoints.forEach((val, i) => {
+        if(i === 0) ctx.moveTo(0, height - (val * stepY));
+        else ctx.lineTo(i * stepX, height - (val * stepY));
+      });
+      ctx.stroke();
+
+      // Draw Points
+      ctx.fillStyle = '#3b82f6';
+      dataPoints.forEach((val, i) => {
+        ctx.beginPath();
+        ctx.arc(i * stepX, height - (val * stepY), 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+    };
+  </script>
+</body></html>

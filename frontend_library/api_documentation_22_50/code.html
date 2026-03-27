@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | API Documentation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#ffd7ce",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "secondary-container": "#304b68",
+              "on-primary": "#601305",
+              "outline-variant": "#43474d",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "surface-dim": "#111317",
+              "on-tertiary": "#003731",
+              "surface-container": "#1e2024",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#005048",
+              "primary-fixed-dim": "#ffb4a4",
+              "secondary": "#adc9eb",
+              "on-background": "#e2e2e7",
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "outline": "#8d9198",
+              "primary-container": "#a44531",
+              "surface-container-highest": "#333539",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "surface-container-high": "#282a2e",
+              "tertiary-container": "#006f64",
+              "on-tertiary-container": "#81f2e2",
+              "tertiary-fixed": "#85f6e5",
+              "on-secondary-container": "#9fbbdd",
+              "surface-container-low": "#1a1c20",
+              "inverse-on-surface": "#2e3035",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface": "#111317",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #111317; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #43474D; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 bg-[#111317] dark:bg-[#111317] shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)] h-20">
+<div class="flex items-center justify-between px-8 h-full w-full mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold text-[#ffb4a4] tracking-tighter font-headline">Insight Curator</span>
+<nav class="hidden md:flex gap-8 font-headline font-semibold tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Projects</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Data</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Models</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-highest px-4 py-2 rounded-full border border-outline-variant/15">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface" placeholder="Search documentation..." type="text"/>
+</div>
+<button class="p-2 text-[#C3C6CE] hover:bg-[#333539]/50 transition-all duration-200 rounded-xl active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-[#C3C6CE] hover:bg-[#333539]/50 transition-all duration-200 rounded-xl active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden ml-2 ring-2 ring-primary/20">
+<img alt="User profile" data-alt="close-up portrait of a professional man in a tech office setting with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6VwV-jvTcUuROE6Jlv8A2CoLJTYIe83CFQTPMtrtbtLEQHT3eOhkX0MiLsqZCbXzHG-Wb8ngHUdLL9Xy_xEBlhT1D1nfrCqSNKj3OADF18fO-PHWYol69rMpkR30EsE9jBprANMyPBQIaktM7zPY8d3PwW0vW0pzyn2EcyRYVS11CqK2tJLbTmY8_SiGCT-W_NMI17yzwmP2Z6JnqEjRsF6ZwMItuYsQf5rJbLMfXoln0h6oKoDtsp69d16eeD7tp-c0FC-Dz4uw"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-24 bg-[#111317]/80 backdrop-blur-xl flex flex-col border-r border-[#43474D]/15 z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h2 class="text-[#E2E2E7] font-headline font-bold text-sm">Project Alpha</h2>
+<p class="text-[0.6875rem] text-on-surface-variant uppercase tracking-wider">ML Ops Pipeline</p>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-xl text-sm transition-transform active:scale-95 shadow-lg shadow-primary/10">
+                    Deploy Model
+                </button>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-xl font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">rocket_launch</span> Deployment
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-xl font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">monitoring</span> Monitoring
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 bg-gradient-to-r from-[#ffb4a4]/10 to-transparent text-[#ffb4a4] border-r-2 border-[#ffb4a4] font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">terminal</span> API Docs
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-xl font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">group</span> Team
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all rounded-xl font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">tune</span> Settings
+                </a>
+<div class="pt-8 pb-4 px-4 text-[0.625rem] font-bold text-on-surface-variant uppercase tracking-[0.2em]">EndPoints v2.4</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#auth">Authentication</a>
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-primary transition-colors" href="#inference">Inference Engine</a>
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#training">Training Jobs</a>
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#datasets">Datasets</a>
+</div>
+</nav>
+<div class="p-4 mt-auto border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:bg-[#1E2024] rounded-xl text-sm transition-all" href="#">
+<span class="material-symbols-outlined">account_circle</span> Profile
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:bg-[#1E2024] rounded-xl text-sm transition-all" href="#">
+<span class="material-symbols-outlined">help</span> Support
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 bg-surface">
+<div class="max-w-6xl mx-auto p-12">
+<!-- Header -->
+<section class="mb-16">
+<h1 class="text-6xl font-headline font-extrabold text-on-surface tracking-tighter mb-4">Inference Engine</h1>
+<p class="text-on-surface-variant text-xl max-w-2xl font-body leading-relaxed">
+                        Interface for executing low-latency machine learning predictions across our global edge network. Version 2.4.0-stable.
+                    </p>
+<div class="flex gap-4 mt-8">
+<div class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-lg text-xs font-bold uppercase tracking-widest border border-tertiary/20">Production Ready</div>
+<div class="px-3 py-1 bg-secondary/10 text-secondary rounded-lg text-xs font-bold uppercase tracking-widest border border-secondary/20">v2.4 LTS</div>
+</div>
+</section>
+<!-- API Method Section (Bento Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Documentation Content -->
+<div class="lg:col-span-7 space-y-12">
+<!-- POST Endpoint -->
+<div class="group">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-4 py-1.5 bg-primary text-on-primary text-sm font-bold rounded-lg shadow-lg shadow-primary/20">POST</span>
+<code class="text-lg font-mono text-on-surface bg-surface-container-low px-4 py-1.5 rounded-lg border border-outline-variant/10">/v2/predict/{model_id}</code>
+</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-3">Execute Prediction</h3>
+<p class="text-on-surface-variant font-body mb-8">
+                                Submits raw input data to a specific model instance for inference. Supports batch processing up to 128 records.
+                            </p>
+<div class="space-y-6">
+<h4 class="text-sm font-bold text-on-surface uppercase tracking-widest border-b border-outline-variant/10 pb-2">Parameters</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-start py-2">
+<div>
+<span class="font-mono text-primary font-bold">model_id</span>
+<span class="ml-2 text-[0.625rem] bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded">required</span>
+<p class="text-sm text-on-surface-variant mt-1">The unique identifier for the trained model version.</p>
+</div>
+<span class="text-xs font-mono text-secondary">string (uuid)</span>
+</div>
+<div class="flex justify-between items-start py-2">
+<div>
+<span class="font-mono text-primary font-bold">X-API-KEY</span>
+<span class="ml-2 text-[0.625rem] bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded">required</span>
+<p class="text-sm text-on-surface-variant mt-1">Authentication token passed via header.</p>
+</div>
+<span class="text-xs font-mono text-secondary">header</span>
+</div>
+</div>
+</div>
+<div class="mt-12 space-y-6">
+<h4 class="text-sm font-bold text-on-surface uppercase tracking-widest border-b border-outline-variant/10 pb-2">Request Body</h4>
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-mono text-tertiary">application/json</span>
+<button class="text-[10px] uppercase font-bold text-on-surface-variant hover:text-on-surface transition-colors">Copy Schema</button>
+</div>
+<pre class="font-mono text-sm text-on-surface-variant leading-relaxed">{
+  <span class="text-primary">"inputs"</span>: [
+    {
+      <span class="text-primary">"data"</span>: [0.24, 0.55, 0.81],
+      <span class="text-primary">"metadata"</span>: { <span class="text-primary">"tag"</span>: <span class="text-secondary">"prod_test"</span> }
+    }
+  ],
+  <span class="text-primary">"config"</span>: {
+    <span class="text-primary">"confidence_threshold"</span>: 0.85
+  }
+}</pre>
+</div>
+</div>
+</div>
+<!-- GET Endpoint -->
+<div class="group pt-12">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-4 py-1.5 bg-secondary text-on-secondary text-sm font-bold rounded-lg">GET</span>
+<code class="text-lg font-mono text-on-surface bg-surface-container-low px-4 py-1.5 rounded-lg border border-outline-variant/10">/v2/status/{job_id}</code>
+</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-3">Poll Job Status</h3>
+<p class="text-on-surface-variant font-body mb-8">
+                                Retrieves the current state of an asynchronous inference task.
+                            </p>
+</div>
+</div>
+<!-- Interactive Play Panel -->
+<div class="lg:col-span-5">
+<div class="sticky top-24">
+<div class="bg-surface-container rounded-2xl overflow-hidden border border-outline-variant/10 shadow-2xl">
+<div class="bg-surface-container-high px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error/40"></div>
+<div class="w-3 h-3 rounded-full bg-tertiary/40"></div>
+<div class="w-3 h-3 rounded-full bg-secondary/40"></div>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant uppercase tracking-widest">Interactive Console</span>
+</div>
+<div class="p-8">
+<div class="mb-6">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Model ID</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl text-on-surface px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm font-mono transition-all" type="text" value="mdl-78x-v4-curator"/>
+</div>
+<div class="mb-8">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Payload Editor</label>
+<textarea class="w-full bg-surface-container-lowest border-none rounded-xl text-on-surface px-4 py-4 focus:ring-2 focus:ring-primary/20 text-sm font-mono transition-all" rows="10">{
+  "inputs": [
+    {
+      "vector": [1.1, 2.3, 0.4]
+    }
+  ],
+  "explainability": true
+}</textarea>
+</div>
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-extrabold rounded-xl transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+                                        TRY IT OUT
+                                    </button>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Response</span>
+<span class="text-[10px] text-tertiary font-bold px-2 py-0.5 bg-tertiary/10 rounded">200 OK</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/10">
+<pre class="font-mono text-xs text-on-surface-variant">{
+  "prediction": "CLASS_B",
+  "confidence": 0.9982,
+  "latency_ms": 14.2,
+  "cluster_id": "us-east-4"
+}</pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Documentation Tip -->
+<div class="mt-6 p-6 bg-secondary/5 rounded-2xl border border-secondary/10 flex gap-4">
+<span class="material-symbols-outlined text-secondary">lightbulb</span>
+<div>
+<h5 class="text-sm font-bold text-on-surface mb-1">Developer Tip</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">Enable <code class="text-secondary">explainability: true</code> to receive SHAP value weights for each input dimension.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-4 px-8 mt-auto bg-[#111317] dark:bg-[#111317] border-t border-[#43474D]/15">
+<div class="flex justify-between items-center w-full">
+<span class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE]">© 2024 Insight Curator. System Status: <span class="text-[#67d9c9]">Operational.</span></span>
+<div class="flex gap-6">
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">API Status</a>
+</div>
+</div>
+</footer>
+</body></html>

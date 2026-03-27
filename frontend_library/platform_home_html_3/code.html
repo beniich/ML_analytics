@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Platform Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "on-secondary-container": "#9fbbdd",
+              "inverse-on-surface": "#2e3035",
+              "surface": "#111317",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "tertiary-fixed": "#85f6e5",
+              "tertiary-container": "#006f64",
+              "surface-container-high": "#282a2e",
+              "on-tertiary-container": "#81f2e2",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary": "#adc9eb",
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed-variant": "#005048",
+              "surface-container-highest": "#333539",
+              "primary-container": "#a44531",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-surface-variant": "#c3c6ce",
+              "on-background": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "on-surface": "#e2e2e7",
+              "outline": "#8d9198",
+              "outline-variant": "#43474d",
+              "on-primary": "#601305",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "secondary-container": "#304b68",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "surface-dim": "#111317",
+              "surface-container": "#1e2024",
+              "on-tertiary": "#003731",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+        }
+        .ghost-border {
+            border: 1px solid rgba(67, 71, 77, 0.15);
+        }
+        .microchip-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,180,164,0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#111317]/80 backdrop-blur-xl shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)] flex items-center justify-between px-8 py-4 w-full">
+<div class="text-xl font-extrabold tracking-tighter text-[#ffb4a4] font-headline">Insight Curator</div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold text-sm tracking-tight">
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Platform</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Solutions</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Resources</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-1 focus:ring-primary/20" placeholder="Search insights..." type="text"/>
+</div>
+<button class="primary-gradient text-on-primary-fixed font-headline font-bold px-6 py-2 rounded-xl active:scale-95 duration-200">Sign In</button>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-8 max-w-7xl mx-auto min-h-screen">
+<!-- Hero Editorial Header -->
+<header class="mb-20 space-y-4">
+<h1 class="text-6xl md:text-7xl font-headline font-extrabold tracking-tighter text-on-surface leading-[0.9]">
+                The Future of <br/><span class="text-primary">Machine Intelligence</span>
+</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed font-body">
+                Upload your raw datasets and let our Synthesis ML engine curate strategic correlations that traditional analytics miss. Architecture designed for absolute clarity.
+            </p>
+</header>
+<!-- Main Interaction: Upload Bento -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+<div class="lg:col-span-8 bg-surface-container-low rounded-xl p-1 relative overflow-hidden group ghost-border">
+<div class="bg-surface rounded-xl p-12 h-full flex flex-col items-center justify-center text-center microchip-bg relative z-10 border border-outline-variant/5">
+<!-- Microchip Graphic Overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<img class="w-full h-full object-cover grayscale brightness-50" data-alt="Abstract macro shot of a sophisticated silicon microchip with glowing copper pathways and futuristic geometric patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuQIquKTzSu5HrU01q30QNoUURRgXjf65AI7-j_eKNwqePFcsT2FbSeCXTyK_gKYhX2rAAes6a2mZWXz5kI2VwV3BuGtfBXMrcfuLY804gFKKY5FN4t8tudcJ8FbERb-OL3xcX57Fn_jyRu8pmfGYjrBi60_a8HfDstdM8QXnFSnecDGTHVd16ViqkyUrQhEX3hWp6oLUy4lnF5uIJ-r9_TMn2h4jqin9hBR-EU2BE5XAzW-em4T_nVcsOkq_avjDD1JCRZS9hJhM"/>
+</div>
+<div class="relative z-20 space-y-6">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mx-auto mb-4 ghost-border group-hover:scale-105 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="upload_file" style="font-variation-settings: 'FILL' 0;">upload_file</span>
+</div>
+<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight">Drop your data model</h2>
+<p class="text-on-surface-variant max-w-md mx-auto">Support for JSON, CSV, and Parquet formats up to 2GB. Automated schema detection enabled.</p>
+<div class="flex flex-wrap justify-center gap-4 pt-4">
+<button class="primary-gradient text-on-primary-fixed font-headline font-bold px-8 py-3 rounded-xl flex items-center gap-2 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                                Select Files
+                            </button>
+<button class="bg-surface-container-highest text-on-surface font-headline font-bold px-8 py-3 rounded-xl ghost-border hover:bg-surface-bright transition-colors">
+                                Browse Cloud Storage
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Bento Card: Live Metrics -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<div class="bg-surface-container-low rounded-xl p-8 ghost-border flex-1 flex flex-col justify-between">
+<div>
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary mb-4 block">Active Workspace</span>
+<h3 class="text-2xl font-headline font-bold mb-2">Synthesis Cluster 01</h3>
+<p class="text-on-surface-variant text-sm">Processing real-time neural weights for the Strategic Curator model.</p>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex justify-between items-end">
+<span class="text-on-surface font-bold text-4xl font-headline">98.4%</span>
+<span class="text-tertiary text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+                                Accuracy
+                            </span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[98.4%] rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="bg-primary text-on-primary-fixed rounded-xl p-8 relative overflow-hidden group cursor-pointer active:scale-[0.98] transition-all">
+<div class="relative z-10">
+<h3 class="text-2xl font-headline font-extrabold leading-tight mb-2">Upgrade to <br/>Enterprise ML</h3>
+<p class="text-on-primary-fixed/70 text-sm mb-6">Unlock multi-cluster deployment and dedicated GPU priority.</p>
+<span class="material-symbols-outlined text-3xl" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-10 rotate-12" data-icon="rocket_launch">rocket_launch</span>
+</div>
+</div>
+</section>
+<!-- Feature Summary Cards (Asymmetric Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Feature 1 -->
+<div class="bg-surface-container rounded-xl p-8 ghost-border hover:bg-surface-container-high transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3">Predictive Trends</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Anticipate market shifts using our proprietary Synthesis ML engine with 15ms latency.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container rounded-xl p-8 ghost-border hover:bg-surface-container-high transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/30 flex items-center justify-center mb-6 text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3">Bento Orchestration</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Visualize complex data relationships through our high-end, editorial dashboard layouts.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container rounded-xl p-8 ghost-border hover:bg-surface-container-high transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-primary-container/30 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="psychology" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3">Strategic Insight</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">The AI doesn't just show data; it explains the narrative behind every significant delta.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-surface-container rounded-xl p-8 ghost-border hover:bg-surface-container-high transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-on-secondary-fixed-variant/30 flex items-center justify-center mb-6 text-on-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3">Neural Encryption</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Your data models remain private with end-to-end encryption at every processing node.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#111317] w-full py-12 border-t border-[#43474D]/15">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="font-['Manrope'] font-black text-[#ffb4a4] text-lg">Insight Curator</div>
+<p class="font-['Inter'] text-xs text-[#C3C6CE]">© 2024 Insight Curator. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Security</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Status</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#C3C6CE] cursor-pointer hover:text-primary transition-colors" data-icon="terminal">terminal</span>
+<span class="material-symbols-outlined text-[#C3C6CE] cursor-pointer hover:text-primary transition-colors" data-icon="cloud">cloud</span>
+</div>
+</div>
+</footer>
+</body></html>

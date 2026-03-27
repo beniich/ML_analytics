@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator - Dashboard Tutorial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed": "#00201c",
+              "on-tertiary": "#003731",
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "secondary-container": "#304b68",
+              "surface-bright": "#37393d",
+              "surface-dim": "#111317",
+              "surface-variant": "#333539",
+              "tertiary-fixed-dim": "#67d9c9",
+              "inverse-primary": "#9f412d",
+              "tertiary-container": "#006f64",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-fixed": "#3e0500",
+              "background": "#111317",
+              "outline": "#8d9198",
+              "on-secondary-container": "#9fbbdd",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e2e2e7",
+              "on-tertiary-container": "#81f2e2",
+              "surface-container": "#1e2024",
+              "error-container": "#93000a",
+              "surface": "#111317",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-primary": "#601305",
+              "surface-container-lowest": "#0c0e12",
+              "tertiary": "#67d9c9",
+              "secondary-fixed-dim": "#adc9eb",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-fixed-variant": "#7f2a18",
+              "outline-variant": "#43474d",
+              "primary-fixed": "#ffdad3",
+              "surface-tint": "#ffb4a4",
+              "on-error": "#690005",
+              "surface-container-high": "#282a2e",
+              "primary-container": "#a44531",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-highest": "#333539",
+              "error": "#ffb4ab",
+              "secondary": "#adc9eb",
+              "on-secondary": "#15324e",
+              "inverse-on-surface": "#2e3035",
+              "tertiary-fixed": "#85f6e5",
+              "inverse-surface": "#e2e2e7",
+              "primary": "#ffb4a4",
+              "on-surface-variant": "#c3c6ce"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #111317;
+            color: #e2e2e7;
+            overflow: hidden;
+        }
+        .tutorial-overlay {
+            background: radial-gradient(circle at 30% 20%, transparent 150px, rgba(12, 14, 18, 0.85) 155px);
+        }
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background: rgba(30, 32, 36, 0.7);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#111317]/80 backdrop-blur-xl shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#E2E2E7] tracking-tighter font-headline">Insight Curator</span>
+<nav class="hidden md:flex items-center gap-6 font-headline font-semibold tracking-tight">
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Analytics</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Export</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-[#C3C6CE] cursor-pointer hover:bg-[#1E2024] p-2 rounded-xl transition-all duration-300">notifications</span>
+</div>
+<span class="material-symbols-outlined text-[#C3C6CE] cursor-pointer hover:bg-[#1E2024] p-2 rounded-xl transition-all duration-300">settings</span>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full border border-outline-variant/20 ml-2" data-alt="high-end studio portrait of a professional woman with minimalist background and soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYA59tXe4btIqR3IOmbYOHpGKQiNknHiXgnEVXx0oxL0_Rwm1poOXjjvR2aOYmWlL83CnUzkGGcuHqfKvusSbUo_V8Y-JY9sQxOtDcfT1xvi3hlHfHDjeeLXYOKF-E6U10Y9cBPerqBxsRjgIijhbWHpJRLsNto7NlgwIIPbEwf8AxoIyLH09zpUnu3N5P68RmBi4SDqALu7b7OMQsXEZE9PiuW42tGXVitLmdH92A2J1zGX1r0IhUDUDfaJbpHqkB2VzN5OE5iVU"/>
+</div>
+</header>
+<div class="flex pt-16 h-screen overflow-hidden">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden lg:flex flex-col h-full p-4 gap-y-2 bg-[#111317]/50 backdrop-blur-2xl w-64 bg-gradient-to-r from-[#1A1C20] to-transparent shrink-0">
+<div class="mb-8 px-4 py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">memory</span>
+</div>
+<div>
+<div class="text-[#ffb4a4] font-black uppercase tracking-widest text-[10px]">ML Curator</div>
+<div class="text-xs text-on-surface-variant font-medium">Enterprise Tier</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 font-['Inter'] text-sm antialiased">
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] font-bold bg-[#1E2024] rounded-xl transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="Memory">memory</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+<span>Exports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Admin</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-xl font-bold mb-4 shadow-lg shadow-primary/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Analysis</span>
+</button>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:text-[#E2E2E7] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:text-[#E2E2E7] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Dashboard Canvas (Blurred Background) -->
+<main class="flex-1 overflow-y-auto bg-surface p-8">
+<header class="mb-12">
+<h1 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface mb-2">Model Performance</h1>
+<p class="text-on-surface-variant font-medium">Predictive accuracy for Q3 deployment clusters.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Large Highlight Card -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low rounded-xl p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-1">Global Accuracy Matrix</h3>
+<p class="text-sm text-on-surface-variant">Live inference stream across 4 regions</p>
+</div>
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary text-xs font-bold rounded-full">LIVE SIGNAL</span>
+</div>
+<div class="h-64 flex items-end gap-2">
+<!-- Mockup Bar Chart -->
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[60%] hover:bg-primary/40 transition-all"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[45%] hover:bg-primary/40 transition-all"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[80%] hover:bg-primary/40 transition-all"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[65%] hover:bg-primary/40 transition-all"></div>
+<div class="flex-1 bg-primary rounded-t-lg h-[90%] transition-all"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[75%] hover:bg-primary/40 transition-all"></div>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+</div>
+<!-- Secondary Metric Card -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl p-8 flex flex-col justify-between border border-outline-variant/10">
+<div>
+<span class="material-symbols-outlined text-secondary mb-4 text-3xl" style="font-variation-settings: 'FILL' 1;">insights</span>
+<h3 class="text-lg font-headline font-bold text-on-surface">Neural Drift</h3>
+<p class="text-sm text-on-surface-variant mb-6">Deviation in predictive weighting</p>
+</div>
+<div class="text-5xl font-extrabold font-headline text-primary tracking-tighter">-0.42%</div>
+</div>
+<!-- Three Small Cards -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-6">
+<h4 class="text-on-surface-variant font-bold text-xs uppercase tracking-widest mb-4">API Latency</h4>
+<div class="text-2xl font-bold font-headline">14ms</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-6">
+<h4 class="text-on-surface-variant font-bold text-xs uppercase tracking-widest mb-4">Tokens Processed</h4>
+<div class="text-2xl font-bold font-headline">1.2M <span class="text-xs text-tertiary font-medium">/hr</span></div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-6">
+<h4 class="text-on-surface-variant font-bold text-xs uppercase tracking-widest mb-4">Error Rate</h4>
+<div class="text-2xl font-bold font-headline">0.003%</div>
+</div>
+</div>
+</main>
+</div>
+<!-- TUTORIAL OVERLAY LAYER -->
+<div class="fixed inset-0 z-[100] tutorial-overlay pointer-events-none">
+<!-- Tooltip 1: Sidebar Navigation -->
+<div class="absolute left-72 top-48 pointer-events-auto w-80">
+<div class="glass-card p-6 rounded-xl border border-primary/30 shadow-2xl relative">
+<!-- Pointer Arrow -->
+<div class="absolute -left-3 top-6 w-6 h-6 bg-[#1e2024] border-l border-b border-primary/30 rotate-45 transform"></div>
+<h3 class="text-primary font-headline font-bold text-lg mb-2">Central Command</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                    Navigate between your high-level <span class="text-on-surface font-semibold">Overview</span>, specific <span class="text-on-surface font-semibold">ML Models</span>, and reporting tools instantly.
+                </p>
+<div class="flex items-center justify-between">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant/40"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant/40"></div>
+</div>
+<button class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg text-xs font-bold transition-all">NEXT FEATURE</button>
+</div>
+</div>
+</div>
+<!-- Highlight Ring for Dashboard Stats (Visual only via background radial gradient logic) -->
+<!-- Note: Real implementation would move the radial gradient center point -->
+<!-- Help Floating Action Button Suppression (Hidden per rule for details/tutorial) -->
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-[#111317]/90 backdrop-blur-lg border-t border-[#43474D]/15 shadow-2xl">
+<a class="flex flex-col items-center justify-center bg-[#ffb4a4]/10 text-[#ffb4a4] rounded-xl px-4 py-1 scale-90 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] scale-90 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] font-medium">Models</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] scale-90 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="shield_person">shield_person</span>
+<span class="font-['Inter'] text-[10px] font-medium">Admin</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] scale-90 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] text-[10px] font-medium">Help</span>
+</a>
+</nav>
+<!-- Overlay Close Button -->
+<div class="fixed top-24 right-8 z-[110] pointer-events-auto">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface bg-surface-container-highest/50 backdrop-blur px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95 border border-outline-variant/20">
+<span>Skip Tutorial</span>
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</body></html>

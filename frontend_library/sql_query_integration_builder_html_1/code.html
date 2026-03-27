@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SQL Query &amp; Integration Builder</title>
+<!-- Manrope font for Synthesis ML Design System -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slateBlue: {
+              50: '#f4f6f8',
+              100: '#e9edf1',
+              200: '#c8d2dc',
+              300: '#a7b7c7',
+              400: '#66829d',
+              500: '#4A6583', // Custom Color
+              600: '#435b76',
+              700: '#384c62',
+              800: '#2d3d4f',
+              900: '#253240',
+            },
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          borderRadius: {
+            'custom': '4px', // ROUND_FOUR
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="global-styles">
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-family: 'Manrope', sans-serif;
+    }
+    .syntax-keyword { color: #2563eb; font-weight: 600; }
+    .syntax-string { color: #92400e; }
+    .syntax-identifier { color: #1e293b; }
+    .line-number { color: #94a3b8; text-align: right; padding-right: 1rem; width: 3rem; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center" data-purpose="navigation-header">
+<h1 class="text-xl font-bold text-slate-800">SQL Query &amp; Integration Builder</h1>
+<span class="text-slate-400 text-sm font-medium">Variant 14 of 20</span>
+</header>
+<!-- END: MainHeader -->
+<main class="flex-1 p-6 space-y-6">
+<!-- BEGIN: PageTitle -->
+<div class="mb-2">
+<h2 class="text-2xl font-bold text-slate-900">Data Source: SQL</h2>
+</div>
+<!-- END: PageTitle -->
+<div class="grid grid-cols-12 gap-6 h-full">
+<!-- BEGIN: SchemaBrowser -->
+<aside class="col-span-3 bg-white border border-slate-200 rounded-custom p-4 shadow-sm" data-purpose="sidebar-navigation">
+<h3 class="text-lg font-bold mb-4 border-b border-slate-100 pb-2">Schema Browser</h3>
+<div class="space-y-2 text-sm overflow-y-auto max-h-[70vh]">
+<!-- Root Database Node -->
+<div class="flex items-center gap-2 font-semibold text-slate-700">
+<svg class="w-4 h-4 text-slateBlue-500" fill="currentColor" viewbox="0 0 20 20"><path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"></path><path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"></path><path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"></path></svg>
+            PostgreSQL: main_db
+          </div>
+<div class="ml-4 space-y-2">
+<div class="flex items-center gap-2 text-slate-600">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              public
+            </div>
+<div class="ml-4 space-y-2">
+<!-- Users Table -->
+<div>
+<div class="flex items-center gap-2 text-slate-700 font-medium">
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V7h-5v2zm-7 0v-2h5v2H4z" fill-rule="evenodd"></path></svg>
+                  users
+                </div>
+<div class="ml-6 space-y-1 mt-1 text-slate-500 font-normal">
+<div class="flex items-center gap-2"><span class="w-3 text-center">T</span> id</div>
+<div class="flex items-center gap-2"><svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg> username</div>
+<div class="flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> email</div>
+<div class="flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> created_at</div>
+</div>
+</div>
+<!-- Products Table -->
+<div class="flex items-center gap-2 text-slate-700 font-medium">
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V7h-5v2zm-7 0v-2h5v2H4z" fill-rule="evenodd"></path></svg>
+                products
+              </div>
+<!-- Orders Table -->
+<div class="flex items-center gap-2 text-slate-700 font-medium">
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V7h-5v2zm-7 0v-2h5v2H4z" fill-rule="evenodd"></path></svg>
+                orders
+              </div>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: SchemaBrowser -->
+<!-- BEGIN: QueryBuilderContent -->
+<section class="col-span-9 flex flex-col gap-6" data-purpose="query-builder-main">
+<!-- BEGIN: SQL Editor Card -->
+<div class="bg-white border border-slate-200 rounded-custom shadow-sm overflow-hidden flex flex-col h-[450px]">
+<!-- Editor Toolbar -->
+<div class="bg-white border-b border-slate-100 p-3 flex justify-between items-center">
+<div class="flex gap-2">
+<button class="px-4 py-1.5 border border-slate-300 rounded-custom text-sm font-semibold text-slate-700 flex items-center gap-2 hover:bg-slate-50 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Save Query
+              </button>
+<button class="px-4 py-1.5 border border-slate-300 rounded-custom text-sm font-semibold text-slate-700 flex items-center gap-2 hover:bg-slate-50 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Format SQL
+              </button>
+</div>
+<div class="flex items-center">
+<select class="form-select text-sm border-slate-300 rounded-custom py-1.5 pr-10 pl-3 focus:ring-slateBlue-500 focus:border-slateBlue-500">
+<option>Database: main_db (PostgreSQL)</option>
+</select>
+</div>
+</div>
+<!-- SQL Editor Area -->
+<div class="flex-1 bg-[#fcfdfe] font-mono text-sm flex overflow-hidden">
+<div class="flex-none bg-slate-50 py-4 select-none">
+<div class="line-number">1</div>
+<div class="line-number">2</div>
+<div class="line-number">3</div>
+<div class="line-number">4</div>
+<div class="line-number">5</div>
+</div>
+<div class="flex-1 p-4 whitespace-pre outline-none" contenteditable="true" spellcheck="false">
+<span class="syntax-keyword">SELECT</span> <span class="syntax-identifier">id, username, email</span>
+<span class="syntax-keyword">FROM</span> <span class="syntax-identifier">users</span>
+<span class="syntax-keyword">WHERE</span> <span class="syntax-identifier">created_at</span> &gt; <span class="syntax-string">'2023-01-01'</span>
+<span class="syntax-keyword">ORDER BY</span> <span class="syntax-identifier">id</span> <span class="syntax-keyword">DESC</span>;
+            </div>
+</div>
+<!-- Run Query Footer -->
+<div class="p-3 bg-slate-50 border-t border-slate-200">
+<button class="w-full bg-slateBlue-500 hover:bg-slateBlue-600 text-white font-bold py-3 px-4 rounded-custom shadow-sm transition-all text-sm uppercase tracking-wide">
+              Run Query
+            </button>
+</div>
+</div>
+<!-- END: SQL Editor Card -->
+<!-- BEGIN: DataPreviewTable -->
+<div class="bg-white border border-slate-200 rounded-custom shadow-sm overflow-hidden" data-purpose="results-display">
+<div class="p-4 border-b border-slate-100 bg-white">
+<h3 class="text-md font-bold text-slate-800">Data Preview (Top 10 rows)</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm" id="results-table">
+<thead class="bg-slate-50 border-b border-slate-200">
+<tr>
+<th class="px-6 py-3 font-bold text-slate-700 uppercase tracking-tight">id</th>
+<th class="px-6 py-3 font-bold text-slate-700 uppercase tracking-tight">username</th>
+<th class="px-6 py-3 font-bold text-slate-700 uppercase tracking-tight">email</th>
+<th class="px-6 py-3 font-bold text-slate-700 uppercase tracking-tight">created_at</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-600">1</td>
+<td class="px-6 py-4 text-slate-600">almin</td>
+<td class="px-6 py-4 text-slate-600">almin0il@example.com</td>
+<td class="px-6 py-4 text-slate-600">2023-01-01 06:58:33</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-600">2</td>
+<td class="px-6 py-4 text-slate-600">username</td>
+<td class="px-6 py-4 text-slate-600">username@gmail.com</td>
+<td class="px-6 py-4 text-slate-600">2023-01-01 06:50:00</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-600">3</td>
+<td class="px-6 py-4 text-slate-600">exanple</td>
+<td class="px-6 py-4 text-slate-600">exarple@example.com</td>
+<td class="px-6 py-4 text-slate-600">2023-01-01 06:53:06</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-600">4</td>
+<td class="px-6 py-4 text-slate-600">deskltay</td>
+<td class="px-6 py-4 text-slate-600">deskltay@example.com</td>
+<td class="px-6 py-4 text-slate-600">2023-01-01 06:59:40</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- END: DataPreviewTable -->
+</section>
+<!-- END: QueryBuilderContent -->
+</div>
+</main>
+<script data-purpose="interaction-handlers">
+    // Add simple click interactions for buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', function() {
+        this.classList.add('scale-95');
+      });
+      btn.addEventListener('mouseup', function() {
+        this.classList.remove('scale-95');
+      });
+    });
+  </script>
+</body></html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | ML Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#1a1c20",
+                        "on-secondary-fixed-variant": "#2d4965",
+                        "on-secondary-container": "#9fbbdd",
+                        "inverse-on-surface": "#2e3035",
+                        "surface": "#111317",
+                        "on-primary-fixed": "#3e0500",
+                        "tertiary": "#67d9c9",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#85f6e5",
+                        "tertiary-container": "#006f64",
+                        "surface-container-high": "#282a2e",
+                        "on-tertiary-container": "#81f2e2",
+                        "secondary-fixed-dim": "#adc9eb",
+                        "tertiary-fixed-dim": "#67d9c9",
+                        "surface-bright": "#37393d",
+                        "background": "#111317",
+                        "secondary": "#adc9eb",
+                        "primary-fixed-dim": "#ffb4a4",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "surface-container-highest": "#333539",
+                        "primary-container": "#a44531",
+                        "on-primary-fixed-variant": "#7f2a18",
+                        "on-surface-variant": "#c3c6ce",
+                        "on-background": "#e2e2e7",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-tertiary-fixed": "#00201c",
+                        "on-surface": "#e2e2e7",
+                        "outline": "#8d9198",
+                        "outline-variant": "#43474d",
+                        "on-primary": "#601305",
+                        "primary": "#ffb4a4",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#304b68",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "surface-dim": "#111317",
+                        "surface-container": "#1e2024",
+                        "on-tertiary": "#003731",
+                        "inverse-primary": "#9f412d",
+                        "surface-variant": "#333539",
+                        "on-primary-container": "#ffd7ce",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-secondary-fixed": "#001d35",
+                        "on-secondary": "#15324e",
+                        "inverse-surface": "#e2e2e7",
+                        "surface-tint": "#ffb4a4",
+                        "primary-fixed": "#ffdad3"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(17, 19, 23, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center justify-between px-8 py-4 w-full max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tighter text-[#ffb4a4] font-headline">Insight Curator</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-headline font-bold text-sm tracking-tight text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Platform</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Solutions</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Resources</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">search</button>
+<button class="primary-gradient text-on-primary px-6 py-2.5 rounded-xl font-headline font-bold text-sm active:scale-95 transition-all shadow-lg shadow-primary/10">Sign In</button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-8 py-20 overflow-hidden">
+<div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-7 space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest text-primary font-label text-[0.6875rem] font-bold tracking-widest uppercase">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        Next Gen ML Analytics
+                    </div>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight text-on-surface">
+                        Analyze Your Data with <span class="text-primary">Modular AI</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-xl leading-relaxed">
+                        Transform raw datasets into strategic narratives. Our curator engine identifies hidden correlations and predictive markers with editorial precision.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="primary-gradient text-on-primary px-8 py-4 rounded-xl font-headline font-bold text-base shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
+                            Start Analysis
+                        </button>
+<button class="px-8 py-4 rounded-xl font-headline font-bold text-base text-secondary border border-outline-variant/20 hover:bg-surface-container transition-colors">
+                            View Documentation
+                        </button>
+</div>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="md:col-span-5">
+<div class="bg-surface-container-low p-1 rounded-2xl border border-outline-variant/10 shadow-2xl">
+<div class="bg-surface-container border-2 border-dashed border-outline-variant/30 rounded-xl p-10 flex flex-col items-center justify-center text-center group cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Drag and drop dataset</h3>
+<p class="text-on-surface-variant text-sm mb-6">Support for CSV, JSON, and Parquet files (Max 500MB)</p>
+<div class="h-[2px] w-12 bg-outline-variant/30 mb-6"></div>
+<button class="text-primary font-label text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                                Browse local files
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decorative Element -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary/5 blur-[120px] rounded-full -z-10"></div>
+<div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-outline-variant/20 to-transparent"></div>
+</section>
+<!-- Feature Bento Grid -->
+<section class="px-8 py-24 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-2xl">
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-4">Curated ML Modules</h2>
+<p class="text-on-surface-variant">Intelligent processing layers designed for depth. No generic charts—only rigorous strategic insights.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-3 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</button>
+<button class="p-3 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Feature Card 1 -->
+<div class="bg-surface-container-low rounded-xl p-8 hover:translate-y-[-4px] transition-all duration-300 group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Basic Stats</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+                            Instant distribution analysis, outlier detection, and statistical significance testing. The foundation of every curator journey.
+                        </p>
+<div class="h-32 w-full rounded-lg bg-surface-container overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="abstract data visualization with soft glowing line charts and vertical bars in slate blue and coral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhBWwGgUaKZbsjI7rPOQHAHcRp6eV_5aRBsWa9AQtMvGvryfQB7A8SufwOBFbAHm8JBVU2sJGAS6zPn0JGf2Ospcuh__jL2qYuIa6vaN1vMVEWY6h8Bs-YLClE68fGfEu9vABKoq8SytNzGL2Eh4mGeSuGx4ne9JQ_EzZudDI4GqCfn2sOVwn22QCMNhSpbkyGDYzeUy0y2cmjjQyrPucQ29pPECY9vq1Yo1bO1hCWUgeVGcGlGQ7TH5C3YMGTlrxXnbmuVIxhU6c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+</div>
+<!-- Feature Card 2 -->
+<div class="bg-surface-container-low rounded-xl p-8 hover:translate-y-[-4px] transition-all duration-300 group ring-1 ring-primary/10">
+<div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4 text-primary">Correlation</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+                            Multi-dimensional mapping that uncovers hidden relationships between variables. Discover the "why" behind the numbers.
+                        </p>
+<div class="grid grid-cols-4 gap-2 opacity-50">
+<div class="aspect-square bg-primary/40 rounded-sm"></div>
+<div class="aspect-square bg-primary/20 rounded-sm"></div>
+<div class="aspect-square bg-primary/60 rounded-sm"></div>
+<div class="aspect-square bg-primary/10 rounded-sm"></div>
+<div class="aspect-square bg-primary/10 rounded-sm"></div>
+<div class="aspect-square bg-primary/70 rounded-sm"></div>
+<div class="aspect-square bg-primary/30 rounded-sm"></div>
+<div class="aspect-square bg-primary/50 rounded-sm"></div>
+</div>
+</div>
+<!-- Feature Card 3 -->
+<div class="bg-surface-container-low rounded-xl p-8 hover:translate-y-[-4px] transition-all duration-300 group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-8 group-hover:bg-tertiary-container transition-colors">
+<span class="material-symbols-outlined text-secondary group-hover:text-tertiary" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Predictive Modeling</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+                            Automated ML pipelines that forecast trends with 94%+ accuracy. Strategic decision support based on probable outcomes.
+                        </p>
+<div class="flex items-end gap-1 h-12">
+<div class="w-full h-[20%] bg-tertiary/20 rounded-t-sm"></div>
+<div class="w-full h-[40%] bg-tertiary/20 rounded-t-sm"></div>
+<div class="w-full h-[35%] bg-tertiary/20 rounded-t-sm"></div>
+<div class="w-full h-[60%] bg-tertiary/20 rounded-t-sm"></div>
+<div class="w-full h-[85%] bg-tertiary/60 rounded-t-sm"></div>
+<div class="w-full h-[70%] bg-tertiary/20 rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Proof Section -->
+<section class="px-8 py-24">
+<div class="max-w-7xl mx-auto bg-surface-container p-12 rounded-3xl relative overflow-hidden">
+<div class="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline text-4xl font-bold mb-6 leading-tight">Insight-driven results for strategic leaders.</h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="text-primary font-headline text-4xl font-extrabold">12x</div>
+<div>
+<h4 class="font-bold text-on-surface">Faster Insights</h4>
+<p class="text-on-surface-variant text-sm">Reduce data prep time from weeks to minutes.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-tertiary font-headline text-4xl font-extrabold">98%</div>
+<div>
+<h4 class="font-bold text-on-surface">Model Confidence</h4>
+<p class="text-on-surface-variant text-sm">Validated accuracy across complex datasets.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="aspect-video rounded-2xl overflow-hidden bg-background border border-outline-variant/10 shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="high-tech workspace with multiple screens displaying complex mathematical models and node-based graphs in a dark studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6gm8tr8PvtP4D_bkpt1mRhUrZ9x5FOrqIrEz74e1Kv7rCNnxS8dE75RMdbZssmMjy8c-Byz57m-ajJReHh9hJMtSd4nSCFbQnvu6piglzHPr_3II29hYQ148hAU1Nj6cGvezvZqwsSfaVnofihPdbMbt9-55QsjS84K7LsJPW--GAK9iN-TF0FrAlaL9WO0e49afb8bCoEVeJmJaRVKxNMW1i-4dbWGrtAAut7xi-JcHvX8GlqtyUfAeegH8J4adxVMnvelvI7KI"/>
+</div>
+</div>
+<!-- Background Gradient -->
+<div class="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[100px] -z-0"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#43474D]/15 bg-[#111317]">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-['Manrope'] font-black text-[#ffb4a4] text-xl">Insight Curator</div>
+<p class="font-['Inter'] text-xs text-[#C3C6CE]">© 2024 Insight Curator. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Security</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Status</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#C3C6CE] hover:text-[#ffb4a4] cursor-pointer">language</span>
+<span class="material-symbols-outlined text-[#C3C6CE] hover:text-[#ffb4a4] cursor-pointer">monitoring</span>
+<span class="material-symbols-outlined text-[#C3C6CE] hover:text-[#ffb4a4] cursor-pointer">hub</span>
+</div>
+</div>
+</footer>
+</body></html>

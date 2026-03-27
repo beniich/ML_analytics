@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MLflow Experiment Tracker - Synthesis ML</title>
+<!-- Load Manrope Font -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4A6583',
+            brand: {
+              peach: '#E69E83',
+              dark: '#333A44',
+              muted: '#F8F9FA'
+            }
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '2px',
+            DEFAULT: '4px',
+            'md': '6px',
+            'lg': '8px',
+            'xl': '12px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style data-purpose="layout-refinements">
+    .experiment-table th {
+      @apply text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider text-gray-500 border-b border-gray-100;
+    }
+    .experiment-table td {
+      @apply px-4 py-4 text-sm text-gray-700 border-b border-gray-50;
+    }
+    .status-badge {
+      @apply px-2 py-1 rounded text-xs font-medium;
+    }
+    .status-finished { @apply bg-green-100 text-green-700; }
+    .status-failed { @apply bg-red-100 text-red-700; }
+  </style>
+</head>
+<body class="bg-brand-muted text-gray-900">
+<!-- BEGIN: Navigation -->
+<nav class="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+<svg class="text-white w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="font-extrabold text-xl tracking-tight uppercase">Synthesis ML</span>
+</div>
+<div class="flex items-center gap-8 text-sm font-semibold text-gray-600">
+<a class="hover:text-primary transition-colors border-b-2 border-primary pb-1" href="#">Experiments</a>
+<a class="hover:text-primary transition-colors" href="#">Models</a>
+<a class="hover:text-primary transition-colors" href="#">Artifacts</a>
+<a class="hover:text-primary transition-colors" href="#">User Profile</a>
+</div>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: Hero Header -->
+<header class="bg-brand-dark py-16 px-8 text-center text-white" data-purpose="main-header">
+<h1 class="text-4xl font-extrabold mb-2">MLflow Experiment Tracker</h1>
+<p class="text-gray-400 font-medium">Integration &amp; Experiment Logs</p>
+</header>
+<!-- END: Hero Header -->
+<!-- BEGIN: Main Dashboard Content -->
+<main class="max-w-7xl mx-auto -mt-10 px-6 pb-20">
+<!-- BEGIN: Experiment Runs Container -->
+<div class="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col lg:flex-row min-h-[600px]" data-purpose="experiment-dashboard">
+<!-- BEGIN: Left Table Section -->
+<section class="flex-grow p-6 border-r border-gray-100">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-bold text-gray-800">Experiment Runs</h2>
+<button class="bg-brand-peach hover:bg-opacity-90 text-white px-4 py-2 rounded text-sm font-bold transition-all uppercase tracking-wide">
+            Experiment Run
+          </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full experiment-table">
+<thead>
+<tr>
+<th>Run Name</th>
+<th>Timestamp</th>
+<th>Status</th>
+<th>Accuracy</th>
+<th>Loss</th>
+<th>Duration</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-blue-50/30">
+<td class="font-semibold text-primary">Run_20231027_0915</td>
+<td>Oct 27, 09:15 AM</td>
+<td><span class="status-badge status-finished">Finished</span></td>
+<td>0.945</td>
+<td>0.089</td>
+<td>2h 15m</td>
+<td class="text-xs text-gray-500">GitHub Action</td>
+</tr>
+<tr>
+<td class="font-semibold">Run_20231026_1430</td>
+<td>Oct 26, 02:30 PM</td>
+<td><span class="status-badge status-finished">Finished</span></td>
+<td>0.932</td>
+<td>0.105</td>
+<td>1h 55m</td>
+<td class="text-xs text-gray-500">Local</td>
+</tr>
+<tr>
+<td class="font-semibold">Run_20231026_1100</td>
+<td>Oct 26, 11:00 AM</td>
+<td><span class="status-badge status-failed">Failed</span></td>
+<td>-</td>
+<td>-</td>
+<td>30m</td>
+<td class="text-xs text-gray-500">Jupyter</td>
+</tr>
+<tr>
+<td class="font-semibold">Run_20231025_1645</td>
+<td>Oct 25, 04:45 PM</td>
+<td><span class="status-badge status-finished">Finished</span></td>
+<td>0.951</td>
+<td>0.072</td>
+<td>2h 40m</td>
+<td class="text-xs text-gray-500">GitHub Action</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: Left Table Section -->
+<!-- BEGIN: Right Sidebar Details -->
+<aside class="w-full lg:w-80 bg-gray-50 p-6" data-purpose="run-details-sidebar">
+<h3 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Run Details: Run_20231027_0915</h3>
+<!-- Sidebar Tabs -->
+<div class="flex gap-4 border-b border-gray-200 mb-6 text-xs font-bold uppercase overflow-x-auto whitespace-nowrap">
+<button class="text-brand-peach border-b-2 border-brand-peach pb-2">Parameters</button>
+<button class="text-gray-400 pb-2 hover:text-gray-600">Metrics</button>
+<button class="text-gray-400 pb-2 hover:text-gray-600">Artifacts</button>
+<button class="text-gray-400 pb-2 hover:text-gray-600">Notes</button>
+</div>
+<!-- Parameter List -->
+<div class="space-y-3 mb-8">
+<div class="flex justify-between text-sm">
+<span class="text-gray-500">learning_rate</span>
+<span class="font-mono text-gray-900">0.001</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-gray-500">batch_size</span>
+<span class="font-mono text-gray-900">32</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-gray-500">epochs</span>
+<span class="font-mono text-gray-900">100</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-gray-500">optimizer</span>
+<span class="font-mono text-gray-900">Adam</span>
+</div>
+</div>
+<!-- Artifacts List -->
+<h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Artifacts</h4>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary cursor-pointer">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            model.pkl
+          </li>
+<li class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary cursor-pointer">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            confusion_matrix.png
+          </li>
+<li class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary cursor-pointer">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+            roc_curve.png
+          </li>
+<li class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary cursor-pointer">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            logs.txt
+          </li>
+</ul>
+</aside>
+<!-- END: Right Sidebar Details -->
+</div>
+<!-- END: Experiment Runs Container -->
+<!-- BEGIN: Grid Layout Section -->
+<section class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8" data-purpose="feature-grid">
+<!-- Feature Card 1 -->
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col gap-4">
+<div class="aspect-video bg-gray-100 rounded overflow-hidden">
+<img alt="Model visualization" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_8_X1Nb9zeAk8cH1xvEdt11RnAtA9zIEITlHm0Dj_gmw0QRdbhPsmKxYm8nqiIzZNkmJlhAsz08TTh19ktTNN7f_6kbvGzz81zBqU4a5Rys0E3dZ-Wk3O2te6nQbRRCXcCURt6F8vodqR9ZqK4q6JDEGF6jtKmtLA2B2d-7QO375VBlO4iCjvh6AC9cunpxuZcMqoOL0eNl94F2g8xcUU5Tk4W4HIdL-bQMbjw_Smn0TKeHpP-CebGxTLxGjydEHIWogq1_5O3Cs"/>
+</div>
+<h3 class="font-bold text-lg">Coch no ead atinmare Bonnnn</h3>
+<p class="text-sm text-gray-500">Conemathroner emo mechs ootiro e duntus.</p>
+<div class="flex gap-2">
+<span class="text-[10px] uppercase font-bold text-brand-peach">Series One</span>
+<span class="text-[10px] uppercase font-bold text-gray-400">Archived</span>
+</div>
+</div>
+<!-- Feature Card 2: Interactive Preview -->
+<div class="bg-brand-dark p-8 rounded-lg shadow-xl text-white relative overflow-hidden flex flex-col justify-between" data-purpose="dark-feature-card">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-full border-2 border-brand-peach flex items-center justify-center text-xs font-bold">5.09</div>
+<h3 class="text-xl font-extrabold uppercase tracking-tight">Rapid Etkamolia</h3>
+<p class="text-gray-400 text-xs">Different as custom tracer of com table</p>
+</div>
+<div class="mt-8 grid grid-cols-3 gap-2">
+<div class="h-12 bg-gray-700 rounded opacity-50"></div>
+<div class="h-12 bg-gray-700 rounded opacity-80"></div>
+<div class="h-12 bg-gray-700 rounded"></div>
+<div class="h-12 bg-gray-700 rounded"></div>
+<div class="h-12 bg-gray-600 rounded"></div>
+<div class="h-12 bg-gray-700 rounded opacity-40"></div>
+</div>
+<button class="mt-8 w-full bg-brand-peach text-white py-3 rounded text-sm font-bold uppercase tracking-widest">
+          Edit Dashboard
+        </button>
+</div>
+<!-- Feature Card 3 -->
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col gap-4">
+<div class="aspect-square bg-gray-100 rounded overflow-hidden relative">
+<img alt="Asset Layout" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq9zC0OMw0KKllSAOWMzcPBqAjy-CrZKGYivCglQzDUWR2rSG9S0RxiXoHnMyN8ZhOvp1Khx9gsTFk0EvmOU27rdF5hjPvyJjBYGvpBbPX5TLkdS3PtDGCTHRM3GlUWCeUrbZy0pTJaQuKlQT8fJG_L3paBZgNo3JeXb2Wr_qN3gTn92TeDkgM8s6s_59_4j4ukxxH2Ztj8CppCnPC1oRsHOX2Xu89HkVK16lebv8OJiEBpEnNhhoVf9ZGfiTMsgAQSHRJWvHrS7Y"/>
+<div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur p-4 rounded shadow-lg">
+<h4 class="font-bold text-sm">Florals</h4>
+<p class="text-[10px] text-gray-500 mt-1">Deless oris accent parameter eraon</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Grid Layout Section -->
+<!-- BEGIN: Editorial Section -->
+<section class="mt-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center" data-purpose="editorial-section">
+<div class="space-y-8">
+<div class="space-y-4">
+<h2 class="text-5xl font-black tracking-tighter uppercase leading-none">Varly Fiere</h2>
+<p class="text-gray-600 text-lg max-w-md">Brists ceonaset ere tonamas e gabrondeconomia sam ces vorese eseipors delta conse poistren, 29880020 Foscer conse coe</p>
+</div>
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-brand-peach flex items-center justify-center text-white font-bold text-xs">G</div>
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold text-xs">E</div>
+</div>
+<p class="text-gray-400 text-xs leading-relaxed max-w-sm">
+          Mous cemo amicus varsity stetman piece portion point content, had ever cursus ut else inclement gentium set exclusive paradise, but andne dont out basically consideration at id bit.
+        </p>
+<button class="bg-brand-peach text-white px-8 py-4 rounded font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform">
+          Discover Core
+        </button>
+</div>
+<div class="relative group">
+<div class="absolute -top-4 -left-4 w-full h-full border-2 border-gray-200 rounded-lg group-hover:top-0 group-hover:left-0 transition-all"></div>
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden bg-gray-100 shadow-2xl">
+<img alt="Office space" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeEEJZQFXhlwn5ZBNtK3Nsm0P2dtVg3sSTVpGcM6jH6_HnR1J7ga-DK23oT7abqozXWRIresmze08ObEYXPT2ETao9Qj7Y3S-cyP8Ag1O3RITtumzz8TIjEI8jSVDzs2cxxEtLnG6JNW3MBglspo4m55R8uoMg7-o4c4MV8J-8_fqQ8olDgPcGSGTyYAeZ5khjKcthFwxs_9_bcJTcDTo8FjGMHo1K0g5gtaRRzhL8p_oKR_UjDaUqXrN29lx0KVcqrSKtdFinVao"/>
+</div>
+</div>
+</section>
+<!-- END: Editorial Section -->
+</main>
+<!-- END: Main Dashboard Content -->
+<!-- BEGIN: Footer -->
+<footer class="bg-white border-t border-gray-200 py-12 px-8 mt-20" data-purpose="site-footer">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+<span class="font-extrabold uppercase tracking-widest text-gray-400">Synthesis ML v2.4</span>
+</div>
+<div class="flex gap-8 text-xs font-bold uppercase text-gray-400">
+<a class="hover:text-primary" href="#">Docs</a>
+<a class="hover:text-primary" href="#">API</a>
+<a class="hover:text-primary" href="#">Support</a>
+<a class="hover:text-primary" href="#">Privacy</a>
+</div>
+<div class="text-xs text-gray-400">
+        © 2023 Synthesis Machine Learning Systems.
+      </div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

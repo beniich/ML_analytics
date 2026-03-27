@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#1a1c20",
+                        "on-secondary-fixed-variant": "#2d4965",
+                        "on-secondary-container": "#9fbbdd",
+                        "inverse-on-surface": "#2e3035",
+                        "surface": "#111317",
+                        "on-primary-fixed": "#3e0500",
+                        "tertiary": "#67d9c9",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#85f6e5",
+                        "tertiary-container": "#006f64",
+                        "surface-container-high": "#282a2e",
+                        "on-tertiary-container": "#81f2e2",
+                        "secondary-fixed-dim": "#adc9eb",
+                        "tertiary-fixed-dim": "#67d9c9",
+                        "surface-bright": "#37393d",
+                        "background": "#111317",
+                        "secondary": "#adc9eb",
+                        "primary-fixed-dim": "#ffb4a4",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "surface-container-highest": "#333539",
+                        "primary-container": "#a44531",
+                        "on-primary-fixed-variant": "#7f2a18",
+                        "on-surface-variant": "#c3c6ce",
+                        "on-background": "#e2e2e7",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-tertiary-fixed": "#00201c",
+                        "on-surface": "#e2e2e7",
+                        "outline": "#8d9198",
+                        "outline-variant": "#43474d",
+                        "on-primary": "#601305",
+                        "primary": "#ffb4a4",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#304b68",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "surface-dim": "#111317",
+                        "surface-container": "#1e2024",
+                        "on-tertiary": "#003731",
+                        "inverse-primary": "#9f412d",
+                        "surface-variant": "#333539",
+                        "on-primary-container": "#ffd7ce",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-secondary-fixed": "#001d35",
+                        "on-secondary": "#15324e",
+                        "inverse-surface": "#e2e2e7",
+                        "surface-tint": "#ffb4a4",
+                        "primary-fixed": "#ffdad3"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(26, 28, 32, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 antialiased overflow-hidden">
+<main class="flex min-h-screen">
+<!-- Visual Section (Left) -->
+<section class="hidden lg:flex lg:w-3/5 relative items-center justify-center overflow-hidden">
+<!-- Background Visualization -->
+<div class="absolute inset-0 z-0 bg-surface-container-lowest">
+<img class="w-full h-full object-cover opacity-40" data-alt="Intricate glowing neural network mesh with floating data points in deep blue and coral tones, cinematic lighting, editorial tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpwyzMp0939o1mowySdD_vsmP2P2AkAJXfVyeYr1B3Fg3HV2JUoCbhUMm5mgbZ6Z8PGjB8G2Frkr-5v81pUhika_rcG7S_H03FU0N7X1QPVOe8OhnFColZH91dmwnTORqMrmitIHqMM0pyYKBnydNVGLXp_cx41flcBMg4ke79pzKayyfJY1UptQ4-lU7LJXv9fc8DwbRQq2u8MN34I-nWtvLyAIW8Iqii2qV_7oK4I4j3safgEF9Uc3OqhVN-1YI4B5HybotIl8o"/>
+<!-- Overlay Gradient for Depth -->
+<div class="absolute inset-0 bg-gradient-to-tr from-surface via-transparent to-transparent opacity-80"></div>
+</div>
+<!-- Content Overlay -->
+<div class="relative z-10 p-20 max-w-2xl">
+<div class="inline-flex items-center gap-2 mb-8 bg-surface-container/40 backdrop-blur-md px-4 py-2 rounded-full border border-outline-variant/10">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">ML Intelligence Hub</span>
+</div>
+<h1 class="font-headline text-6xl md:text-7xl font-extrabold tracking-tighter leading-tight text-on-surface mb-6">
+                    Unlock <span class="text-primary italic">AI-Driven</span> Insights
+                </h1>
+<p class="text-on-surface-variant text-xl leading-relaxed max-w-lg font-light">
+                    The next generation of strategic decision making. Transform complex datasets into professional, editorial-grade narratives.
+                </p>
+<!-- Floating Info Card (Glassmorphism) -->
+<div class="mt-12 glass-panel p-6 rounded-xl border border-outline-variant/10 flex gap-6 items-center max-w-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl">query_stats</span>
+</div>
+<div>
+<div class="text-sm font-headline font-bold text-on-surface">Predictive Precision</div>
+<div class="text-xs text-on-surface-variant">98.4% Accuracy across all core models.</div>
+</div>
+</div>
+</div>
+<!-- Brand Anchor (Bottom Left) -->
+<div class="absolute bottom-12 left-12">
+<div class="font-headline font-black text-2xl tracking-tighter text-primary">Insight Curator</div>
+</div>
+</section>
+<!-- Login Form Section (Right) -->
+<section class="w-full lg:w-2/5 bg-surface-container-low flex items-center justify-center px-8 sm:px-12 lg:px-20 relative">
+<div class="w-full max-w-md">
+<!-- Mobile Branding -->
+<div class="lg:hidden mb-12 flex flex-col items-center">
+<div class="font-headline font-black text-3xl tracking-tighter text-primary mb-2">Insight Curator</div>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+</div>
+<div class="mb-10">
+<h2 class="font-headline text-3xl font-bold text-on-surface mb-2">Welcome Back</h2>
+<p class="text-on-surface-variant text-sm">Please enter your workspace credentials to continue.</p>
+</div>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant" for="email">Work Email</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors">alternate_email</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="email" name="email" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant" for="password">Security Key</label>
+<a class="text-[10px] uppercase tracking-tighter font-bold text-primary hover:text-primary-container transition-colors" href="#">Forgot Access?</a>
+</div>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded bg-surface-container-highest border-none text-primary focus:ring-primary/20 focus:ring-offset-0" id="remember" type="checkbox"/>
+<label class="text-sm text-on-surface-variant" for="remember">Stay authenticated for 30 days</label>
+</div>
+<!-- Submit Button -->
+<button class="w-full primary-gradient text-on-primary-fixed font-headline font-extrabold py-4 rounded-xl flex items-center justify-center gap-2 group transition-transform active:scale-[0.98] shadow-lg shadow-primary/10" type="submit">
+<span>Log In</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<!-- Social/SSO Divider -->
+<div class="my-10 flex items-center gap-4">
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+<span class="text-[10px] uppercase tracking-widest text-outline">Enterprise SSO</span>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<!-- SSO Buttons -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/10 transition-colors group">
+<img alt="Google" class="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6QCRiw93-_rVQJe0thM1UzPjzBqvB8wcRQ-Qqx7XpkPKtSQ0hA6GAai2pR_j1fzmEzQQN9u_ARvKJM_EbiDgwAkwtfpFI84VzYBdchuXZaB65H32nD0b73kziNDDXr-CRMEIowUB053hmpOT9-GvpZOimTIYaOeZV6DLbioBEsfg8sYidxiv3ylnXD1XzyVa3eQH6NGSrCH4BC1F7DTWW3n8wS8Z18XtFb3IrfFbAHRNt0jVBIdbntFuO51JpeNE0965GQe689r8"/>
+<span class="text-sm font-medium text-on-surface-variant">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/10 transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">hub</span>
+<span class="text-sm font-medium text-on-surface-variant">SSO</span>
+</button>
+</div>
+<!-- Footer Sign Up -->
+<div class="mt-12 pt-8 border-t border-outline-variant/10 text-center">
+<p class="text-on-surface-variant text-sm">
+                        New to the Curator? 
+                        <a class="text-primary font-bold ml-1 hover:underline underline-offset-4" href="#">Sign Up</a>
+</p>
+</div>
+</div>
+<!-- Absolute Footer Text -->
+<div class="absolute bottom-8 left-0 right-0 text-center">
+<p class="text-[10px] text-outline uppercase tracking-widest">© 2024 Insight Curator. System version 4.2.0-Alpha</p>
+</div>
+</section>
+</main>
+</body></html>

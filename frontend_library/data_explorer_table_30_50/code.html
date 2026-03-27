@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Data Explorer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#ffd7ce",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "secondary-container": "#304b68",
+              "on-primary": "#601305",
+              "outline-variant": "#43474d",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "surface-dim": "#111317",
+              "on-tertiary": "#003731",
+              "surface-container": "#1e2024",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#005048",
+              "primary-fixed-dim": "#ffb4a4",
+              "secondary": "#adc9eb",
+              "on-background": "#e2e2e7",
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "outline": "#8d9198",
+              "primary-container": "#a44531",
+              "surface-container-highest": "#333539",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "surface-container-high": "#282a2e",
+              "tertiary-container": "#006f64",
+              "on-tertiary-container": "#81f2e2",
+              "tertiary-fixed": "#85f6e5",
+              "on-secondary-container": "#9fbbdd",
+              "surface-container-low": "#1a1c20",
+              "inverse-on-surface": "#2e3035",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface": "#111317",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #111317; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #43474D; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-[#111317] dark:bg-[#111317] shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center justify-between px-8 h-20 w-full mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold text-[#ffb4a4] tracking-tighter font-headline">Insight Curator</span>
+<div class="hidden md:flex items-center gap-8 font-['Manrope'] font-semibold tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Projects</a>
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1 active:scale-95 duration-150" href="#">Data</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Models</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Team</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-highest border-none rounded-xl pl-10 pr-4 py-2 w-64 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Global search..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-[#333539]/50 p-2 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-[#333539]/50 p-2 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+<img alt="User profile" data-alt="Close-up portrait of a professional man with a friendly expression in a modern office environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvUIAshW1sLQ4YUHr-KXAp52Xu9hl_og2akMhfbIFj9GPnYkj3TXi2DxGoM4M6xfrWP0_dW2irzddmxNyBMq0ng4Xk1VdCuTLtLCwTh_j0tBhDT3JzCTOEJ9ru0R7enZHRbxMzCAYg47AWRwpiBllovXGiA0t04MlFiK0S6LNZC4rIrorTFFE-60jzMa0dL2C9Pi0qioZLHhrMyu_oPYRjWLvgUUMK5OXB3A731EuodIKlcilBQIwV0nwX3MjSSiS0xiq5i9FV1H0"/>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 pt-24 bg-[#111317]/80 backdrop-blur-xl border-r border-[#43474D]/15 font-['Inter'] text-sm font-medium z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-on-primary font-bold">A</div>
+<div>
+<div class="text-[#E2E2E7] font-['Manrope'] font-bold leading-tight">Project Alpha</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">ML Ops Pipeline</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Deployment</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-[#ffb4a4]/10 to-transparent text-[#ffb4a4] border-r-2 border-[#ffb4a4] rounded-l-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span>Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>API Docs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Team</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl shadow-lg shadow-primary/10 active:scale-[0.98] transition-all">
+                    Deploy Model
+                </button>
+</div>
+<div class="p-4 border-t border-outline-variant/10 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-lg">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-lg">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 p-8 bg-background">
+<!-- Page Header -->
+<header class="mb-10">
+<h1 class="text-4xl font-extrabold font-headline tracking-tighter text-on-surface mb-2">Data Explorer</h1>
+<p class="text-on-surface-variant text-lg">Managing 2.4M rows of inferred customer sentiment data.</p>
+</header>
+<!-- Action Bar -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">filter_list</span>
+<input class="bg-surface-container-highest border-none rounded-lg pl-9 pr-4 py-2 text-sm w-48 lg:w-64 focus:ring-1 focus:ring-primary/40" placeholder="Regex filtering..." type="text"/>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/20 mx-2"></div>
+<button class="flex items-center gap-2 px-3 py-2 text-sm text-secondary hover:bg-secondary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+<span>Date Range</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 text-sm text-secondary hover:bg-secondary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm">view_column</span>
+<span>Columns</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-on-surface-variant font-medium uppercase tracking-widest">Selected: 0</span>
+<button class="px-4 py-2 bg-surface-container-highest hover:bg-surface-variant text-on-surface text-sm font-semibold rounded-lg transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Export CSV
+                    </button>
+<button class="px-4 py-2 bg-primary text-on-primary text-sm font-bold rounded-lg transition-all flex items-center gap-2 shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-sm">add</span>
+                        New Entry
+                    </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-2xl shadow-black/40 border border-outline-variant/5">
+<!-- Data-Intensive Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-secondary-container/30 text-on-secondary-container font-headline font-semibold text-xs uppercase tracking-widest">
+<th class="px-6 py-4 w-12"><input class="rounded bg-surface-container-highest border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></th>
+<th class="px-6 py-4 cursor-pointer hover:bg-secondary-container/50 transition-colors group">
+<div class="flex items-center gap-2">
+                                        ID <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">unfold_more</span>
+</div>
+</th>
+<th class="px-6 py-4 cursor-pointer hover:bg-secondary-container/50 transition-colors group">
+<div class="flex items-center gap-2">
+                                        Timestamp <span class="material-symbols-outlined text-sm text-primary">arrow_downward</span>
+</div>
+</th>
+<th class="px-6 py-4">Customer Entity</th>
+<th class="px-6 py-4">Sentiment Score</th>
+<th class="px-6 py-4">Confidence</th>
+<th class="px-6 py-4">Region</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4"><input class="rounded bg-surface-container-highest border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="px-6 py-4 font-mono text-xs text-secondary">#UID-82910</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant whitespace-nowrap">2024-10-24 14:02:11</td>
+<td class="px-6 py-4 text-sm font-semibold">Global Logistics Corp</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1.5 bg-surface-container-highest rounded-full overflow-hidden w-24">
+<div class="h-full bg-tertiary" style="width: 82%"></div>
+</div>
+<span class="text-xs font-bold text-tertiary">0.82</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">94.2%</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase">North America</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-xs text-on-surface">Verified</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4"><input class="rounded bg-surface-container-highest border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="px-6 py-4 font-mono text-xs text-secondary">#UID-82911</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant whitespace-nowrap">2024-10-24 13:58:45</td>
+<td class="px-6 py-4 text-sm font-semibold">Starlight Retail Ltd</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1.5 bg-surface-container-highest rounded-full overflow-hidden w-24">
+<div class="h-full bg-primary" style="width: 31%"></div>
+</div>
+<span class="text-xs font-bold text-primary">0.31</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">88.7%</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase">Europe</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs text-on-surface">Pending</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4"><input class="rounded bg-surface-container-highest border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="px-6 py-4 font-mono text-xs text-secondary">#UID-82912</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant whitespace-nowrap">2024-10-24 13:55:01</td>
+<td class="px-6 py-4 text-sm font-semibold">Apex Dynamics</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1.5 bg-surface-container-highest rounded-full overflow-hidden w-24">
+<div class="h-full bg-secondary" style="width: 55%"></div>
+</div>
+<span class="text-xs font-bold text-secondary">0.55</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">91.4%</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase">Asia Pacific</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-xs text-on-surface">Verified</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4"><input class="rounded bg-surface-container-highest border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="px-6 py-4 font-mono text-xs text-secondary">#UID-82913</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant whitespace-nowrap">2024-10-24 13:50:33</td>
+<td class="px-6 py-4 text-sm font-semibold">Zenith Systems</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1.5 bg-surface-container-highest rounded-full overflow-hidden w-24">
+<div class="h-full bg-tertiary" style="width: 89%"></div>
+</div>
+<span class="text-xs font-bold text-tertiary">0.89</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">97.0%</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase">North America</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-xs text-on-surface">Verified</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-6 bg-surface-container-low flex items-center justify-between border-t border-outline-variant/10">
+<div class="flex items-center gap-4 text-xs font-medium text-on-surface-variant uppercase tracking-widest">
+<span>Show</span>
+<select class="bg-surface-container-highest border-none rounded-lg text-xs py-1 px-3 focus:ring-1 focus:ring-primary/40">
+<option>50 rows</option>
+<option>100 rows</option>
+<option>500 rows</option>
+</select>
+<span>Displaying 1-50 of 2,410,293 rows</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">first_page</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-1 px-4">
+<span class="px-3 py-1 bg-primary text-on-primary rounded text-sm font-bold">1</span>
+<span class="px-3 py-1 text-on-surface-variant hover:text-on-surface cursor-pointer text-sm font-bold">2</span>
+<span class="px-3 py-1 text-on-surface-variant hover:text-on-surface cursor-pointer text-sm font-bold">3</span>
+<span class="px-3 py-1 text-on-surface-variant">...</span>
+<span class="px-3 py-1 text-on-surface-variant hover:text-on-surface cursor-pointer text-sm font-bold">48206</span>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bento Status Section -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
+<div class="relative z-10">
+<div class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-4">Ingestion Speed</div>
+<div class="text-3xl font-headline font-extrabold text-on-surface">12.4k<span class="text-sm font-medium text-on-surface-variant ml-1">rows/sec</span></div>
+<div class="mt-4 flex items-center gap-2 text-tertiary text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>8.2% increase from yesterday</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/10 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all"></div>
+<div class="relative z-10">
+<div class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-4">Cluster Health</div>
+<div class="text-3xl font-headline font-extrabold text-on-surface">99.98%</div>
+<div class="mt-4 flex items-center gap-2 text-tertiary text-xs">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Operational • 12 Active Nodes</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/10 rounded-full blur-2xl group-hover:bg-tertiary/20 transition-all"></div>
+<div class="relative z-10">
+<div class="text-[10px] font-bold text-tertiary uppercase tracking-[0.2em] mb-4">Total Storage</div>
+<div class="text-3xl font-headline font-extrabold text-on-surface">4.2 TB</div>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm">storage</span>
+<span>PostgreSQL + Parquet S3</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-4 px-8 mt-auto bg-[#111317] dark:bg-[#111317] border-t border-[#43474D]/15">
+<div class="flex justify-between items-center w-full">
+<span class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE]">© 2024 Insight Curator. System Status: <span class="text-[#67d9c9]">Operational.</span></span>
+<div class="flex gap-6 font-['Inter'] text-[0.6875rem] uppercase tracking-widest">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Terms of Service</a>
+<a class="text-[#ffb4a4]" href="#">API Status</a>
+</div>
+</div>
+</footer>
+</body></html>

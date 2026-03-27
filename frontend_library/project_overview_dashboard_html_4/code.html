@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Project Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#1a1c20",
+                        "on-secondary-fixed-variant": "#2d4965",
+                        "on-secondary-container": "#9fbbdd",
+                        "inverse-on-surface": "#2e3035",
+                        "surface": "#111317",
+                        "on-primary-fixed": "#3e0500",
+                        "tertiary": "#67d9c9",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#85f6e5",
+                        "tertiary-container": "#006f64",
+                        "surface-container-high": "#282a2e",
+                        "on-tertiary-container": "#81f2e2",
+                        "secondary-fixed-dim": "#adc9eb",
+                        "tertiary-fixed-dim": "#67d9c9",
+                        "surface-bright": "#37393d",
+                        "background": "#111317",
+                        "secondary": "#adc9eb",
+                        "primary-fixed-dim": "#ffb4a4",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "surface-container-highest": "#333539",
+                        "primary-container": "#a44531",
+                        "on-primary-fixed-variant": "#7f2a18",
+                        "on-surface-variant": "#c3c6ce",
+                        "on-background": "#e2e2e7",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-tertiary-fixed": "#00201c",
+                        "on-surface": "#e2e2e7",
+                        "outline": "#8d9198",
+                        "outline-variant": "#43474d",
+                        "on-primary": "#601305",
+                        "primary": "#ffb4a4",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#304b68",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "surface-dim": "#111317",
+                        "surface-container": "#1e2024",
+                        "on-tertiary": "#003731",
+                        "inverse-primary": "#9f412d",
+                        "surface-variant": "#333539",
+                        "on-primary-container": "#ffd7ce",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-secondary-fixed": "#001d35",
+                        "on-secondary": "#15324e",
+                        "inverse-surface": "#e2e2e7",
+                        "surface-tint": "#ffb4a4",
+                        "primary-fixed": "#ffdad3"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(17, 19, 23, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .bento-card {
+            background-color: #1E2024;
+            transition: all 0.3s ease;
+        }
+        .bento-card:hover {
+            background-color: #282a2e;
+            transform: translateY(-2px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .primary-gradient-btn {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+<!-- TopNavBar Shell -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)] flex items-center justify-between px-8 py-4 w-full">
+<div class="text-xl font-extrabold tracking-tighter text-[#ffb4a4] font-headline">Insight Curator</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Platform</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Solutions</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Resources</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-[#1E2024] rounded-lg px-3 py-1.5 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder-on-surface-variant w-32 lg:w-48" placeholder="Search insights..." type="text"/>
+</div>
+<button class="primary-gradient-btn text-on-primary-fixed px-6 py-2 rounded-xl font-headline font-bold text-sm active:scale-95 duration-200">Sign In</button>
+</div>
+</nav>
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-[#111317]/50 backdrop-blur-2xl flex flex-col pt-20 pb-6">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="User Analytics Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional data scientist looking confident with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDak8X1ChMTk8RAWX8KZadULhaRTXr8i6k93Mj2kiD-2U9HdpUDs41v_F8kXmiT48f7nf5uXJy87whICqwtgGHu_k-aJimULtd0eS7rjplfzJI6Zz9OfKORCI-uZSae6FbJLEngFs9_L08GppFX2VYM8oi6FlUgjU6CdLcG9wk7AWo5lw7WKqN_vzB-uoRV24IQXcOvmBkh5SIblbkoLbtpbpbGXEMcT7cOoP0oXGQdgTTaQ53zPgCb2LrHM_Repuu9W437uEBFw9o"/>
+</div>
+<div>
+<p class="text-sm font-bold text-secondary font-headline leading-tight">ML Workspace</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-label">Strategic Curator</p>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] bg-[#1E2024] rounded-r-xl border-l-4 border-[#ffb4a4] font-['Inter'] text-sm font-medium hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span> Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all font-['Inter'] text-sm font-medium hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">query_stats</span> Statistics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all font-['Inter'] text-sm font-medium hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">grid_view</span> Correlations
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all font-['Inter'] text-sm font-medium hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">psychology</span> Models
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all font-['Inter'] text-sm font-medium hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span> Deployments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all font-['Inter'] text-sm font-medium hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full bg-surface-container-highest hover:bg-outline-variant text-on-surface py-3 rounded-xl flex items-center justify-center gap-2 transition-colors text-sm font-bold">
+<span class="material-symbols-outlined text-primary">add_circle</span> New Analysis
+            </button>
+<div class="border-t border-outline-variant/15 pt-4">
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] text-xs hover:text-[#ffb4a4] transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span> Help
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] text-xs hover:text-[#ffb4a4] transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">description</span> Documentation
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-20 min-h-screen bg-surface">
+<div class="max-w-7xl mx-auto p-8 lg:p-12 space-y-12">
+<!-- Header Section -->
+<header class="space-y-2">
+<h1 class="text-4xl lg:text-5xl font-extrabold tracking-tighter font-headline text-on-surface">Project <span class="gradient-text">Overview</span></h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">Visualizing neural performance and dataset integrity across your active ML architectures.</p>
+</header>
+<!-- Summary Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Total Rows -->
+<div class="bento-card col-span-1 p-6 rounded-xl flex flex-col justify-between min-h-[160px]">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Total Dataset Rows</span>
+<span class="material-symbols-outlined text-secondary">database</span>
+</div>
+<div>
+<div class="text-3xl font-bold font-headline">1,402,883</div>
+<div class="flex items-center gap-1 text-tertiary text-xs mt-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12.5% vs last month
+                        </div>
+</div>
+</div>
+<!-- Active Models -->
+<div class="bento-card col-span-1 p-6 rounded-xl flex flex-col justify-between min-h-[160px]">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Active Models</span>
+<span class="material-symbols-outlined text-primary">hub</span>
+</div>
+<div>
+<div class="text-3xl font-bold font-headline">24</div>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs mt-1">
+                            98.2% avg. accuracy across clusters
+                        </div>
+</div>
+</div>
+<!-- Main Analysis Graphic -->
+<div class="bento-card col-span-1 md:col-span-2 lg:col-span-2 p-6 rounded-xl relative overflow-hidden group min-h-[160px]">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Global Inference Time</span>
+<div class="text-3xl font-bold font-headline">42ms</div>
+</div>
+<div class="absolute bottom-0 right-0 w-1/2 h-full opacity-40">
+<div class="w-full h-full bg-gradient-to-t from-primary/20 to-transparent"></div>
+</div>
+<!-- Decorative Chart Element -->
+<div class="absolute inset-0 flex items-end px-2 pointer-events-none">
+<div class="w-full h-1/2 flex items-end gap-1 pb-4">
+<div class="flex-1 bg-outline-variant h-[20%] rounded-t-sm"></div>
+<div class="flex-1 bg-outline-variant h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-outline-variant h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-outline-variant h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-outline-variant h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[40%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recently Analyzed Files -->
+<section class="space-y-6">
+<div class="flex items-end justify-between">
+<h2 class="text-2xl font-bold font-headline">Recently Analyzed Files</h2>
+<button class="text-primary text-sm font-bold hover:underline">View All Files</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- File Card 1 -->
+<div class="bento-card rounded-xl overflow-hidden flex flex-col group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern abstract 3D visualization of a data mesh with glowing lines and particles in shades of deep blue and coral" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiJO4N8E7631D4DE5AWYRJ3_Rqj8jquLYOo4n4AHtnGgSKgUXqbiO8sdA-hxDaSIzFr3deKUfMmQVfhFKeYDOxj0OQ4up6o3X6LnH9ei5JzgRCPH2gi9mdl-05wJEju0SqLOJsGgmyAeKpu5yTtxf6rntb3u3uVRyyG6uwKd6T-emssTVC5_tJ8vI2vs4rvAqbI8CPf0TXvNiH81ACDGXVNAQg9k_ANJmtVu0-ZjcdtqBdUawVswBs_ESBO3tGHqF5P--0p4OW5uA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1E2024] to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-surface-container-highest/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-tertiary">CSV DATASET</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div>
+<h3 class="font-headline font-bold text-lg">q3_retail_behavior.csv</h3>
+<p class="text-on-surface-variant text-sm mt-1">Analyzed 2 hours ago • 45.2 MB</p>
+</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-surface-container-highest"></div>
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-primary"></div>
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-secondary"></div>
+</div>
+<button class="outline-variant border border-opacity-20 px-4 py-2 rounded-xl text-xs font-bold hover:bg-surface-container-highest transition-colors">View Analysis</button>
+</div>
+</div>
+</div>
+<!-- File Card 2 -->
+<div class="bento-card rounded-xl overflow-hidden flex flex-col group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Digital representation of complex network server nodes glowing in a dark environment with blue and salmon accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_pQ7gvWCMWGrkx1skqVC6DmG_5x13LHwp2yLsntnCxxrNNgU8BptjHaas3u3FhLYorirMlOJFur1TejdeePkR660dWt0vzAJ7r8viR4mkIKlmtcCewD6bmHe07RsuE0eDTgXL35PtIYZruugeBoDVnSmN8W3TfXPCs4yFp-yeBjX0PwfrYKt2mm0sBYxWcN4w9z7jhEsoahaXrIxjZpnqP5MijYCQM9yPua9ykyPfH_1Dv5v0xvCjEWB6zmKplNaKbC-_OvGAkVs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1E2024] to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-surface-container-highest/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-secondary">JSON CLUSTER</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div>
+<h3 class="font-headline font-bold text-lg">customer_churn_v2.json</h3>
+<p class="text-on-surface-variant text-sm mt-1">Analyzed 5 hours ago • 12.8 MB</p>
+</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-tertiary"></div>
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-surface-container-highest"></div>
+</div>
+<button class="outline-variant border border-opacity-20 px-4 py-2 rounded-xl text-xs font-bold hover:bg-surface-container-highest transition-colors">View Analysis</button>
+</div>
+</div>
+</div>
+<!-- File Card 3 -->
+<div class="bento-card rounded-xl overflow-hidden flex flex-col group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Aesthetic view of planet earth with digital data overlays and satellite connectivity lines at night with soft atmospheric glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALDE4uA_c8XR0Gex5LUkrhWH0Pa4sC71LO2if1IBUQb9KEc190-Da5goFsFTfr587nK8xPotIt7eIsqD7MDwLWzTECtCsk1rdvU2sRuoWIPzG7uSJS4eszCx97v-yY941koxF7wvh9gkB1FT9SZSlHeNzzyKLIv7dGYk6Y_9xqzlJP0zllvNNpBMys42GyOO-hMjE24kAy4TZ9ggcDtgvosdIcXItpbSklp8hEOFLIgL0AWogUPCXmL4WzO5arVWoECtvy01z-qi8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1E2024] to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-surface-container-highest/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-primary">PARQUET STORE</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div>
+<h3 class="font-headline font-bold text-lg">global_logistics_delta.pq</h3>
+<p class="text-on-surface-variant text-sm mt-1">Analyzed yesterday • 1.2 GB</p>
+</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-outline"></div>
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-secondary"></div>
+<div class="w-6 h-6 rounded-full border-2 border-[#1E2024] bg-primary"></div>
+</div>
+<button class="outline-variant border border-opacity-20 px-4 py-2 rounded-xl text-xs font-bold hover:bg-surface-container-highest transition-colors">View Analysis</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="pl-64 w-full py-12 border-t border-[#43474D]/15 bg-[#111317]">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center">
+<div class="mb-6 md:mb-0">
+<span class="font-['Manrope'] font-black text-[#ffb4a4] text-lg">Insight Curator</span>
+<p class="font-['Inter'] text-xs text-[#C3C6CE] mt-2">© 2024 Insight Curator. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Security</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors" href="#">Status</a>
+</div>
+</div>
+</footer>
+</body></html>

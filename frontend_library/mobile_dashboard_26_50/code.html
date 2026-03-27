@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Mobile Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#ffd7ce",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "secondary-container": "#304b68",
+              "on-primary": "#601305",
+              "outline-variant": "#43474d",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "surface-dim": "#111317",
+              "on-tertiary": "#003731",
+              "surface-container": "#1e2024",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#005048",
+              "primary-fixed-dim": "#ffb4a4",
+              "secondary": "#adc9eb",
+              "on-background": "#e2e2e7",
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "outline": "#8d9198",
+              "primary-container": "#a44531",
+              "surface-container-highest": "#333539",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "surface-container-high": "#282a2e",
+              "tertiary-container": "#006f64",
+              "on-tertiary-container": "#81f2e2",
+              "tertiary-fixed": "#85f6e5",
+              "on-secondary-container": "#9fbbdd",
+              "surface-container-low": "#1a1c20",
+              "inverse-on-surface": "#2e3035",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface": "#111317",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-nav {
+            background: rgba(17, 19, 23, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col">
+<!-- Top Navigation Anchor -->
+<header class="w-full sticky top-0 z-50 bg-[#111317] flex items-center justify-between px-6 h-16 shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="text-2xl font-bold text-[#ffb4a4] tracking-tighter font-headline">Insight Curator</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#C3C6CE] hover:bg-[#333539]/50 transition-all rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/20">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up portrait of a professional man with a friendly expression, soft studio lighting, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy_pE4FlRrI7hl0fxtLp1lblpBic3U8TBOVWArS4xbjXCtBrcfz98SOBGhbM4tQOYVpDOY1a8UunCRFlR5vytvnLk7cIncsUdLKFiq2zgGnynTkgmZTxnDqQFdMCp7CU-SXifOWVaAJhm5IxmoRdXc076J6Tr6LyHVxaZ4ZFPCTWyAHqwKWOYapQmehJb9qGPx6fcvxHEj4agqklmkMUAlElAwe0ep8kOV7PLuWXPbumLD4HjbyGTEW11Q4W4VQXbuTRLMplRJ-Mg"/>
+</div>
+</div>
+</header>
+<main class="flex-grow px-6 pt-6 pb-24 overflow-x-hidden">
+<!-- Hero Section: Welcome & Key Metric -->
+<section class="mb-10">
+<p class="text-on-surface-variant font-label text-[0.6875rem] uppercase tracking-widest mb-1">System Status: Operational</p>
+<h1 class="font-headline text-3xl font-extrabold tracking-tight mb-6">Pipeline Health</h1>
+<!-- Main Metric Glass Card -->
+<div class="relative overflow-hidden bg-surface-container-low rounded-full p-6 border border-outline-variant/10">
+<div class="relative z-10 flex justify-between items-end">
+<div>
+<div class="text-on-surface-variant text-sm font-medium mb-1">Daily Inference</div>
+<div class="text-4xl font-headline font-bold text-on-surface">1.2M</div>
+<div class="mt-2 flex items-center gap-1 text-tertiary text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12.4% vs yesterday</span>
+</div>
+</div>
+<div class="w-32 h-16 opacity-50">
+<!-- Abstract mini-chart representation -->
+<div class="flex items-end justify-between h-full gap-1">
+<div class="bg-primary/20 w-full rounded-t-sm" style="height: 40%;"></div>
+<div class="bg-primary/20 w-full rounded-t-sm" style="height: 60%;"></div>
+<div class="bg-primary/20 w-full rounded-t-sm" style="height: 45%;"></div>
+<div class="bg-primary/40 w-full rounded-t-sm" style="height: 80%;"></div>
+<div class="bg-primary w-full rounded-t-sm" style="height: 100%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Quick Insights -->
+<section class="grid grid-cols-2 gap-4 mb-10">
+<div class="bg-surface-container rounded-full p-5 flex flex-col justify-between aspect-square">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-on-surface">24</div>
+<div class="text-on-surface-variant text-xs">Active Models</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-full p-5 flex flex-col justify-between aspect-square">
+<div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">error</span>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-on-surface">02</div>
+<div class="text-on-surface-variant text-xs">Critical Alerts</div>
+</div>
+</div>
+</section>
+<!-- Swipeable Project Cards (Editorial Style) -->
+<section class="mb-10 -mx-6">
+<div class="px-6 flex justify-between items-end mb-4">
+<h2 class="font-headline text-xl font-bold tracking-tight text-on-surface">Recent Projects</h2>
+<button class="text-primary text-xs font-semibold uppercase tracking-wider">View All</button>
+</div>
+<div class="flex overflow-x-auto no-scrollbar gap-4 px-6 snap-x">
+<!-- Project Card 1 -->
+<div class="min-w-[85%] snap-center bg-surface-container-high rounded-full overflow-hidden flex flex-col relative group">
+<div class="h-40 overflow-hidden relative">
+<img alt="Project Alpha" class="w-full h-full object-cover" data-alt="Digital representation of complex neural network data nodes flowing in a dark 3D space with subtle coral light glows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdtZq1SxOU5vQRx7Ge8U5JU-84uqF6aI38uqfRiGYvbepWoXoYhMXlP42PmmKP1LbapXTls8GH9p4wRH_JQMcdYuUq6JWJEkBb-N3zxjE9-oFWHFnAMtIRyOoj-GLQCAQ0GzPtByVRDpgpgYpUSk2K7lQ6wc6vwv70WT8xPgT7Axx1E3VBW4ksb7xvMG9TicoaXPUg_2h3ar5lAosiAcWUtsxWqJoqxBR4cCfWvEgzmLLFpNNv4EizlFFyX4CfDWFoGEnxhIu_X74"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4 bg-surface-dim/80 backdrop-blur-md px-3 py-1 rounded-full border border-outline-variant/20 text-[10px] font-bold text-tertiary uppercase tracking-widest">
+                            Stable
+                        </div>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-headline font-bold text-lg mb-1">Project Alpha</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 font-body">ML Ops Pipeline for predictive maintenance in industrial sensor arrays.</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Updated 2h ago</span>
+<span class="material-symbols-outlined text-primary text-xl">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="min-w-[85%] snap-center bg-surface-container-high rounded-full overflow-hidden flex flex-col relative group">
+<div class="h-40 overflow-hidden relative">
+<img alt="Cyber Sentinel" class="w-full h-full object-cover" data-alt="High tech server room with glowing green and blue status lights, perspective view, sharp focus, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc6emye9NTYJQ_m9XlYGR3-r6aHNPJOGGDpDEo6wZ4Gd-d35kwnHqA3hWhUZhc_BTV_iLLRhvKpzJSbMb5aiHLrJurAcQH9CHisNq9GbhVrZOIDkDwX794_tZo3EQTVGBVqpUX9Z_6hKYl80yoe-ReWlI0h0btG5h1_PwDt1By6PgZSkfLHGYuNHWiNyBXEN0bAqJOfQ8MEMVJBrKWlGDNRXUHDAGjkL35fB4trLct_T-HRCjcjiCZajjgPd6N0nPvMdkhKgHr93w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4 bg-surface-dim/80 backdrop-blur-md px-3 py-1 rounded-full border border-outline-variant/20 text-[10px] font-bold text-primary uppercase tracking-widest">
+                            Warning
+                        </div>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-headline font-bold text-lg mb-1">Cyber Sentinel</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 font-body">Anomaly detection system for decentralized financial transactions.</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Updated 10m ago</span>
+<span class="material-symbols-outlined text-primary text-xl">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Monitoring Section: List Style -->
+<section class="mb-4">
+<h2 class="font-headline text-xl font-bold tracking-tight text-on-surface mb-4">Live Monitoring</h2>
+<div class="space-y-4">
+<!-- Activity Item -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<div>
+<div class="text-sm font-semibold">User Segment API</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Latency: 42ms</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">monitoring</span>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div>
+<div class="text-sm font-semibold">Vision Core v2.4</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Drift Detected</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">warning</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Mobile Priority) -->
+<nav class="fixed bottom-0 left-0 right-0 glass-nav h-20 flex items-center justify-around px-4 border-t border-outline-variant/10 z-50">
+<!-- Dashboard Tab (Active) -->
+<div class="flex flex-col items-center justify-center gap-1 text-[#ffb4a4] active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label text-[10px] font-semibold uppercase tracking-widest">Dash</span>
+</div>
+<!-- Projects Tab -->
+<div class="flex flex-col items-center justify-center gap-1 text-[#C3C6CE] hover:text-[#E2E2E7] active:scale-95 transition-all">
+<span class="material-symbols-outlined">folder</span>
+<span class="font-label text-[10px] font-semibold uppercase tracking-widest">Works</span>
+</div>
+<!-- FAB placeholder logic - Center action -->
+<div class="relative -top-6">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-primary/20 active:scale-90 transition-all">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<!-- Data Tab -->
+<div class="flex flex-col items-center justify-center gap-1 text-[#C3C6CE] hover:text-[#E2E2E7] active:scale-95 transition-all">
+<span class="material-symbols-outlined">database</span>
+<span class="font-label text-[10px] font-semibold uppercase tracking-widest">Data</span>
+</div>
+<!-- Team/Settings Tab -->
+<div class="flex flex-col items-center justify-center gap-1 text-[#C3C6CE] hover:text-[#E2E2E7] active:scale-95 transition-all">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label text-[10px] font-semibold uppercase tracking-widest">Team</span>
+</div>
+</nav>
+<!-- Global Footer -->
+<footer class="bg-[#111317] py-4 px-8 mt-auto border-t border-[#43474D]/15 flex justify-between items-center w-full">
+<span class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE]">© 2024 Insight Curator</span>
+<div class="flex gap-4">
+<span class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-tertiary">Operational</span>
+</div>
+</footer>
+</body></html>

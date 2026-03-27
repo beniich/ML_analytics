@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#ffd7ce",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "secondary-container": "#304b68",
+              "on-primary": "#601305",
+              "outline-variant": "#43474d",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "surface-dim": "#111317",
+              "on-tertiary": "#003731",
+              "surface-container": "#1e2024",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#005048",
+              "primary-fixed-dim": "#ffb4a4",
+              "secondary": "#adc9eb",
+              "on-background": "#e2e2e7",
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "outline": "#8d9198",
+              "primary-container": "#a44531",
+              "surface-container-highest": "#333539",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "surface-container-high": "#282a2e",
+              "tertiary-container": "#006f64",
+              "on-tertiary-container": "#81f2e2",
+              "tertiary-fixed": "#85f6e5",
+              "on-secondary-container": "#9fbbdd",
+              "surface-container-low": "#1a1c20",
+              "inverse-on-surface": "#2e3035",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface": "#111317",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .lineage-grid {
+            background-image: radial-gradient(circle, #43474d 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-[#111317] dark:bg-[#111317] shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center justify-between px-8 h-20 w-full mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold text-[#ffb4a4] tracking-tighter font-['Manrope']">Insight Curator</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Manrope'] font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Dashboard</a>
+<a class="font-['Manrope'] font-semibold tracking-tight text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Projects</a>
+<a class="font-['Manrope'] font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Data</a>
+<a class="font-['Manrope'] font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Models</a>
+<a class="font-['Manrope'] font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Team</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<button class="p-2 text-[#C3C6CE] hover:bg-[#333539]/50 transition-all duration-200 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<button class="p-2 text-[#C3C6CE] hover:bg-[#333539]/50 transition-all duration-200 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="close-up portrait of professional data scientist with glasses in a dimly lit tech office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0xMNfOIvT3f_5HOHGvKk_ADwM_x9P6W8qYyJZr3FZgZjZGhLLNUI4gV_HSCInS8w6VURHuUSfBRRdpB6hYeBd3rTOZeBabaGzVFANwLv-wagS_5x0NsnzHeNjAbuh6Bgm6COqVSWjyFFd3BVtwOeaWcSF0EjnwW-_slkXmpSjC83kvb11vVci96aj2VJWnj-4gUFIXDt5CSjDB_uPPWeCOnO_sn28vRPeNW-ZZVYQGEN0wGO5l9Am6M-ykYPzIsfqyi3MBU2sYhA"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 pt-24 bg-[#111317]/80 backdrop-blur-xl flex-col border-r border-[#43474D]/15 z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 px-2 py-3">
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-sm">hub</span>
+</div>
+<div>
+<h3 class="text-[#E2E2E7] font-['Manrope'] font-bold text-sm">Project Alpha</h3>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">ML Ops Pipeline</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-[#ffb4a4]/10 to-transparent text-[#ffb4a4] border-r-2 border-[#ffb4a4] font-['Inter'] text-sm font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Deployment</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] font-['Inter'] text-sm font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span>Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] font-['Inter'] text-sm font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>API Docs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] font-['Inter'] text-sm font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Team</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] font-['Inter'] text-sm font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto space-y-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-xl font-bold font-headline text-sm shadow-lg active:scale-95 transition-all">
+                Deploy Model
+            </button>
+<div class="pt-4 border-t border-outline-variant/10 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-[#E2E2E7] text-sm font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-[#E2E2E7] text-sm font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 min-h-screen lineage-grid flex flex-col">
+<header class="px-8 pt-12 pb-6">
+<h1 class="text-5xl font-extrabold font-headline text-on-surface tracking-tighter mb-2">Data Lineage Map</h1>
+<p class="text-on-surface-variant max-w-2xl font-body">Visualize the journey of your training data from raw ingestion to model inference. Monitor transformations and health metrics across the entire pipeline.</p>
+</header>
+<!-- Diagramming Area -->
+<div class="flex-1 px-8 relative pb-24">
+<div class="absolute inset-0 pointer-events-none px-8">
+<!-- SVG Lines to connect nodes -->
+<svg class="w-full h-full" style="filter: drop-shadow(0 0 8px rgba(255,180,164,0.1));">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="0" refy="3.5">
+<polygon fill="#43474d" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<!-- Column 1 to 2 -->
+<path d="M 280 250 C 350 250, 350 300, 420 300" fill="none" stroke="#43474d" stroke-width="2"></path>
+<path d="M 280 450 C 350 450, 350 320, 420 320" fill="none" stroke="#43474d" stroke-width="2"></path>
+<!-- Column 2 to 3 -->
+<path d="M 620 310 L 760 310" fill="none" stroke="#ffb4a4" stroke-dasharray="8 4" stroke-width="3"></path>
+<!-- Column 3 to 4 -->
+<path d="M 960 310 C 1030 310, 1030 250, 1100 250" fill="none" stroke="#43474d" stroke-width="2"></path>
+<path d="M 960 310 C 1030 310, 1030 400, 1100 400" fill="none" stroke="#43474d" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Flow Nodes Grid -->
+<div class="relative grid grid-cols-1 md:grid-cols-4 gap-12 pt-10">
+<!-- SOURCE COLUMN -->
+<div class="space-y-8 z-10">
+<div class="inline-block px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant/20 mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary">Source Ingestion</span>
+</div>
+<!-- Node Card -->
+<div class="group cursor-pointer bg-surface-container-low/90 backdrop-blur hover:bg-surface-container transition-all duration-300 rounded-xl p-5 border border-outline-variant/10 hover:border-primary/40 shadow-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">database</span>
+</div>
+<span class="text-[10px] font-mono text-tertiary">STABLE</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1">SQL_Customer_DB</h4>
+<p class="text-xs text-on-surface-variant mb-4">Cloud instance: us-east-1</p>
+<div class="flex items-center gap-2">
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface">85%</span>
+</div>
+</div>
+<div class="group cursor-pointer bg-surface-container-low/90 backdrop-blur hover:bg-surface-container transition-all duration-300 rounded-xl p-5 border border-outline-variant/10 hover:border-primary/40 shadow-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">csv</span>
+</div>
+<span class="text-[10px] font-mono text-error">LATENCY</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1">Daily_Sales_Dump</h4>
+<p class="text-xs text-on-surface-variant mb-4">S3 Bucket: raw-data-stream</p>
+<div class="flex items-center gap-2">
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error w-[42%]"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface">42%</span>
+</div>
+</div>
+</div>
+<!-- TRANSFORMATION COLUMN -->
+<div class="flex flex-col justify-center space-y-8 z-10 pt-20">
+<div class="inline-block px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant/20 mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Transformation</span>
+</div>
+<div class="group cursor-pointer bg-surface-container-highest/60 backdrop-blur-md hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 border-2 border-primary/20 hover:border-primary shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<span class="material-symbols-outlined text-primary text-sm">auto_fix_high</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-2">Cleaning &amp; Scaling</h4>
+<p class="text-xs text-on-surface-variant mb-6">Python script executing Spark cluster workers.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface/50 p-2 rounded-lg">
+<span class="block text-[8px] uppercase text-on-surface-variant">Null Count</span>
+<span class="text-sm font-bold text-primary">0.02%</span>
+</div>
+<div class="bg-surface/50 p-2 rounded-lg">
+<span class="block text-[8px] uppercase text-on-surface-variant">Thruput</span>
+<span class="text-sm font-bold text-tertiary">14k/s</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TRAINING COLUMN -->
+<div class="flex flex-col justify-center space-y-8 z-10 pt-20">
+<div class="inline-block px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant/20 mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-tertiary">Training Stage</span>
+</div>
+<div class="group cursor-pointer bg-surface-container-low/90 backdrop-blur hover:bg-surface-container transition-all duration-300 rounded-xl p-6 border border-outline-variant/10 hover:border-tertiary/40 shadow-xl">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full border-2 border-tertiary border-t-transparent animate-spin-slow flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">model_training</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface">XGBoost_v4</h4>
+<p class="text-[10px] font-mono text-on-surface-variant">EPOCH 45/100</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant">Loss Accuracy</span>
+<span class="font-mono text-tertiary">0.0412</span>
+</div>
+<div class="h-24 w-full bg-surface-container-highest rounded-lg relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-tertiary/20 to-transparent"></div>
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M 0 80 Q 50 20, 100 60 T 200 10 T 300 40" fill="none" stroke="#67d9c9" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- INSIGHT COLUMN -->
+<div class="space-y-8 z-10">
+<div class="inline-block px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant/20 mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Model Insight</span>
+</div>
+<div class="group cursor-pointer bg-surface-container-low/90 backdrop-blur hover:bg-surface-container transition-all duration-300 rounded-xl p-5 border border-outline-variant/10 hover:border-secondary/40 shadow-xl">
+<h4 class="font-headline font-bold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">analytics</span>
+                            Inference Drift
+                        </h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface-variant">Feature Weight</span>
+<span class="text-xs font-bold">+12.4%</span>
+</div>
+<div class="flex items-center gap-1 h-8">
+<div class="bg-primary/40 h-full w-2 rounded-sm"></div>
+<div class="bg-primary/60 h-full w-2 rounded-sm"></div>
+<div class="bg-primary h-full w-2 rounded-sm"></div>
+<div class="bg-surface-variant h-full w-2 rounded-sm"></div>
+<div class="bg-surface-variant h-full w-2 rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="group cursor-pointer bg-surface-container-low/90 backdrop-blur hover:bg-surface-container transition-all duration-300 rounded-xl p-5 border border-outline-variant/10 hover:border-secondary/40 shadow-xl">
+<h4 class="font-headline font-bold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">monitoring</span>
+                            Latency Report
+                        </h4>
+<div class="text-3xl font-bold text-on-surface mb-1">124<span class="text-sm font-normal text-on-surface-variant ml-1">ms</span></div>
+<p class="text-[10px] text-tertiary">↓ 4% from previous build</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-4 px-8 mt-auto bg-[#111317] border-t border-[#43474D]/15 flex justify-between items-center">
+<div class="text-[#67d9c9] font-['Inter'] text-[0.6875rem] uppercase tracking-widest">
+                © 2024 Insight Curator. System Status: Operational.
+            </div>
+<div class="flex gap-6">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors font-['Inter'] text-[0.6875rem] uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors font-['Inter'] text-[0.6875rem] uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-[#ffb4a4] font-['Inter'] text-[0.6875rem] uppercase tracking-widest" href="#">API Status</a>
+</div>
+</footer>
+</main>
+<!-- Floating Node Details Panel (Simulated interaction state) -->
+<div class="fixed bottom-12 right-12 w-80 bg-surface-container-highest/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-outline-variant/20 p-6 z-50 transform translate-y-2 opacity-0 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+<div class="flex justify-between items-center mb-6">
+<h5 class="font-headline font-bold">Node Metadata</h5>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">close</span>
+</div>
+<div class="space-y-4">
+<div class="pb-4 border-b border-outline-variant/10">
+<span class="text-[10px] uppercase text-on-surface-variant block mb-1">Last Updated</span>
+<span class="text-sm">2 minutes ago</span>
+</div>
+<div class="pb-4 border-b border-outline-variant/10">
+<span class="text-[10px] uppercase text-on-surface-variant block mb-1">Source System</span>
+<span class="text-sm">AWS RDS / PostgreSQL 14.2</span>
+</div>
+<div class="pb-4 border-b border-outline-variant/10">
+<span class="text-[10px] uppercase text-on-surface-variant block mb-1">Records</span>
+<span class="text-sm">1.2M rows ingested</span>
+</div>
+<button class="w-full py-2 rounded-lg bg-surface-variant hover:bg-primary/20 text-on-surface transition-colors text-xs font-bold uppercase tracking-widest">
+                Full Log View
+            </button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Predictive Model Training - Configuration</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#FF8A65', // Coral/Orange from the image
+              dark: '#374151',    // Dark background for sidebar
+              sidebar: '#3C4754'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS for specific elements that are hard to replicate with pure utility classes -->
+<style data-purpose="custom-ranges">
+    /* Custom Range Slider Styling */
+    input[type='range'] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type='range']::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 6px;
+      cursor: pointer;
+      background: #E5E7EB;
+      border-radius: 3px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #FF8A65;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -7px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    /* Specific styling for the progress part of the track would require JS or complex CSS, 
+       simulating it with a background gradient for visual fidelity */
+    .slider-progress-rf {
+      background: linear-gradient(to right, #FF8A65 0%, #FF8A65 50%, #E5E7EB 50%, #E5E7EB 100%) !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+<div class="flex items-center space-x-3">
+<!-- Logo Placeholder -->
+<div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border border-gray-300">
+<svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="font-bold text-lg tracking-tight">Predictive Model Training</span>
+</div>
+<nav class="hidden md:flex space-x-8 items-center text-sm font-medium text-gray-600">
+<a class="hover:text-gray-900" href="#">Dashboard</a>
+<a class="hover:text-gray-900" href="#">Projects</a>
+<a class="hover:text-gray-900 border-b-2 border-brand-primary text-gray-900 pb-1" href="#">Data</a>
+<a class="hover:text-gray-900" href="#">Models</a>
+<button class="bg-brand-primary hover:bg-orange-500 text-white px-6 py-2 rounded-full transition-colors shadow-sm">
+          Train Now
+        </button>
+</nav>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+<h1 class="text-2xl font-bold mb-6">Algorithms</h1>
+<!-- Model Configuration Card -->
+<div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+<!-- Sidebar: Algorithm Selection -->
+<!-- BEGIN: Sidebar -->
+<aside class="w-full md:w-64 bg-brand-sidebar text-white p-0">
+<div class="p-6 border-b border-gray-600">
+<h2 class="text-xl font-semibold">Algorithms</h2>
+</div>
+<ul class="mt-2">
+<li class="bg-gray-700/50 px-6 py-4 flex items-center space-x-3 cursor-pointer border-l-4 border-brand-primary">
+<div class="w-4 h-4 rounded-full border-2 border-brand-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+</div>
+<span class="font-medium">Random Forest</span>
+</li>
+<li class="px-6 py-4 flex items-center space-x-3 cursor-pointer hover:bg-gray-700/30 transition-colors">
+<div class="w-4 h-4 rounded-full border-2 border-gray-500"></div>
+<span class="text-gray-300">Linear Regression</span>
+</li>
+</ul>
+</aside>
+<!-- END: Sidebar -->
+<!-- Configuration Panel -->
+<!-- BEGIN: ConfigPanel -->
+<section class="flex-grow p-8 md:p-12 bg-white">
+<h2 class="text-2xl font-bold mb-8">Model Configuration</h2>
+<!-- Target Column Selection -->
+<div class="mb-8" data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-2" for="target-column">Target Column</label>
+<div class="relative">
+<select class="w-full border-gray-300 rounded-md shadow-sm focus:ring-brand-primary focus:border-brand-primary appearance-none py-3 px-4 pr-10" id="target-column">
+<option>Revenue</option>
+<option>Churn</option>
+<option>Engagement</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-400">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+<!-- Hyperparameters Section -->
+<div class="space-y-8" data-purpose="hyperparameters">
+<h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Hyperparameters</h3>
+<!-- N-Estimators -->
+<div class="flex flex-col space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-medium text-gray-700">N-Estimators</label>
+</div>
+<div class="flex items-center space-x-4">
+<input class="flex-grow h-2 rounded-lg cursor-pointer accent-brand-primary" data-purpose="range-input" max="1000" min="1" type="range" value="400"/>
+<input class="w-20 border-gray-300 rounded-md text-center text-sm" readonly="" type="text" value="400"/>
+</div>
+</div>
+<!-- Max Depth -->
+<div class="flex flex-col space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-medium text-gray-700">Max Depth</label>
+</div>
+<div class="flex items-center space-x-4">
+<input class="flex-grow h-2 rounded-lg cursor-pointer accent-brand-primary" data-purpose="range-input" max="50" min="1" type="range" value="10"/>
+<input class="w-20 border-gray-300 rounded-md text-center text-sm" readonly="" type="text" value="10"/>
+</div>
+</div>
+<!-- Learning Rate -->
+<div class="flex flex-col space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-medium text-gray-700">Learning Rate</label>
+</div>
+<div class="flex items-center space-x-4">
+<input class="flex-grow h-2 rounded-lg cursor-pointer accent-brand-primary" data-purpose="range-input" max="1" min="0" step="0.001" type="range" value="0.052"/>
+<input class="w-20 border-gray-300 rounded-md text-center text-sm" readonly="" type="text" value="0.052"/>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-12">
+<button class="w-full bg-brand-primary hover:bg-orange-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-[0.99]">
+            Train Now
+          </button>
+</div>
+</section>
+<!-- END: ConfigPanel -->
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Footer -->
+<footer class="py-8 border-t border-gray-200 bg-white mt-12">
+<div class="max-w-7xl mx-auto px-4 text-center space-x-6">
+<a class="text-sm text-gray-500 hover:text-gray-900" href="#">Privacy Policy</a>
+<a class="text-sm text-gray-500 hover:text-gray-900" href="#">Terms of Service</a>
+</div>
+</footer>
+<!-- END: Footer -->
+<!-- JavaScript for Range Interactions -->
+<script data-purpose="range-value-sync">
+    // Select all ranges and their corresponding text inputs
+    const containers = document.querySelectorAll('[data-purpose="hyperparameters"] > div');
+    
+    containers.forEach(container => {
+      const slider = container.querySelector('input[type="range"]');
+      const textInput = container.querySelector('input[type="text"]');
+      
+      if(slider && textInput) {
+        slider.addEventListener('input', (e) => {
+          textInput.value = e.target.value;
+          // Dynamically update the gradient for visual fidelity like the image
+          const val = (e.target.value - e.target.min) / (e.target.max - e.target.min) * 100;
+          e.target.style.background = `linear-gradient(to right, #FF8A65 0%, #FF8A65 ${val}%, #E5E7EB ${val}%, #E5E7EB 100%)`;
+        });
+        
+        // Initial call to set gradient background
+        const initialVal = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = `linear-gradient(to right, #FF8A65 0%, #FF8A65 ${initialVal}%, #E5E7EB ${initialVal}%, #E5E7EB 100%)`;
+      }
+    });
+  </script>
+</body></html>

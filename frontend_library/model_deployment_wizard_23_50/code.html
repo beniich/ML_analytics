@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Model Deployment Wizard | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#ffd7ce",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "secondary-container": "#304b68",
+              "on-primary": "#601305",
+              "outline-variant": "#43474d",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "surface-dim": "#111317",
+              "on-tertiary": "#003731",
+              "surface-container": "#1e2024",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#005048",
+              "primary-fixed-dim": "#ffb4a4",
+              "secondary": "#adc9eb",
+              "on-background": "#e2e2e7",
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "outline": "#8d9198",
+              "primary-container": "#a44531",
+              "surface-container-highest": "#333539",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "surface-container-high": "#282a2e",
+              "tertiary-container": "#006f64",
+              "on-tertiary-container": "#81f2e2",
+              "tertiary-fixed": "#85f6e5",
+              "on-secondary-container": "#9fbbdd",
+              "surface-container-low": "#1a1c20",
+              "inverse-on-surface": "#2e3035",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface": "#111317",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 28, 32, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (Shared Component) -->
+<header class="w-full sticky top-0 z-50 bg-[#111317] dark:bg-[#111317] shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)] h-20">
+<div class="flex items-center justify-between px-8 h-full w-full mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold text-[#ffb4a4] tracking-tighter font-['Manrope']">Insight Curator</span>
+<nav class="hidden md:flex items-center gap-8 font-['Manrope'] font-semibold tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Dashboard</a>
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Projects</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Data</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Models</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-[#C3C6CE] hover:bg-[#333539]/50 p-2 rounded-full transition-all active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-[#C3C6CE] hover:bg-[#333539]/50 p-2 rounded-full transition-all active:scale-95">settings</button>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest border border-outline-variant/20 overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional portrait of a data scientist in a modern tech office setting, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH7fPTt17vivVGTA8_mW6gI6MMe1xoletVHzAGCpRoBj-S3FmQar4kyyEZ07Hw0wsjtuE43emf0aJeNfSvyF61CjV4vtz_n43xeBWOAPlUsJrCNGYVh3JkGweiE48bU7dpUvlgPZQe5Xu_NaJsVOrs7ePLSw963JRUDc68KYg8EInuf2qIpygIu_96S1CjkYKSkrheKxXNBakVTk22375_EwPygefYXji9naFGy7tG--TqtFhgYmWzvm439XZ3d7Y40Gqz-eeD_qE"/>
+</div>
+</div>
+</div>
+</header>
+<main class="min-h-[calc(100vh-80px-56px)] max-w-7xl mx-auto px-8 py-12 flex gap-16">
+<!-- Sidebar Navigation (Wizard Progress) -->
+<aside class="w-72 shrink-0 hidden lg:block">
+<div class="space-y-12">
+<div>
+<h2 class="font-headline text-3xl font-extrabold tracking-tight mb-2">Deploy Model</h2>
+<p class="text-on-surface-variant text-sm">Configure and push your model to production.</p>
+</div>
+<div class="space-y-8 relative">
+<!-- Vertical Progress Connector -->
+<div class="absolute left-[19px] top-4 bottom-4 w-[2px] bg-surface-container-highest"></div>
+<!-- Step 1 -->
+<div class="relative flex items-center gap-4 group">
+<div class="z-10 w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-[0_0_20px_rgba(255,180,164,0.3)]">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-widest text-primary font-semibold">Step 1</span>
+<span class="font-headline font-bold text-on-surface">Select Model</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex items-center gap-4 group">
+<div class="z-10 w-10 h-10 rounded-full flex items-center justify-center border-2 border-primary bg-surface-container text-primary font-bold">
+<span class="text-sm">02</span>
+</div>
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-widest text-primary font-semibold">Step 2</span>
+<span class="font-headline font-bold text-on-surface">Environment</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex items-center gap-4 group opacity-50">
+<div class="z-10 w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold">
+<span class="text-sm">03</span>
+</div>
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-widest text-on-surface-variant font-semibold">Step 3</span>
+<span class="font-headline font-bold text-on-surface-variant">Scaling Options</span>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex items-center gap-4 group opacity-50">
+<div class="z-10 w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold">
+<span class="text-sm">04</span>
+</div>
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-widest text-on-surface-variant font-semibold">Step 4</span>
+<span class="font-headline font-bold text-on-surface-variant">Review &amp; Deploy</span>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/10">
+<div class="flex items-center gap-3 p-4 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">Estimated deployment time: <span class="text-on-surface font-semibold">4.5 minutes</span></p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Wizard Content Canvas -->
+<section class="flex-1">
+<div class="bg-surface-container-low rounded-xl p-8 lg:p-12 min-h-[600px] flex flex-col">
+<!-- Step Title Area -->
+<div class="mb-12">
+<span class="text-tertiary font-label text-[0.6875rem] uppercase tracking-[0.2em] mb-2 block">Configuration Phase</span>
+<h1 class="text-4xl font-headline font-extrabold tracking-tight text-on-surface mb-4">Choose Environment</h1>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">Select the target infrastructure for your deployment. Each environment comes with pre-configured health checks and logging pipelines.</p>
+</div>
+<!-- Environment Cards Grid (Asymmetric) -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-auto">
+<!-- Docker Card (40% width approx) -->
+<label class="md:col-span-2 group cursor-pointer relative">
+<input checked="" class="peer sr-only" name="env" type="radio"/>
+<div class="h-full p-6 rounded-xl border border-outline-variant/15 bg-surface-container transition-all duration-300 peer-checked:bg-surface-container-highest peer-checked:border-primary/50 group-hover:bg-surface-container-high flex flex-col">
+<div class="flex justify-between items-start mb-8">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline peer-checked:border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Docker Container</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Lightweight standalone deployment ideal for rapid prototyping and microservices.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/10 flex gap-4">
+<div class="flex flex-col">
+<span class="text-[0.6rem] uppercase tracking-wider text-on-surface-variant">Cold Start</span>
+<span class="text-xs font-semibold text-tertiary">~2s</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[0.6rem] uppercase tracking-wider text-on-surface-variant">Complexity</span>
+<span class="text-xs font-semibold text-secondary">Low</span>
+</div>
+</div>
+</div>
+</label>
+<!-- Kubernetes Card (60% width approx) -->
+<label class="md:col-span-3 group cursor-pointer relative">
+<input class="peer sr-only" name="env" type="radio"/>
+<div class="h-full p-6 rounded-xl border border-outline-variant/15 bg-surface-container transition-all duration-300 peer-checked:bg-surface-container-highest peer-checked:border-primary/50 group-hover:bg-surface-container-high flex flex-col">
+<div class="flex justify-between items-start mb-8">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl">hub</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline peer-checked:border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Kubernetes Cluster</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Production-grade orchestration with auto-scaling, self-healing, and multi-node availability for high-load workloads.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/10 flex gap-8">
+<div class="flex flex-col">
+<span class="text-[0.6rem] uppercase tracking-wider text-on-surface-variant">Uptime SLA</span>
+<span class="text-xs font-semibold text-tertiary">99.99%</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[0.6rem] uppercase tracking-wider text-on-surface-variant">Autoscaling</span>
+<span class="text-xs font-semibold text-secondary">Native</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[0.6rem] uppercase tracking-wider text-on-surface-variant">Registry</span>
+<span class="text-xs font-semibold text-on-surface">Private GCR</span>
+</div>
+</div>
+</div>
+</label>
+</div>
+<!-- Footer Actions -->
+<div class="mt-16 pt-8 border-t border-outline-variant/10 flex justify-between items-center">
+<button class="px-6 py-3 rounded-xl font-label text-sm font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                        Back to Model
+                    </button>
+<div class="flex gap-4">
+<button class="px-6 py-3 rounded-xl font-label text-sm font-semibold text-secondary hover:bg-secondary/10 transition-all duration-200 border border-secondary/20">
+                            Save Draft
+                        </button>
+<button class="px-8 py-3 rounded-xl font-label text-sm font-bold bg-gradient-to-br from-primary to-primary-container text-on-primary shadow-[0_8px_16px_-4px_rgba(255,180,164,0.3)] hover:shadow-[0_12px_24px_-4px_rgba(255,180,164,0.5)] active:scale-[0.98] transition-all duration-200 flex items-center gap-2">
+                            Scaling Options
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-4 px-8 mt-auto border-t border-[#43474D]/15 bg-[#111317] dark:bg-[#111317]">
+<div class="flex justify-between items-center w-full">
+<span class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE]">© 2024 Insight Curator. System Status: Operational.</span>
+<div class="flex gap-6 font-['Inter'] text-[0.6875rem] uppercase tracking-widest">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Terms of Service</a>
+<a class="text-[#ffb4a4]" href="#">API Status</a>
+</div>
+</div>
+</footer>
+</body></html>

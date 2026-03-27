@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics Dashboard - Synthesis ML</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              coral: '#F06A57',
+              slate: '#1A1C24',
+              'slate-light': '#252932',
+              'slate-accent': '#2D333E',
+            }
+          },
+          borderRadius: {
+            'md': '4px',
+            'lg': '12px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layouts">
+    body {
+      background-color: #16181D;
+      color: #E2E8F0;
+    }
+    .chart-gradient-bg {
+      background: linear-gradient(180deg, rgba(240, 106, 87, 0.1) 0%, rgba(240, 106, 87, 0) 100%);
+    }
+    .card-border {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .sidebar-active {
+      background-color: #2D333E;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+<!-- BEGIN: MainHeader -->
+<header class="flex items-center justify-between px-6 py-4 bg-[#1A1C24] border-b border-gray-800" data-purpose="top-navigation">
+<div class="flex items-center gap-2">
+<div class="flex gap-1 items-end">
+<div class="w-1.5 h-4 bg-brand-coral rounded-full"></div>
+<div class="w-1.5 h-6 bg-brand-coral rounded-full"></div>
+<div class="w-1.5 h-3 bg-brand-coral rounded-full"></div>
+</div>
+<span class="text-xl font-extrabold uppercase tracking-widest ml-2">Analytics</span>
+</div>
+<div class="flex-1 max-w-xl mx-8">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="w-full bg-[#252932] border-none rounded-md py-2 pl-10 text-sm focus:ring-1 focus:ring-brand-coral text-gray-300" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-gray-400 hover:text-white transition-colors">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="absolute top-0 right-0 block h-4 w-4 rounded-full bg-brand-coral text-[10px] text-white flex items-center justify-center border-2 border-[#1A1C24]">1</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover border border-gray-600" src="https://lh3.googleusercontent.com/aida/ADBb0uiqzlMgNGQW7oFzhEMjYAmbMJdU897fvfw7wGwm3rdeWJ4g0qmohmPR66OMo9D9n4e--DWbcFlf7ZrMMYTSix1KFV2kzBQNTOg4hIh7S_oG3IR0L6JGYNIfD-872v0G3-HNdYZANQLKJkQ6R0qbopSnAJ8hmRiZjnusgkDaF4T5SSeAOMw6YTNlEY4SfgwvU0cgdJf8rfxxJ08_CdupN-h0DXIGDAZKOv7HFmrtD9HG0qrgDdH7z4xq8zU"/>
+<span class="text-sm font-medium text-gray-300">A. Davis</span>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="flex items-center gap-3 ml-4 border-l border-gray-700 pl-4">
+<span class="text-xs font-semibold text-gray-400">Dark Mode</span>
+<div class="w-12 h-6 bg-brand-coral rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="p-6 space-y-6">
+<!-- Title and Action Section -->
+<div class="flex justify-between items-center mb-4">
+<h1 class="text-3xl font-bold tracking-tight text-white">Dashboard - Variant 20 of 20</h1>
+<button class="bg-brand-coral hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Dashboard
+      </button>
+</div>
+<!-- Top Grid: Overview & Monthly Traffic -->
+<div class="grid grid-cols-12 gap-6">
+<!-- BEGIN: OverviewCard -->
+<section class="col-span-12 lg:col-span-3 bg-brand-slate rounded-lg p-6 card-border flex flex-col justify-between" data-purpose="overview-widget">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-lg font-bold text-gray-200">Overview</h2>
+<span class="text-[10px] font-bold bg-brand-coral/20 text-brand-coral px-2 py-0.5 rounded-full uppercase tracking-wider">Active</span>
+</div>
+<div class="space-y-8">
+<div class="relative">
+<p class="text-sm text-gray-400 mb-1">Total Users</p>
+<p class="text-3xl font-extrabold">1,255</p>
+<canvas class="absolute top-0 right-0 w-24 h-12" id="miniChart1"></canvas>
+</div>
+<div class="relative">
+<p class="text-sm text-gray-400 mb-1">Revenue</p>
+<p class="text-3xl font-extrabold">$42.7M</p>
+<canvas class="absolute top-0 right-0 w-24 h-12" id="miniChart2"></canvas>
+</div>
+<div class="relative">
+<p class="text-sm text-gray-400 mb-1">Active Sessions</p>
+<p class="text-3xl font-extrabold">267</p>
+<canvas class="absolute top-0 right-0 w-24 h-12" id="miniChart3"></canvas>
+</div>
+</div>
+</section>
+<!-- END: OverviewCard -->
+<!-- BEGIN: MonthlyTrafficChart -->
+<section class="col-span-12 lg:col-span-9 bg-brand-slate rounded-lg p-6 card-border relative" data-purpose="traffic-chart">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-lg font-bold text-gray-200">Monthly Traffic</h2>
+<div class="flex items-center gap-2 bg-brand-slate-light border border-gray-700 px-3 py-1.5 rounded text-xs font-medium text-gray-300">
+            Month
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Line Chart Visualization Area -->
+<div class="h-[280px] w-full relative">
+<canvas class="w-full h-full" id="mainTrafficChart"></canvas>
+</div>
+</section>
+<!-- END: MonthlyTrafficChart -->
+</div>
+<!-- Bottom Grid: Retention, Top Pages, Recent Activity, System Health -->
+<div class="grid grid-cols-12 gap-6">
+<!-- BEGIN: UserRetention -->
+<section class="col-span-12 md:col-span-6 lg:col-span-3 bg-brand-slate rounded-lg p-6 card-border flex flex-col items-center" data-purpose="retention-widget">
+<h2 class="text-lg font-bold text-gray-200 self-start mb-6">User Retention</h2>
+<div class="relative w-48 h-48">
+<canvas id="retentionDonut"></canvas>
+</div>
+<div class="flex gap-4 mt-6">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-brand-coral"></div>
+<span class="text-xs text-gray-400">Active</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-gray-600"></div>
+<span class="text-xs text-gray-400">Retention</span>
+</div>
+</div>
+</section>
+<!-- END: UserRetention -->
+<!-- BEGIN: TopPages -->
+<section class="col-span-12 md:col-span-6 lg:col-span-3 bg-brand-slate rounded-lg p-6 card-border" data-purpose="top-pages-widget">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-lg font-bold text-gray-200">Top Pages</h2>
+<span class="text-[10px] font-bold bg-brand-coral/20 text-brand-coral px-2 py-0.5 rounded-full uppercase tracking-wider">Top Page</span>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] text-gray-400">
+<span>https://www.sample.com/</span>
+</div>
+<div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-coral h-full w-[100%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] text-gray-400">
+<span>https://www.sample.com/</span>
+</div>
+<div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-coral h-full w-[85%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] text-gray-400">
+<span>https://www.sample.com/</span>
+</div>
+<div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-coral h-full w-[70%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] text-gray-400">
+<span>https://www.sample.com/</span>
+</div>
+<div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-coral h-full w-[60%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] text-gray-400">
+<span>https://www.sample.com/</span>
+</div>
+<div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-coral h-full w-[50%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: TopPages -->
+<!-- BEGIN: RecentActivity -->
+<section class="col-span-12 md:col-span-6 lg:col-span-3 bg-brand-slate rounded-lg p-6 card-border" data-purpose="activity-widget">
+<h2 class="text-lg font-bold text-gray-200 mb-6">Recent Activity</h2>
+<div class="space-y-5">
+<div class="flex items-start gap-4">
+<div class="mt-1 bg-brand-coral/20 p-2 rounded-full">
+<svg class="w-4 h-4 text-brand-coral" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-200">Action 1</p>
+<p class="text-[11px] text-gray-500">Actived 1 month ago</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 bg-brand-coral/20 p-2 rounded-full">
+<svg class="w-4 h-4 text-brand-coral" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-200">Action 2</p>
+<p class="text-[11px] text-gray-500">Actived 2 months ago</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 bg-brand-coral/20 p-2 rounded-full">
+<svg class="w-4 h-4 text-brand-coral" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-200">Action 3</p>
+<p class="text-[11px] text-gray-500">Actived 3 months ago</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 bg-brand-coral/20 p-2 rounded-full">
+<svg class="w-4 h-4 text-brand-coral" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0V12m-3-2.5l3-3m0 0l3 3m-3-3v11.5M4.5 9.5H3m1.5 0V7a1.5 1.5 0 00-3 0v4.5m1.5-2.5h1.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-200">Action 4</p>
+<p class="text-[11px] text-gray-500">Actived 6 months ago</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Recent Activity -->
+<!-- BEGIN: HealthAndUserCard -->
+<div class="col-span-12 md:col-span-6 lg:col-span-3 space-y-6">
+<!-- System Health -->
+<section class="bg-brand-slate rounded-lg p-6 card-border" data-purpose="system-health">
+<h2 class="text-lg font-bold text-gray-200 mb-4">System Health</h2>
+<p class="text-sm text-gray-400 mb-3">Progress Health</p>
+<div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+<div class="bg-brand-coral h-full w-[80%]"></div>
+</div>
+</section>
+<!-- Profile Widget -->
+<section class="bg-brand-slate rounded-lg p-6 card-border" data-purpose="mini-profile">
+<h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Recent Activity</h2>
+<div class="flex items-center gap-4 bg-[#21242D] p-3 rounded-lg">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover grayscale brightness-75" src="https://lh3.googleusercontent.com/aida/ADBb0uiqzlMgNGQW7oFzhEMjYAmbMJdU897fvfw7wGwm3rdeWJ4g0qmohmPR66OMo9D9n4e--DWbcFlf7ZrMMYTSix1KFV2kzBQNTOg4hIh7S_oG3IR0L6JGYNIfD-872v0G3-HNdYZANQLKJkQ6R0qbopSnAJ8hmRiZjnusgkDaF4T5SSeAOMw6YTNlEY4SfgwvU0cgdJf8rfxxJ08_CdupN-h0DXIGDAZKOv7HFmrtD9HG0qrgDdH7z4xq8zU"/>
+<div>
+<p class="text-sm font-bold">A. Davis</p>
+<div class="flex items-center gap-1.5 text-xs text-gray-500 mt-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Active
+              </div>
+</div>
+</div>
+</section>
+</div>
+<!-- END: HealthAndUserCard -->
+</div>
+</main>
+<!-- END: MainContent -->
+<script data-purpose="canvas-charts">
+    // Mocking canvas drawings for the layout representation
+    
+    // Main Traffic Chart
+    const mainCtx = document.getElementById('mainTrafficChart').getContext('2d');
+    function drawMainChart() {
+      const w = mainCtx.canvas.clientWidth;
+      const h = mainCtx.canvas.clientHeight;
+      mainCtx.canvas.width = w;
+      mainCtx.canvas.height = h;
+
+      // Draw Grid Lines
+      mainCtx.strokeStyle = '#2D333E';
+      mainCtx.lineWidth = 1;
+      for(let i=0; i<6; i++) {
+        let y = (h / 5) * i;
+        mainCtx.beginPath();
+        mainCtx.moveTo(0, y);
+        mainCtx.lineTo(w, y);
+        mainCtx.stroke();
+      }
+
+      // Draw Labels
+      mainCtx.fillStyle = '#64748B';
+      mainCtx.font = '10px Manrope';
+      const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Oct', 'Nov', 'Dec'];
+      labels.forEach((label, idx) => {
+        mainCtx.fillText(label, (w / (labels.length - 1)) * idx, h - 5);
+      });
+
+      // Draw Line
+      const points = [
+        [0, 0.8], [0.1, 0.6], [0.2, 0.7], [0.3, 0.45], [0.4, 0.58], [0.5, 0.4], [0.6, 0.25], [0.7, 0.65], [0.8, 0.15], [0.9, 0.48], [1.0, 0.2]
+      ];
+      
+      mainCtx.beginPath();
+      mainCtx.strokeStyle = '#F06A57';
+      mainCtx.lineWidth = 3;
+      mainCtx.shadowBlur = 10;
+      mainCtx.shadowColor = 'rgba(240, 106, 87, 0.3)';
+      
+      points.forEach((p, idx) => {
+        const x = p[0] * w;
+        const y = p[1] * (h - 40) + 20;
+        if(idx === 0) mainCtx.moveTo(x, y);
+        else mainCtx.lineTo(x, y);
+      });
+      mainCtx.stroke();
+
+      // Draw Points
+      mainCtx.shadowBlur = 0;
+      points.forEach((p, idx) => {
+        const x = p[0] * w;
+        const y = p[1] * (h - 40) + 20;
+        mainCtx.beginPath();
+        mainCtx.arc(x, y, 4, 0, Math.PI * 2);
+        mainCtx.fillStyle = '#F06A57';
+        mainCtx.fill();
+        mainCtx.strokeStyle = '#1A1C24';
+        mainCtx.stroke();
+      });
+    }
+
+    // Mini Sparklines
+    function drawMiniChart(id, color) {
+      const ctx = document.getElementById(id).getContext('2d');
+      const w = 96; const h = 48;
+      ctx.canvas.width = w; ctx.canvas.height = h;
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.moveTo(0, h/2);
+      ctx.bezierCurveTo(w/4, h*0.2, w/2, h*0.8, w, h/2);
+      ctx.stroke();
+    }
+
+    // Donut Chart
+    function drawDonut() {
+      const ctx = document.getElementById('retentionDonut').getContext('2d');
+      const cx = 96; const cy = 96; const r = 70;
+      ctx.canvas.width = 192; ctx.canvas.height = 192;
+      
+      // Gray Circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = '#2D333E';
+      ctx.lineWidth = 25;
+      ctx.stroke();
+
+      // Coral Arc
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, -Math.PI/2, Math.PI * 1.3);
+      ctx.strokeStyle = '#F06A57';
+      ctx.lineWidth = 25;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+
+    window.onload = () => {
+      drawMainChart();
+      drawMiniChart('miniChart1', '#F06A57');
+      drawMiniChart('miniChart2', '#F06A57');
+      drawMiniChart('miniChart3', '#F06A57');
+      drawDonut();
+    };
+
+    window.onresize = drawMainChart;
+  </script>
+</body></html>

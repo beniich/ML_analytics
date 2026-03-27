@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ML Analytics - Analyze Your Data with Modular AI</title>
+<!-- Google Font: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              slate: '#4A6583', // Primary brand color from Design System
+              dark: '#3B526B',
+              coral: '#E58A73', // Accent color
+              bgLight: '#F3F4F6',
+              bgMed: '#E5E7EB',
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '16px', // "ROUND_FOUR" style mapping
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout-styles">
+    /* Custom styles for the hero gradient and specific UI elements */
+    .hero-gradient {
+      background-color: #4A6583;
+    }
+    .drop-zone-dashed {
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+    }
+    .drop-zone-dashed:hover {
+      border-color: white;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body class="font-sans bg-brand-bgLight text-slate-800 antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white py-4 px-6 md:px-12 flex items-center justify-between sticky top-0 z-50 shadow-sm" data-purpose="site-navigation">
+<div class="flex items-center space-x-2">
+<span class="text-2xl font-extrabold text-brand-slate tracking-tight">ML Analytics</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+<a class="hover:text-brand-slate transition-colors" href="#">Features</a>
+<a class="hover:text-brand-slate transition-colors" href="#">Pricing</a>
+<a class="hover:text-brand-slate transition-colors" href="#">About</a>
+<a class="hover:text-brand-slate transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center">
+<button class="bg-brand-coral hover:bg-opacity-90 text-white px-6 py-2.5 rounded-custom font-bold transition-all shadow-md">
+        Get Started
+      </button>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="hero-gradient px-6 py-16 md:py-24 text-center text-white rounded-b-[40px] md:rounded-b-[80px]" data-purpose="hero-banner">
+<div class="max-w-4xl mx-auto">
+<h1 class="text-4xl md:text-6xl font-extrabold mb-12 tracking-tight leading-tight">
+          Analyze Your Data<br/>with Modular AI.
+        </h1>
+<!-- BEGIN: FileUploadZone -->
+<div class="drop-zone-dashed rounded-custom p-10 md:p-16 flex flex-col items-center justify-center cursor-pointer transition-all bg-white/5 backdrop-blur-sm" data-purpose="upload-container">
+<div class="mb-6">
+<svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<p class="text-lg md:text-xl font-medium text-white/90">
+            Drag and drop your files here, or <span class="underline decoration-2 underline-offset-4 hover:text-white transition-colors">browse</span> to upload.
+          </p>
+</div>
+<!-- END: FileUploadZone -->
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: FeaturesGrid -->
+<section class="px-6 -mt-12 md:-mt-20 mb-20" data-purpose="feature-cards">
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Basic Stats -->
+<article class="bg-white p-8 rounded-custom shadow-xl border border-slate-100 flex flex-col items-start hover:translate-y-[-4px] transition-transform">
+<div class="bg-brand-coral/20 p-4 rounded-full mb-6 text-brand-coral">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-extrabold text-slate-900 mb-3">Basic Stats</h3>
+<p class="text-slate-500 leading-relaxed font-medium">
+            Instant summary statistics and data distribution overview.
+          </p>
+</article>
+<!-- Card 2: Correlation -->
+<article class="bg-white p-8 rounded-custom shadow-xl border border-slate-100 flex flex-col items-start hover:translate-y-[-4px] transition-transform">
+<div class="bg-brand-coral/20 p-4 rounded-full mb-6 text-brand-coral">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-extrabold text-slate-900 mb-3">Correlation</h3>
+<p class="text-slate-500 leading-relaxed font-medium">
+            Discover hidden relationships and dependencies within your dataset.
+          </p>
+</article>
+<!-- Card 3: Predictive Modeling -->
+<article class="bg-white p-8 rounded-custom shadow-xl border border-slate-100 flex flex-col items-start hover:translate-y-[-4px] transition-transform">
+<div class="bg-brand-coral/20 p-4 rounded-full mb-6 text-brand-coral">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-extrabold text-slate-900 mb-3">Predictive Modeling</h3>
+<p class="text-slate-500 leading-relaxed font-medium">
+            Leverage modular AI to forecast trends and outcomes.
+          </p>
+</article>
+</div>
+</section>
+<!-- END: FeaturesGrid -->
+<!-- BEGIN: PlaceholderSection -->
+<section class="bg-brand-bgMed px-6 py-20" data-purpose="secondary-content-preview">
+<div class="max-w-6xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white h-[400px] rounded-custom shadow-sm border border-slate-200"></div>
+<div class="bg-white h-[400px] rounded-custom shadow-sm border border-slate-200"></div>
+<div class="bg-white h-[400px] rounded-custom shadow-sm border border-slate-200"></div>
+</div>
+</div>
+</section>
+<!-- END: PlaceholderSection -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-slate-900 text-white py-12 px-6" data-purpose="footer-info">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
+<div class="mb-8 md:mb-0">
+<span class="text-2xl font-extrabold tracking-tight">ML Analytics</span>
+<p class="text-slate-400 mt-2">The Insight Curator. High-end editorial data experience.</p>
+</div>
+<div class="flex space-x-8 text-sm text-slate-400">
+<a class="hover:text-white transition-colors" href="#">Privacy</a>
+<a class="hover:text-white transition-colors" href="#">Terms</a>
+<a class="hover:text-white transition-colors" href="#">GitHub</a>
+</div>
+</div>
+<div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-slate-800 text-center text-slate-500 text-xs">
+      © 2023 ML Analytics. All rights reserved. Variant 1 of 10.
+    </div>
+</footer>
+<!-- END: Footer -->
+<script data-purpose="file-interaction-logic">
+    // Simple logic to simulate interaction for the drop zone
+    const dropZone = document.querySelector('[data-purpose="upload-container"]');
+    
+    dropZone.addEventListener('click', () => {
+      console.log('File picker triggered');
+      // In a real application, you would trigger a hidden input[type=file]
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('bg-white/10');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('bg-white/10');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('bg-white/10');
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        alert(`Detected ${files.length} file(s). Upload processing would start here.`);
+      }
+    });
+  </script>
+</body></html>

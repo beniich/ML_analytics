@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile &amp; API Keys - ModularAI</title>
+<!-- Load Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            // Synthesis ML Dark Theme based on #4A6583
+            brand: {
+              DEFAULT: '#4A6583', // Slate Blue
+              dark: '#2D3E50',
+              light: '#5D7C9D',
+            },
+            surface: {
+              DEFAULT: '#1E293B', // Background
+              card: 'rgba(255, 255, 255, 0.05)',
+              border: 'rgba(255, 255, 255, 0.1)',
+            },
+            accent: {
+              coral: '#FF7F50', // Coral accent
+            }
+          },
+          borderRadius: {
+            'custom': '4px', // ROUND_FOUR from design system
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      background-color: #334155; /* Base slate background similar to image */
+      color: #F1F5F9;
+      font-family: 'Manrope', sans-serif;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .sidebar-active {
+      background: rgba(255, 255, 255, 0.1);
+      border-right: 2px solid #5D7C9D;
+    }
+  </style>
+</head>
+<body class="h-full">
+<!-- BEGIN: MainHeader -->
+<header class="h-16 flex items-center justify-between px-6 bg-slate-800/50 border-b border-slate-700/50 fixed w-full top-0 z-50" data-purpose="top-navigation">
+<div class="flex items-center gap-2">
+<!-- Logo placeholder -->
+<div class="w-8 h-8 bg-brand rounded-custom flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-lg font-bold tracking-tight">ModularAI</span>
+</div>
+<nav class="flex items-center gap-8 text-sm font-medium text-slate-400">
+<a class="hover:text-white transition-colors" href="#">Dashboard</a>
+<a class="hover:text-white transition-colors" href="#">Docs</a>
+<a class="hover:text-white transition-colors" href="#">Settings</a>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-700">
+<img alt="John Doe" class="w-8 h-8 rounded-full border border-slate-600" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeQmZCOn9OCpANp2B8Eaghx53m7RsQyYrq3xYR-duiv18PMgYtdnf4AUNxJo9J1ZR45DKOEmWDk7XJHTlefE9w8BQaQdhSgRuIRL7L_DBrvbjujMiKAnNpYXQcpBwod11tfIZkqBT9QJeqbExQG1vXBsqVZBxtrHPT_B8PKxC5su8FHZQx50vhpaAHfp1XRlIaXXXirUeeDYYc73uXb4YtPebldw0NNRm4LYzJrOmfjrWYMsXuRoS8wRZFgzNWMNX9hwE7NaXc-y8"/>
+<div class="flex items-center gap-1 cursor-pointer hover:text-white">
+<span>John Doe</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</nav>
+</header>
+<!-- END: MainHeader -->
+<div class="flex pt-16 h-full">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 border-r border-slate-700/50 bg-slate-800/30 flex-shrink-0" data-purpose="sidebar-navigation">
+<div class="p-6 space-y-6">
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-custom text-slate-400 hover:bg-slate-700/30" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Dashboard
+          </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-custom text-slate-400 hover:bg-slate-700/30" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            Docs
+          </a>
+<div class="space-y-1">
+<div class="flex items-center justify-between px-3 py-2 rounded-custom text-white bg-slate-700/40">
+<div class="flex items-center gap-3">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Settings
+              </div>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+</div>
+<div class="pl-11 space-y-1 mt-1">
+<a class="block py-2 text-sm text-slate-400 hover:text-white" href="#">Profile</a>
+<a class="block py-2 text-sm text-slate-400 hover:text-white" href="#">Security</a>
+<a class="block py-2 text-sm text-brand-light font-semibold border-l border-brand-light pl-4 -ml-4" href="#">API Keys</a>
+</div>
+</div>
+</nav>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto p-12" data-purpose="main-content-area">
+<div class="max-w-6xl mx-auto">
+<h1 class="text-3xl font-bold mb-8 text-white">User Profile &amp; API Keys</h1>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- BEGIN: PersonalInfoSection -->
+<section class="glass-card rounded-custom p-8" data-purpose="personal-info-card">
+<h2 class="text-xl font-semibold mb-8">Personal Information &amp; Security</h2>
+<div class="flex flex-col md:flex-row gap-8 mb-8">
+<div class="flex-shrink-0 text-center">
+<img alt="John Doe Profile" class="w-24 h-24 rounded-full border-2 border-slate-600 mb-2 mx-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHQuF-cwI46gZ1u-b1ljj6oD7PGPrkjC0awocH52M7c7BsUj8p-4Bk21y-2KQNDn85qzHCAY_i0D3JJy4d04Ioufwtg8j1pH1oR8mzHCMwluu32utLctPonQBHW7VxliaX_U001VP8E2FVD1B-Pi5KrTUD-h-iNGXn9xGi2fLVThICfFKDXoyE0hnu8qJfdtkfOSdU14T6xBg1vCXDIIjPO6bBsX_VYIDAZQXY--C-qzRMurdHaAGrR6Wkkd-FoY1eq2gtreSmvjw"/>
+</div>
+<div class="flex-1 space-y-6">
+<!-- Name Field -->
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">Full Name</label>
+<input class="w-full bg-slate-700/50 border-slate-600 rounded-custom px-4 py-2 focus:ring-brand focus:border-brand text-white" type="text" value="John Doe"/>
+</div>
+<!-- Email Field -->
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">Email Address</label>
+<input class="w-full bg-slate-700/50 border-slate-600 rounded-custom px-4 py-2 focus:ring-brand focus:border-brand text-white" type="email" value="john.doe@example.com"/>
+</div>
+<button class="w-full bg-brand hover:bg-brand-light text-white font-semibold py-2.5 rounded-custom transition-all shadow-lg shadow-brand/20">
+                  Save Changes
+                </button>
+</div>
+</div>
+<div class="border-t border-slate-700/50 pt-8">
+<button class="w-full border border-slate-600 hover:bg-slate-700/30 text-slate-300 font-medium py-2.5 rounded-custom transition-all">
+                Change Password
+              </button>
+</div>
+</section>
+<!-- END: PersonalInfoSection -->
+<!-- BEGIN: APIKeySection -->
+<section class="glass-card rounded-custom p-8" data-purpose="api-keys-card">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-semibold">Personal API Keys</h2>
+<button class="bg-brand hover:bg-brand-light text-white px-4 py-2 rounded-custom text-sm font-semibold transition-all">
+                Create New Key
+              </button>
+</div>
+<div class="space-y-6">
+<!-- Key Item: Development -->
+<div class="group" data-purpose="api-key-item">
+<div class="flex items-center justify-between mb-1">
+<span class="text-sm font-semibold text-slate-300">Development Key</span>
+</div>
+<div class="flex items-center gap-3">
+<code class="flex-1 bg-slate-900/50 border border-slate-700/50 rounded-custom px-3 py-2 text-xs font-mono text-slate-400">
+                    sk_live_...4A2B
+                  </code>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-2 text-xs font-medium bg-slate-700/30 hover:bg-slate-700/60 text-slate-300 rounded-custom transition-colors border border-slate-600">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                      Copy
+                    </button>
+<button class="px-3 py-2 text-xs font-medium border border-slate-600 hover:bg-slate-700/30 text-slate-300 rounded-custom transition-colors">
+                      Regenerate
+                    </button>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 mt-1">Last used: 7 minutes ago</p>
+</div>
+<!-- Key Item: Production -->
+<div class="group" data-purpose="api-key-item">
+<div class="flex items-center justify-between mb-1">
+<span class="text-sm font-semibold text-slate-300">Production Key</span>
+</div>
+<div class="flex items-center gap-3">
+<code class="flex-1 bg-slate-900/50 border border-slate-700/50 rounded-custom px-3 py-2 text-xs font-mono text-slate-400">
+                    sk_live_...9F8E
+                  </code>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-2 text-xs font-medium bg-slate-700/30 hover:bg-slate-700/60 text-slate-300 rounded-custom transition-colors border border-slate-600">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                      Copy
+                    </button>
+<button class="px-3 py-2 text-xs font-medium border border-slate-600 hover:bg-slate-700/30 text-slate-300 rounded-custom transition-colors">
+                      Regenerate
+                    </button>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 mt-1">Last used: 7 minutes ago</p>
+</div>
+<!-- Key Item: Testing -->
+<div class="group" data-purpose="api-key-item">
+<div class="flex items-center justify-between mb-1">
+<span class="text-sm font-semibold text-slate-300">Testing Key</span>
+</div>
+<div class="flex items-center gap-3">
+<code class="flex-1 bg-slate-900/50 border border-slate-700/50 rounded-custom px-3 py-2 text-xs font-mono text-slate-400">
+                    sk_test_...1C3D
+                  </code>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-2 text-xs font-medium bg-slate-700/30 hover:bg-slate-700/60 text-slate-300 rounded-custom transition-colors border border-slate-600">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                      Copy
+                    </button>
+<button class="px-3 py-2 text-xs font-medium border border-slate-600 hover:bg-slate-700/30 text-slate-300 rounded-custom transition-colors">
+                      Regenerate
+                    </button>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 mt-1">Last used: 7 minutes ago</p>
+</div>
+</div>
+</section>
+<!-- END: APIKeySection -->
+</div>
+</div>
+</main>
+<!-- END: MainContent -->
+</div>
+<script data-purpose="ui-interactions">
+    // Placeholder for interaction logic like copying to clipboard
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        if (button.innerText.includes('Copy')) {
+          const originalText = button.innerHTML;
+          button.innerHTML = '<span class="text-green-400">Copied!</span>';
+          setTimeout(() => {
+            button.innerHTML = originalText;
+          }, 2000);
+        }
+      });
+    });
+  </script>
+</body></html>

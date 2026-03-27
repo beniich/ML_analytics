@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed": "#00201c",
+              "on-tertiary": "#003731",
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "secondary-container": "#304b68",
+              "surface-bright": "#37393d",
+              "surface-dim": "#111317",
+              "surface-variant": "#333539",
+              "tertiary-fixed-dim": "#67d9c9",
+              "inverse-primary": "#9f412d",
+              "tertiary-container": "#006f64",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-fixed": "#3e0500",
+              "background": "#111317",
+              "outline": "#8d9198",
+              "on-secondary-container": "#9fbbdd",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e2e2e7",
+              "on-tertiary-container": "#81f2e2",
+              "surface-container": "#1e2024",
+              "error-container": "#93000a",
+              "surface": "#111317",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-primary": "#601305",
+              "surface-container-lowest": "#0c0e12",
+              "tertiary": "#67d9c9",
+              "secondary-fixed-dim": "#adc9eb",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-fixed-variant": "#7f2a18",
+              "outline-variant": "#43474d",
+              "primary-fixed": "#ffdad3",
+              "surface-tint": "#ffb4a4",
+              "on-error": "#690005",
+              "surface-container-high": "#282a2e",
+              "primary-container": "#a44531",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-highest": "#333539",
+              "error": "#ffb4ab",
+              "secondary": "#adc9eb",
+              "on-secondary": "#15324e",
+              "inverse-on-surface": "#2e3035",
+              "tertiary-fixed": "#85f6e5",
+              "inverse-surface": "#e2e2e7",
+              "primary": "#ffb4a4",
+              "on-surface-variant": "#c3c6ce"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#111317]/80 backdrop-blur-xl shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#E2E2E7] tracking-tighter font-headline">Insight Curator</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all duration-300 px-3 py-1 rounded-lg" href="#">Dashboard</a>
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all duration-300 px-3 py-1 rounded-lg" href="#">Analytics</a>
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all duration-300 px-3 py-1 rounded-lg" href="#">Export</a>
+<a class="font-headline font-semibold tracking-tight text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-[#1E2024] rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-[#1E2024] rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container ml-2">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="professional portrait of a tech lead with soft studio lighting and a clean dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADb07B4_qUfLAXadpD47PBK1E3xDgRlKJ4lt52j_oBrVaCX762NjMz0M31rEw7vK-XXojhL6EeljG9xeGMspsM0Wuq9k4VezyMmhzSmM8eChF_cxcNq1bRzJZ_r7OWG8VhQIOJOn98ErXQUCpwP9q0uaMLbJH01T2-1U1-Mq-YfYCqJCNecqZBi0SNPz0m0pzCkBmzK-P7V9mimR-fgk75YA35mczz3QJNrLFdEvs-qoRgpmFJlzwjJlVUheM7k_0kbH8tTMqGvb8"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden lg:flex flex-col h-screen w-64 left-0 top-0 fixed z-40 bg-[#111317]/50 backdrop-blur-2xl p-4 gap-y-2 pt-20 bg-gradient-to-r from-[#1A1C20] to-transparent">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[#ffb4a4] font-black uppercase tracking-widest text-xs">ML Curator</span>
+</div>
+<p class="text-xs text-on-surface-variant font-medium">Enterprise Tier</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">memory</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">ios_share</span>
+<span>Exports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+<span>Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#ffb4a4] font-bold bg-[#1E2024] rounded-lg transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">help_center</span>
+<span>Support</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-4 border-t border-outline-variant/15">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-3 rounded-xl mb-4 active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Analysis
+            </button>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<section class="mb-16">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface mb-4">
+                Platform <span class="text-primary">Maintenance</span>
+</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed font-body">
+                Tracking the evolution of the ML Curator ecosystem. From infrastructure hardening to architectural breakthroughs—documented for radical transparency.
+            </p>
+</section>
+<!-- Stats Overview (Asymmetric Bento) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<span class="text-xs font-bold text-tertiary uppercase tracking-widest mb-2 block">System Health</span>
+<h3 class="text-3xl font-bold font-headline mb-4">99.98% Uptime</h3>
+<div class="flex items-center gap-2 text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm">Global regions operational</span>
+</div>
+<div class="h-24 w-full flex items-end gap-1">
+<div class="flex-1 bg-tertiary/20 h-1/2 rounded-t-sm group-hover:bg-tertiary/40 transition-colors"></div>
+<div class="flex-1 bg-tertiary/20 h-2/3 rounded-t-sm group-hover:bg-tertiary/40 transition-colors"></div>
+<div class="flex-1 bg-tertiary/20 h-3/4 rounded-t-sm group-hover:bg-tertiary/40 transition-colors"></div>
+<div class="flex-1 bg-tertiary/20 h-2/3 rounded-t-sm group-hover:bg-tertiary/40 transition-colors"></div>
+<div class="flex-1 bg-tertiary h-full rounded-t-sm"></div>
+</div>
+</div>
+<div class="absolute -right-16 -bottom-16 w-64 h-64 bg-tertiary/5 rounded-full blur-3xl"></div>
+</div>
+<div class="md:col-span-4 bg-primary-container/10 rounded-xl p-8 flex flex-col justify-between border border-primary/10">
+<div>
+<span class="text-xs font-bold text-primary uppercase tracking-widest mb-2 block">Next Sync</span>
+<h3 class="text-2xl font-bold font-headline">Scheduled Update</h3>
+<p class="text-on-surface-variant text-sm mt-2">v4.2.0 "Nebula" rollout starts in:</p>
+</div>
+<div class="mt-8">
+<div class="text-4xl font-black font-headline text-primary">02:45:12</div>
+<p class="text-xs text-on-surface-variant uppercase tracking-tighter mt-1">Hours : Mins : Secs</p>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div class="space-y-12 relative before:absolute before:left-0 md:before:left-1/2 before:top-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-primary/40 before:via-outline-variant/20 before:to-transparent">
+<!-- Update Entry 1: Feature -->
+<div class="relative flex flex-col md:flex-row gap-8 items-start">
+<div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+<div class="bg-surface-container rounded-xl p-6 shadow-xl border-l-4 border-primary md:border-l-0 md:border-r-4">
+<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full mb-3 uppercase tracking-widest">Major Feature</span>
+<h4 class="text-xl font-bold font-headline mb-2">Neural Link v2.0</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Implemented a new cross-model synchronization layer that reduces latency by 45%. New API endpoints are now available for enterprise partners.</p>
+<div class="flex flex-wrap gap-2 md:justify-end">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">Model Latency</span>
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">API Expansion</span>
+</div>
+</div>
+</div>
+<div class="absolute left-[-11px] md:left-1/2 md:translate-x-[-50%] top-6 w-6 h-6 rounded-full bg-background border-4 border-primary z-10 flex items-center justify-center">
+<div class="w-1 h-1 bg-primary rounded-full"></div>
+</div>
+<div class="md:w-1/2 md:pl-12 order-1 md:order-2 pt-6">
+<time class="text-sm font-bold text-on-surface block mb-1">October 24, 2023</time>
+<span class="text-xs text-on-surface-variant">Version 4.1.8-alpha</span>
+</div>
+</div>
+<!-- Update Entry 2: Maintenance -->
+<div class="relative flex flex-col md:flex-row gap-8 items-start">
+<div class="md:w-1/2 md:pr-12 md:text-right md:pt-6 order-1">
+<time class="text-sm font-bold text-on-surface block mb-1">October 19, 2023</time>
+<span class="text-xs text-on-surface-variant">Routine Security Patch</span>
+</div>
+<div class="absolute left-[-11px] md:left-1/2 md:translate-x-[-50%] top-6 w-6 h-6 rounded-full bg-background border-4 border-secondary-container z-10 flex items-center justify-center">
+<div class="w-1 h-1 bg-secondary-container rounded-full"></div>
+</div>
+<div class="md:w-1/2 md:pl-12 order-2">
+<div class="bg-surface-container rounded-xl p-6 shadow-xl border-l-4 border-secondary">
+<span class="inline-block px-3 py-1 bg-secondary/10 text-secondary text-[10px] font-bold rounded-full mb-3 uppercase tracking-widest">Security</span>
+<h4 class="text-xl font-bold font-headline mb-2">Edge Proxy Hardening</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Migrated all edge proxy nodes to secure-enclave instances. Updated TLS certificates and restricted legacy protocol access across all clusters.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">TLS 1.3</span>
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">Zero Trust</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Update Entry 3: Bug Fix -->
+<div class="relative flex flex-col md:flex-row gap-8 items-start">
+<div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+<div class="bg-surface-container rounded-xl p-6 shadow-xl border-l-4 border-tertiary md:border-l-0 md:border-r-4">
+<span class="inline-block px-3 py-1 bg-tertiary/10 text-tertiary text-[10px] font-bold rounded-full mb-3 uppercase tracking-widest">Bug Fix</span>
+<h4 class="text-xl font-bold font-headline mb-2">UI Memory Leak Resolved</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Identified and patched a WebSocket subscription leak in the analytics dashboard causing browser slow-downs after long sessions.</p>
+<div class="flex flex-wrap gap-2 md:justify-end">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">WebSocket</span>
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">Performance</span>
+</div>
+</div>
+</div>
+<div class="absolute left-[-11px] md:left-1/2 md:translate-x-[-50%] top-6 w-6 h-6 rounded-full bg-background border-4 border-tertiary z-10 flex items-center justify-center">
+<div class="w-1 h-1 bg-tertiary rounded-full"></div>
+</div>
+<div class="md:w-1/2 md:pl-12 order-1 md:order-2 pt-6">
+<time class="text-sm font-bold text-on-surface block mb-1">October 12, 2023</time>
+<span class="text-xs text-on-surface-variant">Hotfix Build 902</span>
+</div>
+</div>
+<!-- Visual Break / Image Section -->
+<div class="relative py-8 md:py-16">
+<div class="w-full h-80 rounded-2xl overflow-hidden relative group">
+<img alt="Server room detail" class="w-full h-full object-cover" data-alt="close-up of fiber optic cables in a modern server room with blue and primary coral neon accent lighting and soft bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm6zhXW9ncjU0FpTJJkPfJ558fvQerfADm2vzA2uqaA40gkHXzj1l3vA-1GBrxoH-HDLiKXnI-bLZ3Q9tBLDR36gqjVt31hur4FowUsrnjtsuDQldZHfvY0R5S8Lx-IZ5e5JIjKyBHfqqFuxssBfINAMlBHZQi7w6pgWmNoY2WiA3kTW0aN3vl7brI8_2CnjqI3DTaodv2KSdG5beP-sPkSVDdVy0uqm8gowxssriuFygrcex2WvJ5jO9zNcHtynLtFFpy5Fyk9D4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<h2 class="text-3xl font-bold font-headline mb-2">Global Infrastructure</h2>
+<p class="text-on-surface-variant text-sm max-w-lg">Our data centers are powered by 100% renewable energy and redundant fiber links across 4 continents.</p>
+</div>
+</div>
+</div>
+<!-- Update Entry 4: Infrastructure -->
+<div class="relative flex flex-col md:flex-row gap-8 items-start">
+<div class="md:w-1/2 md:pr-12 md:text-right md:pt-6 order-1">
+<time class="text-sm font-bold text-on-surface block mb-1">September 28, 2023</time>
+<span class="text-xs text-on-surface-variant">Cluster Expansion</span>
+</div>
+<div class="absolute left-[-11px] md:left-1/2 md:translate-x-[-50%] top-6 w-6 h-6 rounded-full bg-background border-4 border-outline-variant z-10 flex items-center justify-center">
+<div class="w-1 h-1 bg-outline-variant rounded-full"></div>
+</div>
+<div class="md:w-1/2 md:pl-12 order-2">
+<div class="bg-surface-container rounded-xl p-6 shadow-xl border-l-4 border-outline">
+<span class="inline-block px-3 py-1 bg-outline/10 text-outline text-[10px] font-bold rounded-full mb-3 uppercase tracking-widest">Maintenance</span>
+<h4 class="text-xl font-bold font-headline mb-2">Regional Cluster Update</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Upgraded Kubernetes nodes in US-East and EU-West regions to latest stable release. Storage throughput increased by 2.4x for massive datasets.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">k8s v1.28</span>
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded">SSD NVMe</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Call-to-Action -->
+<div class="mt-32 p-12 bg-surface-container-lowest rounded-3xl text-center border border-outline-variant/10">
+<h3 class="text-3xl font-bold font-headline mb-4 text-on-surface">Missed something?</h3>
+<p class="text-on-surface-variant max-w-xl mx-auto mb-8 font-body">Get real-time alerts for platform status and maintenance windows directly in your terminal or email inbox.</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto px-8 py-3 rounded-full bg-primary text-on-primary font-bold transition-all hover:shadow-[0_0_20px_rgba(255,180,164,0.3)] active:scale-95">Subscribe to Status</button>
+<button class="w-full sm:w-auto px-8 py-3 rounded-full border border-outline-variant/30 text-on-surface hover:bg-surface-container transition-all active:scale-95">View Public API Docs</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-[#111317]/90 backdrop-blur-lg border-t border-[#43474D]/15 shadow-2xl">
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Models</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Admin</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#ffb4a4]/10 text-[#ffb4a4] rounded-xl px-4 py-1 transition-transform scale-100" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Help</span>
+</a>
+</nav>
+</body></html>

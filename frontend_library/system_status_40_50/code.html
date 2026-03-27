@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | System Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-container": "#ffd7ce",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "on-background": "#e2e2e7",
+              "inverse-surface": "#e2e2e7",
+              "secondary": "#adc9eb",
+              "on-primary": "#601305",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "surface": "#111317",
+              "on-primary-fixed-variant": "#7f2a18",
+              "primary-fixed": "#ffdad3",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-error": "#690005",
+              "surface-bright": "#37393d",
+              "secondary-container": "#304b68",
+              "surface-dim": "#111317",
+              "on-primary-fixed": "#3e0500",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface-container": "#1e2024",
+              "secondary-fixed-dim": "#adc9eb",
+              "inverse-on-surface": "#2e3035",
+              "on-tertiary-fixed": "#00201c",
+              "surface-container-high": "#282a2e",
+              "primary": "#ffb4a4",
+              "outline": "#8d9198",
+              "surface-tint": "#ffb4a4",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary": "#15324e",
+              "primary-container": "#a44531",
+              "background": "#111317",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#333539",
+              "outline-variant": "#43474d",
+              "tertiary-fixed": "#85f6e5",
+              "tertiary-container": "#006f64",
+              "surface-container-low": "#1a1c20",
+              "secondary-fixed": "#d0e4ff",
+              "on-secondary-container": "#9fbbdd",
+              "primary-fixed-dim": "#ffb4a4",
+              "tertiary-fixed-dim": "#67d9c9",
+              "on-tertiary": "#003731",
+              "tertiary": "#67d9c9",
+              "on-tertiary-container": "#81f2e2"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary/30">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 bottom-0 w-64 h-full bg-[#111317]/90 backdrop-blur-lg flex flex-col py-6 px-4 space-y-8 border-r border-[#43474D]/15 z-50">
+<div class="flex items-center space-x-3 px-2">
+<div class="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-[#E2E2E7] font-headline tracking-tight leading-none">ML Platform</h2>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Enterprise Tier</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#ffb4a4] border-r-2 border-[#ffb4a4] bg-gradient-to-r from-[#ffb4a4]/10 to-transparent transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">model_training</span>
+<span class="font-medium text-sm">Models</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="font-medium text-sm">Datasets</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-medium text-sm">Analytics</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-medium text-sm">Deployments</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-outline-variant/10 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="text-sm">Documentation</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">contact_support</span>
+<span class="text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 flex items-center justify-between px-8 h-16 ml-64 bg-[#111317]/80 backdrop-blur-xl z-40 shadow-[0_40px_40px_-10px_rgba(226,222,231,0.06)]">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl pl-10 pr-4 py-2 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:ring-1 focus:ring-primary/20 transition-all" placeholder="Search infrastructure..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="text-xs font-headline font-bold text-on-surface-variant uppercase tracking-tighter">System Live</span>
+</div>
+<div class="flex items-center space-x-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="professional male software architect portrait with neutral expression in modern tech office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eFGVQJlWN3Tu62TVQYVj335rQmqGK8m4V5BbD1L1LPRlTpoia0pHPpimqTy1PCIybYL7UBLfF1WBRz-VOamg5dQJ1y9AJkM_6JHAP4pY9PrHQ2cHT3PFUBLGVnv3SpNKwx_tOVAPLi3HMo74na0duXEum8oG0t4UsuTUribW_NXahKH9csX_MvWyymd4tU_GWqkOk8SgvBg05F7p5_AT80VL-ieNZUF9L3U4yrwEzrGvu_uMBymdP6QFjl6MW-h0BUh-1PRHPfw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 pb-12 px-8 min-h-screen bg-surface">
+<!-- Hero Header -->
+<header class="mb-12">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-2">Infrastructure <span class="text-primary">Status</span></h1>
+<p class="text-on-surface-variant text-lg max-w-2xl font-body">Real-time telemetry and resource orchestration across 4 active clusters.</p>
+</div>
+<div class="flex items-end flex-col">
+<div class="text-6xl font-black font-headline text-primary-fixed tracking-tighter leading-none mb-1">40<span class="text-2xl text-on-surface-variant">/50</span></div>
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Active Nodes</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Real-time CPU Usage (Asymmetric 7/12) -->
+<section class="col-span-12 lg:col-span-7 bg-surface-container-low rounded-xl p-6 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-1">Compute Load</h3>
+<p class="text-xs text-on-surface-variant">Aggregated CPU utilization across US-East-1</p>
+</div>
+<div class="flex space-x-2">
+<span class="px-3 py-1 bg-surface-container-highest text-primary text-[10px] font-bold rounded-full uppercase tracking-widest">Live</span>
+</div>
+</div>
+<div class="h-64 flex items-end space-x-1 relative">
+<!-- Custom Graph Visualization -->
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[40%]" title="40%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[45%]" title="45%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[38%]" title="38%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[55%]" title="55%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/30 to-primary/10 rounded-t-sm h-[82%]" title="82%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[60%]" title="60%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[52%]" title="52%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[48%]" title="48%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[42%]" title="42%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/40 to-primary/20 rounded-t-sm h-[94%] border-t-2 border-primary" title="94% (Peak)"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[75%]" title="75%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[68%]" title="68%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[55%]" title="55%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[50%]" title="50%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[45%]" title="45%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[40%]" title="40%"></div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary/5 rounded-t-sm h-[42%]" title="42%"></div>
+</div>
+<div class="mt-4 flex justify-between text-[10px] uppercase font-bold text-on-surface-variant/40 tracking-widest">
+<span>14:00</span>
+<span>14:15</span>
+<span>14:30</span>
+<span>14:45</span>
+<span>15:00</span>
+</div>
+</section>
+<!-- Memory Consumption (5/12) -->
+<section class="col-span-12 lg:col-span-5 bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-headline font-bold text-on-surface">Memory Health</h3>
+<span class="material-symbols-outlined text-tertiary">memory</span>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-on-surface">Shared Memory Pool</span>
+<span class="text-on-surface-variant">78.4 GB / 128 GB</span>
+</div>
+<div class="h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[62%] bg-gradient-to-r from-secondary to-tertiary rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-on-surface">GPU VRAM Utilization</span>
+<span class="text-on-surface-variant">22.1 GB / 24 GB</span>
+</div>
+<div class="h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[92%] bg-gradient-to-r from-primary to-primary-container rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-on-surface">Swap File Usage</span>
+<span class="text-on-surface-variant">1.2 GB / 16 GB</span>
+</div>
+<div class="h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[8%] bg-tertiary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container rounded-xl border-l-4 border-primary/40">
+<p class="text-xs text-on-surface italic leading-relaxed">
+<span class="font-bold text-primary mr-1">Advisory:</span> Model 'LLM-v2-prod' is currently caching heavy weights in VRAM. Cluster expansion recommended within 12 hours.
+                    </p>
+</div>
+</section>
+<!-- Infrastructure Map (Full Width) -->
+<section class="col-span-12 bg-surface-container rounded-xl p-8 overflow-hidden relative min-h-[400px]">
+<div class="absolute inset-0 opacity-10">
+<img class="w-full h-full object-cover" data-alt="abstract digital blue earth network visualization with glowing data nodes and interconnected lines on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcO6GobvH5PtY5stcPXUgqCz4R6ebtUlU96R1qG7yVrBFpbyVtAkoERpTfHNnwDTiPVlKwv2VlmezVu1Pzc6t2AA7QZrcPUkBVbot1gaSC7Ubn1S6LISCdnoF9iCORCRVqFUkwUhgzjrGdsr5Q13qTbV4UieNc-dDmSDiOi_sgSqg78zD1Siyn951vmuPtR8LvLeE2C_4rxe2Tf1sVwSr20SfEAGUxrefIfiaT2brRK-DkP0heA3HRYvGg03_cjvPCmMA3duduXA0"/>
+</div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12 h-full">
+<div class="lg:col-span-1">
+<h3 class="text-2xl font-headline font-extrabold text-on-surface mb-4">Node Topology</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-8">Visualizing spatial distribution and health of regional edge clusters. Latency current average: <span class="text-tertiary font-bold">14ms</span>.</p>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(103,217,201,0.6)]"></div>
+<span class="text-sm font-semibold">US-EAST-VIRGINIA</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">ONLINE</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(103,217,201,0.6)]"></div>
+<span class="text-sm font-semibold">EU-WEST-DUBLIN</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">ONLINE</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl border border-primary/20 bg-primary/5 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(255,180,164,0.6)]"></div>
+<span class="text-sm font-bold text-primary">AP-SOUTH-MUMBAI</span>
+</div>
+<span class="text-[10px] font-bold text-primary">RECOVERING</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-2 flex items-center justify-center relative">
+<!-- Simulated Infrastructure Map nodes -->
+<div class="relative w-full h-64 border border-outline-variant/10 rounded-2xl bg-surface/40 backdrop-blur-md">
+<div class="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-tertiary"></div>
+<div class="absolute top-1/3 left-1/2 w-4 h-4 rounded-full bg-tertiary"></div>
+<div class="absolute bottom-1/4 right-1/4 w-3 h-3 rounded-full bg-primary animate-ping"></div>
+<div class="absolute bottom-1/4 right-1/4 w-3 h-3 rounded-full bg-primary"></div>
+<div class="absolute top-1/2 right-1/3 w-2 h-2 rounded-full bg-tertiary"></div>
+<!-- Connection Lines (SVG) -->
+<svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<path d="M25% 25% L50% 33% L66% 50% L75% 75%" fill="none" stroke="#43474D" stroke-dasharray="4 4" stroke-width="1"></path>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<!-- Docker Container Fleet (Full Width) -->
+<section class="col-span-12 bg-surface-container-low rounded-xl overflow-hidden">
+<div class="p-6 flex justify-between items-center bg-surface-container-highest/30">
+<h3 class="text-xl font-headline font-bold text-on-surface">Docker Resource Orchestration</h3>
+<div class="flex space-x-2">
+<button class="px-4 py-2 bg-primary text-on-primary text-xs font-bold rounded-xl flex items-center space-x-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Scale Fleet</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant/10">
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Container ID</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Image Name</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">CPU %</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Mem Usage</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<code class="text-xs font-mono text-secondary bg-secondary-container/20 px-2 py-1 rounded">7f2a18d18</code>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-bold">nlp-inference-v4</span>
+<span class="text-[10px] text-on-surface-variant">python:3.9-slim</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-xs font-medium text-tertiary">Running</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface">12.4%</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface">1.4 GB</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-surface-container hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">pause</span></button>
+<button class="p-2 rounded-lg bg-surface-container hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<code class="text-xs font-mono text-secondary bg-secondary-container/20 px-2 py-1 rounded">bc891f1a2</code>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-bold">redis-cache-tier</span>
+<span class="text-[10px] text-on-surface-variant">redis:alpine</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-xs font-medium text-tertiary">Running</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface">0.8%</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface">128 MB</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-surface-container hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">pause</span></button>
+<button class="p-2 rounded-lg bg-surface-container hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<code class="text-xs font-mono text-secondary bg-secondary-container/20 px-2 py-1 rounded">2d4965e9a</code>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-bold">data-preprocessor</span>
+<span class="text-[10px] text-on-surface-variant">rust-worker:latest</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-primary">Paused</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface-variant">0.0%</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface-variant">42 MB</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-surface-container hover:text-tertiary transition-colors"><span class="material-symbols-outlined text-sm">play_arrow</span></button>
+<button class="p-2 rounded-lg bg-surface-container hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - Suppressed per context instructions for status view -->
+</body></html>

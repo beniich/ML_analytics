@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Distribution Analysis Charts - Varlyhere</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              primary: '#4A6583',
+              accent: '#F29479',
+              dark: '#3A526A',
+              navy: '#2E445C',
+            }
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '0.125rem',
+            DEFAULT: '4px',
+            'md': '0.375rem',
+            'lg': '0.5rem',
+            'xl': '0.75rem',
+            '2xl': '1rem',
+            '3xl': '1.5rem',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      background-color: #f8fafc;
+      font-family: 'Manrope', sans-serif;
+    }
+    .chart-card {
+      transition: transform 0.2s ease-in-out;
+    }
+    .chart-card:hover {
+      transform: translateY(-4px);
+    }
+    /* Mimic the specific rounded style from Design System ROUND_FOUR */
+    .rounded-custom {
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-brand-primary text-white pt-6 pb-20 px-6 md:px-12 lg:px-24">
+<nav class="flex items-center justify-between mb-16">
+<div class="text-2xl font-extrabold tracking-tight uppercase" data-purpose="logo">
+        VARLYHERE
+      </div>
+<div class="hidden md:flex items-center space-x-8 text-sm font-semibold uppercase tracking-wider">
+<a class="hover:opacity-80 flex items-center" href="#">Products <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+<a class="hover:opacity-80 flex items-center" href="#">Solutions <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+<a class="hover:opacity-80 flex items-center" href="#">Resources <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+<a class="hover:opacity-80" href="#">Pricing</a>
+<button class="bg-brand-accent text-white px-6 py-2.5 rounded shadow-lg hover:brightness-105 transition-all uppercase text-xs font-bold tracking-widest">
+          Get Started
+        </button>
+</div>
+</nav>
+<div class="text-center max-w-4xl mx-auto">
+<h1 class="text-4xl md:text-6xl font-extrabold mb-6">Distribution Analysis Charts</h1>
+<p class="text-lg md:text-xl opacity-90 mb-10">Visualize data spread and identify outliers across key variables.</p>
+<!-- Toggle Switch for Data Type -->
+<div class="flex items-center justify-center space-x-4">
+<span class="text-xs font-bold tracking-widest uppercase opacity-80">Categorical</span>
+<div class="relative inline-block w-14 h-7 bg-brand-accent rounded-full p-1 cursor-pointer">
+<div class="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-md"></div>
+</div>
+<span class="text-xs font-bold tracking-widest uppercase">Numerical</span>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: ContentArea -->
+<main class="max-w-7xl mx-auto px-6 md:px-12 -mt-10 mb-20">
+<div class="flex justify-end mb-6">
+<button class="bg-brand-accent/80 hover:bg-brand-accent text-white px-5 py-2 rounded text-xs font-bold uppercase tracking-widest shadow-md">
+        Filter Data
+      </button>
+</div>
+<!-- Grid of Charts -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Age Distribution -->
+<section class="chart-card bg-white p-6 rounded-custom shadow-xl border border-gray-100" data-purpose="chart-container">
+<h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight">Age Distribution<br/><span class="text-base font-medium opacity-70">(Histogram)</span></h3>
+<div class="aspect-[4/5] bg-white flex items-center justify-center border-t border-gray-50 pt-4">
+<!-- Placeholder for Histogram Image -->
+<img alt="Age Distribution Histogram" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT1A61TSIfLNQ7DChDOKU_N3lHx_36TQWj-SGq2O0RrlvJTSmzkbdk2Phec2-vG6RXBqrXkHO1UdLHA3hjhPXIpowgSlQDgynYEtuiVNyRblPPiGs-YX_2DmfBhedHJX9If5nINXN26WMykGtFNK5SiGUXjG3ktPK97CNV5p9AL89spD7HQ3tLyNJLCWRLFClBW9Z-v-N2YWQE2WW-WVhss6HnyOXbZB96DZf36x5MPZsUrMPLSEHBXCjkOmtzntmIu_iT2LiJ7aE"/>
+</div>
+</section>
+<!-- Income per Household -->
+<section class="chart-card bg-white p-6 rounded-custom shadow-xl border border-gray-100" data-purpose="chart-container">
+<h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight">Income per Household<br/><span class="text-base font-medium opacity-70">(Box Plot)</span></h3>
+<div class="aspect-[4/5] bg-white flex items-center justify-center border-t border-gray-50 pt-4">
+<img alt="Income Box Plot" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQyT6DdNyWbnruOeR-1A8Wud1WjUf2-xRjA4o4eKtvlLC_r3N0yKzFcOzgEoB4bUMzb-subyXNLZsxZUHwhapwnS3neqRhwx710HEk7mKh8dHoLiWypsR6dmwE_xXeFqQEkwuHHQd02eRxlMi1a9OuvEiM5WbWM78IKR0_UdGUIiN_q0rufZEgmidDdPdn-ywOrDT8TLEGmwtfx5QbnbN62-YOjVhaWrdnIXiW60YBNDotQ1-HvwXd5HajhexH9JWya2gTZvyUBU4"/>
+</div>
+</section>
+<!-- Product Ratings -->
+<section class="chart-card bg-white p-6 rounded-custom shadow-xl border border-gray-100" data-purpose="chart-container">
+<h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight">Product Ratings<br/><span class="text-base font-medium opacity-70">(Histogram)</span></h3>
+<div class="aspect-[4/5] bg-white flex items-center justify-center border-t border-gray-50 pt-4">
+<img alt="Product Ratings Histogram" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3EL6K3wfa-SUocDajHYZbBDozFMtppx2Cx3_3cqjQv2fj10JpwPPts-u01Hgma6XqoX_Oxn0bMTkx4xLhwA1gtY2MTksvL1Uia6G0E3-zQdZdyn0m84o0dVEtJrEl8mM82fM5JGn7BtLgN-XqfnJdvq4JlksORyLmnOzZI4K1PXB6LXiwnn8tTUsSDycw1J2Gepu0eYct5V9awBQ7Fok9WkE5Qpaxpt5wj6mAGquCUmpO-muMQfy8j4FsfHtW9bNrqUnLsYHkhGg"/>
+</div>
+</section>
+<!-- Daily Active Users -->
+<section class="chart-card bg-white p-6 rounded-custom shadow-xl border border-gray-100" data-purpose="chart-container">
+<h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight">Daily Active Users<br/><span class="text-base font-medium opacity-70">(Box Plot)</span></h3>
+<div class="aspect-[4/5] bg-white flex items-center justify-center border-t border-gray-50 pt-4">
+<img alt="Daily Active Users Box Plot" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXT2cgrbjuAec7Zh7o1XN0W1aQIaaLXMHZv6Z9lHPYllW6a9HwJ-Dzj9NwHrtpgjzzIXavYukVy4hWnP60ClLp8hXb30nvAssPPyhsH_Wj24EYILHqWjHvmebrqJnGOrzsy0_UcGZvrFVvnCAUike89W4TNiEFb5gL_rAK7WoLrYrNrY1dsk8PIA_3W4IZbdh6bhMWjoRrspiXIoRjYvDRje2iWapxYwhj_leanbXlr8IQsrrym-WAIn86c4CybAo-twrwF-HB1tk"/>
+</div>
+</section>
+<!-- Transaction Value -->
+<section class="chart-card bg-white p-6 rounded-custom shadow-xl border border-gray-100" data-purpose="chart-container">
+<h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight">Transaction Value<br/><span class="text-base font-medium opacity-70">(Histogram)</span></h3>
+<div class="aspect-[4/5] bg-white flex items-center justify-center border-t border-gray-50 pt-4">
+<img alt="Transaction Value Histogram" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8qqjdel0a-bD5VgwRq6lbV27vBrBtK9eCSiK4pCQaHZiVOOU6O4uyUViiXHvSnY-k0I0oYKwbP8T4BxvJWFJoJRnxkYGhCL-xbqxRColJR54BDxth2DwK4Z9U4nJvXD7Ll5RtM3wv6p7CRP1V5wOdojkopChxFRhUTsxOKBqCS0o4HqXplzPuc_F6GMbWyViTphABHvrrTp05wteduPzA6r4UjgZfBFgYGOwDvN_TVxaplbt4Abwat1bTWLB8Ssg1URXvBTPOD2I"/>
+</div>
+</section>
+<!-- Session Duration -->
+<section class="chart-card bg-white p-6 rounded-custom shadow-xl border border-gray-100" data-purpose="chart-container">
+<h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight">Session Duration<br/><span class="text-base font-medium opacity-70">(Box Plot)</span></h3>
+<div class="aspect-[4/5] bg-white flex items-center justify-center border-t border-gray-50 pt-4">
+<img alt="Session Duration Box Plot" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbthmAdZFmhEknQjLtGLS475QXB0r9ym9DoSRsM_iZf0gD3mPgdy_aXL90ymgkiDK1rEZec3kBIdCoT_wwPjoYuTr32XywY-Igpi2tk3nbS0RKiI_DlhuZRHEoR9un16zR-I0EJyAOvmfxVutRJT42TpmjWwG455T3QL3n8G0K0HOa8XWW9rQVLI0qCGVt9jBgsAta2ByNv4wzt8G0ZvUjIWBwuS6gaNK_3cfzzSA1Si4VN9ernpCkZMDGrE0Hpp8N1jVigTHbAe8"/>
+</div>
+</section>
+</div>
+</main>
+<!-- END: ContentArea -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-brand-navy text-gray-300 pt-16 pb-12 px-6 md:px-12 lg:px-24">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<!-- Brand Section -->
+<div>
+<h4 class="text-white text-lg font-bold mb-6 tracking-tight uppercase">VARLYHERE</h4>
+<p class="text-sm opacity-70">Varlyhere</p>
+</div>
+<!-- Links: Products -->
+<div>
+<h5 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Products</h5>
+<ul class="space-y-3 text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Products</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Data source</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Solutions</a></li>
+</ul>
+</div>
+<!-- Links: Resources -->
+<div>
+<h5 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Resources</h5>
+<ul class="space-y-3 text-sm">
+<li><a class="hover:text-white transition-colors" href="#">About</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Pricing</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Pricing</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<!-- Links: Social -->
+<div>
+<h5 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Social Us</h5>
+<div class="flex space-x-4">
+<a class="bg-gray-700/50 hover:bg-gray-700 p-2 rounded-full transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</a>
+<a class="bg-gray-700/50 hover:bg-gray-700 p-2 rounded-full transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+<a class="bg-gray-700/50 hover:bg-gray-700 p-2 rounded-full transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.981 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
+</a>
+<a class="bg-gray-700/50 hover:bg-gray-700 p-2 rounded-full transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.965 1.406-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.261 7.929-7.261 4.162 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C1.124 23.594 2.133 24 3.202 24c6.621 0 11.988-5.367 11.988-11.987C15.19 5.367 9.823 0 3.202 0"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

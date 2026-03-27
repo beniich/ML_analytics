@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ModularAI - User Profile &amp; API Keys</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'mod-bg': '#1e293b', // Deep blue/slate background
+            'mod-sidebar': '#334155', // Sidebar background
+            'mod-card': 'rgba(255, 255, 255, 0.05)', // Transparent card background
+            'mod-accent': '#3b82f6', // Primary blue button
+            'mod-text-primary': '#f1f5f9',
+            'mod-text-secondary': '#94a3b8',
+            'mod-input-bg': 'rgba(15, 23, 42, 0.4)',
+            'mod-border': 'rgba(255, 255, 255, 0.1)'
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for UI Polish -->
+<style data-purpose="layout-styling">
+    body {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- BEGIN: Top Navigation Header -->
+<header class="h-16 border-b border-mod-border flex items-center justify-between px-6 bg-mod-bg z-20">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<!-- Minimalist Logo Icon -->
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xl font-bold tracking-tight">ModularAI</span>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-mod-text-secondary">
+<a class="hover:text-white transition" href="#">Dashboard</a>
+<a class="hover:text-white transition" href="#">Docs</a>
+<a class="hover:text-white transition" href="#">Settings</a>
+<div class="flex items-center gap-3 pl-4 border-l border-mod-border">
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uiWOFSAUgcnYcMXaSZVg9JXy3ABB6Kk41ZXTSO0Y4Ap4lUJLKha2H9J4h0a59A3J5qDyXX9DHNDNmgXIcRLFRboHsC7V_aUZzWMMfa-wkVbFG7SjYj0nMalMx9O9BHY0eQSaPkMlPm4Df9ca6C9IZSnX5YFLQjREAzYLSUylr1ubGO2ijSJ6csw57Z4vn4ywTj2EMCHr4kwvYnJ-RiuckKg9n_yhUcx1O-0QSYGikYH7ps3pddZiyVS9Q"/>
+<span class="text-white">John Doe</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</nav>
+</header>
+<!-- END: Top Navigation Header -->
+<div class="flex flex-1 overflow-hidden">
+<!-- BEGIN: Side Navigation -->
+<aside class="w-64 border-r border-mod-border flex flex-col p-4 gap-2 bg-mod-bg">
+<a class="flex items-center gap-3 px-4 py-2 text-mod-text-secondary hover:bg-white/5 rounded-lg transition" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-mod-text-secondary hover:bg-white/5 rounded-lg transition" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Docs</span>
+</a>
+<!-- Settings Submenu -->
+<div class="mt-2">
+<button class="w-full flex items-center justify-between px-4 py-2 bg-white/10 text-white rounded-lg transition">
+<div class="flex items-center gap-3">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Settings</span>
+</div>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="ml-11 mt-1 flex flex-col gap-1 border-l border-mod-border">
+<a class="px-4 py-2 text-mod-text-secondary hover:text-white transition" href="#">Profile</a>
+<a class="px-4 py-2 text-mod-text-secondary hover:text-white transition" href="#">Security</a>
+<a class="px-4 py-2 text-white bg-blue-500/10 rounded-r-md border-l-2 border-blue-500 transition" href="#">API Keys</a>
+</div>
+</div>
+</aside>
+<!-- END: Side Navigation -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<header class="mb-10">
+<h1 class="text-3xl font-bold">User Profile &amp; API Keys</h1>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<!-- BEGIN: Personal Information Section -->
+<section class="bg-mod-card border border-mod-border rounded-2xl p-8" data-purpose="personal-info-card">
+<h2 class="text-xl font-semibold mb-8">Personal Information &amp; Security</h2>
+<div class="flex flex-col md:flex-row gap-8 mb-8 items-start">
+<div class="relative group">
+<img alt="User Profile" class="w-32 h-32 rounded-full object-cover border-4 border-mod-border" src="https://lh3.googleusercontent.com/aida/ADBb0uiWOFSAUgcnYcMXaSZVg9JXy3ABB6Kk41ZXTSO0Y4Ap4lUJLKha2H9J4h0a59A3J5qDyXX9DHNDNmgXIcRLFRboHsC7V_aUZzWMMfa-wkVbFG7SjYj0nMalMx9O9BHY0eQSaPkMlPm4Df9ca6C9IZSnX5YFLQjREAzYLSUylr1ubGO2ijSJ6csw57Z4vn4ywTj2EMCHr4kwvYnJ-RiuckKg9n_yhUcx1O-0QSYGikYH7ps3pddZiyVS9Q"/>
+<div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="flex-1 w-full space-y-6">
+<div>
+<label class="block text-sm font-medium text-mod-text-secondary mb-2">Full Name</label>
+<input class="w-full bg-mod-input-bg border border-mod-border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" type="text" value="John Doe"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-mod-text-secondary mb-2">Email Address</label>
+<input class="w-full bg-mod-input-bg border border-mod-border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" type="email" value="john.doe@example.com"/>
+</div>
+<button class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-lg transition-all shadow-lg shadow-blue-500/20">
+                Save Changes
+              </button>
+</div>
+</div>
+<div class="pt-8 border-t border-mod-border">
+<button class="w-full py-3 border border-mod-border rounded-lg text-mod-text-secondary hover:bg-white/5 transition">
+              Change Password
+            </button>
+</div>
+</section>
+<!-- END: Personal Information Section -->
+<!-- BEGIN: API Keys Section -->
+<section class="bg-mod-card border border-mod-border rounded-2xl p-8" data-purpose="api-keys-card">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-semibold">Personal API Keys</h2>
+<button class="bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 px-4 py-2 rounded-lg text-sm font-semibold transition">
+              Create New Key
+            </button>
+</div>
+<div class="space-y-6">
+<!-- Development Key Row -->
+<div class="p-4 bg-mod-input-bg rounded-xl border border-mod-border">
+<div class="flex items-center justify-between mb-1">
+<span class="font-medium text-white">Development Key</span>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-xs text-mod-text-secondary hover:text-white transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Copy</span>
+</button>
+<button class="text-xs text-mod-text-secondary hover:text-white border border-mod-border px-3 py-1 rounded-md transition">Regenerate</button>
+</div>
+</div>
+<div class="flex items-center gap-2 text-mod-text-secondary mb-2">
+<code class="text-sm font-mono">sk_live_...4A2B</code>
+<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="text-xs text-mod-text-secondary opacity-60">Last used: 7 minutes ago</div>
+</div>
+<!-- Production Key Row -->
+<div class="p-4 bg-mod-input-bg rounded-xl border border-mod-border">
+<div class="flex items-center justify-between mb-1">
+<span class="font-medium text-white">Production Key</span>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-xs text-mod-text-secondary hover:text-white transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Copy</span>
+</button>
+<button class="text-xs text-mod-text-secondary hover:text-white border border-mod-border px-3 py-1 rounded-md transition">Regenerate</button>
+</div>
+</div>
+<div class="flex items-center gap-2 text-mod-text-secondary mb-2">
+<code class="text-sm font-mono">sk_live_...9F8E</code>
+<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="text-xs text-mod-text-secondary opacity-60">Last used: 7 minutes ago</div>
+</div>
+<!-- Testing Key Row -->
+<div class="p-4 bg-mod-input-bg rounded-xl border border-mod-border">
+<div class="flex items-center justify-between mb-1">
+<span class="font-medium text-white">Testing Key</span>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-xs text-mod-text-secondary hover:text-white transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Copy</span>
+</button>
+<button class="text-xs text-mod-text-secondary hover:text-white border border-mod-border px-3 py-1 rounded-md transition">Regenerate</button>
+</div>
+</div>
+<div class="flex items-center gap-2 text-mod-text-secondary mb-2">
+<code class="text-sm font-mono">sk_test_...1C3D</code>
+<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="text-xs text-mod-text-secondary opacity-60">Last used: 7 minutes ago</div>
+</div>
+</div>
+</section>
+<!-- END: API Keys Section -->
+</div>
+</main>
+<!-- END: Main Content Area -->
+</div>
+<!-- BEGIN: Interaction Script -->
+<script data-purpose="interaction-logic">
+    // Placeholder logic for button clicks or copy functionality
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const text = e.target.innerText || 'Action';
+        console.log(`User clicked: ${text.trim()}`);
+      });
+    });
+  </script>
+<!-- END: Interaction Script -->
+</body></html>

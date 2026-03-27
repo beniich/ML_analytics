@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Model Evaluation Metrics - Synthesis ML</title>
+<!-- Google Font: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            'brand': '#4A6583',
+            'brand-dark': '#1A1A1A',
+            'brand-light': '#F8FAFC',
+            'brand-accent': '#FF8A65', // Based on the "Export" button in screenshot
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '0.125rem',
+            'DEFAULT': '4px', // ROUND_FOUR from design system
+            'md': '0.375rem',
+            'lg': '0.5rem',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      background-color: #F8FAFC;
+      color: #1A1A1A;
+    }
+    .gauge-container {
+      position: relative;
+      width: 280px;
+      height: 140px;
+      overflow: hidden;
+    }
+    .gauge-bg {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #E53E3E 0% 15%, 
+        #DD6B20 15% 30%, 
+        #D69E2E 30% 50%, 
+        #38A169 50% 100%
+      );
+      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    }
+    .gauge-mask {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      width: 220px;
+      height: 220px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+    .gauge-needle {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 110px;
+      background: #2D3748;
+      transform-origin: bottom center;
+      transform: translateX(-50%) rotate(67deg); /* Position for ~87.5% */
+      border-radius: 4px;
+    }
+    .grid-line {
+      stroke: #E2E8F0;
+      stroke-dasharray: 4;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<!-- Logo Placeholder -->
+<div class="w-10 h-10 rounded-full border-2 border-brand flex items-center justify-center">
+<div class="w-6 h-6 rounded-full border-2 border-brand-dark animate-pulse"></div>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+<a class="hover:text-brand transition-colors" href="#">Dashboard</a>
+<a class="hover:text-brand transition-colors" href="#">Models</a>
+<a class="hover:text-brand transition-colors" href="#">Train</a>
+<a class="hover:text-brand transition-colors" href="#">Deploy</a>
+<a class="hover:text-brand transition-colors" href="#">Settings</a>
+</nav>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-6xl mx-auto p-8">
+<!-- BEGIN: TitleSection -->
+<section class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div data-purpose="title-group">
+<h2 class="text-xs font-bold tracking-widest text-gray-500 uppercase mb-1">Variethere</h2>
+<h1 class="text-3xl font-extrabold text-gray-900">Model Evaluation Metrics</h1>
+</div>
+<button class="bg-brand-accent hover:opacity-90 text-white font-semibold py-2.5 px-6 rounded shadow-sm transition-all text-sm">
+        Export Summary Report
+      </button>
+</section>
+<!-- END: TitleSection -->
+<!-- BEGIN: TopMetricsGrid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<!-- BEGIN: AccuracyCard -->
+<article class="bg-white p-8 rounded border border-gray-100 shadow-sm flex flex-col items-center">
+<h3 class="w-full text-lg font-bold text-gray-800 mb-8">Accuracy / MSE</h3>
+<div class="gauge-container mb-4" data-purpose="accuracy-gauge">
+<div class="gauge-bg"></div>
+<div class="gauge-mask"></div>
+<div class="gauge-needle"></div>
+</div>
+<div class="text-center">
+<span class="block text-4xl font-extrabold text-gray-900">87.5%</span>
+<span class="text-sm font-medium text-gray-500">Mean Squared Error: 0.12</span>
+</div>
+</article>
+<!-- END: AccuracyCard -->
+<!-- BEGIN: FeatureImportanceCard -->
+<article class="bg-white p-8 rounded border border-gray-100 shadow-sm">
+<h3 class="text-lg font-bold text-gray-800 mb-6">Feature Importance</h3>
+<div class="space-y-4" data-purpose="bar-chart">
+<!-- Age -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-right text-xs font-semibold text-gray-600">Age</span>
+<div class="flex-1 h-8 bg-gray-100 rounded-sm overflow-hidden">
+<div class="h-full bg-brand opacity-80" style="width: 35.1%;"></div>
+</div>
+<span class="w-12 text-xs font-bold text-gray-800">35.1%</span>
+</div>
+<!-- Income -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-right text-xs font-semibold text-gray-600">Income</span>
+<div class="flex-1 h-8 bg-gray-100 rounded-sm overflow-hidden">
+<div class="h-full bg-brand opacity-80" style="width: 28.9%;"></div>
+</div>
+<span class="w-12 text-xs font-bold text-gray-800">28.9%</span>
+</div>
+<!-- Education -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-right text-xs font-semibold text-gray-600">Education</span>
+<div class="flex-1 h-8 bg-gray-100 rounded-sm overflow-hidden">
+<div class="h-full bg-brand opacity-80" style="width: 18.8%;"></div>
+</div>
+<span class="w-12 text-xs font-bold text-gray-800">18.8%</span>
+</div>
+<!-- Location -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-right text-xs font-semibold text-gray-600">Location</span>
+<div class="flex-1 h-8 bg-gray-100 rounded-sm overflow-hidden">
+<div class="h-full bg-brand opacity-80" style="width: 11.2%;"></div>
+</div>
+<span class="w-12 text-xs font-bold text-gray-800">11.2%</span>
+</div>
+<!-- Otrann -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-right text-xs font-semibold text-gray-600">Otrann</span>
+<div class="flex-1 h-8 bg-gray-100 rounded-sm overflow-hidden">
+<div class="h-full bg-brand opacity-80" style="width: 8.7%;"></div>
+</div>
+<span class="w-12 text-xs font-bold text-gray-800">8.7%</span>
+</div>
+<!-- Other -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-right text-xs font-semibold text-gray-600">Other</span>
+<div class="flex-1 h-8 bg-gray-100 rounded-sm overflow-hidden">
+<div class="h-full bg-brand opacity-80" style="width: 4.9%;"></div>
+</div>
+<span class="w-12 text-xs font-bold text-gray-800">4.9%</span>
+</div>
+</div>
+<div class="flex justify-between mt-6 px-16 text-[10px] font-bold text-gray-400">
+<span>0%</span>
+<span>10%</span>
+<span>20%</span>
+<span>30%</span>
+</div>
+</article>
+<!-- END: FeatureImportanceCard -->
+</div>
+<!-- END: TopMetricsGrid -->
+<!-- BEGIN: ScatterPlotCard -->
+<section class="bg-white p-8 rounded border border-gray-100 shadow-sm">
+<h3 class="text-lg font-bold text-gray-800 mb-8">Predictions vs Reality</h3>
+<div class="relative w-full aspect-[16/9] mt-4" data-purpose="scatter-plot-container">
+<!-- Y Axis Label -->
+<div class="absolute -left-12 top-1/2 -translate-y-1/2 -rotate-90 text-xs font-bold text-gray-600">
+          Actual Value
+        </div>
+<!-- Plot Area -->
+<div class="w-full h-full border-l-2 border-b-2 border-gray-300 relative">
+<!-- Grid Lines (SVG for better control) -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<line class="grid-line" stroke-width="0.1" x1="0" x2="100" y1="20" y2="20"></line>
+<line class="grid-line" stroke-width="0.1" x1="0" x2="100" y1="40" y2="40"></line>
+<line class="grid-line" stroke-width="0.1" x1="0" x2="100" y1="60" y2="60"></line>
+<line class="grid-line" stroke-width="0.1" x1="0" x2="100" y1="80" y2="80"></line>
+<line class="grid-line" stroke-width="0.1" x1="20" x2="20" y1="0" y2="100"></line>
+<line class="grid-line" stroke-width="0.1" x1="40" x2="40" y1="0" y2="100"></line>
+<line class="grid-line" stroke-width="0.1" x1="60" x2="60" y1="0" y2="100"></line>
+<line class="grid-line" stroke-width="0.1" x1="80" x2="80" y1="0" y2="100"></line>
+<!-- Regression Line -->
+<line stroke="#4A6583" stroke-width="0.5" x1="0" x2="100" y1="90" y2="10"></line>
+</svg>
+<!-- Canvas for Scatter Points -->
+<canvas class="absolute inset-0 w-full h-full" id="scatterCanvas"></canvas>
+</div>
+<!-- X Axis Label -->
+<div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-600">
+          Predicted Value
+        </div>
+<!-- Axis Numbers -->
+<div class="absolute -bottom-6 left-0 text-[10px] font-bold text-gray-400">0</div>
+<div class="absolute -bottom-6 left-[20%] -translate-x-1/2 text-[10px] font-bold text-gray-400">20</div>
+<div class="absolute -bottom-6 left-[40%] -translate-x-1/2 text-[10px] font-bold text-gray-400">40</div>
+<div class="absolute -bottom-6 left-[60%] -translate-x-1/2 text-[10px] font-bold text-gray-400">60</div>
+<div class="absolute -bottom-6 left-[80%] -translate-x-1/2 text-[10px] font-bold text-gray-400">80</div>
+<div class="absolute -bottom-6 right-0 translate-x-1/2 text-[10px] font-bold text-gray-400">100</div>
+<div class="absolute -left-8 bottom-0 text-[10px] font-bold text-gray-400">30</div>
+<div class="absolute -left-8 bottom-[20%] text-[10px] font-bold text-gray-400">40</div>
+<div class="absolute -left-8 bottom-[40%] text-[10px] font-bold text-gray-400">50</div>
+<div class="absolute -left-8 bottom-[60%] text-[10px] font-bold text-gray-400">60</div>
+<div class="absolute -left-8 bottom-[80%] text-[10px] font-bold text-gray-400">70</div>
+<div class="absolute -left-8 top-0 text-[10px] font-bold text-gray-400">100</div>
+</div>
+</section>
+<!-- END: ScatterPlotCard -->
+</main>
+<script data-purpose="scatter-points-generator">
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('scatterCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Handle resizing
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        drawPoints();
+      }
+
+      function drawPoints() {
+        const width = canvas.width / window.devicePixelRatio;
+        const height = canvas.height / window.devicePixelRatio;
+        
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = '#4A6583';
+        ctx.globalAlpha = 0.6;
+
+        // Generate points clustered around the diagonal line
+        for (let i = 0; i < 350; i++) {
+          const x = Math.random() * width;
+          // Calculate y on the regression line then add noise
+          // Line goes from (0, height*0.9) to (width, height*0.1)
+          const targetY = (height * 0.9) - (x / width) * (height * 0.8);
+          const noise = (Math.random() - 0.5) * (height * 0.3);
+          const y = targetY + noise;
+
+          // Stay within bounds
+          if (y > 0 && y < height) {
+            ctx.beginPath();
+            ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+    });
+  </script>
+</body></html>

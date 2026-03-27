@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Data Statistics View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#1a1c20",
+                        "on-secondary-fixed-variant": "#2d4965",
+                        "on-secondary-container": "#9fbbdd",
+                        "inverse-on-surface": "#2e3035",
+                        "surface": "#111317",
+                        "on-primary-fixed": "#3e0500",
+                        "tertiary": "#67d9c9",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#85f6e5",
+                        "tertiary-container": "#006f64",
+                        "surface-container-high": "#282a2e",
+                        "on-tertiary-container": "#81f2e2",
+                        "secondary-fixed-dim": "#adc9eb",
+                        "tertiary-fixed-dim": "#67d9c9",
+                        "surface-bright": "#37393d",
+                        "background": "#111317",
+                        "secondary": "#adc9eb",
+                        "primary-fixed-dim": "#ffb4a4",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "surface-container-highest": "#333539",
+                        "primary-container": "#a44531",
+                        "on-primary-fixed-variant": "#7f2a18",
+                        "on-surface-variant": "#c3c6ce",
+                        "on-background": "#e2e2e7",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-tertiary-fixed": "#00201c",
+                        "on-surface": "#e2e2e7",
+                        "outline": "#8d9198",
+                        "outline-variant": "#43474d",
+                        "on-primary": "#601305",
+                        "primary": "#ffb4a4",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#304b68",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "surface-dim": "#111317",
+                        "surface-container": "#1e2024",
+                        "on-tertiary": "#003731",
+                        "inverse-primary": "#9f412d",
+                        "surface-variant": "#333539",
+                        "on-primary-container": "#ffd7ce",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-secondary-fixed": "#001d35",
+                        "on-secondary": "#15324e",
+                        "inverse-surface": "#e2e2e7",
+                        "surface-tint": "#ffb4a4",
+                        "primary-fixed": "#ffdad3"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .editorial-shadow {
+            box-shadow: 0 40px 40px -10px rgba(226, 226, 231, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-[#111317]/80 backdrop-blur-xl flex items-center justify-between px-8 py-4 w-full editorial-shadow">
+<div class="text-xl font-extrabold tracking-tighter text-[#ffb4a4] font-headline">Insight Curator</div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold text-sm tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Platform</a>
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Solutions</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Resources</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-5 py-2 rounded-xl text-sm font-bold bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed active:scale-95 duration-200">Sign In</button>
+</div>
+</nav>
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-[#111317]/50 backdrop-blur-2xl flex flex-col pt-20 pb-6 border-r border-outline-variant/10">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-surface">Strategic Curator</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">ML Workspace</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] bg-[#1E2024] rounded-r-xl border-l-4 border-[#ffb4a4]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-['Inter'] text-sm font-medium">Statistics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Inter'] text-sm font-medium">Correlations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-['Inter'] text-sm font-medium">Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-['Inter'] text-sm font-medium">Deployments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto pt-6 border-t border-outline-variant/10">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-surface-container-highest text-primary font-bold text-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Analysis
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 pt-24 pb-20 px-10 min-h-screen">
+<header class="mb-12">
+<h1 class="text-5xl font-extrabold font-headline tracking-tight text-on-surface mb-4">Feature Statistics</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">Detailed exploratory data analysis of the current dataset. Review distributions, central tendencies, and data quality metrics for active ML model features.</p>
+</header>
+<!-- Search and Filters -->
+<section class="flex flex-col md:flex-row gap-6 mb-10 items-end">
+<div class="flex-1 w-full">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-1">Search Features</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest rounded-xl border-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50 text-sm" placeholder="Filter by column name..." type="text"/>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="min-w-[160px]">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-1">Data Type</label>
+<select class="w-full bg-surface-container-highest rounded-xl border-none py-4 px-4 text-sm focus:ring-2 focus:ring-primary/20">
+<option>All Types</option>
+<option>Numerical</option>
+<option>Categorical</option>
+</select>
+</div>
+<div class="min-w-[160px]">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-1">Sort By</label>
+<select class="w-full bg-surface-container-highest rounded-xl border-none py-4 px-4 text-sm focus:ring-2 focus:ring-primary/20">
+<option>Missing Values</option>
+<option>Variance</option>
+<option>Mean</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Bento Grid Stats Summary -->
+<section class="grid grid-cols-12 gap-6 mb-12">
+<div class="col-span-12 md:col-span-4 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between aspect-[16/7]">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Total Features</span>
+<span class="material-symbols-outlined text-primary">view_column</span>
+</div>
+<div class="text-5xl font-extrabold font-headline">42</div>
+<div class="text-xs text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+                    All features valid
+                </div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between aspect-[16/7]">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Data Health</span>
+<span class="material-symbols-outlined text-tertiary">health_and_safety</span>
+</div>
+<div class="text-5xl font-extrabold font-headline">98.4<span class="text-2xl">%</span></div>
+<div class="text-xs text-on-surface-variant">Avg. non-missing ratio</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between aspect-[16/7]">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Outliers Detected</span>
+<span class="material-symbols-outlined text-error">priority_high</span>
+</div>
+<div class="text-5xl font-extrabold font-headline">12</div>
+<div class="text-xs text-on-surface-variant">Across 3 features</div>
+</div>
+</section>
+<!-- Data Table Section -->
+<section class="bg-surface-container-low rounded-xl overflow-hidden mb-20">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container text-left">
+<th class="px-8 py-6 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Column Name</th>
+<th class="px-6 py-6 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Mean</th>
+<th class="px-6 py-6 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Median</th>
+<th class="px-6 py-6 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Missing Values</th>
+<th class="px-6 py-6 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Distribution</th>
+<th class="px-8 py-6 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">user_purchase_value</span>
+<span class="text-[10px] text-secondary-fixed-dim uppercase tracking-tighter">Float64</span>
+</div>
+</td>
+<td class="px-6 py-6 text-sm tabular-nums">1,245.82</td>
+<td class="px-6 py-6 text-sm tabular-nums">980.00</td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[95%]"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">0.2%</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<div class="h-8 w-32 flex items-end gap-[2px]">
+<div class="w-2 bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/40 h-[50%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/60 h-[80%] rounded-t-sm"></div>
+<div class="w-2 bg-primary h-[100%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/70 h-[60%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/40 h-[40%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/20 h-[20%] rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">session_duration_sec</span>
+<span class="text-[10px] text-secondary-fixed-dim uppercase tracking-tighter">Int32</span>
+</div>
+</td>
+<td class="px-6 py-6 text-sm tabular-nums">412.5</td>
+<td class="px-6 py-6 text-sm tabular-nums">390.0</td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-full"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">0.0%</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<div class="h-8 w-32 flex items-end gap-[2px]">
+<div class="w-2 bg-primary/20 h-[10%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/30 h-[20%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/50 h-[40%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/80 h-[70%] rounded-t-sm"></div>
+<div class="w-2 bg-primary h-[100%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/70 h-[60%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/40 h-[30%] rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">customer_loyalty_score</span>
+<span class="text-[10px] text-secondary-fixed-dim uppercase tracking-tighter">Float64</span>
+</div>
+</td>
+<td class="px-6 py-6 text-sm tabular-nums">0.68</td>
+<td class="px-6 py-6 text-sm tabular-nums">0.72</td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error-container w-[88%]"></div>
+</div>
+<span class="text-[10px] font-bold text-error">12.4%</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<div class="h-8 w-32 flex items-end gap-[2px]">
+<div class="w-2 bg-primary/10 h-[20%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/30 h-[25%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/40 h-[35%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/60 h-[50%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/80 h-[70%] rounded-t-sm"></div>
+<div class="w-2 bg-primary h-[90%] rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">ad_click_frequency</span>
+<span class="text-[10px] text-secondary-fixed-dim uppercase tracking-tighter">Int32</span>
+</div>
+</td>
+<td class="px-6 py-6 text-sm tabular-nums">4.2</td>
+<td class="px-6 py-6 text-sm tabular-nums">2.0</td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[99%]"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">0.1%</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<div class="h-8 w-32 flex items-end gap-[2px]">
+<div class="w-2 bg-primary h-[100%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/60 h-[50%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/40 h-[30%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/20 h-[15%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/10 h-[8%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/5 h-[4%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/5 h-[2%] rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-8 py-6 flex justify-between items-center bg-surface-container">
+<span class="text-xs text-on-surface-variant">Showing 4 of 42 features</span>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-lg bg-surface-container-highest text-on-surface-variant text-xs font-bold active:scale-95 transition-all">Previous</button>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary-container text-xs font-bold active:scale-95 transition-all">Next</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#111317] w-full py-12 border-t border-[#43474D]/15">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="font-['Manrope'] font-black text-[#ffb4a4] text-lg">Insight Curator</div>
+<p class="font-['Inter'] text-xs text-[#C3C6CE]">© 2024 Insight Curator. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors opacity-80 hover:opacity-100" href="#">Security</a>
+<a class="font-['Inter'] text-xs text-[#C3C6CE] hover:text-[#ffb4a4] transition-colors opacity-80 hover:opacity-100" href="#">Status</a>
+</div>
+</div>
+</footer>
+</body></html>

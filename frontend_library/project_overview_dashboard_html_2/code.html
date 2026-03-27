@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Analytics Pro - Dashboard</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Manrope Font Import -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              main: '#4A6583', // Derived from custom_color in Design System
+              sidebar: '#4A5E7A',
+              sidebarActive: 'rgba(255, 255, 255, 0.15)',
+              accent: '#C58471', // The muted coral color for buttons/accents
+              lightBg: '#F8FAFC',
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          borderRadius: {
+            'r4': '4px', // From DESIGN_SYSTEM: roundness: ROUND_FOUR
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-brand-lightBg font-sans text-slate-800 min-h-screen flex overflow-hidden">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-brand-sidebar text-white flex flex-col flex-shrink-0" data-purpose="main-navigation">
+<div class="p-6 flex items-center space-x-3" data-purpose="sidebar-header">
+<div class="w-8 h-8 bg-white rounded-r4 flex items-center justify-center">
+<svg class="w-5 h-5 text-brand-sidebar" fill="currentColor" viewbox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+</div>
+<span class="font-bold text-lg tracking-tight">AI Analytics Pro</span>
+</div>
+<nav class="mt-4 px-4 flex-grow space-y-2">
+<a class="flex items-center space-x-3 px-4 py-3 bg-brand-sidebarActive rounded-r4 transition-colors" data-purpose="nav-item-active" href="#">
+<svg class="w-5 h-5 opacity-80" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 hover:bg-brand-sidebarActive rounded-r4 transition-colors" href="#">
+<svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="opacity-80">Data Sources</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 hover:bg-brand-sidebarActive rounded-r4 transition-colors" href="#">
+<svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="opacity-80">AI Models</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 hover:bg-brand-sidebarActive rounded-r4 transition-colors" href="#">
+<svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="opacity-80">Reports</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 hover:bg-brand-sidebarActive rounded-r4 transition-colors" href="#">
+<svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="opacity-80">Settings</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 hover:bg-brand-sidebarActive rounded-r4 transition-colors" href="#">
+<svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="opacity-80">User Profile</span>
+</a>
+</nav>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-grow flex flex-col h-screen overflow-y-auto" data-purpose="content-wrapper">
+<!-- Top Nav Strip -->
+<header class="h-16 bg-white border-b border-slate-200 flex-shrink-0" data-purpose="page-header"></header>
+<div class="p-8 max-w-7xl">
+<!-- BEGIN: Hero Stats -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10" data-purpose="stats-overview">
+<!-- Stats Card: Data Rows -->
+<div class="bg-white p-6 rounded-r4 border border-slate-200 shadow-sm flex justify-between items-center h-32">
+<div>
+<h3 class="text-sm font-semibold text-slate-500 mb-1">Total Data Rows Processed</h3>
+<div class="flex items-baseline space-x-2">
+<span class="text-4xl font-extrabold text-slate-900 tracking-tight">1,245,890</span>
+<svg class="w-4 h-4 text-brand-main" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17l9.272-11.921c.142-.183.428-.155.532.052L21 15"></path></svg>
+</div>
+</div>
+<!-- Simple SVG Bar Chart Placeholder -->
+<svg class="w-32 h-16" viewbox="0 0 100 40">
+<rect fill="#4A6583" height="10" opacity="0.4" width="8" x="0" y="30"></rect>
+<rect fill="#4A6583" height="15" opacity="0.5" width="8" x="12" y="25"></rect>
+<rect fill="#4A6583" height="20" opacity="0.6" width="8" x="24" y="20"></rect>
+<rect fill="#4A6583" height="18" opacity="0.7" width="8" x="36" y="22"></rect>
+<rect fill="#4A6583" height="25" opacity="0.8" width="8" x="48" y="15"></rect>
+<rect fill="#4A6583" height="30" opacity="0.9" width="8" x="60" y="10"></rect>
+<rect fill="#4A6583" height="35" width="8" x="72" y="5"></rect>
+<rect fill="#4A6583" height="40" width="8" x="84" y="0"></rect>
+</svg>
+</div>
+<!-- Stats Card: Active Models -->
+<div class="bg-white p-6 rounded-r4 border border-slate-200 shadow-sm flex justify-between items-center h-32">
+<div>
+<h3 class="text-sm font-semibold text-slate-500 mb-1">Active Models</h3>
+<span class="text-4xl font-extrabold text-slate-900 tracking-tight">24</span>
+</div>
+<!-- Simple SVG Sparkline Placeholder -->
+<svg class="w-32 h-16" viewbox="0 0 100 40">
+<path d="M0 35 Q 20 30, 40 38 T 60 20 T 80 10 T 100 5" fill="none" stroke="#4A6583" stroke-width="2"></path>
+<path d="M0 35 Q 20 30, 40 38 T 60 20 T 80 10 T 100 5 V 40 H 0 Z" fill="#4A6583" opacity="0.1"></path>
+</svg>
+</div>
+</section>
+<!-- END: Hero Stats -->
+<!-- BEGIN: Recently Analyzed Files -->
+<section data-purpose="recently-analyzed-section">
+<h2 class="text-xl font-bold text-slate-900 mb-6">Recently Analyzed Files</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Sales Forecast Q3 -->
+<article class="bg-white rounded-r4 border border-slate-200 shadow-sm overflow-hidden flex flex-col h-full" data-purpose="file-card">
+<div class="p-4 bg-slate-50 border-b border-slate-100 flex items-center justify-center h-48">
+<img alt="Sales Forecast Q3 Chart" class="object-contain max-h-full rounded shadow-sm border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIwNkZhcC0ltjoUoJkYhZFKXmdZrLwXeLq14zcnq8xaZxqUsqaTX8_t5gzvTm7Mw2nFIvj-Bohq3Ip0MQNJAcBnzTwfM121I1YK6B2CWyNSRuHJTQGSlHEjHXT_oRyiFNdJ3D_yL556LuWbdYeC78We0baRzxmOyO-w1Vt91-WzixU4sEkaVtKmfEPiLBj7Tuiorea3MVWZjUlwi5MWIkUPDQ5wOo0RSfpAzvwpe3_LgL2s1bWd203ARzL-E766jzCmL0iS9vRKAM"/>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-slate-900 mb-2">Sales Forecast Q3</h3>
+<p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Data from sales.csv,<br/>
+                5 charts generated
+              </p>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full bg-brand-accent hover:bg-opacity-90 text-white py-2.5 rounded-r4 text-sm font-semibold transition-all shadow-sm">
+                View Analysis
+              </button>
+</div>
+</article>
+<!-- Card 2: Customer Churn Prediction -->
+<article class="bg-white rounded-r4 border border-slate-200 shadow-sm overflow-hidden flex flex-col h-full" data-purpose="file-card">
+<div class="p-4 bg-slate-50 border-b border-slate-100 flex items-center justify-center h-48">
+<img alt="Customer Churn Prediction Chart" class="object-contain max-h-full rounded shadow-sm border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwb-O4xZ2BFt4gtSsjvyHUF3-ido1UGKA2ILTCh9F2_4TJ2Ji40NaK-FBER_UkIui84pBcdJTHXxllTOR8d63E1Oktix4wePWJnsANh272kvIKFZQIIe9uBuOs423NcYDB5lTpNZSq9DS7UPBJageG-4s57IRQXsQUh6ng_qpxeLI33LxMbjnV1Z9BAgVAtly1lx6soSktIGiGRbklHg-xtvkmUCNmzM1NI4_qQkRilD5rfLY7J3tiroJPGvHetrXk6eqgdnhnfYU"/>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-slate-900 mb-2">Customer Churn Prediction</h3>
+<p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Data from customer_db.json,<br/>
+                3 models applied
+              </p>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full bg-brand-accent hover:bg-opacity-90 text-white py-2.5 rounded-r4 text-sm font-semibold transition-all shadow-sm">
+                View Analysis
+              </button>
+</div>
+</article>
+<!-- Card 3: Market Trends 2024 -->
+<article class="bg-white rounded-r4 border border-slate-200 shadow-sm overflow-hidden flex flex-col h-full" data-purpose="file-card">
+<div class="p-4 bg-slate-50 border-b border-slate-100 flex items-center justify-center h-48">
+<img alt="Market Trends 2024 Scatter Plot" class="object-contain max-h-full rounded shadow-sm border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDmqP_sOupvsTgGU9SaEJXBdNTQYaheX0-HyBhGC6VayK1nDctkSynMzd4HxdEPOgyqwmq4Q9i0k0YVtt7o77V-bM4qXEpseC0eHo7UjxmEe76fANerGXfDdxDsUuWN5O_PIcteC2K55_Ffqb-26NUWc4YqbBMkNtrvevBbltow9njEpAvUMF5d0CED0hZTL-pf2Z2_YCUuPZr3wKo-mCr-UhNmZLR9GeVtKiSrtDQJWx4ti3ttGEHedlvpspTWmQiGVHG6kLHNck"/>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-slate-900 mb-2">Market Trends 2024</h3>
+<p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Data from market_report.xlsx,<br/>
+                7 insights found
+              </p>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full bg-brand-accent hover:bg-opacity-90 text-white py-2.5 rounded-r4 text-sm font-semibold transition-all shadow-sm">
+                View Analysis
+              </button>
+</div>
+</article>
+</div>
+</section>
+<!-- END: Recently Analyzed Files -->
+</div>
+</main>
+<!-- END: Main Content Area -->
+</body></html>

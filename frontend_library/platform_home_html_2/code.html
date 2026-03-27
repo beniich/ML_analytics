@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ML Analytics - The Insight Curator</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#4A6583',
+              dark: '#1e293b',
+              light: '#64748b',
+              accent: '#10b981', // Emerald for Sign Up/Action
+            }
+          },
+          borderRadius: {
+            'custom': '4px', // Roundness: ROUND_FOUR
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+    .hero-dashed-border {
+      border: 2px dashed #cbd5e1;
+    }
+    .footer-link {
+      @apply text-slate-500 hover:text-brand transition-colors duration-200;
+    }
+    /* Subtle editorial shadows */
+    .editorial-shadow {
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Logo and Nav -->
+<nav class="flex items-center gap-10" data-purpose="main-navigation">
+<a class="flex items-center gap-2 group" href="/">
+<div class="bg-brand-dark p-1.5 rounded-sm">
+<svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4 13h2v7H4v-7zm5-4h2v11H9V9zm5 7h2v4h-2v-4zm5-12h2v16h-2V4z"></path>
+</svg>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-brand-dark">ML Analytics</span>
+</a>
+<ul class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+<li class="flex items-center gap-1 cursor-pointer hover:text-brand">
+            Platform <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</li>
+<li class="flex items-center gap-1 cursor-pointer hover:text-brand">
+            Solutions <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</li>
+<li class="flex items-center gap-1 cursor-pointer hover:text-brand">
+            Resources <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</li>
+<li class="cursor-pointer hover:text-brand">Pricing</li>
+</ul>
+</nav>
+<!-- Auth Actions -->
+<div class="flex items-center gap-4" data-purpose="header-actions">
+<button class="px-5 py-2 text-sm font-semibold border border-slate-200 rounded-custom hover:bg-slate-50 transition-all">Sign In</button>
+<button class="px-5 py-2 text-sm font-semibold bg-[#10b981] text-white rounded-custom hover:opacity-90 transition-all">Sign Up</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto px-6 py-12">
+<!-- BEGIN: Hero Upload Section -->
+<section class="mb-12" data-purpose="data-upload-hero">
+<div class="hero-dashed-border bg-white rounded-xl p-16 flex flex-col md:flex-row items-center justify-between gap-12 editorial-shadow">
+<div class="flex-1 text-center md:text-left">
+<h1 class="text-2xl md:text-3xl font-medium text-slate-800 leading-relaxed mb-8">
+            Drag and drop your CSV or JSON files here to start analyzing.<br/>
+<span class="text-slate-500">Or click to browse.</span>
+</h1>
+<button class="px-8 py-3 bg-[#10b981] text-white font-bold rounded-custom hover:opacity-95 transition-all shadow-md">
+            Upload Data
+          </button>
+</div>
+<!-- Hero Illustration (Visual representation of the image AI chip) -->
+<div class="flex-shrink-0 relative">
+<img alt="ML Analytics Dashboard UI" class="hidden md:block absolute opacity-0 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uj2Rr0DGCLOor1T_xkok4bH27SYUL-d8pQ3_QIWVt3fdQJm1sEM2g6ZMOkuiedQgOX5aq0X1mpK15M2XcjEjsCuSINjOdawg9fme4DdY1DhXNK3K98vUgnbrBgedtZ214V1d8FM2r3OxA_zqONgCqYQZfWpqzDCJJzgk2jlJWo7yysfAnGh1QImRQacaeFkDesVsrG-e1B72ds1kU4NzCZolSDxRVMDeFy70hUBB5heBlCnKTLsQ2MiuNI"/>
+<!-- Recreating the AI Chip Graphic from the image -->
+<div class="w-64 h-64 bg-slate-50 rounded-full flex items-center justify-center relative border border-slate-100 shadow-inner">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-40 h-40 bg-brand/5 rounded-full animate-pulse"></div>
+</div>
+<div class="z-10 bg-white p-6 rounded-2xl shadow-xl border border-emerald-100 flex flex-col items-center">
+<div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-xl flex items-center justify-center mb-2">
+<span class="text-white font-black text-2xl tracking-tighter">AI</span>
+</div>
+<div class="flex gap-1">
+<div class="w-1 h-3 bg-emerald-300 rounded-full"></div>
+<div class="w-1 h-5 bg-emerald-500 rounded-full"></div>
+<div class="w-1 h-2 bg-emerald-200 rounded-full"></div>
+</div>
+</div>
+<!-- Decorative Circuit Lines -->
+<div class="absolute top-0 right-0 p-2"><svg class="text-slate-200 w-12" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 2v20m10-10H2"></path></svg></div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Hero Upload Section -->
+<!-- BEGIN: Feature Cards -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20" data-purpose="feature-grid">
+<!-- Basic Statistics -->
+<article class="bg-white p-8 rounded-xl editorial-shadow border border-slate-100 hover:border-brand/30 transition-all cursor-default group">
+<div class="w-12 h-12 mb-6 flex items-center justify-center bg-emerald-50 rounded-lg group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-slate-800 mb-2">Basic Statistics</h3>
+<p class="text-sm text-slate-500 leading-relaxed">Quickly view descriptive stats and data distributions.</p>
+</article>
+<!-- Correlation Analysis -->
+<article class="bg-white p-8 rounded-xl editorial-shadow border border-slate-100 hover:border-brand/30 transition-all cursor-default group">
+<div class="w-12 h-12 mb-6 flex items-center justify-center bg-blue-50 rounded-lg group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-slate-800 mb-2">Correlation Analysis</h3>
+<p class="text-sm text-slate-500 leading-relaxed">Discover relationships between your variables.</p>
+</article>
+<!-- Predictive Modeling -->
+<article class="bg-white p-8 rounded-xl editorial-shadow border border-slate-100 hover:border-brand/30 transition-all cursor-default group">
+<div class="w-12 h-12 mb-6 flex items-center justify-center bg-purple-50 rounded-lg group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 011 1V4z"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-slate-800 mb-2">Predictive Modeling</h3>
+<p class="text-sm text-slate-500 leading-relaxed">Build and train machine learning models easily.</p>
+</article>
+<!-- MLflow Tracking -->
+<article class="bg-white p-8 rounded-xl editorial-shadow border border-slate-100 hover:border-brand/30 transition-all cursor-default group">
+<div class="w-12 h-12 mb-6 flex items-center justify-center bg-orange-50 rounded-lg group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-slate-800 mb-2">MLflow Tracking</h3>
+<p class="text-sm text-slate-500 leading-relaxed">Manage and track your ML experiments with MLflow.</p>
+</article>
+</section>
+<!-- END: Feature Cards -->
+</main>
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 pt-20 pb-10">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+<!-- Platform Column -->
+<div data-purpose="footer-column">
+<h4 class="font-bold text-brand-dark mb-6">Platform</h4>
+<ul class="space-y-3 text-sm">
+<li><a class="footer-link" href="#">Features</a></li>
+<li><a class="footer-link" href="#">Enterprise</a></li>
+<li><a class="footer-link" href="#">Copilot</a></li>
+<li><a class="footer-link" href="#">AI</a></li>
+<li><a class="footer-link" href="#">Security</a></li>
+<li><a class="footer-link" href="#">Pricing</a></li>
+<li><a class="footer-link" href="#">Team</a></li>
+<li><a class="footer-link" href="#">Resources</a></li>
+<li><a class="footer-link" href="#">Roadmap</a></li>
+<li><a class="footer-link" href="#">Compare ML Analytics</a></li>
+</ul>
+</div>
+<!-- Ecosystem Column -->
+<div data-purpose="footer-column">
+<h4 class="font-bold text-brand-dark mb-6">Ecosystem</h4>
+<ul class="space-y-3 text-sm">
+<li><a class="footer-link" href="#">Developer API</a></li>
+<li><a class="footer-link" href="#">Partners</a></li>
+<li><a class="footer-link" href="#">Education</a></li>
+<li><a class="footer-link" href="#">ML Analytics CLI</a></li>
+<li><a class="footer-link" href="#">ML Analytics Desktop</a></li>
+<li><a class="footer-link" href="#">ML Analytics Mobile</a></li>
+<li><a class="footer-link" href="#">ML Analytics Marketplace</a></li>
+<li><a class="footer-link" href="#">MCP Registry</a></li>
+</ul>
+</div>
+<!-- Support Column -->
+<div data-purpose="footer-column">
+<h4 class="font-bold text-brand-dark mb-6">Support</h4>
+<ul class="space-y-3 text-sm">
+<li><a class="footer-link" href="#">Docs</a></li>
+<li><a class="footer-link" href="#">Community Forum</a></li>
+<li><a class="footer-link" href="#">Professional Services</a></li>
+<li><a class="footer-link" href="#">Premium Support</a></li>
+<li><a class="footer-link" href="#">Skills</a></li>
+<li><a class="footer-link" href="#">Status</a></li>
+<li><a class="footer-link" href="#">Contact ML Analytics</a></li>
+</ul>
+</div>
+<!-- Company Column -->
+<div data-purpose="footer-column">
+<h4 class="font-bold text-brand-dark mb-6">Company</h4>
+<ul class="space-y-3 text-sm">
+<li><a class="footer-link" href="#">About</a></li>
+<li><a class="footer-link" href="#">Why ML Analytics</a></li>
+<li><a class="footer-link" href="#">Customer stories</a></li>
+<li><a class="footer-link" href="#">Blog</a></li>
+<li><a class="footer-link" href="#">The ReadME Project</a></li>
+<li><a class="footer-link" href="#">Careers</a></li>
+<li><a class="footer-link" href="#">Newsroom</a></li>
+<li><a class="footer-link" href="#">Inclusion</a></li>
+<li><a class="footer-link" href="#">Social Impact</a></li>
+<li><a class="footer-link" href="#">Shop</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Footer Info -->
+<div class="border-t border-slate-100 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-[11px] text-slate-500">
+<span>© 2026 Analytics, Inc.</span>
+<a class="hover:text-brand" href="#">Terms</a>
+<a class="hover:text-brand" href="#">Privacy (Updated 02/2024)</a>
+<a class="hover:text-brand" href="#">Sitemap</a>
+<a class="hover:text-brand font-medium" href="#">What is Git?</a>
+<a class="hover:text-brand" href="#">Do not share my personal information</a>
+</div>
+<!-- Social Icons -->
+<div class="flex items-center gap-6 text-slate-400">
+<a class="hover:text-brand-dark transition-colors" href="#"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a>
+<a class="hover:text-brand-dark transition-colors" href="#"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+<a class="hover:text-brand-dark transition-colors" href="#"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a>
+<a class="hover:text-brand-dark transition-colors" href="#"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+<a class="hover:text-brand-dark transition-colors" href="#"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"></path></svg></a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

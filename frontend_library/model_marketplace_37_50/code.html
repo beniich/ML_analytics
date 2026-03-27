@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Model Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-container": "#ffd7ce",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "on-background": "#e2e2e7",
+              "inverse-surface": "#e2e2e7",
+              "secondary": "#adc9eb",
+              "on-primary": "#601305",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "surface": "#111317",
+              "on-primary-fixed-variant": "#7f2a18",
+              "primary-fixed": "#ffdad3",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-error": "#690005",
+              "surface-bright": "#37393d",
+              "secondary-container": "#304b68",
+              "surface-dim": "#111317",
+              "on-primary-fixed": "#3e0500",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface-container": "#1e2024",
+              "secondary-fixed-dim": "#adc9eb",
+              "inverse-on-surface": "#2e3035",
+              "on-tertiary-fixed": "#00201c",
+              "surface-container-high": "#282a2e",
+              "primary": "#ffb4a4",
+              "outline": "#8d9198",
+              "surface-tint": "#ffb4a4",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary": "#15324e",
+              "primary-container": "#a44531",
+              "background": "#111317",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#333539",
+              "outline-variant": "#43474d",
+              "tertiary-fixed": "#85f6e5",
+              "tertiary-container": "#006f64",
+              "surface-container-low": "#1a1c20",
+              "secondary-fixed": "#d0e4ff",
+              "on-secondary-container": "#9fbbdd",
+              "primary-fixed-dim": "#ffb4a4",
+              "tertiary-fixed-dim": "#67d9c9",
+              "on-tertiary": "#003731",
+              "tertiary": "#67d9c9",
+              "on-tertiary-container": "#81f2e2"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(17, 19, 23, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#111317]/90 backdrop-blur-lg border-r border-[#43474D]/15 flex flex-col py-6 px-4 space-y-8 z-50">
+<div class="flex items-center gap-3 px-2">
+<div class="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-[#E2E2E7] leading-tight">ML Platform</h2>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Enterprise Tier</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#ffb4a4] border-r-2 border-[#ffb4a4] bg-gradient-to-r from-[#ffb4a4]/10 to-transparent transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">model_training</span>
+<span class="font-medium text-sm">Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">database</span>
+<span class="font-medium text-sm">Datasets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">insights</span>
+<span class="font-medium text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">rocket_launch</span>
+<span class="font-medium text-sm">Deployments</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-outline-variant/10">
+<button class="w-full flex items-center justify-center gap-2 btn-gradient text-on-primary py-3 rounded-xl font-bold text-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Experiment
+            </button>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">help</span>
+<span class="font-medium text-sm">Documentation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">contact_support</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 flex items-center justify-between px-8 h-16 ml-64 bg-[#111317]/80 backdrop-blur-xl z-40 shadow-[0_40px_40px_-10px_rgba(226,222,231,0.06)]">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/50" placeholder="Search models, tags, or authors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-6 border-l border-outline-variant/20">
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface leading-none">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant font-medium">Senior ML Engineer</p>
+</div>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full border border-primary/20" data-alt="Close-up portrait of a professional man with short dark hair and a neutral expression, soft studio lighting on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyXJ3kkckyAIaHeXmBxz2qx8TxOLisHrpt0IPKeEV3KMXSEZ7dbdYJYIWCA0zBScE6wqwh3lrLyk9FV01b-v9aG3fpgxujrPOFb0PfEqj3kiwT1V-GS4DkfVjuBNYLz0LMfHXEJXNl1gJIighKWMsR9oUkN3uCIsIKcK8EhVDzpAjOi4ixQIikdOJkdFqqcSlNx1X-WToctImaYE2QJZ4spIJQsaok2Ykz_xfH8FX4ckY39TzaGmoQXolrFZP8Dle4gTrojZTTsyA"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-12 pb-20">
+<!-- Hero Section -->
+<section class="mb-20">
+<div class="flex items-end justify-between mb-8">
+<div>
+<span class="text-primary font-bold tracking-[0.2em] text-xs uppercase mb-2 block">Internal Marketplace</span>
+<h1 class="text-5xl font-extrabold font-headline tracking-tighter mb-4 text-on-surface">Model Marketplace <span class="text-on-surface-variant font-light text-3xl ml-4">37/50 Slots</span></h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">
+                        Access our curated library of pre-trained enterprise models. Standardized for seamless deployment across production clusters.
+                    </p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 rounded-xl border border-outline-variant/20 hover:bg-surface-container transition-colors font-semibold text-sm">
+                        View History
+                    </button>
+<button class="px-6 py-3 rounded-xl btn-gradient text-on-primary font-bold text-sm shadow-xl shadow-primary/10">
+                        Upload Custom Model
+                    </button>
+</div>
+</div>
+<!-- Stats Ribbon -->
+<div class="grid grid-cols-4 gap-1 p-1 bg-surface-container-low rounded-2xl">
+<div class="bg-surface p-6 rounded-xl flex flex-col">
+<span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Active Deployments</span>
+<span class="text-3xl font-headline font-black text-primary">124</span>
+</div>
+<div class="bg-surface p-6 rounded-xl flex flex-col">
+<span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Avg. Accuracy</span>
+<span class="text-3xl font-headline font-black text-secondary">98.2%</span>
+</div>
+<div class="bg-surface p-6 rounded-xl flex flex-col">
+<span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Total Inferences</span>
+<span class="text-3xl font-headline font-black text-tertiary">14.2M</span>
+</div>
+<div class="bg-surface p-6 rounded-xl flex flex-col">
+<span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Marketplace Value</span>
+<span class="text-3xl font-headline font-black text-on-surface">$2.4M</span>
+</div>
+</div>
+</section>
+<!-- Model Catalog (Asymmetric Bento Grid) -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Featured Model (Large Card) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low rounded-[2rem] p-10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 group-hover:opacity-30 transition-opacity">
+<img alt="Neural network visualization" class="w-full h-full object-cover grayscale" data-alt="Abstract 3D visualization of neural network pathways glowing with soft orange and blue light on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE2aqnPuqhP9DorIZmpz1qruJnFY1203MSvhI6lgA16tLWs7xoUoxRosa4DJCULnFwB--vO-hSTXf2bewmx5SddxPAGRkIKM9KdE0Be-D8x_IVTrzKMw6SSWChiEqvVofEoIn5R73FgkHtzCCGT2xQPSKlZlBUYKjNTk-fMc_PdiNrdLi-dhqTdXWVkgJum5ZCqjQkAgXXyurDKMaN95lptdlu4mV95f7LTgVsW9MCubJSM3K47YVScnl1xwRL-_jh5ERhC7IdBLk"/>
+</div>
+<div class="relative z-10 max-w-lg">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">Recommended</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">NLP-V4</span>
+</div>
+<h3 class="text-3xl font-bold font-headline mb-4">Semantic Context Engine XL</h3>
+<p class="text-on-surface-variant text-lg mb-8 leading-relaxed">
+                        Our state-of-the-art transformer model optimized for multi-lingual sentiment analysis and intent classification with zero-shot capabilities.
+                    </p>
+<div class="grid grid-cols-3 gap-6 mb-10">
+<div>
+<p class="text-on-surface-variant text-xs mb-1">Accuracy</p>
+<p class="text-xl font-black text-secondary">99.4%</p>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs mb-1">Latency</p>
+<p class="text-xl font-black text-secondary">14ms</p>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs mb-1">Parameters</p>
+<p class="text-xl font-black text-secondary">1.2B</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-3 btn-gradient text-on-primary font-bold rounded-xl active:scale-95 transition-transform">Deploy Now</button>
+<button class="px-8 py-3 border border-outline-variant/30 hover:bg-surface-container-high rounded-xl font-bold transition-colors">Documentation</button>
+</div>
+</div>
+</div>
+<!-- Model Sidebar (Quick Actions) -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<div class="bg-surface-container p-8 rounded-[2rem]">
+<h4 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-6">Filter Marketplace</h4>
+<div class="space-y-4">
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-all">
+<span class="text-sm font-medium">Computer Vision</span>
+<input class="rounded border-outline-variant bg-surface text-primary focus:ring-primary" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-all">
+<span class="text-sm font-medium">Natural Language</span>
+<input checked="" class="rounded border-outline-variant bg-surface text-primary focus:ring-primary" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-all">
+<span class="text-sm font-medium">Predictive Analytics</span>
+<input class="rounded border-outline-variant bg-surface text-primary focus:ring-primary" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="bg-primary/5 p-8 rounded-[2rem] border border-primary/10">
+<span class="material-symbols-outlined text-primary mb-4" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h4 class="text-lg font-bold mb-2">Need a custom fine-tune?</h4>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Schedule a session with our ML Core team to build a proprietary model tailored to your dataset.</p>
+<a class="text-primary font-bold text-sm hover:underline" href="#">Request Consultation →</a>
+</div>
+</div>
+<!-- Secondary Models Grid -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-low rounded-3xl p-8 hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-surface-container-highest rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9 (1.2k)</span>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-2">Vision-Guardian V2</h4>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Real-time object detection and anomaly flagging for industrial surveillance pipelines.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-2 py-0.5 bg-outline-variant/10 text-on-surface-variant text-[9px] font-bold rounded uppercase">PyTorch</span>
+<span class="px-2 py-0.5 bg-outline-variant/10 text-on-surface-variant text-[9px] font-bold rounded uppercase">Real-time</span>
+</div>
+<div class="pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold mb-1">Precision</p>
+<p class="font-bold text-tertiary">97.8%</p>
+</div>
+<button class="px-4 py-2 bg-surface-container-highest hover:bg-primary hover:text-on-primary transition-all rounded-lg font-bold text-xs">Deploy</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low rounded-3xl p-8 hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-surface-container-highest rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">query_stats</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7 (842)</span>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-2">MarketForecaster Prime</h4>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">High-frequency financial time-series prediction with confidence interval mapping.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-2 py-0.5 bg-outline-variant/10 text-on-surface-variant text-[9px] font-bold rounded uppercase">TensorFlow</span>
+<span class="px-2 py-0.5 bg-outline-variant/10 text-on-surface-variant text-[9px] font-bold rounded uppercase">Regression</span>
+</div>
+<div class="pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold mb-1">Precision</p>
+<p class="font-bold text-tertiary">92.1%</p>
+</div>
+<button class="px-4 py-2 bg-surface-container-highest hover:bg-primary hover:text-on-primary transition-all rounded-lg font-bold text-xs">Deploy</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low rounded-3xl p-8 hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-surface-container-highest rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">clinical_notes</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.8 (315)</span>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-2">HealthText BioBERT</h4>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Medical entity recognition and clinical documentation summary for healthcare providers.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-2 py-0.5 bg-outline-variant/10 text-on-surface-variant text-[9px] font-bold rounded uppercase">Transformers</span>
+<span class="px-2 py-0.5 bg-outline-variant/10 text-on-surface-variant text-[9px] font-bold rounded uppercase">Medical</span>
+</div>
+<div class="pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold mb-1">Precision</p>
+<p class="font-bold text-tertiary">99.1%</p>
+</div>
+<button class="px-4 py-2 bg-surface-container-highest hover:bg-primary hover:text-on-primary transition-all rounded-lg font-bold text-xs">Deploy</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Reviews & Community Insights -->
+<section class="mt-24">
+<h2 class="text-3xl font-headline font-bold mb-10 text-on-surface">Community Validation</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-8 bg-surface-container-low rounded-3xl relative">
+<span class="material-symbols-outlined absolute top-8 right-8 text-primary/20 text-4xl">format_quote</span>
+<div class="flex items-center gap-3 mb-6">
+<img alt="Reviewer" class="w-10 h-10 rounded-full grayscale" data-alt="Portrait of a young man with glasses and a friendly smile, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrLF8Pgd7uCmpPPSZ2RCzVU2jN2J0Z60BmP5BiJXnXFURn-pObQ5dnx-VMeHlzs_gV81IJiUGmyQpbNKgn5nc5vpz591BIvt9TyfGcfMqCzoyEFZyJueMJT2A6QH6fL5glS_kh_dZ4kbV8QhubU3ODk-Ckt_ItnZAHIWJsCOo2uXUzAf5nWyuwkMwfbBgQALWMG6c913Y7iOSiP0cBjF_wgJGSur5ahYqdbsI0DKywrg2cr1-lK3rz6e9zC-ySDBvCHjNvYTXTkQU"/>
+<div>
+<p class="text-sm font-bold">Sarah Jenkins</p>
+<p class="text-[10px] text-on-surface-variant">Lead Data Scientist, FinCorp</p>
+</div>
+</div>
+<p class="text-on-surface-variant italic leading-relaxed text-sm">
+                        "The Context Engine XL reduced our false positives by 40% in the first week. The deployment container was flawless."
+                    </p>
+</div>
+<div class="p-8 bg-surface-container-low rounded-3xl relative">
+<span class="material-symbols-outlined absolute top-8 right-8 text-primary/20 text-4xl">format_quote</span>
+<div class="flex items-center gap-3 mb-6">
+<img alt="Reviewer" class="w-10 h-10 rounded-full grayscale" data-alt="Portrait of a professional man with a beard looking forward, dark soft background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAGE0uZ6moKU2ENhD2jFy97pZdDTDvaxn0HTNegNdU5zEocCGKehzyJEHcI1a2aqB38bCCcrkfArnkGLwlDfL_DDT8CLLkv6vnSon4fDSHafranZ6RYXiSfYXG0n-HdFJiV8SxqRWexOc7OcNzOkxNHd0U6wLqLhCHVqLoS_EByl5eoW4vKc_TLsBGZ4S9D35yFumlyHRKSFykUPKTGoY3kCMjzgZ85kdA4shZu04pmM5DTrQOvwWhoZrox8p3UxUA6-zmGLsX0aw"/>
+<div>
+<p class="text-sm font-bold">David Chen</p>
+<p class="text-[10px] text-on-surface-variant">ML Ops Director, HealthStack</p>
+</div>
+</div>
+<p class="text-on-surface-variant italic leading-relaxed text-sm">
+                        "BioBERT is consistently ahead of the curve. Being able to deploy locally within our secure cluster is a huge win for HIPAA."
+                    </p>
+</div>
+<div class="p-8 bg-surface-container-low rounded-3xl border border-outline-variant/10 flex flex-col items-center justify-center text-center">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">add_comment</span>
+</div>
+<h4 class="font-bold mb-2">Write a Review</h4>
+<p class="text-xs text-on-surface-variant mb-6">Share your experience with the team.</p>
+<button class="text-sm font-bold border-b border-primary text-primary pb-1">Start Writing</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 rounded-full btn-gradient shadow-2xl shadow-primary/40 flex items-center justify-center text-on-primary group transition-all active:scale-90 z-50">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300">add</span>
+</button>
+</body></html>

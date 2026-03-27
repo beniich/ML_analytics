@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Automated Report Builder</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Configuration for consistent colors -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#1e293b', // Dark blue/gray header
+              accent: '#3b82f6', // Bright blue for toggles/selected
+              danger: '#f87171', // Red/coral for export button
+              surface: '#f8fafc', // Light gray background
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scroll">
+    /* Custom scrollbar for the live preview area */
+    .preview-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .preview-scroll::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .preview-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-brand-surface font-sans text-slate-900 min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center space-x-8">
+<!-- Logo Section -->
+<div class="flex items-center space-x-2" data-purpose="branding">
+<div class="bg-brand-primary p-1.5 rounded text-white">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold text-slate-800">Automated Report Builder</h1>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex space-x-6 text-slate-500 font-medium">
+<a class="hover:text-brand-accent transition-colors" href="#">Dashboard</a>
+<a class="text-brand-accent border-b-2 border-brand-accent pb-1" href="#">Templates</a>
+<a class="hover:text-brand-accent transition-colors" href="#">Reports</a>
+<a class="hover:text-brand-accent transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center">
+<!-- Placeholder for User/Account -->
+<div class="w-8 h-8 rounded-full bg-slate-200"></div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainLayout -->
+<main class="max-w-[1440px] mx-auto p-8 grid grid-cols-12 gap-8">
+<!-- BEGIN: LeftSidebar - Templates -->
+<section class="col-span-12 lg:col-span-3" data-purpose="template-selection">
+<h2 class="text-xl font-bold mb-6 text-slate-800">Templates</h2>
+<div class="space-y-4">
+<!-- Selected Template Card -->
+<button class="w-full text-left p-4 rounded-xl border-2 border-brand-accent bg-blue-50/50 flex space-x-4 transition-all" data-purpose="template-card-selected">
+<div class="bg-blue-100 p-3 rounded-lg text-brand-accent">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-bold text-slate-800">Executive Summary <span class="text-brand-accent font-normal">(Selected)</span></h3>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Concise overview for stakeholders. Includes key metrics.</p>
+</div>
+</button>
+<!-- Unselected Template Card -->
+<button class="w-full text-left p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex space-x-4 transition-all" data-purpose="template-card">
+<div class="bg-slate-100 p-3 rounded-lg text-slate-400">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-bold text-slate-800">Technical Deep-dive</h3>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Full data analysis with detailed charts.</p>
+</div>
+</button>
+</div>
+</section>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: CenterPanel - Report Builder -->
+<section class="col-span-12 lg:col-span-4" data-purpose="builder-controls">
+<h2 class="text-xl font-bold mb-6 text-slate-800">Report Builder</h2>
+<div class="space-y-6">
+<!-- Section Toggle Groups -->
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-start space-x-4">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Introduction &amp; Scope</p>
+<p class="text-sm text-slate-500">On, 1 page</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start space-x-4">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Stats Overview</p>
+<p class="text-sm text-slate-500">On, 3 pages, 5 charts</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start space-x-4">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Correlations Analysis</p>
+<p class="text-sm text-slate-500">On, 2 pages, 3 matrices</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-start space-x-4">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Predictions Model</p>
+<p class="text-sm text-slate-500">On, 2 pages, 1 forecast</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex items-start space-x-4">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Key Findings &amp; Recommendations</p>
+<p class="text-sm text-slate-500">On, 1 page</p>
+</div>
+</div>
+<!-- Item 6 (Off) -->
+<div class="flex items-start space-x-4 opacity-60">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Methodology</p>
+<p class="text-sm text-slate-500">Off</p>
+</div>
+</div>
+<!-- Item 7 (Off) -->
+<div class="flex items-start space-x-4 opacity-60">
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+<div>
+<p class="font-bold text-slate-800 leading-tight">Appendix</p>
+<p class="text-sm text-slate-500">Off</p>
+</div>
+</div>
+</div>
+<!-- Export Actions -->
+<div class="pt-6 border-t border-slate-200">
+<button class="w-full bg-brand-danger hover:bg-red-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-red-200 transition-all text-lg mb-4">
+            Export as PDF (Variant 13/20)
+          </button>
+<p class="text-center text-slate-500">
+            or <a class="text-slate-800 font-medium hover:underline" href="#">Export as HTML</a>
+</p>
+</div>
+</div>
+</section>
+<!-- END: CenterPanel -->
+<!-- BEGIN: RightPanel - Live Preview -->
+<section class="col-span-12 lg:col-span-5" data-purpose="report-live-preview">
+<h2 class="text-xl font-bold mb-6 text-slate-800">Live Preview: Executive Summary</h2>
+<!-- Preview Container mimicking a page with scrollbar -->
+<div class="bg-slate-200 rounded-2xl p-6 relative overflow-hidden h-[800px] border border-slate-300 flex justify-center">
+<!-- The actual "Paper" content -->
+<div class="bg-white w-full max-w-[600px] shadow-2xl rounded-sm p-10 overflow-y-auto preview-scroll" id="report-canvas">
+<!-- Mockup Content for the Report -->
+<header class="mb-8">
+<h1 class="text-3xl font-extrabold text-slate-900">Q4 2023 Executive Summary Report</h1>
+<p class="text-slate-500 mt-1">Prepared on Oct 26, 2023</p>
+</header>
+<!-- Report Section 1 -->
+<section class="mb-12">
+<div class="flex items-center space-x-2 text-xl font-bold text-slate-800 mb-6">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>1. Stats Overview</span>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div data-purpose="mock-chart">
+<p class="text-xs font-bold text-center mb-4 text-slate-400">Growth by Region</p>
+<!-- Simple Bar Chart Mockup -->
+<div class="flex items-end justify-between h-32 px-4 border-b border-slate-200">
+<div class="w-6 bg-slate-800 rounded-t h-[75%] relative">
+<span class="absolute -top-6 left-0 text-[10px] font-bold text-green-600">+15%</span>
+<span class="absolute -bottom-6 left-0 text-[10px] text-slate-400">North</span>
+</div>
+<div class="w-6 bg-slate-800 rounded-t h-[60%] relative">
+<span class="absolute -top-6 left-0 text-[10px] font-bold text-green-600">+12%</span>
+<span class="absolute -bottom-6 left-0 text-[10px] text-slate-400">South</span>
+</div>
+<div class="w-6 bg-slate-800 rounded-t h-[35%] relative">
+<span class="absolute -top-6 left-0 text-[10px] font-bold text-green-600">+8%</span>
+<span class="absolute -bottom-6 left-0 text-[10px] text-slate-400">East</span>
+</div>
+<div class="w-6 bg-slate-800 rounded-t h-[50%] relative">
+<span class="absolute -top-6 left-0 text-[10px] font-bold text-green-600">+10%</span>
+<span class="absolute -bottom-6 left-0 text-[10px] text-slate-400">West</span>
+</div>
+</div>
+</div>
+<div class="text-xs text-slate-600 leading-relaxed pt-2">
+<p>Key performance indicators are promising across North <span class="text-green-600 font-bold">+15%</span> and owners in the region's analysis and North <span class="text-green-600 font-bold">+12%</span> by <span class="text-green-600 font-bold">+80%</span>.</p>
+<p class="mt-2">Key performance indicators are an announcement are 55% and watchdogs around the activity and West <span class="text-green-600 font-bold">+13%</span> by <span class="text-green-600 font-bold">+10%</span>.</p>
+</div>
+</div>
+</section>
+<!-- Report Section 2 -->
+<section class="mb-12">
+<div class="flex items-center space-x-2 text-xl font-bold text-slate-800 mb-6">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>2. Correlations Analysis</span>
+</div>
+<div class="flex items-start gap-6">
+<div class="text-xs text-slate-600 leading-relaxed w-1/2">
+                Marketing Spend is a positive correlation between positive Spend margin and high reduction markers, and on-mes in-a-breeds. This matrix visual have positive correlation in Marketing Spend and User Acquisition.
+              </div>
+<!-- Mock Scatter Plot / Matrix -->
+<div class="w-1/2 border border-slate-200 bg-slate-50 p-2 rounded flex items-center justify-center">
+<img alt="Correlation Matrix" class="w-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr0DAMHV_mbMb5gf4QwU5XMNrO3T6o62pqSeY4md_3LjCpUxsBoePzWQVzV25ABoroP8y5JD1LyqlDr4IPL1LqLWaT61oF34fwlOhalJQRdVPWBuIezsv7agpBQjOrXIECzRLP7c53M63KX79Gi6g8hsNM5kB_Dmd-UBH6ZNCubHlT2znxYpcwLdlUN5iMWeHFMtL-GpraRCzibhL4FExzsjIKuL_Qgo6z3xsCMvIANyt740VYBoyeRm-yOV-pZRkd257q_cI96cU"/>
+</div>
+</div>
+</section>
+<!-- Report Section 3 -->
+<section class="mb-12">
+<div class="flex items-center space-x-2 text-xl font-bold text-slate-800 mb-6">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>3. Predictions Model</span>
+</div>
+<div class="text-xs text-slate-600 mb-4">
+              Revenue Forecast Q1-Q2 2024 is projected by software analysis, and imnce projected towards conference set from kentra.
+            </div>
+<!-- Mock Trend Chart -->
+<div class="w-full h-40 bg-slate-50 border border-slate-200 rounded-lg p-4 relative overflow-hidden">
+<p class="text-[10px] font-bold text-slate-400 absolute top-2 right-4">Revenue Forecast Q1-Q2 2024</p>
+<div class="absolute bottom-4 left-4 right-4 h-24 border-l border-b border-slate-300">
+<!-- SVG Line for chart -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0 80 Q 25 75, 50 60 T 100 20" fill="none" stroke="#3b82f6" stroke-width="2"></path>
+<path d="M0 80 Q 25 75, 50 60 T 100 20 L 100 100 L 0 100 Z" fill="rgba(59, 130, 246, 0.1)"></path>
+</svg>
+</div>
+</div>
+</section>
+</div>
+<!-- Mock Scrollbar UI for the preview area container -->
+<div class="absolute right-4 top-1/2 -translate-y-1/2 w-1.5 h-64 bg-slate-300 rounded-full opacity-50"></div>
+</div>
+</section>
+<!-- END: RightPanel -->
+</main>
+<!-- END: MainLayout -->
+<script data-purpose="toggle-handling">
+    // Simple interactivity mock for toggles (purely visual for this task)
+    document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+      toggle.addEventListener('change', function() {
+        const textContainer = this.closest('div').nextElementSibling;
+        const statusText = textContainer.querySelector('p:last-child');
+        if (this.checked) {
+          this.closest('.flex').classList.remove('opacity-60');
+          // Note: In a real app, logic would update the "On/Off" text and page counts
+        } else {
+          this.closest('.flex').classList.add('opacity-60');
+        }
+      });
+    });
+  </script>
+</body></html>

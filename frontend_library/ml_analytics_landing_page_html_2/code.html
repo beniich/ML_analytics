@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ML Analytics - Analyze Your Data with Modular AI</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              slate: '#4A6583', // Primary Slate Blue from Design System
+              coral: '#E38B75', // Brand Coral for CTAs and Accents
+              lightGray: '#F3F4F6',
+              darkSlate: '#3B5169',
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '4px', // ROUND_FOUR from Design System
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1 {
+      letter-spacing: -0.02em;
+    }
+  </style>
+<style data-purpose="layout-styles">
+    .hero-gradient {
+      background-color: #4A6583;
+    }
+    .drop-zone-border {
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+    }
+    .feature-card {
+      transition: transform 0.2s ease-in-out;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800">
+<!-- BEGIN: Navigation -->
+<header class="w-full py-6 px-8 flex justify-between items-center max-w-7xl mx-auto" data-purpose="main-header">
+<div class="flex items-center gap-2" data-purpose="logo">
+<span class="text-2xl font-extrabold text-[#4A6583]">ML Analytics</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+<a class="hover:text-brand-slate transition-colors" href="#">Features</a>
+<a class="hover:text-brand-slate transition-colors" href="#">Pricing</a>
+<a class="hover:text-brand-slate transition-colors" href="#">About</a>
+<a class="hover:text-brand-slate transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center">
+<button class="bg-brand-coral hover:bg-[#d47a64] text-white px-6 py-2.5 rounded-custom font-semibold transition-all">
+        Get Started
+      </button>
+</div>
+</header>
+<!-- END: Navigation -->
+<!-- BEGIN: Hero Section -->
+<section class="px-4 py-4" data-purpose="hero-section">
+<div class="max-w-7xl mx-auto hero-gradient rounded-xl p-12 md:p-20 text-center text-white">
+<h1 class="text-4xl md:text-6xl font-extrabold mb-10 leading-tight">
+        Analyze Your Data<br/>with Modular AI.
+      </h1>
+<!-- BEGIN: Upload Drop Zone -->
+<div class="max-w-3xl mx-auto drop-zone-border rounded-xl py-12 px-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/5 transition-colors" data-purpose="file-upload-zone">
+<div class="mb-4 text-white">
+<svg class="h-16 w-16" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<p class="text-lg md:text-xl opacity-90">
+          Drag and drop your files here, or <span class="underline decoration-1 underline-offset-4 font-semibold">browse</span> to upload.
+        </p>
+</div>
+<!-- END: Upload Drop Zone -->
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Features Grid -->
+<section class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8" data-purpose="feature-grid">
+<!-- Feature: Basic Stats -->
+<div class="feature-card bg-[#EDF1F5] p-8 rounded-xl" data-purpose="feature-item">
+<div class="w-16 h-16 bg-brand-coral/20 rounded-full flex items-center justify-center mb-6">
+<svg class="h-8 w-8 text-brand-coral" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 13h1v7H3v-7zm5-4h1v11H8V9zm5 7h1v4h-1v-4zm5-9h1v13h-1V7z"></path>
+</svg>
+</div>
+<h3 class="text-2xl font-bold mb-3 text-slate-800">Basic Stats</h3>
+<p class="text-slate-600 leading-relaxed">
+        Instant summary statistics and data distribution overview.
+      </p>
+</div>
+<!-- Feature: Correlation -->
+<div class="feature-card bg-[#EDF1F5] p-8 rounded-xl" data-purpose="feature-item">
+<div class="w-16 h-16 bg-brand-coral/20 rounded-full flex items-center justify-center mb-6">
+<svg class="h-8 w-8 text-brand-coral" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 9l-1.41-1.42L18.17 6l-1.58-1.58L18 3l3 3-3 3zM3.41 4.83L2 6.24l7.1 7.1-5.69 5.69 1.42 1.42L10.51 14.8l7.07 7.07 1.41-1.41-7.07-7.07 7.07-7.07-1.41-1.41L10.51 12 3.41 4.83z"></path>
+</svg>
+</div>
+<h3 class="text-2xl font-bold mb-3 text-slate-800">Correlation</h3>
+<p class="text-slate-600 leading-relaxed">
+        Discover hidden relationships and dependencies within your dataset.
+      </p>
+</div>
+<!-- Feature: Predictive Modeling -->
+<div class="feature-card bg-[#EDF1F5] p-8 rounded-xl" data-purpose="feature-item">
+<div class="w-16 h-16 bg-brand-coral/20 rounded-full flex items-center justify-center mb-6">
+<svg class="h-8 w-8 text-brand-coral" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2c-4.97 0-9 4.03-9 9 0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-2.31C18.16 18.67 21 15.17 21 11c0-4.97-4.03-9-9-9zm0 2c3.87 0 7 3.13 7 7 0 3.17-2.11 5.85-5 6.71V14h-4v3.71c-2.89-.86-5-3.54-5-6.71 0-3.87 3.13-7 7-7zm-3 5h2v2H9V9zm4 0h2v2h-2V9z"></path>
+</svg>
+</div>
+<h3 class="text-2xl font-bold mb-3 text-slate-800">Predictive Modeling</h3>
+<p class="text-slate-600 leading-relaxed">
+        Leverage modular AI to forecast trends and outcomes.
+      </p>
+</div>
+</section>
+<!-- END: Features Grid -->
+<!-- BEGIN: Comparison/Preview Section -->
+<section class="bg-brand-lightGray py-20" data-purpose="preview-section">
+<div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Placeholder cards for visualization mentioned in description -->
+<div class="bg-white aspect-[3/4] rounded-custom shadow-sm border border-slate-200" data-purpose="viz-card-1"></div>
+<div class="bg-white aspect-[3/4] rounded-custom shadow-sm border border-slate-200" data-purpose="viz-card-2"></div>
+<div class="bg-white aspect-[3/4] rounded-custom shadow-sm border border-slate-200" data-purpose="viz-card-3"></div>
+</div>
+</section>
+<!-- END: Comparison/Preview Section -->
+<!-- BEGIN: Footer -->
+<footer class="py-8 text-center text-slate-400 text-sm">
+<p>Variant 1 of 10</p>
+</footer>
+<!-- END: Footer -->
+</body></html>

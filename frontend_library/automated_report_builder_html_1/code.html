@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Automated Report Builder - Synthesis ML</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              slate: '#4A6583', // Custom color from design system
+              coral: '#FF7F6F', // Coral accent for buttons
+              dark: '#111827',
+              muted: '#6B7280',
+              bg: '#F8FAFC'
+            }
+          },
+          borderRadius: {
+            'synthesis': '4px', // ROUND_FOUR from design system
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body {
+      background-color: #F8FAFC;
+    }
+    .custom-shadow {
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+    .pdf-scroll-track::-webkit-scrollbar {
+      width: 6px;
+    }
+    .pdf-scroll-track::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .pdf-scroll-track::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    /* Toggle Switch Custom Styling */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 38px;
+      height: 20px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #CBD5E1;
+      transition: .4s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #3B82F6;
+    }
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-900 overflow-hidden">
+<!-- BEGIN: Navigation -->
+<header class="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2" data-purpose="logo-container">
+<div class="w-8 h-8 bg-brand-slate rounded-synthesis flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2 11h2v6H2v-6zm4-4h2v10H6V7zm4 4h2v6h-2v-6zm4-8h2v14h-2V3z"></path></svg>
+</div>
+<span class="font-bold text-xl tracking-tight text-brand-dark">Automated Report Builder</span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-brand-muted hover:text-brand-slate transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-brand-dark border-b-2 border-brand-slate pb-0.5" href="#">Templates</a>
+<a class="text-sm font-medium text-brand-muted hover:text-brand-slate transition-colors" href="#">Reports</a>
+<a class="text-sm font-medium text-brand-muted hover:text-brand-slate transition-colors" href="#">Settings</a>
+</nav>
+</div>
+</header>
+<!-- END: Navigation -->
+<!-- BEGIN: Main Content Layout -->
+<main class="grid grid-cols-12 gap-8 p-8 h-[calc(100vh-73px)]">
+<!-- BEGIN: Templates Sidebar -->
+<section class="col-span-3 flex flex-col gap-6" data-purpose="templates-sidebar">
+<h2 class="text-2xl font-bold text-brand-dark">Templates</h2>
+<div class="flex flex-col gap-4">
+<!-- Selected Template -->
+<div class="bg-white border-2 border-brand-slate rounded-lg p-5 custom-shadow cursor-pointer transition-all hover:bg-slate-50 relative">
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-slate-100 rounded-md flex items-center justify-center text-brand-slate">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h3 class="font-bold text-brand-dark">Executive Summary <span class="text-blue-500 font-normal">(Selected)</span></h3>
+<p class="text-sm text-brand-muted mt-1 leading-relaxed">Concise overview for stakeholders. Includes key metrics.</p>
+</div>
+</div>
+</div>
+<!-- Inactive Template -->
+<div class="bg-white border border-gray-200 rounded-lg p-5 cursor-pointer transition-all hover:border-gray-300">
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-gray-50 rounded-md flex items-center justify-center text-gray-400">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h3 class="font-bold text-brand-dark">Technical Deep-dive</h3>
+<p class="text-sm text-brand-muted mt-1 leading-relaxed">Full data analysis with detailed charts.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Templates Sidebar -->
+<!-- BEGIN: Report Builder Controls -->
+<section class="col-span-3 flex flex-col gap-6" data-purpose="builder-controls">
+<h2 class="text-2xl font-bold text-brand-dark">Report Builder</h2>
+<div class="flex flex-col gap-5 bg-transparent">
+<!-- Toggle Item 1 -->
+<div class="flex items-start gap-3">
+<label class="switch mt-1">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Introduction &amp; Scope</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">On, 1 page</span>
+</div>
+</div>
+<!-- Toggle Item 2 -->
+<div class="flex items-start gap-3">
+<label class="switch mt-1">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Stats Overview</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">On, 3 pages, 5 charts</span>
+</div>
+</div>
+<!-- Toggle Item 3 -->
+<div class="flex items-start gap-3">
+<label class="switch mt-1">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Correlations Analysis</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">On, 2 pages, 3 matrices</span>
+</div>
+</div>
+<!-- Toggle Item 4 -->
+<div class="flex items-start gap-3">
+<label class="switch mt-1">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Predictions Model</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">On, 2 pages, 1 forecast</span>
+</div>
+</div>
+<!-- Toggle Item 5 -->
+<div class="flex items-start gap-3">
+<label class="switch mt-1">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Key Findings &amp; Recommendations</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">On, 1 page</span>
+</div>
+</div>
+<!-- Toggle Item 6 (Off) -->
+<div class="flex items-start gap-3 opacity-60">
+<label class="switch mt-1">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Methodology</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">Off</span>
+</div>
+</div>
+<!-- Toggle Item 7 (Off) -->
+<div class="flex items-start gap-3 opacity-60">
+<label class="switch mt-1">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+<div class="flex flex-col">
+<span class="text-[15px] font-bold text-brand-dark">Appendix</span>
+<span class="text-xs text-brand-muted uppercase tracking-wider">Off</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-4 flex flex-col gap-4">
+<button class="w-full bg-brand-coral hover:opacity-90 text-white font-bold py-3.5 rounded-synthesis shadow-sm transition-all transform active:scale-[0.98]">
+          Export as PDF (Variant 13/20)
+        </button>
+<button class="w-full text-brand-muted text-sm font-medium hover:text-brand-slate underline underline-offset-4">
+          or Export as HTML
+        </button>
+</div>
+</section>
+<!-- END: Report Builder Controls -->
+<!-- BEGIN: Live Preview Pane -->
+<section class="col-span-6 flex flex-col gap-6" data-purpose="live-preview">
+<h2 class="text-2xl font-bold text-brand-dark">Live Preview: Executive Summary</h2>
+<!-- Preview Frame -->
+<div class="bg-[#E2E8F0] flex-1 rounded-xl p-8 overflow-hidden flex justify-center relative shadow-inner">
+<!-- Scrollable Document Page -->
+<div class="bg-white w-full max-w-[500px] h-full shadow-2xl overflow-y-auto pdf-scroll-track p-10 flex flex-col gap-8 rounded-sm">
+<!-- Report Header -->
+<div class="border-b border-gray-100 pb-6">
+<h1 class="text-2xl font-extrabold text-brand-dark tracking-tight">Q4 2023 Executive Summary Report</h1>
+<p class="text-sm text-brand-muted mt-1">Prepared on Oct 26, 2023</p>
+</div>
+<!-- Section 1: Stats -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<svg class="w-5 h-5 text-brand-slate" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<h3 class="text-lg font-bold text-brand-dark">1. Stats Overview</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Mini Chart Simulation -->
+<div class="flex flex-col gap-2">
+<span class="text-[10px] font-bold text-center text-brand-muted uppercase">Growth by Region</span>
+<div class="h-32 flex items-end justify-between px-2 gap-1.5 border-b border-l border-gray-200">
+<div class="w-full bg-[#1e40af] h-[75%] rounded-t-sm relative"><span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] text-green-600 font-bold">+15%</span></div>
+<div class="w-full bg-[#1e40af] h-[55%] rounded-t-sm relative"><span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] text-green-600 font-bold">+12%</span></div>
+<div class="w-full bg-[#1e40af] h-[35%] rounded-t-sm relative"><span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] text-green-600 font-bold">+8%</span></div>
+<div class="w-full bg-[#1e40af] h-[50%] rounded-t-sm relative"><span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] text-green-600 font-bold">+10%</span></div>
+</div>
+<div class="flex justify-between px-1 text-[8px] text-brand-muted font-bold">
+<span>North</span><span>South</span><span>East</span><span>West</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-[10px] text-brand-dark leading-relaxed">
+                  Key performance indicators are nnnoumoust ovs are North <span class="text-green-600 font-bold">+15%</span> and overnars in the region't anarnity and North <span class="text-green-600 font-bold">+12%</span> by <span class="text-green-600 font-bold">+80%</span>.
+                </p>
+<p class="text-[10px] text-brand-dark leading-relaxed">
+                  Key performance indicators are an nnounoumenst are 55% and votchursro-mshout the aoavity and West <span class="text-green-600 font-bold">+13%</span> by <span class="text-green-600 font-bold">+10%</span>.
+                </p>
+</div>
+</div>
+</div>
+<!-- Section 2: Correlations -->
+<div class="flex flex-col gap-4 pt-4 border-t border-gray-50">
+<div class="flex items-center gap-2">
+<svg class="w-5 h-5 text-brand-slate" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<h3 class="text-lg font-bold text-brand-dark">2. Correlations Analysis</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<p class="text-[10px] text-brand-dark leading-relaxed">
+                Marketing Spend is a positive correlation between positive-Spend rummr-matrix and high reduct markeriiio, and on-mes in-a-breeds. This matrix visuad have positive correlation in Marketing Spend and User Acquisition.
+              </p>
+<!-- Bubble Chart Simulation -->
+<div class="bg-slate-50 border border-gray-200 h-32 relative rounded-sm overflow-hidden p-2">
+<div class="absolute left-0 top-0 bottom-0 w-4 bg-gray-200/50 flex items-center justify-center -rotate-90 origin-center"><span class="text-[6px] font-bold text-brand-muted">Correlations</span></div>
+<div class="grid grid-cols-2 grid-rows-2 h-full gap-1 ml-3">
+<div class="bg-blue-200/50 border border-blue-200 flex items-center justify-center"><span class="text-blue-600 font-bold text-lg">+</span></div>
+<div class="bg-white border border-gray-100 relative">
+<div class="absolute top-2 left-2 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+<div class="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full"></div>
+</div>
+<div class="bg-white border border-gray-100 relative">
+<div class="absolute bottom-2 left-4 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+<div class="absolute top-4 right-2 w-1 h-1 bg-blue-500 rounded-full"></div>
+</div>
+<div class="bg-blue-300/50 border border-blue-300 flex items-center justify-center"><span class="text-blue-800 font-bold text-lg">+</span></div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-4 bg-gray-200/50 flex justify-around items-center pl-3">
+<span class="text-[6px] font-bold text-brand-muted">Marketing Spend</span>
+<span class="text-[6px] font-bold text-brand-muted">User Acquisition</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Predictions -->
+<div class="flex flex-col gap-4 pt-4 border-t border-gray-50">
+<div class="flex items-center gap-2">
+<svg class="w-5 h-5 text-brand-slate" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<h3 class="text-lg font-bold text-brand-dark">3. Predictions Model</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<p class="text-[10px] text-brand-dark leading-relaxed">
+                Revenue Forecast Q1-Q2 2024 is projected by nninware analysis, and inmce projected towonds conferencerat from kentrvrs.
+              </p>
+<div class="h-24 bg-white border-b border-l border-gray-200 flex items-end relative overflow-hidden">
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0 100 Q 25 80, 50 60 T 100 10" fill="none" stroke="#1e40af" stroke-width="2"></path>
+<area d="M0 100 Q 25 80, 50 60 T 100 10 L 100 100 L 0 100" fill="#1e40af" fill-opacity="0.1"/>
+</svg>
+<div class="absolute -left-1 top-0 bottom-0 flex flex-col justify-between text-[6px] font-bold text-brand-muted px-1">
+<span>12.5M</span><span>10.9M</span><span>10.8M</span><span>7.80M</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Scroll Indicator -->
+<div class="absolute right-4 top-1/2 -translate-y-1/2 w-1.5 h-64 bg-slate-300/30 rounded-full flex items-start">
+<div class="w-full h-1/4 bg-slate-400 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- END: Live Preview Pane -->
+</main>
+<!-- END: Main Content Layout -->
+</body></html>

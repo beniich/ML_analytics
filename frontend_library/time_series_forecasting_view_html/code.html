@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Time-Series Forecasting View - Analytics Pro</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            'slate-blue-dark': '#1e293b',
+            'slate-blue-panel': '#334155',
+            'slate-blue-sidebar': '#94a3b8',
+            'coral-accent': '#f43f5e',
+            'coral-button': '#f06e5b',
+          },
+          borderRadius: {
+            'synthesis': '4px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      background-color: #4A6583; /* Custom color from Design System */
+      color: #f8fafc;
+      font-family: 'Manrope', sans-serif;
+    }
+    .chart-grid-line {
+      stroke: rgba(255, 255, 255, 0.1);
+    }
+    .chart-text {
+      fill: #cbd5e1;
+      font-size: 12px;
+    }
+    .forecast-area {
+      fill: rgba(240, 110, 91, 0.2);
+    }
+    .trend-line {
+      stroke: #f06e5b;
+      stroke-width: 3;
+      fill: none;
+    }
+    .sidebar-bg {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- BEGIN: MainHeader -->
+<header class="bg-slate-900/50 border-b border-white/10 px-6 py-3 flex items-center justify-between" data-purpose="top-navigation">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-coral-button rounded-synthesis flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+</div>
+<span class="font-extrabold tracking-tight text-xl uppercase">Analytics <span class="text-coral-button">Pro</span></span>
+</div>
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+<a class="flex items-center gap-2 hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Dashboard
+        </a>
+<a class="flex items-center gap-2 hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Data Sources
+        </a>
+<a class="flex items-center gap-2 text-white border-b-2 border-coral-button pb-1" href="#">
+<svg class="w-4 h-4 text-coral-button" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Time-Series
+        </a>
+<a class="flex items-center gap-2 hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Reports
+        </a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-sm">
+<div class="w-8 h-8 rounded-full bg-slate-700 border border-white/20 flex items-center justify-center overflow-hidden">
+<svg class="w-6 h-6 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path></svg>
+</div>
+<span>John Doe</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"></path></svg>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: PageTitleArea -->
+<div class="px-6 py-6" data-purpose="title-breadcrumb">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-3xl font-bold tracking-tight">Time-Series Forecasting View</h1>
+<p class="text-slate-300 text-sm mt-1">Analysis › Time-Series › Forecasting</p>
+</div>
+<div class="flex gap-2">
+<select class="bg-white/10 border-white/20 rounded-synthesis text-sm px-4 py-2 focus:ring-coral-button focus:border-coral-button cursor-pointer">
+<option>Last 24 Months</option>
+<option>Last 12 Months</option>
+<option>Year to Date</option>
+</select>
+</div>
+</div>
+</div>
+<!-- END: PageTitleArea -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex flex-col lg:flex-row px-6 pb-6 gap-6" data-purpose="forecasting-workspace">
+<!-- BEGIN: ChartContainer -->
+<section class="flex-1 bg-slate-900/30 rounded-synthesis border border-white/10 p-6 relative overflow-hidden" data-purpose="visualization-area">
+<h2 class="text-xl font-semibold mb-6">Sales Revenue Forecast (USD)</h2>
+<div class="relative w-full h-[500px]" id="chart-wrapper">
+<!-- SVG Chart Representation -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 500">
+<!-- Horizontal Grid Lines -->
+<line class="chart-grid-line" x1="60" x2="980" y1="50" y2="50"></line>
+<line class="chart-grid-line" x1="60" x2="980" y1="130" y2="130"></line>
+<line class="chart-grid-line" x1="60" x2="980" y1="210" y2="210"></line>
+<line class="chart-grid-line" x1="60" x2="980" y1="290" y2="290"></line>
+<line class="chart-grid-line" x1="60" x2="980" y1="370" y2="370"></line>
+<line class="chart-grid-line" x1="60" x2="980" y1="450" y2="450"></line>
+<!-- Y-Axis Labels -->
+<text class="chart-text text-right" text-anchor="end" x="50" y="55">$600k</text>
+<text class="chart-text text-right" text-anchor="end" x="50" y="135">$500k</text>
+<text class="chart-text text-right" text-anchor="end" x="50" y="215">$400k</text>
+<text class="chart-text text-right" text-anchor="end" x="50" y="295">$300k</text>
+<text class="chart-text text-right" text-anchor="end" x="50" y="375">$200k</text>
+<text class="chart-text text-right" text-anchor="end" x="50" y="455">$100k</text>
+<text class="chart-text text-right" text-anchor="end" x="50" y="485">$0</text>
+<!-- Vertical Grid Lines (Simplified) -->
+<line class="chart-grid-line" x1="60" x2="60" y1="50" y2="450"></line>
+<line class="chart-grid-line" x1="180" x2="180" y1="50" y2="450"></line>
+<line class="chart-grid-line" x1="300" x2="300" y1="50" y2="450"></line>
+<line class="chart-grid-line" x1="420" x2="420" y1="50" y2="450"></line>
+<line class="chart-grid-line" x1="540" x2="540" y1="50" y2="450"></line>
+<line class="chart-grid-line" x1="660" x2="660" y1="50" y2="450"></line>
+<!-- Forecast Confidence Interval (Area) -->
+<!-- Defined starting from Jan '24 at x=540 -->
+<path class="forecast-area" d="M 540 210 Q 640 270 740 240 Q 840 210 940 180 L 940 90 Q 840 120 740 150 Q 640 180 540 210 Z"></path>
+<!-- Historical Data Line -->
+<path class="trend-line" d="M 60 410 L 120 380 L 180 385 L 240 430 L 300 350 L 360 355 L 420 290 L 480 380 L 540 210"></path>
+<!-- Forecasted Data Line (Dashed) -->
+<path d="M 540 210 Q 640 240 740 220 Q 840 180 940 150" fill="none" stroke="#f06e5b" stroke-dasharray="6,4" stroke-width="3"></path>
+<!-- Last Historical Point -->
+<circle cx="540" cy="210" fill="#f06e5b" r="4"></circle>
+<text class="chart-text" text-anchor="end" x="535" y="200">$480,250</text>
+<!-- Current Forecast Point Tooltip Representation -->
+<circle cx="670" cy="235" fill="#f06e5b" r="4"></circle>
+<!-- X-Axis Labels -->
+<text class="chart-text" x="80" y="475">Jan '22</text>
+<text class="chart-text" x="200" y="475">Apr '22</text>
+<text class="chart-text" x="320" y="475">Jul '22</text>
+<text class="chart-text" x="440" y="475">Oct '22</text>
+<text class="chart-text" x="560" y="475">Jan '23</text>
+<text class="chart-text" x="680" y="475">Apr '23</text>
+<text class="chart-text" x="800" y="475">Jul '23</text>
+<text class="chart-text" x="920" y="475">Oct '23</text>
+</svg>
+<!-- HTML Overlay Tooltip -->
+<div class="absolute top-1/4 left-1/2 ml-24 -mt-10 bg-white text-slate-900 p-3 rounded shadow-xl border border-coral-button/20 text-xs" data-purpose="chart-tooltip">
+<p class="font-bold text-slate-500 uppercase tracking-wider mb-1">Forecast:</p>
+<p class="text-sm font-extrabold">$515,000 <span class="text-slate-400 font-medium">(±$20,000)</span></p>
+<!-- Arrow -->
+<div class="absolute -bottom-2 left-4 w-4 h-4 bg-white rotate-45"></div>
+</div>
+</div>
+</section>
+<!-- END: ChartContainer -->
+<!-- BEGIN: SidebarControls -->
+<aside class="w-full lg:w-80 flex flex-col gap-6" data-purpose="forecast-settings-sidebar">
+<div class="sidebar-bg rounded-synthesis border border-white/10 p-5 flex flex-col h-full">
+<h3 class="text-lg font-bold border-b border-white/10 pb-4 mb-4">Forecast Settings</h3>
+<!-- Horizon Setting -->
+<div class="mb-6">
+<label class="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-3">Forecast Horizon</label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<input class="w-full bg-slate-900/40 border-white/10 rounded-synthesis text-sm py-2 px-3 pr-8 focus:ring-1 focus:ring-coral-button" type="text" value="Jul 23, 2023"/>
+<svg class="w-4 h-4 absolute right-2 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="w-20">
+<div class="flex items-center gap-1 bg-slate-900/40 border border-white/10 rounded-synthesis p-1">
+<span class="text-[10px] text-slate-400 pl-1">Mo:</span>
+<input class="w-full bg-transparent border-none text-sm p-0 focus:ring-0" type="number" value="12"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Seasonality Setting -->
+<div class="mb-6">
+<label class="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-3">Seasonality Parameters</label>
+<div class="mb-3">
+<label class="block text-xs text-slate-400 mb-1">Seasonality Type</label>
+<select class="w-full bg-slate-900/40 border-white/10 rounded-synthesis text-sm py-2 px-3 focus:ring-1 focus:ring-coral-button appearance-none">
+<option>Automatic (Multi-Period)</option>
+<option>Manual (Fourier)</option>
+<option>None</option>
+</select>
+</div>
+<div class="flex flex-wrap gap-4 mt-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded-sm bg-slate-800 border-white/20 text-coral-button focus:ring-coral-button h-4 w-4" type="checkbox"/>
+<span class="text-xs">Annual</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded-sm bg-slate-800 border-white/20 text-coral-button focus:ring-coral-button h-4 w-4" type="checkbox"/>
+<span class="text-xs">Quarterly</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded-sm bg-slate-800 border-white/20 text-coral-button focus:ring-coral-button h-4 w-4" type="checkbox"/>
+<span class="text-xs">Monthly</span>
+</label>
+</div>
+</div>
+<!-- Model Parameters -->
+<div class="mb-8">
+<label class="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-3">Model Parameters</label>
+<div class="mb-4">
+<div class="flex justify-between mb-2">
+<span class="text-xs text-slate-300">Smoothing Factor (Alpha):</span>
+<span class="text-xs font-bold text-white">0.45</span>
+</div>
+<input class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-coral-button" max="1" min="0" step="0.01" type="range" value="0.45"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs text-slate-300">Trend Factor (Beta):</span>
+<span class="text-xs font-bold text-white">0.20</span>
+</div>
+<input class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-coral-button" max="1" min="0" step="0.01" type="range" value="0.20"/>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-auto">
+<button class="w-full bg-coral-button hover:bg-coral-button/90 transition-all text-white font-bold py-3.5 rounded-full shadow-lg shadow-coral-button/20 text-sm uppercase tracking-widest mb-4 active:scale-95" data-purpose="run-forecast-button">
+            Run Forecast
+          </button>
+<div class="text-center">
+<p class="text-[10px] text-slate-400">Last run: Today at 10:35 AM</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: SidebarControls -->
+</main>
+<!-- END: MainContent -->
+</body></html>

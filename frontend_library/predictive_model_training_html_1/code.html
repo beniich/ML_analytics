@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Model Configuration - Predictive Model Training</title>
+<!-- Load Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            'brand-primary': '#4A6583',
+            'brand-accent': '#FF8A65', // Based on the orange buttons in the UI
+            'sidebar-bg': '#3D454F',
+            'input-bg': '#FFFFFF',
+          },
+          borderRadius: {
+            'synthesis': '4px', // ROUND_FOUR as per design system
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-sliders">
+    /* Custom styles for range inputs to match the brand accent color */
+    input[type='range'] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type='range']::-webkit-slider-runnable-track {
+      background: #E5E7EB;
+      height: 6px;
+      border-radius: 3px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid #FF8A65;
+      margin-top: -7px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    /* Simple fill effect for the track (simulated) */
+    .slider-container {
+      position: relative;
+    }
+    .slider-fill {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      height: 6px;
+      background-color: #FF8A65;
+      border-radius: 3px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-slate-900 min-h-screen flex flex-col">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between" data-purpose="global-navigation">
+<div class="flex items-center gap-3">
+<!-- Brand Logo Placeholder -->
+<div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center border border-slate-200 overflow-hidden">
+<img alt="Logo" class="object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTpVjvChUUVRKG6oxfj_Pehy8nYnBEdf1_9m4QGxEPfOa-s2Z7tTFmWU01wyzKGx5CO4ezq9BE34RZTRKRZK-YJkQHCnfQ1I-t7y5YE8tHvm_L_yBqDIYXpdgS1waqET-u-B9TztmGcqdnZsfCGSWuC_AqLqYdyH7FFFkIpjjVG9qkdyIckASkCei4pG2EsoBWNnFylfKZVjJndopS1pGbpWthF8IPL-kYO5dS9Sd1sCZYSRzCrmPITKgQER5gjseZrqgxTCwq3RM"/>
+</div>
+<span class="font-extrabold text-lg tracking-tight">Predictive Model Training</span>
+</div>
+<nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+<a class="hover:text-brand-primary transition-colors" href="#">Dashboard</a>
+<a class="hover:text-brand-primary transition-colors" href="#">Projects</a>
+<a class="hover:text-brand-primary transition-colors" href="#">Data</a>
+<a class="hover:text-brand-primary transition-colors" href="#">Models</a>
+</nav>
+<div>
+<button class="bg-brand-accent hover:bg-opacity-90 text-white px-6 py-2 rounded-full font-bold transition-all shadow-sm">
+        Train Now
+      </button>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow container mx-auto max-w-6xl px-4 py-8">
+<h1 class="text-2xl font-bold mb-6">Algorithms</h1>
+<!-- BEGIN: ToolContainer -->
+<div class="bg-white border border-gray-200 rounded-synthesis shadow-sm flex flex-col md:flex-row min-h-[700px] overflow-hidden" data-purpose="main-application-container">
+<!-- BEGIN: Sidebar -->
+<aside class="w-full md:w-64 bg-sidebar-bg text-white flex-shrink-0" data-purpose="algorithm-selector">
+<div class="p-5 border-b border-white/10">
+<h2 class="font-bold text-lg">Algorithms</h2>
+</div>
+<nav class="py-2">
+<!-- Active State Item -->
+<div class="flex items-center gap-3 px-5 py-3 bg-slate-700/50 border-l-4 border-brand-accent cursor-pointer group">
+<div class="w-4 h-4 rounded-full border-2 border-brand-accent flex items-center justify-center">
+<div class="w-2 h-2 bg-brand-accent rounded-full"></div>
+</div>
+<span class="font-medium text-sm">Random Forest</span>
+</div>
+<!-- Inactive State Item -->
+<div class="flex items-center gap-3 px-5 py-3 hover:bg-slate-700/30 cursor-pointer transition-colors group">
+<div class="w-4 h-4 rounded-full border-2 border-slate-500 group-hover:border-slate-300"></div>
+<span class="font-medium text-sm text-slate-300 group-hover:text-white">Linear Regression</span>
+</div>
+</nav>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: ConfigurationArea -->
+<section class="flex-grow p-8 md:p-12" data-purpose="model-configuration-form">
+<header class="mb-8">
+<h2 class="text-2xl font-bold text-slate-800">Model Configuration</h2>
+</header>
+<form class="max-w-2xl space-y-8">
+<!-- Target Selection -->
+<div class="space-y-2">
+<label class="block font-bold text-slate-700" for="target-column">Target Column</label>
+<div class="relative">
+<select class="w-full border-gray-300 rounded-synthesis focus:ring-brand-primary focus:border-brand-primary py-3 px-4 appearance-none" id="target-column">
+<option>Revenue</option>
+<option>Churn</option>
+<option>User Growth</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+<svg class="h-5 w-5 text-gray-400" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Hyperparameters Section -->
+<div class="space-y-6">
+<h3 class="font-bold text-lg text-slate-800">Hyperparameters</h3>
+<!-- N-Estimators -->
+<div class="space-y-2">
+<label class="block font-semibold text-sm text-slate-600">N-Estimators</label>
+<div class="flex items-center gap-6">
+<div class="slider-container flex-grow">
+<div class="slider-fill" style="width: 40%;"></div>
+<input class="w-full relative z-10" max="1000" min="10" type="range" value="400"/>
+</div>
+<input class="w-20 border-gray-300 rounded-synthesis text-center font-medium focus:ring-brand-primary focus:border-brand-primary" data-purpose="param-input" type="text" value="400"/>
+</div>
+</div>
+<!-- Max Depth -->
+<div class="space-y-2">
+<label class="block font-semibold text-sm text-slate-600">Max Depth</label>
+<div class="flex items-center gap-6">
+<div class="slider-container flex-grow">
+<div class="slider-fill" style="width: 50%;"></div>
+<input class="w-full relative z-10" max="20" min="1" type="range" value="10"/>
+</div>
+<input class="w-20 border-gray-300 rounded-synthesis text-center font-medium focus:ring-brand-primary focus:border-brand-primary" data-purpose="param-input" type="text" value="10"/>
+</div>
+</div>
+<!-- Learning Rate -->
+<div class="space-y-2">
+<label class="block font-semibold text-sm text-slate-600">Learning Rate</label>
+<div class="flex items-center gap-6">
+<div class="slider-container flex-grow">
+<div class="slider-fill" style="width: 30%;"></div>
+<input class="w-full relative z-10" max="1" min="0" step="0.001" type="range" value="0.052"/>
+</div>
+<input class="w-20 border-gray-300 rounded-synthesis text-center font-medium focus:ring-brand-primary focus:border-brand-primary" data-purpose="param-input" type="text" value="0.052"/>
+</div>
+</div>
+</div>
+<!-- Train Button -->
+<div class="pt-6">
+<button class="w-full bg-brand-accent hover:bg-opacity-90 text-white font-extrabold py-4 rounded-synthesis transition-all shadow-md text-lg" type="button">
+              Train Now
+            </button>
+</div>
+</form>
+</section>
+<!-- END: ConfigurationArea -->
+</div>
+<!-- END: ToolContainer -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Footer -->
+<footer class="py-12 border-t border-gray-200 mt-auto" data-purpose="global-footer">
+<div class="container mx-auto px-4 flex justify-center gap-10 text-slate-500 font-medium text-sm">
+<a class="hover:text-slate-800 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-800 transition-colors" href="#">Terms of Service</a>
+</div>
+</footer>
+<!-- END: Footer -->
+<!-- Simple JavaScript to handle slider fills visually -->
+<script data-purpose="slider-interactivity">
+    document.querySelectorAll('input[type="range"]').forEach(slider => {
+      const updateFill = () => {
+        const val = slider.value;
+        const min = slider.min || 0;
+        const max = slider.max || 100;
+        const percent = ((val - min) / (max - min)) * 100;
+        const fill = slider.parentElement.querySelector('.slider-fill');
+        if (fill) fill.style.width = percent + '%';
+        
+        // Sync the text input next to it
+        const textInput = slider.closest('.flex').querySelector('input[type="text"]');
+        if (textInput) textInput.value = val;
+      };
+
+      slider.addEventListener('input', updateFill);
+      // Initial call
+      updateFill();
+    });
+  </script>
+</body></html>

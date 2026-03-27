@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Organization Settings | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed": "#00201c",
+              "on-tertiary": "#003731",
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "secondary-container": "#304b68",
+              "surface-bright": "#37393d",
+              "surface-dim": "#111317",
+              "surface-variant": "#333539",
+              "tertiary-fixed-dim": "#67d9c9",
+              "inverse-primary": "#9f412d",
+              "tertiary-container": "#006f64",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-fixed": "#3e0500",
+              "background": "#111317",
+              "outline": "#8d9198",
+              "on-secondary-container": "#9fbbdd",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e2e2e7",
+              "on-tertiary-container": "#81f2e2",
+              "surface-container": "#1e2024",
+              "error-container": "#93000a",
+              "surface": "#111317",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-primary": "#601305",
+              "surface-container-lowest": "#0c0e12",
+              "tertiary": "#67d9c9",
+              "secondary-fixed-dim": "#adc9eb",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-fixed-variant": "#7f2a18",
+              "outline-variant": "#43474d",
+              "primary-fixed": "#ffdad3",
+              "surface-tint": "#ffb4a4",
+              "on-error": "#690005",
+              "surface-container-high": "#282a2e",
+              "primary-container": "#a44531",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-highest": "#333539",
+              "error": "#ffb4ab",
+              "secondary": "#adc9eb",
+              "on-secondary": "#15324e",
+              "inverse-on-surface": "#2e3035",
+              "tertiary-fixed": "#85f6e5",
+              "inverse-surface": "#e2e2e7",
+              "primary": "#ffb4a4",
+              "on-surface-variant": "#c3c6ce"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #111317; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopNavBar Implementation -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#111317]/80 backdrop-blur-xl shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#E2E2E7] tracking-tighter font-headline">Insight Curator</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Dashboard</a>
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Analytics</a>
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Export</a>
+<a class="font-headline font-semibold tracking-tight text-[#C3C6CE] hover:text-[#E2E2E7] transition-all duration-300" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl text-[#C3C6CE] hover:bg-[#1E2024] transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-xl text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1 font-headline font-semibold tracking-tight">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden ml-2 ring-2 ring-outline-variant/20">
+<img alt="User profile avatar" data-alt="Professional headshot of a corporate executive in a dark suit with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKe_QSFbLJV3gF8uJZTG3bzzxtUeYRFABvIB8at17M0AH4goDPtBAY0rXb-3FZNOemYaxJ5gJDcqMSi8ValF13oqqmnjGh-gmxE0NqmZjCEmAgDPYGd7UrYuJ0vLdgLGQRyzgoxLsgDgOQLhaY9K-6ZQciNAdBj76jdlAwaSE0rM2oE0kHX2QRps2DzD4WLFh63EMfY_xJiWDEs87Tsdf9AEpxx9JLZUkSpsGYh5_ykY66U8QHoAmTG4XF5Q2x39tlJG8eCqqd6ME"/>
+</div>
+</div>
+</nav>
+<!-- Sidebar Implementation -->
+<aside class="hidden md:flex flex-col h-screen w-64 left-0 top-0 fixed pt-20 p-4 gap-y-2 bg-[#111317]/50 backdrop-blur-2xl bg-gradient-to-r from-[#1A1C20] to-transparent z-40">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-lg" data-icon="Memory">memory</span>
+</div>
+<div>
+<p class="text-[#ffb4a4] font-black uppercase tracking-widest text-xs">ML Curator</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Enterprise Tier</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="Memory">memory</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+<span>Exports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] font-bold bg-[#1E2024] rounded-lg transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="help_center">help_center</span>
+<span>Support</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 space-y-1">
+<button class="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl mb-6 shadow-lg shadow-primary/10 transition-all hover:scale-[1.02] active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Analysis</span>
+</button>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-transform duration-200 ease-in-out font-['Inter'] text-sm antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="text-5xl md:text-6xl font-headline font-extrabold tracking-tighter text-on-surface mb-2">Organization Settings</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">Configure your company identity, visual presence, and global preferences for the Insight Curator ecosystem.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Company Profile Card -->
+<section class="md:col-span-7 bg-surface-container-low rounded-xl p-8 transition-all hover:bg-surface-container duration-300">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary" data-icon="corporate_fare">corporate_fare</span>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Company Profile</h2>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Organization Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all outline-none" type="text" value="Quantum Dynamics Inc."/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Primary Industry</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all outline-none" type="text" value="Advanced Machine Learning"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Corporate Description</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none" rows="4">Global leaders in high-performance computing and neural network orchestration, serving the enterprise sector with curated strategic intelligence.</textarea>
+</div>
+<div class="flex justify-end gap-3 pt-4">
+<button class="px-6 py-2 rounded-xl text-primary font-bold text-sm hover:bg-primary/5 transition-colors">Discard</button>
+<button class="px-8 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl text-sm shadow-lg shadow-primary/10 transition-all hover:scale-[1.02]">Save Profile</button>
+</div>
+</div>
+</section>
+<!-- Logo Branding Card -->
+<section class="md:col-span-5 bg-surface-container rounded-xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="z-10 w-full">
+<h2 class="text-2xl font-headline font-bold text-on-surface mb-6 text-left">Brand Identity</h2>
+<div class="mb-8 p-8 border-2 border-dashed border-outline-variant/30 rounded-full w-48 h-48 mx-auto flex flex-col items-center justify-center bg-surface-container-low transition-all group-hover:border-primary/40">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="cloud_upload">cloud_upload</span>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Logo Upload</p>
+</div>
+<p class="text-sm text-on-surface-variant mb-8 px-4">Upload a high-resolution SVG or PNG. Preferred size is 512x512px with transparent background.</p>
+<button class="w-full py-4 border border-outline-variant/20 rounded-xl text-on-surface font-semibold text-sm hover:bg-surface-container-highest transition-colors">
+                        Select Logo File
+                    </button>
+</div>
+</section>
+<!-- Preferences Card (Asymmetric Span) -->
+<section class="md:col-span-8 bg-surface-container-low rounded-xl p-8">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-tertiary" data-icon="tune">tune</span>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Global Preferences</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-8">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-bold text-on-surface">Predictive Analysis</h3>
+<p class="text-sm text-on-surface-variant">Enable automated trend forecasting across all curated dashboards.</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner">
+<div class="absolute right-1 top-1 w-4 h-4 bg-on-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-bold text-on-surface">Real-time Syncing</h3>
+<p class="text-sm text-on-surface-variant">Update visualizations immediately as new ML model outputs are generated.</p>
+</div>
+<div class="w-12 h-6 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant/10">
+<div class="absolute left-1 top-1 w-4 h-4 bg-outline rounded-full"></div>
+</div>
+</div>
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-bold text-on-surface">Data Anonymization</h3>
+<p class="text-sm text-on-surface-variant">Strip PII from all datasets before they are processed by external curators.</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner">
+<div class="absolute right-1 top-1 w-4 h-4 bg-on-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Standard Timezone</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 appearance-none">
+<option>UTC -05:00 Eastern Time</option>
+<option>UTC +00:00 Greenwich Mean Time</option>
+<option>UTC +09:00 Japan Standard Time</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Currency Format</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 appearance-none">
+<option>USD ($) United States Dollar</option>
+<option>EUR (€) Euro</option>
+<option>JPY (¥) Japanese Yen</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Default Model Language</label>
+<div class="flex flex-wrap gap-2">
+<span class="bg-primary-container/20 text-primary-fixed-dim px-3 py-1 rounded-full text-xs font-bold border border-primary/20">English (Global)</span>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold border border-outline-variant/10">German</span>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold border border-outline-variant/10">Mandarin</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Access Stats -->
+<section class="md:col-span-4 space-y-6">
+<div class="bg-surface-container rounded-xl p-6 border-l-4 border-primary">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Organization Health</p>
+<p class="text-3xl font-headline font-extrabold text-on-surface">Optimal</p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[94%] bg-primary"></div>
+</div>
+<p class="mt-2 text-[10px] text-on-surface-variant font-medium">94% compliance across global preference nodes</p>
+</div>
+<div class="bg-surface-container rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-9xl text-tertiary" data-icon="shield">shield</span>
+</div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Security Status</p>
+<h3 class="text-lg font-bold text-on-surface mb-4">Tier 3 Encryption</h3>
+<button class="text-xs font-bold text-tertiary flex items-center gap-1 group">
+                        VIEW AUDIT LOGS
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="bg-gradient-to-br from-secondary-container to-on-secondary-fixed-variant rounded-xl p-6 text-on-secondary-container">
+<p class="text-[10px] font-black uppercase tracking-widest mb-4 opacity-70">Platform Tier</p>
+<p class="text-xl font-headline font-bold mb-4">Insight Curator Enterprise Plus</p>
+<button class="w-full py-2 bg-on-secondary-container text-secondary-container font-bold rounded-lg text-xs hover:bg-white transition-colors">
+                        MANAGE SUBSCRIPTION
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar Implementation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-[#111317]/90 backdrop-blur-lg border-t border-[#43474D]/15 shadow-2xl">
+<button class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] scale-90 active:scale-100 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] scale-90 active:scale-100 transition-transform">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] font-medium">Models</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#ffb4a4]/10 text-[#ffb4a4] rounded-xl px-4 py-1 scale-90 active:scale-100 transition-transform">
+<span class="material-symbols-outlined" data-icon="shield_person">shield_person</span>
+<span class="font-['Inter'] text-[10px] font-medium">Admin</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] scale-90 active:scale-100 transition-transform">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] text-[10px] font-medium">Help</span>
+</button>
+</nav>
+</body></html>

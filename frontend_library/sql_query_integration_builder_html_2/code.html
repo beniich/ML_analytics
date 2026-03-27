@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SQL Query &amp; Integration Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    .code-font {
+      font-family: 'JetBrains+Mono', monospace;
+    }
+  </style>
+<style data-purpose="custom-layout">
+    /* Custom scrollbar for a cleaner UI */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .sidebar-tree-item:hover {
+      background-color: #f1f5f9;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm">
+<div class="flex items-center space-x-2">
+<h1 class="text-xl font-bold tracking-tight text-slate-900">SQL Query &amp; Integration Builder</h1>
+</div>
+<div class="text-sm text-slate-500 font-medium">
+      Variant 14 of 20
+    </div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: PageTitleSection -->
+<section class="px-8 py-6">
+<h2 class="text-2xl font-bold text-slate-900">Data Source: SQL</h2>
+</section>
+<!-- END: PageTitleSection -->
+<main class="px-8 pb-12 grid grid-cols-12 gap-6">
+<!-- BEGIN: SchemaBrowserSidebar -->
+<aside class="col-span-12 lg:col-span-3 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col h-[700px]">
+<div class="p-4 border-b border-slate-100 bg-slate-50/50">
+<h3 class="font-semibold text-slate-700">Schema Browser</h3>
+</div>
+<div class="flex-1 overflow-y-auto p-4 text-sm">
+<!-- Tree View Structure -->
+<div class="space-y-1">
+<div class="flex items-center space-x-2 py-1 cursor-pointer">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-4 h-4 text-blue-500" fill="currentColor" viewbox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+<span class="font-medium">PostgreSQL: main_db</span>
+</div>
+<div class="ml-4 space-y-1">
+<div class="flex items-center space-x-2 py-1 cursor-pointer">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+<span>public</span>
+</div>
+<!-- Tables -->
+<div class="ml-4 space-y-1">
+<!-- Users Table -->
+<div>
+<div class="flex items-center space-x-2 py-1 cursor-pointer bg-slate-50 rounded px-1">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
+<span class="font-medium">users</span>
+</div>
+<div class="ml-6 mt-1 space-y-1 text-slate-500">
+<div class="flex items-center space-x-2 py-0.5"><span class="w-4 text-center font-mono text-xs">T</span><span>id</span></div>
+<div class="flex items-center space-x-2 py-0.5"><svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg><span>username</span></div>
+<div class="flex items-center space-x-2 py-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span>email</span></div>
+<div class="flex items-center space-x-2 py-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span>created_at</span></div>
+</div>
+</div>
+<!-- Products Table -->
+<div>
+<div class="flex items-center space-x-2 py-1 cursor-pointer">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
+<span class="font-medium">products</span>
+</div>
+</div>
+<!-- Orders Table -->
+<div>
+<div class="flex items-center space-x-2 py-1 cursor-pointer">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 20 20"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
+<span class="font-medium">orders</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: SchemaBrowserSidebar -->
+<!-- BEGIN: MainEditorContainer -->
+<div class="col-span-12 lg:col-span-9 space-y-6">
+<!-- BEGIN: QueryEditorSection -->
+<section class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col">
+<!-- Toolbar -->
+<div class="p-3 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+<div class="flex space-x-2">
+<button class="px-4 py-1.5 bg-white border border-slate-200 rounded text-sm font-medium flex items-center hover:bg-slate-50 transition-colors">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              Save Query
+            </button>
+<button class="px-4 py-1.5 bg-white border border-slate-200 rounded text-sm font-medium flex items-center hover:bg-slate-50 transition-colors">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              Format SQL
+            </button>
+</div>
+<div class="flex items-center space-x-2">
+<select class="text-sm border-slate-200 rounded-md focus:ring-blue-500 focus:border-blue-500 py-1.5 pr-8 pl-3">
+<option>Database: main_db (PostgreSQL)</option>
+</select>
+</div>
+</div>
+<!-- Editor Area -->
+<div class="min-h-[300px] flex code-font text-[14px] leading-relaxed relative">
+<!-- Line Numbers -->
+<div class="w-12 bg-slate-50 border-r border-slate-100 flex flex-col items-center py-4 text-slate-400 select-none">
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+</div>
+<!-- Code Content -->
+<div class="flex-1 p-4 whitespace-pre relative">
+<div class="relative z-10">
+<span class="text-indigo-600 font-medium">SELECT</span> id, username, email
+<span class="text-indigo-600 font-medium">FROM</span> users
+<span class="text-indigo-600 font-medium">WHERE</span> created_at &gt; <span class="text-orange-600">'2023-01-01'</span>
+<span class="text-indigo-600 font-medium">ORDER BY</span> id <span class="text-indigo-600 font-medium">DESC</span>;
+            </div>
+<!-- Active line highlight -->
+<div class="absolute top-[108px] left-0 right-0 h-7 bg-blue-50/50 -z-0"></div>
+</div>
+</div>
+<!-- Footer / Run Action -->
+<div class="p-4 border-t border-slate-100 bg-white">
+<button class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            Run Query
+          </button>
+</div>
+</section>
+<!-- END: QueryEditorSection -->
+<!-- BEGIN: DataPreviewSection -->
+<section class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4 border-b border-slate-100">
+<h3 class="font-semibold text-slate-800">Data Preview <span class="text-slate-500 font-normal">(Top 10 rows)</span></h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left border-collapse" id="results-table">
+<thead class="bg-slate-50 text-slate-700 font-medium border-b border-slate-200">
+<tr>
+<th class="px-4 py-3 border-r border-slate-200">id</th>
+<th class="px-4 py-3 border-r border-slate-200">username</th>
+<th class="px-4 py-3 border-r border-slate-200">email</th>
+<th class="px-4 py-3">created_at</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-slate-600">
+<tr class="hover:bg-slate-50">
+<td class="px-4 py-2.5 border-r border-slate-100">1</td>
+<td class="px-4 py-2.5 border-r border-slate-100">admin</td>
+<td class="px-4 py-2.5 border-r border-slate-100">admin@example.com</td>
+<td class="px-4 py-2.5">2023-01-01 08:58:33</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-4 py-2.5 border-r border-slate-100">2</td>
+<td class="px-4 py-2.5 border-r border-slate-100">username</td>
+<td class="px-4 py-2.5 border-r border-slate-100">username@gmail.com</td>
+<td class="px-4 py-2.5">2023-01-01 08:50:00</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-4 py-2.5 border-r border-slate-100">3</td>
+<td class="px-4 py-2.5 border-r border-slate-100">example</td>
+<td class="px-4 py-2.5 border-r border-slate-100">example@example.com</td>
+<td class="px-4 py-2.5">2023-01-01 08:53:06</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-4 py-2.5 border-r border-slate-100">4</td>
+<td class="px-4 py-2.5 border-r border-slate-100">jdoe</td>
+<td class="px-4 py-2.5 border-r border-slate-100">john.doe@test.com</td>
+<td class="px-4 py-2.5">2023-01-01 09:12:45</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: DataPreviewSection -->
+</div>
+<!-- END: MainEditorContainer -->
+</main>
+</body></html>

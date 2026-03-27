@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Billing &amp; Subscription - Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed": "#00201c",
+              "on-tertiary": "#003731",
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "secondary-container": "#304b68",
+              "surface-bright": "#37393d",
+              "surface-dim": "#111317",
+              "surface-variant": "#333539",
+              "tertiary-fixed-dim": "#67d9c9",
+              "inverse-primary": "#9f412d",
+              "tertiary-container": "#006f64",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-fixed": "#3e0500",
+              "background": "#111317",
+              "outline": "#8d9198",
+              "on-secondary-container": "#9fbbdd",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e2e2e7",
+              "on-tertiary-container": "#81f2e2",
+              "surface-container": "#1e2024",
+              "error-container": "#93000a",
+              "surface": "#111317",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-primary": "#601305",
+              "surface-container-lowest": "#0c0e12",
+              "tertiary": "#67d9c9",
+              "secondary-fixed-dim": "#adc9eb",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-fixed-variant": "#7f2a18",
+              "outline-variant": "#43474d",
+              "primary-fixed": "#ffdad3",
+              "surface-tint": "#ffb4a4",
+              "on-error": "#690005",
+              "surface-container-high": "#282a2e",
+              "primary-container": "#a44531",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-highest": "#333539",
+              "error": "#ffb4ab",
+              "secondary": "#adc9eb",
+              "on-secondary": "#15324e",
+              "inverse-on-surface": "#2e3035",
+              "tertiary-fixed": "#85f6e5",
+              "inverse-surface": "#e2e2e7",
+              "primary": "#ffb4a4",
+              "on-surface-variant": "#c3c6ce"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #111317;
+        color: #e2e2e7;
+        font-family: 'Inter', sans-serif;
+      }
+      .glass-card {
+        background: rgba(30, 32, 36, 0.5);
+        backdrop-filter: blur(16px);
+      }
+    </style>
+</head>
+<body class="min-h-screen">
+<aside class="hidden md:flex flex-col h-screen w-64 left-0 top-0 fixed bg-[#111317]/50 backdrop-blur-2xl bg-gradient-to-r from-[#1A1C20] to-transparent font-['Inter'] text-sm antialiased p-4 gap-y-2 z-50">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" style="font-variation-settings: 'FILL' 1;">memory</span>
+</div>
+<div>
+<div class="text-[#ffb4a4] font-black uppercase tracking-widest text-xs">ML Curator</div>
+<div class="text-[10px] text-on-surface-variant">Enterprise Tier</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 transition-transform duration-200 ease-in-out hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 transition-transform duration-200 ease-in-out hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="Memory">memory</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 transition-transform duration-200 ease-in-out hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+<span>Exports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] font-bold bg-[#1E2024] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 transition-transform duration-200 ease-in-out hover:bg-[#1E2024] hover:text-[#E2E2E7] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help_center">help_center</span>
+<span>Support</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1E2024] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1E2024] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<header class="fixed top-0 w-full z-40 flex justify-between items-center px-8 h-16 bg-[#111317]/80 backdrop-blur-xl md:pl-72 shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="font-['Manrope'] font-bold text-xl text-[#E2E2E7] tracking-tighter">Insight Curator</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-6 font-['Manrope'] font-semibold tracking-tight text-sm">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7]" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7]" href="#">Analytics</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7]" href="#">Export</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7]" href="#">Support</a>
+</div>
+<div class="flex items-center gap-4 text-[#ffb4a4]">
+<button class="material-symbols-outlined hover:bg-[#1E2024] p-2 rounded-full transition-all active:scale-95">notifications</button>
+<button class="material-symbols-outlined hover:bg-[#1E2024] p-2 rounded-full transition-all active:scale-95">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Professional corporate headshot of a male executive in a dark suit with neutral studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrM8QnZ0JbUPjQVKtAVJzARzmQ7uDJCsThnFO7RxKUG0aIUHKvf4pQUH-bdk-d0l_Ot0OUoBTZYCt39zWQeDSQWxuDTc69QNDX9y4rrvTwM5GDAnSgFavgKivGTY5IfJFDpdoqGTw5EtRWwoMFvzkrImTNQPFqJOzrU0dHKAOd5j8Z2bE-DLDfuhvwAvA1ovV1Xn7t-VkKBEbzn0pZs7ZqSKLxIeYuvOG74vx5x6EQKQySbRQVCChZ2iyFASv6lty7AdcOxJbmSqU"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-24 md:pb-8 md:pl-72 px-6 lg:px-12 max-w-7xl mx-auto">
+<section class="mb-12">
+<h1 class="font-headline font-extrabold text-4xl lg:text-5xl text-on-surface mb-2 tracking-tighter">Billing &amp; Subscription</h1>
+<p class="text-on-surface-variant max-w-2xl font-body">Manage your enterprise ML resources, analyze usage trends, and control your subscription parameters from a centralized editorial control center.</p>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-container-low rounded-xl p-6 glass-card border border-outline-variant/10">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="text-xs font-bold text-primary uppercase tracking-widest mb-1 block font-headline">Current Plan</span>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Enterprise AI</h2>
+</div>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full border border-primary/20">ACTIVE</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Unlimited ML Models</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Priority GPU Queues</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Dedicated Curator Account Manager</span>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-on-surface-variant">Next billing date</span>
+<span class="text-on-surface font-semibold">Oct 24, 2023</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Monthly total</span>
+<span class="text-on-surface font-semibold">$1,450.00</span>
+</div>
+</div>
+<button class="w-full mt-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl transition-all active:scale-[0.98] hover:shadow-lg hover:shadow-primary/20">
+                        Change Plan
+                    </button>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/5">
+<h3 class="text-sm font-bold text-on-surface mb-4 font-headline uppercase tracking-wider">Payment Method</h3>
+<div class="flex items-center gap-4 bg-surface-container rounded-xl p-4 mb-4">
+<div class="w-12 h-8 bg-surface-container-highest rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[#adc9eb]">credit_card</span>
+</div>
+<div class="flex-1">
+<div class="text-sm font-semibold text-on-surface">•••• •••• •••• 8842</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Expires 12/26</div>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Edit</button>
+</div>
+<button class="text-tertiary text-xs font-bold flex items-center gap-1 hover:gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">add</span> Add Backup Method
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-8">
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/5">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="text-xl font-headline font-bold text-on-surface">Usage Metrics</h3>
+<p class="text-sm text-on-surface-variant">ML Compute cycles and Data Token usage for the current cycle.</p>
+</div>
+<div class="text-right">
+<span class="text-xs text-on-surface-variant block mb-1">Cycle ends in</span>
+<span class="text-lg font-headline font-bold text-tertiary">14 Days</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Compute Units</span>
+<span>74% Used</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 74%"></div>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-on-surface-variant">7,420 of 10,000 units</span>
+<span class="text-primary font-bold">+2.4k this week</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Data Ingestion</span>
+<span>32% Used</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 32%"></div>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-on-surface-variant">1.6 TB of 5.0 TB</span>
+<span class="text-tertiary font-bold">Stable usage</span>
+</div>
+</div>
+</div>
+<div class="mt-10 h-48 w-full relative">
+<div class="absolute inset-0 flex items-end gap-1 px-4">
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[30%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[45%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[60%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t-sm h-[75%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t-sm h-[85%]"></div>
+<div class="flex-1 bg-primary rounded-t-sm h-[95%]"></div>
+</div>
+<div class="absolute -bottom-6 left-0 right-0 flex justify-between text-[10px] text-on-surface-variant uppercase tracking-widest px-4">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/5">
+<div class="px-8 py-6 flex justify-between items-center border-b border-outline-variant/10">
+<h3 class="text-lg font-headline font-bold text-on-surface">Invoice History</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-base">download</span> Export CSV
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-lowest">
+<tr>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Invoice ID</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Date</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Amount</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-8 py-5 text-sm font-medium text-on-surface">#INV-2023-009</td>
+<td class="px-8 py-5 text-sm text-on-surface-variant">Sep 24, 2023</td>
+<td class="px-8 py-5 text-sm font-bold text-on-surface">$1,450.00</td>
+<td class="px-8 py-5">
+<span class="px-2 py-1 rounded-full bg-tertiary/10 text-tertiary text-[10px] font-bold border border-tertiary/20">PAID</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">download</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-8 py-5 text-sm font-medium text-on-surface">#INV-2023-008</td>
+<td class="px-8 py-5 text-sm text-on-surface-variant">Aug 24, 2023</td>
+<td class="px-8 py-5 text-sm font-bold text-on-surface">$1,450.00</td>
+<td class="px-8 py-5">
+<span class="px-2 py-1 rounded-full bg-tertiary/10 text-tertiary text-[10px] font-bold border border-tertiary/20">PAID</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">download</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-8 py-5 text-sm font-medium text-on-surface">#INV-2023-007</td>
+<td class="px-8 py-5 text-sm text-on-surface-variant">Jul 24, 2023</td>
+<td class="px-8 py-5 text-sm font-bold text-on-surface">$1,280.00</td>
+<td class="px-8 py-5">
+<span class="px-2 py-1 rounded-full bg-tertiary/10 text-tertiary text-[10px] font-bold border border-tertiary/20">PAID</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">download</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-[#111317]/90 backdrop-blur-lg border-t border-[#43474D]/15 shadow-2xl">
+<button class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] font-medium">Models</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#ffb4a4]/10 text-[#ffb4a4] rounded-xl px-4 py-1 transition-transform scale-90 active:scale-100">
+<span class="material-symbols-outlined" data-icon="shield_person">shield_person</span>
+<span class="font-['Inter'] text-[10px] font-medium">Admin</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] text-[10px] font-medium">Help</span>
+</button>
+</footer>
+</body></html>

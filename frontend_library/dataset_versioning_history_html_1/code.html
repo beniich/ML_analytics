@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dataset Versioning &amp; History - DataForge</title>
+<!-- Manrope Font -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#4A6583', // Synthesis ML Slate Blue
+              50: '#F4F6F8',
+              100: '#E9ECF1',
+              200: '#C9D3DE',
+              300: '#A8BACC',
+              400: '#88A1B9',
+              500: '#4A6583',
+              600: '#3D526A',
+              700: '#2F4052',
+              800: '#222E3B',
+              900: '#141B23',
+            },
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '0.125rem',
+            DEFAULT: '4px', // ROUND_FOUR from design system
+            'md': '4px',
+            'lg': '4px',
+            'xl': '4px',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="layout-tweaks">
+    body {
+      background-color: #F3F7F9; /* Subtle light blue background from the image */
+      font-family: 'Manrope', sans-serif;
+    }
+    /* Timeline vertical line */
+    .timeline-line {
+      position: absolute;
+      left: 23px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: #E2E8F0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50" data-purpose="site-navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex items-center gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 bg-brand rounded flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.001 8.001 0 0117.748 8H12V2.252z"></path></svg>
+</div>
+<span class="font-bold text-xl tracking-tight text-brand-800">DataForge</span>
+</div>
+<!-- Nav Links -->
+<nav class="hidden md:flex space-x-8">
+<a class="text-slate-500 hover:text-brand-600 px-1 pt-1 text-sm font-medium border-b-2 border-transparent" href="#">Projects</a>
+<a class="text-brand-600 border-brand-600 px-1 pt-1 text-sm font-medium border-b-2" href="#">Datasets</a>
+<a class="text-slate-500 hover:text-brand-600 px-1 pt-1 text-sm font-medium border-b-2 border-transparent" href="#">Analysis</a>
+<a class="text-slate-500 hover:text-brand-600 px-1 pt-1 text-sm font-medium border-b-2 border-transparent" href="#">Team</a>
+</nav>
+</div>
+<!-- User Profile -->
+<div class="flex items-center gap-3">
+<img alt="Sarah Chen" class="w-8 h-8 rounded-full border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgOqt-MQuQNHHYnfGgccULNQvK7Hn0MrggWpw6ZhbL145Zgm5TpjEvJRosOJuLISRH3TrmrgBtskZfU-FYVaQnd4Jz2ZzlZZfDF4g-BWIG_3VJ8HiPEZavZxdVKqz-YG7vF9ysQg7ZURUg4M5IqSRE4nQ6wzc6UOS6DQ2jn3QBPhykTdoOBiYWimMqzh6tkph0x3gBsVi-TJRFXKwmts_sOOPhGCKPYTr7rJkYWxavNjCrd3m_5xY4MIOr5cOot0JrU8A2nw9E_zM"/>
+<button class="flex items-center text-sm font-medium text-slate-700 hover:text-brand-600">
+            Sarah Chen
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-purpose="main-content-area">
+<!-- Breadcrumbs -->
+<nav class="mb-4 text-sm font-medium" data-purpose="breadcrumbs">
+<ol class="flex items-center space-x-2 text-slate-500">
+<li><a class="hover:text-brand-600" href="#">Projects</a></li>
+<li><svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path></svg></li>
+<li><a class="hover:text-brand-600" href="#">Alpha Analysis - Genomic Data</a></li>
+<li><svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path></svg></li>
+<li class="text-slate-900">Dataset Versioning &amp; History</li>
+</ol>
+</nav>
+<!-- Page Header -->
+<header class="flex justify-between items-start mb-8">
+<div>
+<h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Dataset Versioning &amp; History</h1>
+<p class="mt-1 text-slate-600">Manage and review historical dataset versions for the Alpha Analysis project.</p>
+</div>
+<button class="bg-brand hover:bg-brand-600 text-white px-5 py-2.5 rounded text-sm font-semibold transition-colors shadow-sm" data-purpose="upload-button">
+        Upload New Version
+      </button>
+</header>
+<!-- BEGIN: TimelineContainer -->
+<section class="bg-white border border-slate-200 rounded-md shadow-sm overflow-hidden" data-purpose="version-timeline-container">
+<!-- Toolbar -->
+<div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-end gap-3 items-center">
+<button class="p-2 text-slate-500 hover:text-brand-600 border border-slate-200 rounded bg-white hover:bg-slate-50">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="px-4 py-2 text-slate-400 bg-slate-100 rounded text-sm font-semibold cursor-not-allowed" disabled="">
+          Compare Selected Versions
+        </button>
+</div>
+<!-- Timeline Items -->
+<div class="relative p-6 space-y-4">
+<div class="timeline-line mx-6"></div>
+<!-- Version 4 -->
+<div class="relative flex gap-8 group" data-purpose="version-item">
+<div class="z-10 mt-6 flex-none">
+<div class="w-12 h-12 bg-white flex items-center justify-center">
+<div class="w-4 h-4 rounded-full bg-brand border-4 border-brand-100 ring-2 ring-white"></div>
+</div>
+</div>
+<article class="flex-grow p-5 border border-brand-200 bg-brand-50/20 rounded-md transition-shadow hover:shadow-md">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<h3 class="text-lg font-bold text-slate-900">Version 4 (Current)</h3>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-700 uppercase tracking-wide">Active</span>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 text-slate-400 bg-slate-50 border border-slate-200 rounded text-sm font-semibold cursor-not-allowed">Restore</button>
+<button class="px-4 py-1.5 text-brand-600 bg-white border border-brand-500 rounded text-sm font-bold hover:bg-brand-50 transition-colors">Compare</button>
+</div>
+</div>
+<div class="flex items-center text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 26, 2023, 10:45 AM</span>
+<span class="mx-2">•</span>
+<div class="flex items-center gap-1.5">
+<img alt="Sarah Chen" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmMDXRV38T8OLELb2OboZfvAAI4IGQKusuNA_6aQI_klTZWD-c8U-B51OEkabXYeKQnppVZz_MAF_r2G9qZTrf5qaJDeBE0uqjeGlFjbw9Hw-p4NNpi3GY5vWAhHpNR5_jy7Ud-dupL9-J-rTl_SJ-eDi9x3eGsOBftVcWDSSA5uWl4FsPNlNpJwDHuAXIrf428j2KvdYkXEIHuE6R_bMyi2zzauR5Z4OVm3PQ7nCbYN6IyWLpLQQf6BbRMlfttMtQUxOtwDyqYVM"/>
+<span class="font-medium text-slate-700">Sarah Chen</span>
+</div>
+</div>
+<p class="text-slate-600 text-sm leading-relaxed">
+              Updated genomic sequence data for cohort B. Includes fix for variant calling.
+            </p>
+</article>
+</div>
+<!-- Version 3 -->
+<div class="relative flex gap-8 group" data-purpose="version-item">
+<div class="z-10 mt-6 flex-none">
+<div class="w-12 h-12 bg-white flex items-center justify-center">
+<div class="w-3 h-3 rounded-full border-2 border-slate-200 bg-white group-hover:border-brand-300"></div>
+</div>
+</div>
+<article class="flex-grow p-5 border border-slate-200 bg-white rounded-md transition-shadow hover:shadow-md">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<h3 class="text-lg font-bold text-slate-900">Version 3</h3>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-500 uppercase tracking-wide">Archived</span>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 text-slate-600 bg-white border border-slate-200 rounded text-sm font-bold hover:bg-slate-50 transition-colors">Restore</button>
+<button class="px-4 py-1.5 text-slate-600 bg-white border border-slate-200 rounded text-sm font-bold hover:bg-slate-50 transition-colors">Compare</button>
+</div>
+</div>
+<div class="flex items-center text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 24, 2023, 3:30 PM</span>
+<span class="mx-2">•</span>
+<div class="flex items-center gap-1.5">
+<img alt="David Miller" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgEVyfCNAzEj7j5eYSEJHPAfZMgWtpGLqXFuRvU16cxvMcs9eGV1Qz0n9lmYFhde2x5f5d1-ICaS5dFdu9Nt0SMQrq5V2E6XVqF_d9fw_5YCWkMvq4AX5O4oMFYHhBp6j1WX2ibEywSM608s7s9JrLcXxDZDkimB-DXRiXOYCVyI73dpqu9EN7Fng7uaHAgL5Xs2ZNpECFJViIv-IEqOdvSPxGXEqdDqp6ccAsI4zgVHi_H9pElVPthQh2YzuE16fPlzhfmVdzMpE"/>
+<span class="font-medium text-slate-700">David Miller</span>
+</div>
+</div>
+<p class="text-slate-600 text-sm leading-relaxed">
+              Initial cohort B sequence data. Pending variant calling fix.
+            </p>
+</article>
+</div>
+<!-- Version 2 -->
+<div class="relative flex gap-8 group" data-purpose="version-item">
+<div class="z-10 mt-6 flex-none">
+<div class="w-12 h-12 bg-white flex items-center justify-center">
+<div class="w-3 h-3 rounded-full border-2 border-slate-200 bg-white group-hover:border-brand-300"></div>
+</div>
+</div>
+<article class="flex-grow p-5 border border-slate-200 bg-white rounded-md transition-shadow hover:shadow-md">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<h3 class="text-lg font-bold text-slate-900">Version 2</h3>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-500 uppercase tracking-wide">Archived</span>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 text-slate-600 bg-white border border-slate-200 rounded text-sm font-bold hover:bg-slate-50 transition-colors">Restore</button>
+<button class="px-4 py-1.5 text-slate-600 bg-white border border-slate-200 rounded text-sm font-bold hover:bg-slate-50 transition-colors">Compare</button>
+</div>
+</div>
+<div class="flex items-center text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 20, 2023, 9:15 AM</span>
+<span class="mx-2">•</span>
+<div class="flex items-center gap-1.5">
+<img alt="Sarah Chen" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYBGDXDfVk_GyHAB4jKvFCLP_UNANvXGS8eOYfZniOTxWSVurLWTZVaOpwrbF0_D7cpPHEOQkRl2yHjEvmyarmHfXC_IFdt2AWCW6U_zYbNMJqI-P1UEjwpuATDtgiYm7t4sFAXyeHpfRB4PpdyFt4MJTr4vtagdGihRjrpWNjZnVsRTpObECvPB4jYJc5GDxMU6q4TlFeDV0hoJwm-nEUpgVNN9MQ_7_NotJMfoEPzqd_ElvIJv4_hIYJmAtMrT94YFW9DQ6dXZM"/>
+<span class="font-medium text-slate-700">Sarah Chen</span>
+</div>
+</div>
+<p class="text-slate-600 text-sm leading-relaxed">
+              Refined cohort A data with additional metadata.
+            </p>
+</article>
+</div>
+<!-- Version 1 -->
+<div class="relative flex gap-8 group" data-purpose="version-item">
+<div class="z-10 mt-6 flex-none">
+<div class="w-12 h-12 bg-white flex items-center justify-center">
+<div class="w-3 h-3 rounded-full border-2 border-slate-200 bg-white group-hover:border-brand-300"></div>
+</div>
+</div>
+<article class="flex-grow p-5 border border-slate-200 bg-white rounded-md transition-shadow hover:shadow-md">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<h3 class="text-lg font-bold text-slate-900">Version 1 (Baseline)</h3>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-500 uppercase tracking-wide">Archived</span>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 text-slate-600 bg-white border border-slate-200 rounded text-sm font-bold hover:bg-slate-50 transition-colors">Restore</button>
+<button class="px-4 py-1.5 text-slate-600 bg-white border border-slate-200 rounded text-sm font-bold hover:bg-slate-50 transition-colors">Compare</button>
+</div>
+</div>
+<div class="flex items-center text-sm text-slate-500 mb-3">
+<span>Uploaded Oct 15, 2023, 11:00 AM</span>
+<span class="mx-2">•</span>
+<div class="flex items-center gap-1.5">
+<img alt="Emily Davis" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8HS0tTz2c5t5uOVcnisMRHqyWycgDF1oeC8DnECNxNXsvzcvdKtAhLp9wf_YQbZrDf65ypNFeCSn-axHSN9AAJYQ6OrUdiO5FapP4XSHj5cCDz4V-rFqeeSz6be0uxkHqtsAPjb9ahbBFhjOJ-v1PwZNkZD7X6i7qdsR8OqQRMbPqvD7DJpMFypbDerZcQKiF6I9XlRP1s1nPh8VRhcFdx9SCYGG8bMKmcUVOGGEXC7S-CSloAbxO1erv1ino-1Rm5B_aLEYbZDo"/>
+<span class="font-medium text-slate-700">Emily Davis</span>
+</div>
+</div>
+<p class="text-slate-600 text-sm leading-relaxed">
+              Original raw genomic data upload from sequencing facility.
+            </p>
+</article>
+</div>
+</div>
+</section>
+<!-- END: TimelineContainer -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Simple Footer -->
+<footer class="mt-12 py-8 border-t border-slate-200">
+<div class="max-w-7xl mx-auto px-4 text-center text-slate-400 text-sm">
+      © 2023 DataForge AI. All rights reserved.
+    </div>
+</footer>
+<!-- END: Simple Footer -->
+</body></html>

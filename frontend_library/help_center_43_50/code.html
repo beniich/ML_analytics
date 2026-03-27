@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Help Center | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed": "#00201c",
+              "on-tertiary": "#003731",
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "secondary-container": "#304b68",
+              "surface-bright": "#37393d",
+              "surface-dim": "#111317",
+              "surface-variant": "#333539",
+              "tertiary-fixed-dim": "#67d9c9",
+              "inverse-primary": "#9f412d",
+              "tertiary-container": "#006f64",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-fixed": "#3e0500",
+              "background": "#111317",
+              "outline": "#8d9198",
+              "on-secondary-container": "#9fbbdd",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e2e2e7",
+              "on-tertiary-container": "#81f2e2",
+              "surface-container": "#1e2024",
+              "error-container": "#93000a",
+              "surface": "#111317",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-primary": "#601305",
+              "surface-container-lowest": "#0c0e12",
+              "tertiary": "#67d9c9",
+              "secondary-fixed-dim": "#adc9eb",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-fixed-variant": "#7f2a18",
+              "outline-variant": "#43474d",
+              "primary-fixed": "#ffdad3",
+              "surface-tint": "#ffb4a4",
+              "on-error": "#690005",
+              "surface-container-high": "#282a2e",
+              "primary-container": "#a44531",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-highest": "#333539",
+              "error": "#ffb4ab",
+              "secondary": "#adc9eb",
+              "on-secondary": "#15324e",
+              "inverse-on-surface": "#2e3035",
+              "tertiary-fixed": "#85f6e5",
+              "inverse-surface": "#e2e2e7",
+              "primary": "#ffb4a4",
+              "on-surface-variant": "#c3c6ce"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 28, 32, 0.7);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#111317]/80 backdrop-blur-xl shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#E2E2E7] tracking-tighter font-headline">Insight Curator</span>
+<div class="hidden md:flex items-center gap-6 font-headline font-semibold tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all duration-300 px-3 py-1 rounded-lg" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all duration-300 px-3 py-1 rounded-lg" href="#">Analytics</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all duration-300 px-3 py-1 rounded-lg" href="#">Export</a>
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#C3C6CE] hover:bg-[#1E2024] rounded-full transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-[#C3C6CE] hover:bg-[#1E2024] rounded-full transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full border border-outline-variant/30" data-alt="professional portrait of a tech professional in a soft-lit modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANqYum5KberzxsOykQte9ce9MgMrV891QP_A_Y2vlr4nPw_RliL0AHenUbzF06UHC2Hsc6ee59Ir01GLn6CdZIQVHyqLm9qybps-FLr-z2IbdeeHOmz3GXLqzlagyxlHBYO5b-6ZfQjdtiCNqIdriCzIKwsVom7pkaUPfrZrOVYkW3z2UWBNOGNYe225Jtr3BhtKU1XsGCnlV0hmlBmCIeHwVApNZjycKWXNmVXXmeigeshIGsFrtaXQiZ8OgUN0Dlmc5d_1eqI58"/>
+</div>
+</nav>
+<div class="flex min-h-screen pt-16">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 p-4 gap-y-2 bg-[#111317]/50 backdrop-blur-2xl bg-gradient-to-r from-[#1A1C20] to-transparent font-['Inter'] text-sm antialiased">
+<div class="px-4 py-6 mb-4">
+<span class="text-[#ffb4a4] font-black uppercase tracking-widest text-xs">ML CURATOR</span>
+<p class="text-[10px] text-on-surface-variant/60 font-medium">ENTERPRISE TIER</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="Memory">memory</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+<span>Exports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:translate-x-1 hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] font-bold bg-[#1E2024] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help_center">help_center</span>
+<span>Support</span>
+</a>
+<div class="mt-auto border-t border-outline-variant/10 pt-4 flex flex-col gap-1">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed px-4 py-3 rounded-xl font-bold text-sm mb-4 transition-transform active:scale-95">
+                    New Analysis
+                </button>
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-8 lg:p-12 mb-20 md:mb-0">
+<!-- Hero Search Section -->
+<section class="max-w-6xl mx-auto mb-20 text-center">
+<h1 class="text-6xl font-headline font-extrabold tracking-tighter mb-6 text-on-surface">
+                    How can we <span class="text-primary">help</span> you today?
+                </h1>
+<p class="text-on-surface-variant text-xl max-w-2xl mx-auto mb-12">
+                    Access deep-dive documentation, video masterclasses, and API schemas curated for enterprise ML excellence.
+                </p>
+<div class="relative max-w-3xl mx-auto">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-primary text-2xl" data-icon="search">search</span>
+<input class="w-full h-16 pl-16 pr-6 bg-surface-container-highest rounded-full border-none focus:ring-2 focus:ring-primary/20 text-on-surface text-lg transition-all shadow-2xl" placeholder="Search for models, API endpoints, or tutorials..." type="text"/>
+</div>
+</section>
+<!-- Bento Grid Categories -->
+<section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
+<!-- Large Feature Card: Getting Started -->
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="relative z-10 flex flex-col h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" data-icon="rocket_launch" data-weight="fill">rocket_launch</span>
+<h3 class="text-3xl font-headline font-bold mb-4">Foundation Series</h3>
+<p class="text-on-surface-variant text-lg mb-8 max-w-md leading-relaxed">
+                            New to Insight Curator? Start with our interactive onboarding modules to master the dashboard in under 15 minutes.
+                        </p>
+<div class="mt-auto flex gap-4">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold flex items-center gap-2 group-hover:shadow-[0_0_20px_rgba(255,180,164,0.3)] transition-all">
+                                Start Onboarding <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 h-full opacity-20 group-hover:opacity-40 transition-opacity pointer-events-none">
+<img alt="Analytics visual" class="w-full h-full object-cover" data-alt="abstract visualization of node network with glowing salmon and teal connections on a deep slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbIOaQREvfMk76vT6TY2qoP6UKXfz-QcTAfbcwK1gEXhXxMV7mme2RQWfadsAQn7LlqHAI_gtNgYsDzr7Vzdk4R0cuQOF5wdafRdde5gAK86pXREoL_yNJdz6fh7tGT8vegq5Iw0wRstNA_7ePezteguzFz9kzrt8wxoWet5Vj_ekgxA3ucGz7p3SM5PNWBVs-0g4EuxhhipVcRklD35cEhK-UTbhDdKbfHzRbE3O2m9n0XMSbzN9woKH6L72_nkPP9GC_Wai78Us"/>
+</div>
+</div>
+<!-- Video Tutorials -->
+<div class="md:col-span-4 bg-surface-container rounded-xl p-8 flex flex-col border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4" data-icon="video_library">video_library</span>
+<h3 class="text-xl font-headline font-bold mb-2">Video Library</h3>
+<p class="text-on-surface-variant text-sm mb-6">Expert-led walkthroughs of complex ML pipeline configurations.</p>
+<ul class="flex flex-col gap-3 mt-auto">
+<li class="flex items-center gap-3 text-sm text-on-surface hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="play_circle">play_circle</span>
+                            Dataset Normalization
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="play_circle">play_circle</span>
+                            Model Versioning Logic
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="play_circle">play_circle</span>
+                            Advanced SQL Exports
+                        </li>
+</ul>
+</div>
+<!-- API Reference -->
+<div class="md:col-span-4 bg-surface-container rounded-xl p-8 border border-outline-variant/10 group hover:border-primary/30 transition-all">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="code">code</span>
+<h3 class="text-xl font-headline font-bold mb-2">API Reference</h3>
+<p class="text-on-surface-variant text-sm mb-6">Connect your stack with our REST and GraphQL endpoints.</p>
+<div class="bg-surface-container-lowest p-4 rounded-lg font-mono text-[10px] text-on-tertiary-container/80 mb-4 overflow-hidden border border-outline-variant/5">
+<span class="text-primary">GET</span> /v1/insights/curate<br/>
+<span class="text-secondary">{</span> "limit": 50, "auth": "key" <span class="text-secondary">}</span>
+</div>
+<a class="text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+                        View Schemas <span class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+<!-- Community / Support -->
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 flex items-center gap-12 border border-outline-variant/5">
+<div class="flex-1">
+<h3 class="text-2xl font-headline font-bold mb-3">Enterprise Concierge</h3>
+<p class="text-on-surface-variant mb-6">Priority 24/7 support for architecture reviews and scaling bottlenecks.</p>
+<div class="flex gap-4">
+<button class="bg-surface-container-highest border border-outline-variant/20 px-6 py-3 rounded-xl font-bold hover:bg-surface-container-high transition-colors">
+                                Talk to Engineer
+                            </button>
+<button class="text-on-surface-variant font-bold px-4 py-3 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="forum">forum</span> Open Chat
+                            </button>
+</div>
+</div>
+<div class="hidden sm:flex flex-wrap gap-2 w-48 justify-end">
+<img alt="Team member" class="w-12 h-12 rounded-full border-2 border-surface shadow-xl" data-alt="close-up of a smiling software engineer in a bright tech office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbx3yO64f082lkN0wRFDBqebBcm-HL0oK_iq7JaTarAiQU7YzKuM4eHDHIS3u9p5idLX50tJfzbO7i898OIrbsb7OJ2ClgzMPVMvd2fZbKp7hRsjGw87kc3dKzx0qWzLj-Ihe5CRpjmIyoKOq-AakTnToX_22WhSv6DXuAKvMT8RIhzmYKNo7c0kXVZY1cVIoUsYmzAr2ZcOy3PvObxaPIHcg7joCxBp0aCeig2ebQTyTzMWsfZe43hWjGTOBKrCrdbSDPkpihBgk"/>
+<img alt="Team member" class="w-12 h-12 rounded-full border-2 border-surface -ml-4 shadow-xl" data-alt="professional male developer working with high-tech monitors in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgpz2i60p8ppMuSah4pkx3qV2WTolVQCxFuwZcl2fDaV83_T21Nmm4tytnBZVfZIf4UOJkYGgqImIhMjfm0gHPF1COMbWDNxr5M31MLDjB9AZI4FHuYbVIE6oL4R4qTDC9vzQ3J88WNjjk1BQnCL4x5mxXFyzG1gbLSKo2QNlOvU_hz26NKTX623YdAj8HDOXq7v-Of2YA3iW28viqqaryFuFZmu6PmQwgynq8h_EhoK5oAV9xk3-7GriVmuZbr7Y7NiD1kDV1d8o"/>
+<img alt="Team member" class="w-12 h-12 rounded-full border-2 border-surface -ml-4 shadow-xl" data-alt="professional account manager smiling with modern architecture in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJYlpEU8cwPvPG9D5fgkJ3882BBn3OG0I1ksZRkC82ZsTLAdGrl_WJek_ak94laY2ZzfikVLeacCbpr8IouexwgN_YJvhcQEOoG7V5iuMJDIDZgsC2WfWZhibvqs-oWdP-HK6N1IQWsciW8SUr0niIUKFJGcZ8_FXtzU8k2SN9qtA-qgaBnmWnNRVIYKRrSAWm5KuP7UY89doLSiOeh_kOMtD7q4ouNVePUeDSgxkMjEKck1ULyASb0jp8IBNgNPKwIWAD9cLvAeM"/>
+<div class="w-12 h-12 rounded-full bg-primary/20 border-2 border-surface -ml-4 flex items-center justify-center text-[10px] font-bold text-primary">
+                            +12
+                        </div>
+</div>
+</div>
+</section>
+<!-- Knowledge Base Section -->
+<section class="max-w-7xl mx-auto mb-20">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-headline font-bold text-on-surface">Trending Articles</h2>
+<p class="text-on-surface-variant">Most frequent solutions from our curator ecosystem.</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-1">
+                        Browse all <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container rounded-xl p-6 hover:translate-y-[-4px] transition-all duration-300 group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-tertiary bg-tertiary/10 px-2 py-1 rounded">Security</span>
+<span class="text-on-surface-variant text-[10px]">5 min read</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3 group-hover:text-primary transition-colors">Configuring OAuth 2.0 with SAML Providers</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2">Learn how to bridge enterprise identity providers with the Insight Curator platform for single sign-on.</p>
+</div>
+<div class="bg-surface-container rounded-xl p-6 hover:translate-y-[-4px] transition-all duration-300 group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2 py-1 rounded">Models</span>
+<span class="text-on-surface-variant text-[10px]">12 min read</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3 group-hover:text-primary transition-colors">Optimizing Transformer Latency for Edge Devices</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2">A technical guide to pruning and quantization for deployment in low-compute environments.</p>
+</div>
+<div class="bg-surface-container rounded-xl p-6 hover:translate-y-[-4px] transition-all duration-300 group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">Updates</span>
+<span class="text-on-surface-variant text-[10px]">3 min read</span>
+</div>
+<h4 class="font-headline font-bold text-lg mb-3 group-hover:text-primary transition-colors">Release Notes: v4.2.0 "Obsidian"</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2">Everything new in the latest major update, including multi-modal data curation and enhanced visualization.</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-[#111317]/90 backdrop-blur-lg border-t border-[#43474D]/15 shadow-2xl">
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] font-medium">Models</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C3C6CE] active:bg-[#1E2024] transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="shield_person">shield_person</span>
+<span class="font-['Inter'] text-[10px] font-medium">Admin</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#ffb4a4]/10 text-[#ffb4a4] rounded-xl px-4 py-1 transition-transform scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] text-[10px] font-medium">Help</span>
+</a>
+</nav>
+</body></html>

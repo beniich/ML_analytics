@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-50" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Correlation Analysis Matrix - Synthesis ML</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand': '#4A6583',
+            'heatmap-neg': '#4A5578', // Deep blue
+            'heatmap-mid': '#CBD5E1', // Neutral grey
+            'heatmap-pos': '#EE8162', // Coral orange
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          borderRadius: {
+            'synthesis': '4px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body { font-family: 'Manrope', sans-serif; }
+    
+    /* Heatmap cell coloring logic based on values */
+    .cell-pos-high { background-color: #EE8162; color: white; }
+    .cell-pos-med { background-color: #F4A790; color: #1e293b; }
+    .cell-neutral { background-color: #E2E8F0; color: #64748b; }
+    .cell-neg-med { background-color: #94A3B8; color: white; }
+    .cell-neg-high { background-color: #4A5578; color: white; }
+
+    /* Vertical label rotation */
+    .vertical-label {
+      writing-mode: vertical-rl;
+      transform: rotate(225deg);
+      white-space: nowrap;
+    }
+
+    /* Tooltip arrow */
+    .tooltip-arrow::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: 20px;
+      border-width: 0 5px 5px 5px;
+      border-style: solid;
+      border-color: transparent transparent #1e293b transparent;
+    }
+  </style>
+</head>
+<body class="antialiased text-slate-900">
+<!-- BEGIN: Main Navigation -->
+<nav class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between" data-purpose="main-nav">
+<div class="flex items-center space-x-8">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 bg-brand rounded-synthesis flex items-center justify-center text-white font-bold">ML</div>
+<span class="font-bold text-lg tracking-tight">Synthesis</span>
+</div>
+<div class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-500">
+<a class="flex items-center space-x-1 hover:text-brand transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-1 hover:text-brand transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Data Sources</span>
+</a>
+<a class="flex items-center space-x-1 text-brand border-b-2 border-brand pb-3 -mb-3.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Analysis</span>
+</a>
+<a class="flex items-center space-x-1 hover:text-brand transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Models</span>
+</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSk5gWVUK1asdbx76dm5dPNWy6D0l74A7lqlB4GtQm2FcntTdKfJzSbGOQMaRcSwdM_mzVAz3Q5evIm6ssvKzCSNawiYiseAravvIxQ_mg0p24EO-kJ1Q0RpJzWcg9nwiBPB_TQmh8si_RfDd-6rM6nKQyeZVczcjSod70YNS_-PaReX3G58LczLYmjRs92OVcFKB1rKdtJF4HTfygn4vc_-y_pjp8rZbrPb06f7axk4FI6P8rbFhF0a_hRdyliYCGBWPYIv5lWoQ"/>
+</div>
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</nav>
+<!-- END: Main Navigation -->
+<!-- BEGIN: Main Content Container -->
+<main class="max-w-[1200px] mx-auto p-8">
+<!-- BEGIN: Header Section -->
+<section class="mb-10" data-purpose="page-header">
+<h1 class="text-3xl font-bold text-slate-900 tracking-tight">Correlation Analysis Matrix</h1>
+<p class="text-slate-500 mt-1">Correlation matrix visualization, and correlates variables analysis.</p>
+</section>
+<!-- END: Header Section -->
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- BEGIN: Left Sidebar (Controls) -->
+<aside class="w-full lg:w-72 space-y-6" data-purpose="sidebar-controls">
+<!-- BEGIN: Filter Variables Card -->
+<div class="bg-white border border-slate-200 rounded-synthesis p-5 shadow-sm">
+<h3 class="font-bold text-slate-800 mb-4">Filter Variables</h3>
+<div class="relative mb-4">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-synthesis text-sm focus:ring-brand focus:border-brand" placeholder="Search" type="text"/>
+</div>
+<div class="space-y-3">
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Customer Age</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input checked="" class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Purchase Freq</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input checked="" class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Product Rating</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input checked="" class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Site Visits</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Return Rate</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Session Time</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input class="rounded-synthesis text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+<span>Discount Usage</span>
+</label>
+</div>
+</div>
+<!-- END: Filter Variables Card -->
+<!-- BEGIN: Correlation Method Card -->
+<div class="bg-white border border-slate-200 rounded-synthesis p-5 shadow-sm">
+<h3 class="font-bold text-slate-800 mb-4">Correlation Method</h3>
+<div class="space-y-3">
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input checked="" class="text-brand focus:ring-brand h-4 w-4" name="method" type="radio"/>
+<span>Pearson (Linear)</span>
+</label>
+<label class="flex items-center space-x-3 text-sm text-slate-600 cursor-pointer">
+<input class="text-brand focus:ring-brand h-4 w-4" name="method" type="radio"/>
+<span>Spearman (Rank-based)</span>
+</label>
+</div>
+</div>
+<!-- END: Correlation Method Card -->
+<!-- BEGIN: Lag/Shift Card -->
+<div class="bg-white border border-slate-200 rounded-synthesis p-5 shadow-sm">
+<h3 class="font-bold text-slate-800 mb-4">Lag/Shift (Optional)</h3>
+<select class="w-full border border-slate-200 rounded-synthesis text-sm py-2 px-3 focus:ring-brand focus:border-brand">
+<option>None</option>
+<option>Shift +1</option>
+<option>Shift -1</option>
+</select>
+</div>
+<!-- END: Lag/Shift Card -->
+</aside>
+<!-- END: Left Sidebar -->
+<!-- BEGIN: Heatmap Visualization Container -->
+<section class="flex-1 bg-white border border-slate-100 rounded-synthesis p-8 shadow-sm overflow-x-auto" data-purpose="heatmap-container">
+<div class="min-w-[700px]">
+<table class="w-full border-separate border-spacing-2" id="correlation-matrix">
+<thead>
+<tr>
+<th class="w-32"></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Customer Age</div></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Purchase Freq</div></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Product Rating</div></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Site Visits</div></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Return Rate</div></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Session Time</div></th>
+<th class="p-2"><div class="vertical-label text-xs font-semibold text-slate-500 pb-8">Discount Usage</div></th>
+</tr>
+</thead>
+<tbody class="text-xs font-medium">
+<!-- ROW 1 -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Customer Age</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">1.00</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">0.39</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.83</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.05</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">0.37</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-0.85</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">+1.0</td>
+</tr>
+<!-- ROW 2 -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Purchase Freq</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.23</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">1.00</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">+0.78</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.23</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">+0.34</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.35</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">0.88</td>
+</tr>
+<!-- ROW 3 (With Active Tooltip Example) -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Product Rating</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-0.76</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">1.00</td>
+<td class="relative group h-12 w-12">
+<div class="cell-pos-high h-full w-full flex items-center justify-center rounded-synthesis ring-2 ring-slate-800 ring-offset-1 z-10">
+                    +0.78
+                    <div class="hidden group-hover:block absolute top-full mt-2 left-0 w-48 bg-slate-800 text-white text-[10px] p-2 rounded-synthesis shadow-xl z-50">
+<div class="font-bold mb-1">Purchase Freq vs. Product Rating: +0.78</div>
+<div class="opacity-80">(Strong Positive)</div>
+</div>
+</div>
+</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.75</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">+0.73</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.17</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.78</td>
+</tr>
+<!-- ROW 4 -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Site Visits</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.22</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.12</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.00</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.23</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.65</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.17</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.72</td>
+</tr>
+<!-- ROW 5 -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Return Rate</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-0.85</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.02</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">0.24</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.00</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">0.32</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.17</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.75</td>
+</tr>
+<!-- ROW 6 -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Session Time</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-0.65</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.17</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.03</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">-0.05</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.00</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-0.35</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.83</td>
+</tr>
+<!-- ROW 7 -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Discount Usage</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-1.00</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.00</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">0.22</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.30</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.03</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">1.00</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.97</td>
+</tr>
+<!-- ROW 8 (Repeat pattern as per image) -->
+<tr>
+<td class="text-right pr-4 font-semibold text-slate-600">Customer Age</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">1.00</td>
+<td class="cell-neg-high h-12 w-12 text-center rounded-synthesis">-0.33</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.86</td>
+<td class="cell-pos-med h-12 w-12 text-center rounded-synthesis">0.25</td>
+<td class="cell-pos-high h-12 w-12 text-center rounded-synthesis">0.95</td>
+<td class="cell-neg-med h-12 w-12 text-center rounded-synthesis">-0.22</td>
+<td class="cell-neutral h-12 w-12 text-center rounded-synthesis">0.00</td>
+</tr>
+</tbody>
+</table>
+<div class="mt-8 flex justify-center">
+<div class="flex items-center space-x-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Negative</span>
+<div class="flex h-3 w-40 rounded-full overflow-hidden">
+<div class="flex-1 bg-heatmap-neg"></div>
+<div class="flex-1 bg-slate-300"></div>
+<div class="flex-1 bg-heatmap-pos"></div>
+</div>
+<span>Positive</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Heatmap Visualization Container -->
+</div>
+</main>
+<!-- END: Main Content Container -->
+</body></html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Basic Statistics - Synthesis ML</title>
+<!-- Google Font: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: '#4A6583',
+            surface: {
+              50: '#F8FAFC',
+              100: '#F1F5F9',
+              800: '#1E293B',
+              900: '#0F172A',
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '2px',
+            DEFAULT: '4px',
+            'md': '4px',
+            'lg': '4px',
+            'xl': '4px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body {
+      background-color: #F3F4F6; /* Light gray background like the screenshot */
+      color: #111827;
+    }
+    .sidebar-active {
+      background-color: #E2E8F0;
+      color: #1E293B;
+      font-weight: 600;
+    }
+    .sparkline-canvas {
+      width: 120px;
+      height: 32px;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+<!-- BEGIN: MainLayout -->
+<div class="flex min-h-screen">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-white border-r border-gray-200 flex flex-col shrink-0" data-purpose="sidebar-navigation">
+<div class="p-6">
+<div class="flex items-center gap-2 text-brand font-extrabold text-lg">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+<span>AI Platform</span>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded" href="#">
+<svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Dashboard
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded" href="#">
+<svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Projects
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded" href="#">
+<svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Datasets
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded" href="#">
+<svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Models
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded" href="#">
+<svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Experiments
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm sidebar-active rounded" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Statistics
+        </a>
+</nav>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+<span>AI Platform</span>
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-gray-600">Data Statistics View</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-400 hover:text-gray-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+<svg class="w-5 h-5 text-gray-400" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 overflow-auto p-8">
+<div class="max-w-6xl mx-auto space-y-6">
+<!-- Page Title -->
+<section>
+<h1 class="text-3xl font-bold text-gray-900">Basic Statistics</h1>
+<p class="text-sm text-gray-500 mt-1">Variant 4 of 10</p>
+</section>
+<!-- BEGIN: DataCard -->
+<div class="bg-white rounded border border-gray-200 shadow-sm overflow-hidden" data-purpose="statistics-table-container">
+<!-- Filters Toolbar -->
+<div class="px-6 py-4 flex items-center justify-between border-b border-gray-100">
+<h3 class="font-semibold text-gray-700">Filters</h3>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 text-sm border border-gray-300 rounded hover:bg-gray-50 text-gray-600">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Filter
+                </button>
+<div class="relative">
+<select class="appearance-none pl-3 pr-8 py-1.5 text-sm border border-gray-300 rounded bg-white text-gray-600 focus:outline-none focus:ring-1 focus:ring-brand">
+<option>All cons</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="relative">
+<input class="pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded w-48 focus:ring-1 focus:ring-brand focus:border-brand" placeholder="Search" type="text"/>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+</div>
+<!-- BEGIN: StatisticsTable -->
+<table class="w-full text-left border-collapse" id="statistics-table">
+<thead class="bg-gray-50 border-b border-gray-100">
+<tr>
+<th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider w-12"></th>
+<th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Column Name</th>
+<th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1">
+                    Mean
+                    <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 24 24"><path d="M11 5h2v10l3-3 1 1-5 5-5-5 1-1 3 3V5z"></path></svg>
+</th>
+<th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Median</th>
+<th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Missing Values</th>
+<th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Distribution</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 text-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-gray-400">1</td>
+<td class="px-6 py-4 font-medium text-gray-900">User Age</td>
+<td class="px-6 py-4 text-gray-600">34.5</td>
+<td class="px-6 py-4 text-gray-600">32</td>
+<td class="px-6 py-4 text-gray-600">0 (0%)</td>
+<td class="px-6 py-4">
+<canvas class="sparkline-canvas" data-purpose="distribution-plot" data-type="bell"></canvas>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-gray-400">2</td>
+<td class="px-6 py-4 font-medium text-gray-900">Sales Revenue</td>
+<td class="px-6 py-4 text-gray-600">$12,500</td>
+<td class="px-6 py-4 text-gray-600">$11,200</td>
+<td class="px-6 py-4 text-gray-600">15 (1.2%)</td>
+<td class="px-6 py-4">
+<canvas class="sparkline-canvas" data-purpose="distribution-plot" data-type="steps"></canvas>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-gray-400">3</td>
+<td class="px-6 py-4 font-medium text-gray-900">Product Rating</td>
+<td class="px-6 py-4 text-gray-600">4.2</td>
+<td class="px-6 py-4 text-gray-600">4.5</td>
+<td class="px-6 py-4 text-gray-600">5 (0.4%)</td>
+<td class="px-6 py-4">
+<canvas class="sparkline-canvas" data-purpose="distribution-plot" data-type="bars"></canvas>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-gray-400">4</td>
+<td class="px-6 py-4 font-medium text-gray-900">Daily Active Users</td>
+<td class="px-6 py-4 text-gray-600">540</td>
+<td class="px-6 py-4 text-gray-600">550</td>
+<td class="px-6 py-4 text-gray-600">0 (0%)</td>
+<td class="px-6 py-4">
+<canvas class="sparkline-canvas" data-purpose="distribution-plot" data-type="wave"></canvas>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-gray-400">5</td>
+<td class="px-6 py-4 font-medium text-gray-900">Session Duration</td>
+<td class="px-6 py-4 text-gray-600">8m 30s</td>
+<td class="px-6 py-4 text-gray-600">7m 45s</td>
+<td class="px-6 py-4 text-gray-600">2 (0.1%)</td>
+<td class="px-6 py-4">
+<canvas class="sparkline-canvas" data-purpose="distribution-plot" data-type="peak-start"></canvas>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-gray-400">6</td>
+<td class="px-6 py-4 font-medium text-gray-900">Region Code</td>
+<td class="px-6 py-4 text-gray-600">N/A</td>
+<td class="px-6 py-4 text-gray-600">N/A</td>
+<td class="px-6 py-4 text-gray-600">0 (0%)</td>
+<td class="px-6 py-4">
+<canvas class="sparkline-canvas" data-purpose="distribution-plot" data-type="categorical"></canvas>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- END: StatisticsTable -->
+</div>
+<!-- END: DataCard -->
+</div>
+</div>
+</main>
+<!-- END: MainContent -->
+</div>
+<!-- END: MainLayout -->
+<!-- BEGIN: Sparkline Script -->
+<script data-purpose="canvas-sparkline-generation">
+    function drawSparklines() {
+      const canvases = document.querySelectorAll('.sparkline-canvas');
+      
+      canvases.forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        const type = canvas.getAttribute('data-type');
+        const w = canvas.width = 120;
+        const h = canvas.height = 32;
+        const color = '#93C5FD'; // Tailwind blue-300 approx
+        const fillColor = 'rgba(147, 197, 253, 0.2)';
+        
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        ctx.beginPath();
+        
+        if (type === 'bell') {
+          // Normal Distribution Curve
+          for (let x = 0; x <= w; x++) {
+            const val = Math.exp(-Math.pow((x - w / 2) / (w / 4), 2)) * (h - 5);
+            const y = h - val - 2;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+        } else if (type === 'steps') {
+          // Upward steps/trend
+          ctx.moveTo(0, h - 5);
+          ctx.lineTo(w * 0.3, h - 8);
+          ctx.lineTo(w * 0.6, h - 18);
+          ctx.lineTo(w, h - 25);
+        } else if (type === 'bars') {
+          // Histogram bars
+          const barWidth = 10;
+          const heights = [10, 20, 15, 25, 30, 20, 28, 22];
+          ctx.fillStyle = color;
+          heights.forEach((height, i) => {
+            ctx.fillRect(i * (barWidth + 2), h - height, barWidth, height);
+          });
+          return; // Skip stroke/fill for bars
+        } else if (type === 'wave') {
+          // Oscillating wave
+          for (let x = 0; x <= w; x++) {
+            const y = (h/2) + Math.sin(x * 0.2) * 10;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+        } else if (type === 'peak-start') {
+          // Right-skewed distribution
+          for (let x = 0; x <= w; x++) {
+            const val = (x < 10) ? (x * 3) : Math.max(0, 30 - (x-10)*0.4);
+            const y = h - val - 2;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+        } else if (type === 'categorical') {
+          // Blocky bars for categorical
+          const barWidth = 15;
+          const heights = [15, 25, 12, 18, 20];
+          ctx.fillStyle = color;
+          heights.forEach((height, i) => {
+            ctx.fillRect(i * (barWidth + 4), h - height, barWidth, height);
+          });
+          return;
+        }
+
+        ctx.stroke();
+        
+        // Add fill under path
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+      });
+    }
+
+    // Run on load
+    window.addEventListener('DOMContentLoaded', drawSparklines);
+  </script>
+<!-- END: Sparkline Script -->
+</body></html>

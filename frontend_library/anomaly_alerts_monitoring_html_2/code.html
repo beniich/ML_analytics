@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Anomaly Alerts &amp; Monitoring Dashboard</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Styles -->
+<style data-purpose="layout-and-colors">
+    body {
+      background-color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .chart-grid-line {
+      stroke: #e2e8f0;
+    }
+    .chart-line {
+      stroke: #3b82f6;
+      stroke-width: 2;
+      fill: none;
+    }
+    .chart-area {
+      fill: url(#chartGradient);
+      opacity: 0.1;
+    }
+    .chart-point {
+      fill: #3b82f6;
+      stroke: #ffffff;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10">
+<!-- BEGIN: DashboardHeader -->
+<header class="flex justify-between items-center mb-6" data-purpose="dashboard-header">
+<h1 class="text-2xl font-bold text-gray-800">Anomaly Alerts &amp; Monitoring</h1>
+<div class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-xs font-medium border border-gray-200">
+      Variant 12 of 20
+    </div>
+</header>
+<!-- END: DashboardHeader -->
+<!-- BEGIN: ChartSection -->
+<section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-8" data-purpose="alert-frequency-chart">
+<h2 class="text-lg font-semibold text-gray-700 mb-6">Alert Frequency Over Time (Last 30 Days)</h2>
+<div class="relative h-64 w-full">
+<!-- Simple SVG Chart Representation -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3b82f6"></stop>
+<stop offset="100%" stop-color="#ffffff"></stop>
+</lineargradient>
+</defs>
+<!-- Horizontal Grid Lines -->
+<line class="chart-grid-line" stroke-dasharray="4" x1="0" x2="1000" y1="0" y2="0"></line>
+<line class="chart-grid-line" stroke-dasharray="4" x1="0" x2="1000" y1="50" y2="50"></line>
+<line class="chart-grid-line" stroke-dasharray="4" x1="0" x2="1000" y1="100" y2="100"></line>
+<line class="chart-grid-line" stroke-dasharray="4" x1="0" x2="1000" y1="150" y2="150"></line>
+<line class="chart-grid-line" x1="0" x2="1000" y1="200" y2="200"></line>
+<!-- Data Path -->
+<path class="chart-line" d="M 0,200 L 33.3,150 L 66.6,170 L 100,120 L 133.3,165 L 166.6,155 L 200,150 L 233.3,145 L 266.6,180 L 300,115 L 333.3,140 L 366.6,150 L 400,120 L 433.3,135 L 466.6,190 L 500,50 L 533.3,105 L 566.6,95 L 600,150 L 633.3,105 L 666.6,140 L 700,115 L 733.3,155 L 766.6,145 L 800,75 L 833.3,150 L 866.6,75 L 900,160 L 933.3,125 L 1000,165"></path>
+<!-- Fill Area -->
+<path class="chart-area" d="M 0,200 L 33.3,150 L 66.6,170 L 100,120 L 133.3,165 L 166.6,155 L 200,150 L 233.3,145 L 266.6,180 L 300,115 L 333.3,140 L 366.6,150 L 400,120 L 433.3,135 L 466.6,190 L 500,50 L 533.3,105 L 566.6,95 L 600,150 L 633.3,105 L 666.6,140 L 700,115 L 733.3,155 L 766.6,145 L 800,75 L 833.3,150 L 866.6,75 L 900,160 L 933.3,125 L 1000,165 V 200 H 0 Z"></path>
+<!-- Data Points -->
+<circle class="chart-point" cx="0" cy="200" r="4"></circle>
+<circle class="chart-point" cx="33.3" cy="150" r="4"></circle>
+<circle class="chart-point" cx="100" cy="120" r="4"></circle>
+<circle class="chart-point" cx="300" cy="115" r="4"></circle>
+<circle class="chart-point" cx="500" cy="50" r="4"></circle>
+<circle class="chart-point" cx="800" cy="75" r="4"></circle>
+<circle class="chart-point" cx="866.6" cy="75" r="4"></circle>
+</svg>
+<!-- Y-Axis Labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-gray-400 -translate-x-6">
+<span>20</span>
+<span>15</span>
+<span>10</span>
+<span>5</span>
+<span>0</span>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-2 text-[10px] text-gray-400">
+<span>May 1</span>
+<span>May 5</span>
+<span>May 10</span>
+<span>May 15</span>
+<span>May 20</span>
+<span>May 25</span>
+<span>May 30</span>
+</div>
+</div>
+</section>
+<!-- END: ChartSection -->
+<!-- BEGIN: RecentAlertsSection -->
+<section class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden" data-purpose="recent-alerts-list">
+<div class="p-6 border-b border-gray-100">
+<h2 class="text-lg font-semibold text-gray-700">Recent Alerts</h2>
+</div>
+<div class="divide-y divide-gray-100">
+<!-- Alert Row 1: High -->
+<div class="flex items-center p-4 hover:bg-gray-50 transition-colors" data-purpose="alert-item-high">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-red-50 text-red-600 mr-4">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700">High</span>
+<h3 class="text-sm font-semibold text-gray-900">Model Performance Drop: 'Fraud Detection Model v3' F1-score decreased significantly.</h3>
+</div>
+<p class="text-xs text-gray-500">Affected Dataset: Transaction Logs - May 29, 2024, 09:15 AM</p>
+</div>
+<button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition-colors" data-purpose="view-details-btn">
+          View Details
+        </button>
+</div>
+<!-- Alert Row 2: Medium -->
+<div class="flex items-center p-4 hover:bg-gray-50 transition-colors" data-purpose="alert-item-medium">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-orange-50 text-orange-600 mr-4">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-100 text-orange-700">Medium</span>
+<h3 class="text-sm font-semibold text-gray-900">Data Anomaly: Unusual spike in 'Login Attempts' detected.</h3>
+</div>
+<p class="text-xs text-gray-500">Affected Dataset: User Access Logs - May 28, 2024, 04:30 PM</p>
+</div>
+<button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition-colors">
+          View Details
+        </button>
+</div>
+<!-- Alert Row 3: Low -->
+<div class="flex items-center p-4 hover:bg-gray-50 transition-colors" data-purpose="alert-item-low">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-50 text-emerald-600 mr-4">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700">Low</span>
+<h3 class="text-sm font-semibold text-gray-900">Data Quality Issue: Missing values in 'Customer Demographics' exceed threshold.</h3>
+</div>
+<p class="text-xs text-gray-500">Affected Dataset: Customer Records - May 27, 2024, 11:45 AM</p>
+</div>
+<button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition-colors">
+          View Details
+        </button>
+</div>
+<!-- Alert Row 4: High -->
+<div class="flex items-center p-4 hover:bg-gray-50 transition-colors" data-purpose="alert-item-high-2">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-red-50 text-red-600 mr-4">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700">High</span>
+<h3 class="text-sm font-semibold text-gray-900">Drift Detected: 'Recommendation Engine' input data distribution has shifted.</h3>
+</div>
+<p class="text-xs text-gray-500">Affects: Product Interaction Data - May 26, 2024, 02:00 PM</p>
+</div>
+<button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition-colors">
+          View Details
+        </button>
+</div>
+<!-- Alert Row 5: Medium -->
+<div class="flex items-center p-4 hover:bg-gray-50 transition-colors" data-purpose="alert-item-medium-2">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-orange-50 text-orange-600 mr-4">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-100 text-orange-700">Medium</span>
+<h3 class="text-sm font-semibold text-gray-900">Latency Warning: Real-time inference response time above SLA.</h3>
+</div>
+<p class="text-xs text-gray-500">Affects: API Gateway Metrics - May 25, 2024, 10:10 AM</p>
+</div>
+<button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition-colors">
+          View Details
+        </button>
+</div>
+<!-- Alert Row 6: Low -->
+<div class="flex items-center p-4 hover:bg-gray-50 transition-colors" data-purpose="alert-item-low-2">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-50 text-emerald-600 mr-4">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700">Low</span>
+<h3 class="text-sm font-semibold text-gray-900">Pattern Alert: Recurring access pattern identified outside business hours.</h3>
+</div>
+<p class="text-xs text-gray-500">Affects: Security Events - May 24, 2024, 08:00 AM</p>
+</div>
+<button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition-colors">
+          View Details
+        </button>
+</div>
+</div>
+</section>
+<!-- END: RecentAlertsSection -->
+</body></html>

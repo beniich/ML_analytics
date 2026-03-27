@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Model Benchmark Comparison - Synthesis ML</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              slate: '#4A6583', // Custom color from design system
+              coral: '#FF7F66', // Action color from image
+              dark: '#0F172A',
+              surface: '#1E293B',
+              border: '#334155'
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '4px', // Roundness: ROUND_FOUR
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="global-typography">
+    body {
+      background-color: #0F172A;
+      color: #E2E8F0;
+      font-family: 'Manrope', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #1E293B;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #4A6583;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- BEGIN: MainHeader -->
+<header class="h-16 border-b border-brand-border bg-brand-dark flex items-center justify-between px-6 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-brand-surface rounded-custom transition-colors" data-purpose="menu-toggle">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<h1 class="text-xl font-semibold tracking-tight">Model Benchmark Comparison</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Models
+      </a>
+<a class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Datasets
+      </a>
+<a class="flex items-center gap-2 text-white border-b-2 border-brand-coral py-5 -mb-[2px]" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Analysis
+      </a>
+<a class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Settings
+      </a>
+</nav>
+</header>
+<!-- END: MainHeader -->
+<main class="flex-1 flex flex-col md:flex-row p-6 gap-6 bg-slate-50 text-slate-900">
+<!-- BEGIN: LeftSidebar -->
+<aside class="w-full md:w-64 space-y-4 shrink-0">
+<div class="bg-white border border-slate-200 rounded-custom p-4 shadow-sm" data-purpose="comparison-tools-card">
+<h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4 px-2">Comparison Tools</h2>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-center gap-2 py-2 px-4 border-2 border-brand-coral text-brand-coral font-bold rounded-custom hover:bg-brand-coral hover:text-white transition-all">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Select Models
+          </button>
+<button class="w-full flex items-center justify-center gap-2 py-2 px-4 border-2 border-brand-coral text-brand-coral font-bold rounded-custom hover:bg-brand-coral hover:text-white transition-all">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Run New Benchmark
+          </button>
+<button class="w-full flex items-center justify-center gap-2 py-2 px-4 bg-brand-coral text-white font-bold rounded-custom shadow-lg shadow-brand-coral/30 hover:brightness-110 transition-all">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Compare Selected
+          </button>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: MainContent -->
+<section class="flex-1 space-y-6 min-w-0">
+<!-- BEGIN: PerformanceTrendsCard -->
+<article class="bg-white border border-slate-200 rounded-custom shadow-sm overflow-hidden" data-purpose="chart-container">
+<div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Performance Trends</h3>
+</div>
+<div class="p-6">
+<div class="mb-4 text-center">
+<h4 class="text-md font-medium text-slate-600">Validation Loss Over Epochs</h4>
+</div>
+<!-- Chart Placeholder/Representation -->
+<div class="relative h-[400px] w-full border-l-2 border-b-2 border-slate-300 ml-12 mb-12">
+<!-- Y-Axis Labels -->
+<div class="absolute -left-12 top-0 h-full flex flex-col justify-between items-end pr-3 text-xs text-slate-500 font-mono">
+<span>1</span>
+<span>0.88</span>
+<span>0.66</span>
+<span>0.44</span>
+<span>0.22</span>
+<span>0</span>
+</div>
+<!-- Y-Axis Title -->
+<div class="absolute -left-16 top-1/2 -rotate-90 origin-center text-xs font-bold text-slate-600 uppercase tracking-widest">
+              Loss
+            </div>
+<!-- X-Axis Labels -->
+<div class="absolute -bottom-10 left-0 w-full flex justify-between pt-3 text-xs text-slate-500 font-mono">
+<span>0</span>
+<span>10</span>
+<span>20</span>
+<span>30</span>
+<span>40</span>
+<span>50</span>
+<span>60</span>
+<span>70</span>
+<span>80</span>
+<span>90</span>
+<span>100</span>
+</div>
+<!-- X-Axis Title -->
+<div class="absolute -bottom-16 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-600 uppercase tracking-widest">
+              Epochs (0-100)
+            </div>
+<!-- Canvas for Chart Rendering -->
+<canvas class="absolute inset-0 w-full h-full" id="lossChart"></canvas>
+<!-- Legend -->
+<div class="absolute top-4 right-4 flex flex-col gap-2 bg-white/80 p-2 rounded-custom text-xs">
+<div class="flex items-center gap-2">
+<span class="w-6 h-0.5 bg-brand-coral"></span>
+<span class="text-slate-700">XGBoost (Primary)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-0.5 bg-brand-slate"></span>
+<span class="text-slate-700">Random Forest</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- END: PerformanceTrendsCard -->
+<!-- BEGIN: MetricsSummaryCard -->
+<article class="bg-white border border-slate-200 rounded-custom shadow-sm overflow-hidden" data-purpose="metrics-table">
+<div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Metrics Summary</h3>
+<p class="text-xs text-slate-500 font-medium">Model Performance on Test Dataset</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] tracking-widest">
+<tr>
+<th class="px-6 py-4">Model Name</th>
+<th class="px-6 py-4">R2 Score</th>
+<th class="px-6 py-4">RMSE (Root Mean Squared Error)</th>
+<th class="px-6 py-4">Training Time</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="bg-red-50/50">
+<td class="px-6 py-4 font-bold text-slate-900">XGBoost (Primary)</td>
+<td class="px-6 py-4 font-mono text-slate-700">0.945</td>
+<td class="px-6 py-4 font-mono text-slate-700">0.021</td>
+<td class="px-6 py-4 text-slate-600">1h 45m</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-emerald-600 font-bold">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+                    Completed
+                  </div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-900">Random Forest</td>
+<td class="px-6 py-4 font-mono text-slate-700">0.892</td>
+<td class="px-6 py-4 font-mono text-slate-700">0.045</td>
+<td class="px-6 py-4 text-slate-600">45m</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-emerald-600 font-bold">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-900">Linear Regression</td>
+<td class="px-6 py-4 font-mono text-slate-700">0.883</td>
+<td class="px-6 py-4 font-mono text-slate-700">0.028</td>
+<td class="px-6 py-4 text-slate-600">25m</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-emerald-600 font-bold">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article>
+<!-- END: MetricsSummaryCard -->
+</section>
+<!-- END: MainContent -->
+</main>
+<script data-purpose="canvas-chart-rendering">
+    /**
+     * Renders the loss curves onto the canvas element
+     * Mimics the look of the provided reference image
+     */
+    function renderLossChart() {
+      const canvas = document.getElementById('lossChart');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      
+      const width = rect.width;
+      const height = rect.height;
+
+      // Draw Grid Lines (Horizontal)
+      ctx.beginPath();
+      ctx.strokeStyle = '#F1F5F9';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i++) {
+        const y = (height / 5) * i;
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+      }
+      ctx.stroke();
+
+      // Draw Grid Lines (Vertical)
+      ctx.beginPath();
+      for (let i = 1; i <= 10; i++) {
+        const x = (width / 10) * i;
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+      }
+      ctx.stroke();
+
+      // XGBoost Line (Coral)
+      ctx.beginPath();
+      ctx.strokeStyle = '#FF7F66';
+      ctx.lineWidth = 2.5;
+      ctx.moveTo(0, 0);
+      for (let x = 0; x <= width; x++) {
+        const progress = x / width;
+        // Exponential decay curve
+        const y = height - (height * Math.exp(-progress * 6));
+        ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Random Forest Line (Slate)
+      ctx.beginPath();
+      ctx.strokeStyle = '#4A6583';
+      ctx.lineWidth = 2.5;
+      ctx.moveTo(0, 0);
+      for (let x = 0; x <= width; x++) {
+        const progress = x / width;
+        // Slower decay curve with some slight noise
+        const noise = Math.sin(x / 10) * 2;
+        const y = height - (height * Math.exp(-progress * 2.5)) + noise;
+        ctx.lineTo(x, Math.max(0, y - 40)); // Shifted up slightly for visual separation
+      }
+      ctx.stroke();
+    }
+
+    // Initial render
+    window.addEventListener('load', renderLossChart);
+    // Re-render on resize for responsiveness
+    window.addEventListener('resize', renderLossChart);
+  </script>
+</body></html>

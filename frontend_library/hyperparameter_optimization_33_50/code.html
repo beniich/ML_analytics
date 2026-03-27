@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hyperparameter Optimization | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-container": "#ffd7ce",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "on-background": "#e2e2e7",
+              "inverse-surface": "#e2e2e7",
+              "secondary": "#adc9eb",
+              "on-primary": "#601305",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "surface": "#111317",
+              "on-primary-fixed-variant": "#7f2a18",
+              "primary-fixed": "#ffdad3",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-error": "#690005",
+              "surface-bright": "#37393d",
+              "secondary-container": "#304b68",
+              "surface-dim": "#111317",
+              "on-primary-fixed": "#3e0500",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface-container": "#1e2024",
+              "secondary-fixed-dim": "#adc9eb",
+              "inverse-on-surface": "#2e3035",
+              "on-tertiary-fixed": "#00201c",
+              "surface-container-high": "#282a2e",
+              "primary": "#ffb4a4",
+              "outline": "#8d9198",
+              "surface-tint": "#ffb4a4",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary": "#15324e",
+              "primary-container": "#a44531",
+              "background": "#111317",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#333539",
+              "outline-variant": "#43474d",
+              "tertiary-fixed": "#85f6e5",
+              "tertiary-container": "#006f64",
+              "surface-container-low": "#1a1c20",
+              "secondary-fixed": "#d0e4ff",
+              "on-secondary-container": "#9fbbdd",
+              "primary-fixed-dim": "#ffb4a4",
+              "tertiary-fixed-dim": "#67d9c9",
+              "on-tertiary": "#003731",
+              "tertiary": "#67d9c9",
+              "on-tertiary-container": "#81f2e2"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(16px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #43474D; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary/30">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 bottom-0 w-64 h-full bg-[#111317]/90 backdrop-blur-lg dark:bg-[#111317]/90 flex flex-col py-6 px-4 space-y-8 border-r border-[#43474D]/15 z-50">
+<div class="flex items-center gap-3 px-2">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="hub">hub</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-[#E2E2E7] leading-tight">ML Platform</h2>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Enterprise Tier</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 text-on-surface-variant opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 text-[#ffb4a4] border-r-2 border-[#ffb4a4] bg-gradient-to-r from-[#ffb4a4]/10 to-transparent translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="Model_Training">model_training</span>
+<span class="font-medium text-sm">Models</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 text-on-surface-variant opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="database">database</span>
+<span class="font-medium text-sm">Datasets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 text-on-surface-variant opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
+<span class="font-medium text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 text-on-surface-variant opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-medium text-sm">Deployments</span>
+</a>
+</nav>
+<button class="w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold text-sm shadow-lg shadow-primary/10 active:scale-95 transition-transform">
+            New Experiment
+        </button>
+<div class="pt-6 border-t border-outline-variant/10 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 text-on-surface-variant opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span class="font-medium text-sm">Documentation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 text-on-surface-variant opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="contact_support">contact_support</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 flex items-center justify-between px-8 h-16 ml-64 bg-[#111317]/80 backdrop-blur-xl dark:bg-[#111317]/80 z-40 tonal-transition">
+<div class="flex items-center gap-4">
+<h1 class="text-2xl font-bold tracking-tighter text-[#ffb4a4] font-headline">Insight Curator</h1>
+<div class="h-4 w-[1px] bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center bg-[#1E2024] px-4 py-1.5 rounded-full border border-outline-variant/10">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface w-48 placeholder:text-on-surface-variant/50" placeholder="Search trials..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/20">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Dr. Elena Vance</p>
+<p class="text-[10px] text-on-surface-variant">Lead ML Engineer</p>
+</div>
+<img alt="User profile avatar" class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="Close-up portrait of a professional woman with a confident expression in a high-tech office environment, soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK_5Eh5f-b3EZXvXKRJEK1vaEMzUjm8qGakVn12zb6WdoxiVILvXzQKk-PXo2qQYSfks6BwL4WAl0W8RWBhVSepYQTypsam4E5vsgpZWtIde6fLbgd01HeqCCIqgOO_Nq9DkMQr_n7jUI6DW6bs3Uhi2Se014wo94bVaT2DHdc6G8CCr3AAmzF1hfS6NgH9BTv8Iy_noRsnI0qbOrH0OY34a5eFgN672l_6GJZbYHNxB8Vx-8UM_o6G7adCu8tnYjwmj5CYNnZhsM"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12 min-h-screen bg-surface">
+<!-- Header & Top Stats -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+<div class="max-w-2xl">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary uppercase tracking-widest">Active Session</span>
+<span class="text-on-surface-variant text-xs font-medium">• Project: ResNet-101 Optimization</span>
+</div>
+<h2 class="text-5xl font-extrabold tracking-tight font-headline text-on-surface mb-4">Hyperparameter Tuning</h2>
+<p class="text-on-surface-variant leading-relaxed font-body">Exploring multidimensional parameter spaces to identify the optimal configuration for loss minimization. Analyzing correlations between learning rates, batch sizes, and weight decay.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-low p-5 rounded-xl min-w-[140px] border border-outline-variant/5">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Trials</p>
+<p class="text-2xl font-black text-on-surface">342<span class="text-sm text-tertiary ml-1">/500</span></p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl min-w-[140px] border border-outline-variant/5">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Best Loss</p>
+<p class="text-2xl font-black text-primary">0.0412</p>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Parallel Coordinates Plot (Large Anchor) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low rounded-full overflow-hidden p-8 border border-outline-variant/10 shadow-sm relative">
+<div class="absolute inset-0 opacity-5 pointer-events-none">
+<div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, #c3c6ce 1px, transparent 0); background-size: 32px 32px;"></div>
+</div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="text-xl font-bold font-headline text-on-surface">Parallel Coordinates</h3>
+<p class="text-xs text-on-surface-variant">Mapping Trial Configurations to Performance</p>
+</div>
+<div class="flex gap-2">
+<button class="p-1.5 rounded-lg bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-1.5 rounded-lg bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="fullscreen">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Visualization Mockup -->
+<div class="h-72 w-full relative flex justify-between items-end border-b border-outline-variant/20 pb-4">
+<!-- Column Labels -->
+<div class="absolute -top-4 w-full flex justify-between text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter px-2">
+<span>Learning Rate</span>
+<span>Batch Size</span>
+<span>Weight Decay</span>
+<span>Optimizer</span>
+<span class="text-primary">Loss (Min)</span>
+</div>
+<!-- Vertical Axes -->
+<div class="h-full w-[1px] bg-outline-variant/30 relative"><div class="absolute bottom-0 -left-1.5 w-3 h-3 rounded-full bg-on-surface-variant/20"></div></div>
+<div class="h-full w-[1px] bg-outline-variant/30 relative"><div class="absolute bottom-0 -left-1.5 w-3 h-3 rounded-full bg-on-surface-variant/20"></div></div>
+<div class="h-full w-[1px] bg-outline-variant/30 relative"><div class="absolute bottom-0 -left-1.5 w-3 h-3 rounded-full bg-on-surface-variant/20"></div></div>
+<div class="h-full w-[1px] bg-outline-variant/30 relative"><div class="absolute bottom-0 -left-1.5 w-3 h-3 rounded-full bg-on-surface-variant/20"></div></div>
+<div class="h-full w-[2px] bg-primary/30 relative"><div class="absolute bottom-0 -left-1.5 w-3 h-3 rounded-full bg-primary/40"></div></div>
+<!-- Simulated Path: Best Trial -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path class="opacity-90" d="M 0 120 L 160 80 L 320 180 L 480 60 L 640 220" fill="none" stroke="#ffb4a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<path class="opacity-40" d="M 0 180 L 160 140 L 320 100 L 480 200 L 640 100" fill="none" stroke="#adc9eb" stroke-dasharray="4 2" stroke-width="1.5"></path>
+<path class="opacity-40" d="M 0 50 L 160 220 L 320 60 L 480 140 L 640 150" fill="none" stroke="#adc9eb" stroke-dasharray="4 2" stroke-width="1.5"></path>
+<path class="opacity-40" d="M 0 240 L 160 60 L 320 220 L 480 180 L 640 50" fill="none" stroke="#adc9eb" stroke-dasharray="4 2" stroke-width="1.5"></path>
+</svg>
+<!-- Axis Indicators -->
+<div class="absolute left-0 bottom-1/2 -translate-y-1/2 -ml-8 rotate-[-90deg] text-[9px] text-on-surface-variant">0.0001 - 0.1</div>
+<div class="absolute left-1/4 bottom-1/2 -translate-y-1/2 -ml-8 rotate-[-90deg] text-[9px] text-on-surface-variant">16 - 256</div>
+<div class="absolute left-2/4 bottom-1/2 -translate-y-1/2 -ml-8 rotate-[-90deg] text-[9px] text-on-surface-variant">1e-6 - 1e-3</div>
+<div class="absolute left-3/4 bottom-1/2 -translate-y-1/2 -ml-8 rotate-[-90deg] text-[9px] text-on-surface-variant">ADAM / SGD</div>
+<div class="absolute right-0 bottom-1/2 -translate-y-1/2 -mr-8 rotate-[90deg] text-[9px] text-primary">0.0 - 1.0</div>
+</div>
+</div>
+<!-- Loss Curves (Narrower Focus) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 shadow-sm flex flex-col h-full">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-on-surface font-headline">Training Loss</h3>
+<div class="flex gap-1 text-[10px] font-bold">
+<span class="flex items-center gap-1 text-primary"><span class="w-2 h-2 rounded-full bg-primary"></span> Best</span>
+<span class="flex items-center gap-1 text-on-surface-variant ml-2"><span class="w-2 h-2 rounded-full bg-outline-variant"></span> Avg</span>
+</div>
+</div>
+<div class="flex-1 min-h-[200px] relative">
+<!-- Graph Mockup -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 200 120">
+<defs>
+<lineargradient id="fade" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#ffb4a4" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#ffb4a4" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Average Curve -->
+<path d="M 0 80 Q 50 60 100 40 T 200 25" fill="none" stroke="#43474d" stroke-dasharray="2 2" stroke-width="1.5"></path>
+<!-- Best Curve -->
+<path d="M 0 70 Q 50 40 100 20 T 200 10" fill="none" stroke="#ffb4a4" stroke-width="2.5"></path>
+<path d="M 0 70 Q 50 40 100 20 T 200 10 L 200 120 L 0 120 Z" fill="url(#fade)"></path>
+</svg>
+<!-- Floating Indicator -->
+<div class="absolute top-2 right-0 bg-surface-container-highest/80 glass-panel px-3 py-1.5 rounded-lg border border-outline-variant/10">
+<span class="text-[10px] text-on-surface-variant block uppercase">Latest Trial</span>
+<span class="text-sm font-black text-on-surface">Loss: 0.0384</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/5">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="text-on-surface-variant">Convergence Rate</span>
+<span class="text-tertiary font-bold">+12.4%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Top Trials Table (Full Width Bottom Section) -->
+<div class="col-span-12 bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10">
+<div class="px-8 py-6 border-b border-outline-variant/5 flex justify-between items-center bg-surface-container-low">
+<h3 class="text-lg font-bold font-headline text-on-surface">Top Trial Configurations</h3>
+<div class="flex gap-4">
+<button class="text-xs font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span> Export CSV
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
+<th class="px-8 py-4">Trial ID</th>
+<th class="px-8 py-4">Learning Rate</th>
+<th class="px-8 py-4">Batch Size</th>
+<th class="px-8 py-4">Weight Decay</th>
+<th class="px-8 py-4">Status</th>
+<th class="px-8 py-4 text-right">Loss Score</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-sm font-bold text-on-surface">#321</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">0.00245</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">64</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">1e-5</td>
+<td class="px-8 py-5">
+<span class="px-2 py-1 rounded-md text-[10px] font-bold bg-tertiary/10 text-tertiary uppercase">Completed</span>
+</td>
+<td class="px-8 py-5 text-right font-black text-primary">0.0412</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-sm font-bold text-on-surface">#289</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">0.00180</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">128</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">5e-5</td>
+<td class="px-8 py-5">
+<span class="px-2 py-1 rounded-md text-[10px] font-bold bg-tertiary/10 text-tertiary uppercase">Completed</span>
+</td>
+<td class="px-8 py-5 text-right font-black text-on-surface">0.0425</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-sm font-bold text-on-surface">#342</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">0.00510</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">32</td>
+<td class="px-8 py-5 text-sm font-medium text-on-surface-variant">1e-4</td>
+<td class="px-8 py-5">
+<span class="px-2 py-1 rounded-md text-[10px] font-bold bg-primary/10 text-primary uppercase">Running</span>
+</td>
+<td class="px-8 py-5 text-right font-black text-on-surface-variant italic">evaluating...</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Correlation Matrix / Feature Importance (Editorial Card) -->
+<div class="col-span-12 lg:col-span-6 bg-surface-container-low rounded-xl p-8 border border-outline-variant/10 shadow-sm">
+<h3 class="text-xl font-bold font-headline text-on-surface mb-6">Parameter Correlations</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-bold text-on-surface">Learning Rate <span class="text-primary">→</span> Loss</span>
+<span class="text-xs font-bold text-primary">Strong Positive (0.82)</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="flex-1 bg-primary rounded-l-full"></div>
+<div class="flex-1 bg-primary"></div>
+<div class="flex-1 bg-primary"></div>
+<div class="flex-1 bg-primary"></div>
+<div class="flex-1 bg-surface-container-highest rounded-r-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-bold text-on-surface">Batch Size <span class="text-secondary">→</span> Loss</span>
+<span class="text-xs font-bold text-secondary">Moderate (0.45)</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="flex-1 bg-secondary rounded-l-full"></div>
+<div class="flex-1 bg-secondary"></div>
+<div class="flex-1 bg-surface-container-highest"></div>
+<div class="flex-1 bg-surface-container-highest"></div>
+<div class="flex-1 bg-surface-container-highest rounded-r-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-bold text-on-surface">Weight Decay <span class="text-on-surface-variant">→</span> Loss</span>
+<span class="text-xs font-bold text-on-surface-variant">Weak (0.12)</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="flex-1 bg-outline-variant rounded-l-full"></div>
+<div class="flex-1 bg-surface-container-highest"></div>
+<div class="flex-1 bg-surface-container-highest"></div>
+<div class="flex-1 bg-surface-container-highest"></div>
+<div class="flex-1 bg-surface-container-highest rounded-r-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Insights / Actions -->
+<div class="col-span-12 lg:col-span-6 flex flex-col gap-6">
+<div class="flex-1 bg-gradient-to-br from-primary/10 to-transparent p-8 rounded-xl border border-primary/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="text-xl font-bold font-headline text-on-surface">Curated Suggestion</h3>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                        The current optimizer distribution shows that <strong class="text-on-surface">ADAM with Weight Decay (1e-5)</strong> is consistently outperforming SGD across all tested batch sizes. We recommend narrowing the Learning Rate search space to <strong class="text-on-surface">[0.001, 0.005]</strong> for the next 100 trials.
+                    </p>
+<button class="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest hover:translate-x-1 transition-transform">
+                        Refine Search Space <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Component Placeholder for context -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl" data-icon="add" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+</div>
+</body></html>

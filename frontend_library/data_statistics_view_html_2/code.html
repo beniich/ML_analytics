@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Basic Statistics - AI Platform</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4A6583',
+            dark: {
+              900: '#0B0F14',
+              800: '#141A21',
+              700: '#1E262F',
+              600: '#2A343F',
+            },
+            accent: {
+              blue: '#5FA8D3',
+              light: '#8E9AAF',
+            }
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '2px',
+            DEFAULT: '4px',
+            'md': '6px',
+            'lg': '8px',
+            'xl': '12px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="layout-styles">
+    body {
+      background-color: #0B0F14;
+      color: #E2E8F0;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Custom scrollbar for a darker theme */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #141A21;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2A343F;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+<div class="flex min-h-screen">
+<!-- BEGIN: Sidebar Navigation -->
+<aside class="w-64 bg-dark-800 border-r border-dark-600 flex flex-col" data-purpose="sidebar">
+<div class="p-6">
+<div class="flex items-center gap-2 mb-8">
+<div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
+<div class="w-3 h-3 bg-white rotate-45"></div>
+</div>
+<span class="text-lg font-bold tracking-tight text-white">AI Platform</span>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-accent-light hover:bg-dark-700 hover:text-white rounded transition-colors" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Dashboard
+          </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-accent-light hover:bg-dark-700 hover:text-white rounded transition-colors" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Projects
+          </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-accent-light hover:bg-dark-700 hover:text-white rounded transition-colors" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Datasets
+          </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-accent-light hover:bg-dark-700 hover:text-white rounded transition-colors" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Models
+          </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-accent-light hover:bg-dark-700 hover:text-white rounded transition-colors" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Experiments
+          </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-primary/20 text-blue-400 rounded transition-colors" data-purpose="active-nav-item" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Statistics
+          </a>
+</nav>
+</div>
+</aside>
+<!-- END: Sidebar Navigation -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- BEGIN: Top Header -->
+<header class="h-16 bg-dark-800 border-b border-dark-600 flex items-center justify-between px-8" data-purpose="main-header">
+<div class="flex items-center gap-2 text-sm text-accent-light">
+<span>AI Platform</span>
+<span>›</span>
+<span class="text-white">Data Statistics View</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-accent-light hover:text-white transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="w-8 h-8 rounded-full bg-dark-600 border border-dark-600 flex items-center justify-center">
+<svg class="w-5 h-5 text-accent-light" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path></svg>
+</div>
+</div>
+</header>
+<!-- END: Top Header -->
+<!-- BEGIN: Statistics Dashboard Content -->
+<section class="flex-1 overflow-y-auto p-8 bg-dark-900" data-purpose="statistics-dashboard">
+<div class="max-w-6xl mx-auto">
+<!-- Header and Breadcrumb -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-white mb-1">Basic Statistics</h1>
+<p class="text-sm text-accent-light">Variant 4 of 10</p>
+</div>
+<!-- BEGIN: Main Data Table Card -->
+<div class="bg-dark-800 border border-dark-600 rounded-lg overflow-hidden shadow-xl">
+<!-- Table Toolbar -->
+<div class="p-4 border-b border-dark-600 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-semibold text-white px-2">Filters</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-3 py-1.5 text-xs font-medium border border-dark-600 rounded hover:bg-dark-700 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Filter
+                </button>
+<div class="relative">
+<select class="appearance-none bg-dark-800 border border-dark-600 rounded px-3 py-1.5 text-xs font-medium focus:ring-primary focus:border-primary pr-8">
+<option>All columns</option>
+<option>Numerical</option>
+<option>Categorical</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-accent-light">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="relative">
+<input class="bg-dark-800 border border-dark-600 rounded px-8 py-1.5 text-xs w-64 focus:ring-primary focus:border-primary" placeholder="Search" type="text"/>
+<div class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none text-accent-light">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+</div>
+<!-- BEGIN: Statistics Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="statistics-table">
+<thead>
+<tr class="bg-dark-700/50 border-b border-dark-600">
+<th class="px-6 py-4 text-xs font-semibold text-accent-light uppercase tracking-wider w-16 text-center">#</th>
+<th class="px-6 py-4 text-xs font-semibold text-accent-light uppercase tracking-wider">Column Name</th>
+<th class="px-6 py-4 text-xs font-semibold text-accent-light uppercase tracking-wider">
+<div class="flex items-center gap-1">
+                        Mean <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+</div>
+</th>
+<th class="px-6 py-4 text-xs font-semibold text-accent-light uppercase tracking-wider">Median</th>
+<th class="px-6 py-4 text-xs font-semibold text-accent-light uppercase tracking-wider">Missing Values</th>
+<th class="px-6 py-4 text-xs font-semibold text-accent-light uppercase tracking-wider">Distribution</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-dark-600">
+<!-- Row 1: User Age -->
+<tr class="hover:bg-dark-700/30 transition-colors">
+<td class="px-6 py-4 text-sm text-accent-light text-center">1</td>
+<td class="px-6 py-4 text-sm font-medium text-white">User Age</td>
+<td class="px-6 py-4 text-sm text-white">34.5</td>
+<td class="px-6 py-4 text-sm text-white">32</td>
+<td class="px-6 py-4 text-sm text-white">0 (0%)</td>
+<td class="px-6 py-2">
+<canvas class="w-full h-12" data-purpose="sparkline-chart" data-type="curve" id="chart-1"></canvas>
+</td>
+</tr>
+<!-- Row 2: Sales Revenue -->
+<tr class="hover:bg-dark-700/30 transition-colors">
+<td class="px-6 py-4 text-sm text-accent-light text-center">2</td>
+<td class="px-6 py-4 text-sm font-medium text-white">Sales Revenue</td>
+<td class="px-6 py-4 text-sm text-white">$12,500</td>
+<td class="px-6 py-4 text-sm text-white">$11,200</td>
+<td class="px-6 py-4 text-sm text-white">15 (1.2%)</td>
+<td class="px-6 py-2">
+<canvas class="w-full h-12" data-purpose="sparkline-chart" data-type="area" id="chart-2"></canvas>
+</td>
+</tr>
+<!-- Row 3: Product Rating -->
+<tr class="hover:bg-dark-700/30 transition-colors">
+<td class="px-6 py-4 text-sm text-accent-light text-center">3</td>
+<td class="px-6 py-4 text-sm font-medium text-white">Product Rating</td>
+<td class="px-6 py-4 text-sm text-white">4.2</td>
+<td class="px-6 py-4 text-sm text-white">4.5</td>
+<td class="px-6 py-4 text-sm text-white">5 (0.4%)</td>
+<td class="px-6 py-2">
+<canvas class="w-full h-12" data-purpose="sparkline-chart" data-type="bars" id="chart-3"></canvas>
+</td>
+</tr>
+<!-- Row 4: Daily Active Users -->
+<tr class="hover:bg-dark-700/30 transition-colors">
+<td class="px-6 py-4 text-sm text-accent-light text-center">4</td>
+<td class="px-6 py-4 text-sm font-medium text-white">Daily Active Users</td>
+<td class="px-6 py-4 text-sm text-white">540</td>
+<td class="px-6 py-4 text-sm text-white">550</td>
+<td class="px-6 py-4 text-sm text-white">0 (0%)</td>
+<td class="px-6 py-2">
+<canvas class="w-full h-12" data-purpose="sparkline-chart" data-type="sine" id="chart-4"></canvas>
+</td>
+</tr>
+<!-- Row 5: Session Duration -->
+<tr class="hover:bg-dark-700/30 transition-colors">
+<td class="px-6 py-4 text-sm text-accent-light text-center">5</td>
+<td class="px-6 py-4 text-sm font-medium text-white">Session Duration</td>
+<td class="px-6 py-4 text-sm text-white">8m 30s</td>
+<td class="px-6 py-4 text-sm text-white">7m 45s</td>
+<td class="px-6 py-4 text-sm text-white">2 (0.1%)</td>
+<td class="px-6 py-2">
+<canvas class="w-full h-12" data-purpose="sparkline-chart" data-type="peak" id="chart-5"></canvas>
+</td>
+</tr>
+<!-- Row 6: Region Code -->
+<tr class="hover:bg-dark-700/30 transition-colors">
+<td class="px-6 py-4 text-sm text-accent-light text-center">6</td>
+<td class="px-6 py-4 text-sm font-medium text-white">Region Code</td>
+<td class="px-6 py-4 text-sm text-white">N/A</td>
+<td class="px-6 py-4 text-sm text-white">N/A</td>
+<td class="px-6 py-4 text-sm text-white">0 (0%)</td>
+<td class="px-6 py-2">
+<canvas class="w-full h-12" data-purpose="sparkline-chart" data-type="bars-random" id="chart-6"></canvas>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- END: Statistics Table -->
+</div>
+<!-- END: Main Data Table Card -->
+</div>
+</section>
+<!-- END: Statistics Dashboard Content -->
+</main>
+<!-- END: Main Content Area -->
+</div>
+<!-- BEGIN: Sparkline Canvas Scripts -->
+<script data-purpose="canvas-sparkline-generator">
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvases = document.querySelectorAll('canvas[data-purpose="sparkline-chart"]');
+      const accentBlue = '#5FA8D3';
+      const accentBlueLight = 'rgba(95, 168, 211, 0.2)';
+
+      canvases.forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        const type = canvas.dataset.type;
+        const width = canvas.offsetWidth;
+        const height = canvas.offsetHeight;
+        
+        // Match resolution to display size
+        canvas.width = width * window.devicePixelRatio;
+        canvas.height = height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+        ctx.strokeStyle = accentBlue;
+        ctx.lineWidth = 2;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        const drawPath = (points) => {
+          ctx.beginPath();
+          ctx.moveTo(points[0].x, points[0].y);
+          for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+          }
+          ctx.stroke();
+
+          // Fill Area
+          ctx.lineTo(width, height);
+          ctx.lineTo(0, height);
+          ctx.closePath();
+          ctx.fillStyle = accentBlueLight;
+          ctx.fill();
+        };
+
+        const drawCurve = (points) => {
+          ctx.beginPath();
+          ctx.moveTo(points[0].x, points[0].y);
+          for (let i = 0; i < points.length - 1; i++) {
+            const xc = (points[i].x + points[i + 1].x) / 2;
+            const yc = (points[i].y + points[i + 1].y) / 2;
+            ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+          }
+          ctx.stroke();
+
+          // Fill Area
+          const lastPoint = points[points.length - 1];
+          ctx.lineTo(lastPoint.x, lastPoint.y);
+          ctx.lineTo(width, height);
+          ctx.lineTo(0, height);
+          ctx.closePath();
+          ctx.fillStyle = accentBlueLight;
+          ctx.fill();
+        };
+
+        if (type === 'curve') {
+          const pts = [];
+          for (let i = 0; i <= 20; i++) {
+            pts.push({
+              x: (i / 20) * width,
+              y: (height * 0.7) - (Math.sin(i * 0.3) * height * 0.3)
+            });
+          }
+          drawCurve(pts);
+        } else if (type === 'area') {
+          const pts = [];
+          for (let i = 0; i <= 20; i++) {
+            pts.push({
+              x: (i / 20) * width,
+              y: (height * 0.5) + (Math.random() * height * 0.4) - 0.2 * height
+            });
+          }
+          drawCurve(pts);
+        } else if (type === 'bars' || type === 'bars-random') {
+          const barCount = 12;
+          const barWidth = (width / barCount) * 0.7;
+          const gap = (width / barCount) * 0.3;
+          for (let i = 0; i < barCount; i++) {
+            const h = type === 'bars' ? (i + 1) * (height / barCount) : Math.random() * height;
+            ctx.fillStyle = accentBlueLight;
+            ctx.fillRect(i * (barWidth + gap), height - h, barWidth, h);
+            ctx.strokeStyle = accentBlue;
+            ctx.strokeRect(i * (barWidth + gap), height - h, barWidth, h);
+          }
+        } else if (type === 'sine') {
+          const pts = [];
+          for (let i = 0; i <= 50; i++) {
+            pts.push({
+              x: (i / 50) * width,
+              y: (height * 0.5) + (Math.sin(i * 0.5) * height * 0.3)
+            });
+          }
+          drawPath(pts);
+        } else if (type === 'peak') {
+          const pts = [];
+          for (let i = 0; i <= 30; i++) {
+            let yVal = height * 0.85;
+            if (i > 5 && i < 15) {
+               yVal = (height * 0.2) + (Math.abs(10 - i) * (height * 0.05));
+            }
+            pts.push({ x: (i / 30) * width, y: yVal });
+          }
+          drawCurve(pts);
+        }
+      });
+    });
+  </script>
+<!-- END: Sparkline Canvas Scripts -->
+</body></html>

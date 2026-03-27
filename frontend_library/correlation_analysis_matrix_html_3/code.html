@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Correlation Analysis Matrix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#1a1c20",
+              "on-secondary-fixed-variant": "#2d4965",
+              "on-secondary-container": "#9fbbdd",
+              "inverse-on-surface": "#2e3035",
+              "surface": "#111317",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "tertiary-fixed": "#85f6e5",
+              "tertiary-container": "#006f64",
+              "surface-container-high": "#282a2e",
+              "on-tertiary-container": "#81f2e2",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary": "#adc9eb",
+              "primary-fixed-dim": "#ffb4a4",
+              "on-tertiary-fixed-variant": "#005048",
+              "surface-container-highest": "#333539",
+              "primary-container": "#a44531",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-surface-variant": "#c3c6ce",
+              "on-background": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "on-surface": "#e2e2e7",
+              "outline": "#8d9198",
+              "outline-variant": "#43474d",
+              "on-primary": "#601305",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "secondary-container": "#304b68",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "surface-dim": "#111317",
+              "surface-container": "#1e2024",
+              "on-tertiary": "#003731",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-primary-container": "#ffd7ce",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        background: rgba(17, 19, 23, 0.8);
+        backdrop-filter: blur(20px);
+      }
+      .heatmap-cell {
+        aspect-ratio: 1 / 1;
+        transition: transform 0.2s ease, filter 0.2s ease;
+      }
+      .heatmap-cell:hover {
+        transform: scale(1.05);
+        z-index: 10;
+        filter: brightness(1.2);
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111317;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333539;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary">
+<!-- Top Navigation Anchor -->
+<nav class="fixed top-0 w-full z-50 bg-[#111317]/80 backdrop-blur-xl flex items-center justify-between px-8 py-4 w-full shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="text-xl font-extrabold tracking-tighter text-[#ffb4a4] font-headline">Insight Curator</div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold text-sm tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Platform</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Solutions</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Resources</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-highest border-none rounded-full py-1.5 pl-10 pr-4 text-xs w-48 focus:ring-1 focus:ring-primary transition-all" placeholder="Search insights..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary font-headline font-bold text-sm px-6 py-2 rounded-xl active:scale-95 duration-200 shadow-lg shadow-primary/10">Sign In</button>
+</div>
+</nav>
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-[#111317]/50 backdrop-blur-2xl flex flex-col pt-20 pb-6 font-body text-sm font-medium">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="User Analytics Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb1z1TdxykyujCGgR9zeKTI6GRvjZKriFjXcMaze4W8SF_Q0-BVVcNKU-ukfbyGxyzZEZk5oNSj-OyHPLwvAIiQup5CMKokMfTNFCnKvDOa94rTNLSNfUBfL0osIqSPziBJ3S17jMWOaTy9VuuApFRhobE2wVdNdX-jDyRYCt7UYBGJZClFpI3rezJDArsoOKJSR7jNzaZKPZFS7pyWhN3HFM57dUgObbRWwi9_JKl6YbktlCUh67mYcAlMpe__q6KLv-pmFBiX64"/>
+</div>
+<div>
+<p class="text-on-surface font-bold">ML Workspace</p>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-widest">Strategic Curator</p>
+</div>
+</div>
+<nav class="flex-1 px-0 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span>Statistics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#ffb4a4] bg-[#1E2024] rounded-r-xl border-l-4 border-[#ffb4a4] hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Correlations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span>Deployments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#C3C6CE] hover:bg-[#1A1C20] transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-bold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Analysis
+            </button>
+<div class="pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-primary transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+                    Help
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#C3C6CE] hover:text-primary transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+                    Documentation
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 pt-24 px-10 pb-12">
+<!-- Editorial Header -->
+<header class="max-w-7xl mx-auto mb-12">
+<h1 class="font-headline font-extrabold text-5xl tracking-tight text-on-surface mb-2">Correlation Matrix</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">Visualizing interdependent feature relationships using the Synthesis Diverging Scale. High intensity Salmon represents positive correlation, while deep Slate Blue indicates negative association.</p>
+</header>
+<div class="max-w-7xl mx-auto grid grid-cols-12 gap-8 items-start">
+<!-- Left Side: Matrix & Stats (70%) -->
+<section class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Bento Grid Layout for Matrix -->
+<div class="bg-surface-container-low rounded-xl p-8 shadow-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl" data-icon="analytics">analytics</span>
+</div>
+<div class="flex items-end justify-between mb-8">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface">Feature Heatmap</h3>
+<p class="text-on-surface-variant text-sm">Dynamic calculation based on Pearson Coefficients</p>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-bold tracking-widest uppercase text-on-surface-variant">
+<span>Negative (-1)</span>
+<div class="h-2 w-32 rounded-full bg-gradient-to-r from-secondary via-surface-container-highest to-primary"></div>
+<span>Positive (+1)</span>
+</div>
+</div>
+<!-- Correlation Heatmap Grid -->
+<div class="grid grid-cols-9 gap-1.5 font-label">
+<!-- Labels Row -->
+<div class="col-span-1"></div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">User_Age</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">Session_Dur</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">Click_Rate</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">Churn_Risk</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">CLV</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">Support_Tix</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">Feature_Use</div>
+<div class="text-[10px] text-center text-on-surface-variant rotate-[-45deg] pb-2">Last_Login</div>
+<!-- Data Rows (Simulated 8x8) -->
+<!-- Row 1 -->
+<div class="text-[10px] text-right pr-3 flex items-center justify-end text-on-surface-variant">User_Age</div>
+<div class="heatmap-cell bg-primary rounded-lg flex items-center justify-center text-[10px] font-bold text-on-primary">1.0</div>
+<div class="heatmap-cell bg-primary/40 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.32</div>
+<div class="heatmap-cell bg-surface-container-highest rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.02</div>
+<div class="heatmap-cell bg-secondary/30 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">-.18</div>
+<div class="heatmap-cell bg-primary/20 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.14</div>
+<div class="heatmap-cell bg-secondary/10 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">-.05</div>
+<div class="heatmap-cell bg-primary/10 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.08</div>
+<div class="heatmap-cell bg-primary/50 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.41</div>
+<!-- Row 2 -->
+<div class="text-[10px] text-right pr-3 flex items-center justify-end text-on-surface-variant">Session_Dur</div>
+<div class="heatmap-cell bg-primary/40 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.32</div>
+<div class="heatmap-cell bg-primary rounded-lg flex items-center justify-center text-[10px] font-bold text-on-primary">1.0</div>
+<div class="heatmap-cell bg-primary/80 rounded-lg flex items-center justify-center text-[8px] text-on-primary-container">.74</div>
+<div class="heatmap-cell bg-secondary/60 rounded-lg flex items-center justify-center text-[8px] text-on-secondary">-.52</div>
+<div class="heatmap-cell bg-primary/70 rounded-lg flex items-center justify-center text-[8px] text-on-primary-container">.68</div>
+<div class="heatmap-cell bg-secondary/40 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">-.31</div>
+<div class="heatmap-cell bg-primary/90 rounded-lg flex items-center justify-center text-[8px] text-on-primary-container">.88</div>
+<div class="heatmap-cell bg-primary/10 rounded-lg flex items-center justify-center text-[8px] text-on-surface-variant">.09</div>
+<!-- Row 3 -->
+<div class="text-[10px] text-right pr-3 flex items-center justify-end text-on-surface-variant">Click_Rate</div>
+<div class="heatmap-cell bg-surface-container-highest rounded-lg"></div>
+<div class="heatmap-cell bg-primary/80 rounded-lg"></div>
+<div class="heatmap-cell bg-primary rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/80 rounded-lg"></div>
+<div class="heatmap-cell bg-primary/30 rounded-lg"></div>
+<div class="heatmap-cell bg-surface-container rounded-lg"></div>
+<div class="heatmap-cell bg-primary/60 rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/20 rounded-lg"></div>
+<!-- Row 4 (Churn Risk Focus) -->
+<div class="text-[10px] text-right pr-3 flex items-center justify-end text-on-surface-variant">Churn_Risk</div>
+<div class="heatmap-cell bg-secondary/30 rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/60 rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/80 rounded-lg"></div>
+<div class="heatmap-cell bg-primary rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/90 rounded-lg flex items-center justify-center text-[8px] text-white">-.92</div>
+<div class="heatmap-cell bg-primary/80 rounded-lg flex items-center justify-center text-[8px] text-on-primary-container">.78</div>
+<div class="heatmap-cell bg-secondary/70 rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/40 rounded-lg"></div>
+<!-- Row 5 (CLV) -->
+<div class="text-[10px] text-right pr-3 flex items-center justify-end text-on-surface-variant">CLV</div>
+<div class="heatmap-cell bg-primary/20 rounded-lg"></div>
+<div class="heatmap-cell bg-primary/70 rounded-lg"></div>
+<div class="heatmap-cell bg-primary/30 rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/90 rounded-lg"></div>
+<div class="heatmap-cell bg-primary rounded-lg"></div>
+<div class="heatmap-cell bg-secondary/60 rounded-lg"></div>
+<div class="heatmap-cell bg-primary/90 rounded-lg"></div>
+<div class="heatmap-cell bg-primary/10 rounded-lg"></div>
+</div>
+</div>
+<!-- Secondary Analysis Card (Asymmetric) -->
+<div class="grid grid-cols-2 gap-8">
+<div class="bg-surface-container rounded-xl p-6 border-l-4 border-primary/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="lightbulb">lightbulb</span>
+<h4 class="font-headline font-bold text-on-surface">Strongest Positive</h4>
+</div>
+<p class="text-3xl font-headline font-black text-primary mb-1">0.88</p>
+<p class="text-on-surface-variant text-sm">Feature_Use ↔ Session_Dur</p>
+<div class="mt-4 h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[88%]"></div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-6 border-l-4 border-secondary/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="warning">warning</span>
+<h4 class="font-headline font-bold text-on-surface">Inverse Critical</h4>
+</div>
+<p class="text-3xl font-headline font-black text-secondary mb-1">-0.92</p>
+<p class="text-on-surface-variant text-sm">CLV ↔ Churn_Risk</p>
+<div class="mt-4 h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[92%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Side: Sidebar Controls (30%) -->
+<aside class="col-span-12 lg:col-span-4 space-y-8 sticky top-24">
+<!-- Filter Section -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-xl">
+<h3 class="font-headline font-bold text-on-surface mb-6 flex items-center justify-between">
+                        Filter Variables
+                        <span class="text-[10px] text-on-surface-variant font-normal uppercase tracking-widest">Selected: 8</span>
+</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">User_Age</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Session_Dur</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Click_Rate</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Churn_Risk</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">CLV</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Support_Tix</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="w-5 h-5 rounded border-none bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-primary transition-colors">System_Latency</span>
+</label>
+</div>
+</div>
+<!-- Method Section -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-xl">
+<h3 class="font-headline font-bold text-on-surface mb-6">Correlation Method</h3>
+<div class="space-y-4">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-3">
+<input checked="" class="text-primary bg-surface-container-highest border-none focus:ring-primary/20" name="method" type="radio"/>
+<span class="text-sm text-on-surface">Pearson</span>
+</div>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded uppercase">Linear</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-3">
+<input class="text-primary bg-surface-container-highest border-none focus:ring-primary/20" name="method" type="radio"/>
+<span class="text-sm text-on-surface">Spearman</span>
+</div>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded uppercase">Rank</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-3">
+<input class="text-primary bg-surface-container-highest border-none focus:ring-primary/20" name="method" type="radio"/>
+<span class="text-sm text-on-surface">Kendall Tau</span>
+</div>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded uppercase">Ord.</span>
+</label>
+</div>
+</div>
+<!-- Quick Export -->
+<button class="w-full py-4 border border-outline-variant/20 rounded-xl font-headline font-bold text-on-surface hover:bg-primary/5 hover:border-primary/30 transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                    Export CSV Data
+                </button>
+</aside>
+</div>
+</main>
+<!-- Footer Anchor -->
+<footer class="bg-[#111317] w-full py-12 border-t border-[#43474D]/15">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="font-['Manrope'] font-black text-[#ffb4a4] text-xl">Insight Curator</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Inter'] text-xs text-[#C3C6CE]">
+<a class="hover:text-[#ffb4a4] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#ffb4a4] transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-[#ffb4a4] transition-colors" href="#">Security</a>
+<a class="hover:text-[#ffb4a4] transition-colors" href="#">Status</a>
+</div>
+<div class="font-['Inter'] text-xs text-[#C3C6CE]">
+                © 2024 Insight Curator. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

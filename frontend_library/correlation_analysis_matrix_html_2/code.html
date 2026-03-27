@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Correlation Analysis Matrix - Synthesis ML</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#4A6583',
+              dark: '#1e293b',
+              light: '#94a3b8',
+            },
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '2px',
+            DEFAULT: '4px',
+            'md': '6px',
+            'lg': '8px',
+            'xl': '12px',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scrollbar">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4A6583;
+      border-radius: 4px;
+    }
+  </style>
+<style data-purpose="heatmap-styles">
+    /* Heatmap cell coloring logic (simulated with classes) */
+    .cell-pos-high { background-color: #ef4444; color: white; }
+    .cell-pos-med { background-color: #f87171; color: white; }
+    .cell-pos-low { background-color: #fca5a5; color: #1e293b; }
+    .cell-neutral { background-color: #e2e8f0; color: #1e293b; }
+    .cell-neg-low { background-color: #cbd5e1; color: #1e293b; }
+    .cell-neg-med { background-color: #64748b; color: white; }
+    .cell-neg-high { background-color: #334155; color: white; }
+    
+    .diagonal-cell { background-color: #94a3b8; color: white; }
+
+    .rotated-label {
+      transform: rotate(-45deg);
+      transform-origin: bottom left;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900 antialiased min-h-screen">
+<!-- BEGIN: Navigation -->
+<nav class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between sticky top-0 z-50" data-purpose="main-nav">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-brand rounded flex items-center justify-center text-white font-bold">∑</div>
+<span class="font-bold text-lg tracking-tight">Synthesis ML</span>
+</div>
+<div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-500">
+<a class="hover:text-brand flex items-center gap-1" href="#"><span class="w-4 h-4">⌂</span> Dashboard</a>
+<a class="hover:text-brand flex items-center gap-1" href="#">▤ Data Sources</a>
+<a class="text-brand border-b-2 border-brand py-1 flex items-center gap-1" href="#">📈 Analysis</a>
+<a class="hover:text-brand flex items-center gap-1" href="#">⚙ Models</a>
+<a class="hover:text-brand flex items-center gap-1" href="#">📋 Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
+        👤
+      </div>
+</div>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-[1400px] mx-auto p-8">
+<!-- BEGIN: HeaderSection -->
+<header class="mb-8">
+<h1 class="text-3xl font-bold text-slate-900">Correlation Analysis Matrix</h1>
+<p class="text-slate-500 mt-1">Correlation matrix visualization, and correlates variables analysis.</p>
+</header>
+<!-- END: HeaderSection -->
+<div class="grid grid-cols-12 gap-8">
+<!-- BEGIN: SidebarFilters -->
+<aside class="col-span-12 lg:col-span-3 space-y-6">
+<!-- Filter Variables Card -->
+<section class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm" data-purpose="filter-variables">
+<h2 class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-4">Filter Variables</h2>
+<div class="relative mb-4">
+<input class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-md focus:ring-brand focus:border-brand" placeholder="Search" type="text"/>
+<span class="absolute left-3 top-2.5 text-slate-400">🔍</span>
+</div>
+<div class="space-y-3">
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Customer Age
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Purchase Freq
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Product Rating
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Site Visits
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Return Rate
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Session Time
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input class="rounded border-slate-300 text-brand focus:ring-brand" type="checkbox"/> Discount Usage
+            </label>
+</div>
+</section>
+<!-- Correlation Method Card -->
+<section class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm" data-purpose="correlation-settings">
+<h2 class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-4">Correlation Method</h2>
+<div class="space-y-3 mb-6">
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input checked="" class="border-slate-300 text-brand focus:ring-brand" name="method" type="radio"/> Pearson (Linear)
+            </label>
+<label class="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+<input class="border-slate-300 text-brand focus:ring-brand" name="method" type="radio"/> Spearman (Rank-based)
+            </label>
+</div>
+<h2 class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Lag/Shift (Optional)</h2>
+<select class="w-full text-sm border border-slate-200 rounded-md focus:ring-brand focus:border-brand">
+<option>None</option>
+<option>1 Period</option>
+<option>2 Periods</option>
+</select>
+</section>
+</aside>
+<!-- END: SidebarFilters -->
+<!-- BEGIN: MatrixContainer -->
+<div class="col-span-12 lg:col-span-9 bg-white p-8 rounded-lg border border-slate-200 shadow-sm overflow-x-auto" data-purpose="heatmap-container">
+<div class="min-w-[700px]">
+<table class="w-full border-separate border-spacing-1">
+<thead>
+<tr>
+<th class="w-1/8"></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500">Customer Age</div></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500">Purchase Freq</div></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500">Product Rating</div></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500">Site Visits</div></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500">Return Rate</div></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500">Session Time</div></th>
+<th class="p-2"><div class="rotated-label text-xs font-semibold text-slate-500 text-right">Discount Usage</div></th>
+</tr>
+</thead>
+<tbody class="text-xs font-medium">
+<!-- Row 1 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Customer Age</td>
+<td class="cell-neutral p-4 text-center rounded">1.00</td>
+<td class="cell-neg-low p-4 text-center rounded">0.39</td>
+<td class="cell-pos-med p-4 text-center rounded">0.83</td>
+<td class="cell-neutral p-4 text-center rounded">0.05</td>
+<td class="cell-pos-low p-4 text-center rounded">0.37</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.85</td>
+<td class="cell-pos-high p-4 text-center rounded">+1.0</td>
+</tr>
+<!-- Row 2 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Purchase Freq</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.23</td>
+<td class="cell-neutral p-4 text-center rounded">1.00</td>
+<td class="cell-pos-med p-4 text-center rounded">+0.78</td>
+<td class="cell-neutral p-4 text-center rounded">0.23</td>
+<td class="cell-pos-low p-4 text-center rounded">+0.34</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.35</td>
+<td class="cell-pos-med p-4 text-center rounded">0.88</td>
+</tr>
+<!-- Row 3 (Active Hover State Emulated) -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Product Rating</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.76</td>
+<td class="cell-neutral p-4 text-center rounded">1.00</td>
+<td class="relative cell-pos-med p-4 text-center rounded border-2 border-slate-900 shadow-lg z-10">
+                  +0.78
+                  <!-- Tooltip -->
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 p-2 bg-slate-800 text-white rounded text-[10px] leading-tight text-left z-20 pointer-events-none">
+                    Purchase Freq vs. Product Rating: +0.78 <br/>
+<span class="text-brand-light">(Strong Positive)</span>
+</div>
+</td>
+<td class="cell-neutral p-4 text-center rounded">0.75</td>
+<td class="cell-pos-med p-4 text-center rounded">+0.73</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.17</td>
+<td class="cell-pos-med p-4 text-center rounded">0.78</td>
+</tr>
+<!-- Row 4 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Site Visits</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.22</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.12</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+<td class="cell-neutral p-4 text-center rounded">0.23</td>
+<td class="cell-pos-med p-4 text-center rounded">0.65</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.17</td>
+<td class="cell-pos-med p-4 text-center rounded">0.72</td>
+</tr>
+<!-- Row 5 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Return Rate</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.35</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.02</td>
+<td class="cell-pos-low p-4 text-center rounded">0.24</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+<td class="cell-pos-low p-4 text-center rounded">0.32</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.17</td>
+<td class="cell-pos-med p-4 text-center rounded">0.75</td>
+</tr>
+<!-- Row 6 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Session Time</td>
+<td class="cell-neg-high p-4 text-center rounded">-0.65</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.17</td>
+<td class="cell-neutral p-4 text-center rounded">0.03</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.05</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.35</td>
+<td class="cell-pos-med p-4 text-center rounded">0.83</td>
+</tr>
+<!-- Row 7 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700 text-[10px]">Discount Usage</td>
+<td class="cell-neg-high p-4 text-center rounded">-1.00</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+<td class="cell-pos-low p-4 text-center rounded">0.22</td>
+<td class="cell-neutral p-4 text-center rounded">0.30</td>
+<td class="cell-neutral p-4 text-center rounded">0.03</td>
+<td class="cell-neutral p-4 text-center rounded">1.00</td>
+<td class="cell-pos-high p-4 text-center rounded">0.87</td>
+</tr>
+<!-- Row 8 (Repeated Pattern for Full Layout) -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Customer Age</td>
+<td class="cell-neg-med p-4 text-center rounded">1.00</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.33</td>
+<td class="cell-pos-med p-4 text-center rounded">0.86</td>
+<td class="cell-neutral p-4 text-center rounded">0.25</td>
+<td class="cell-pos-high p-4 text-center rounded">0.95</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.22</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+</tr>
+<!-- Row 9 -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Purchase Freq</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.58</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.34</td>
+<td class="cell-pos-med p-4 text-center rounded">0.72</td>
+<td class="cell-neutral p-4 text-center rounded">0.75</td>
+<td class="cell-pos-med p-4 text-center rounded">0.74</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.17</td>
+<td class="cell-pos-med p-4 text-center rounded">0.74</td>
+</tr>
+<!-- Additional rows to fill visual height as in sample -->
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Site Visits</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.55</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.63</td>
+<td class="cell-pos-med p-4 text-center rounded">0.75</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+<td class="cell-pos-high p-4 text-center rounded">0.85</td>
+<td class="cell-neg-low p-4 text-center rounded">-0.17</td>
+<td class="cell-pos-med p-4 text-center rounded">0.79</td>
+</tr>
+<tr>
+<td class="pr-4 py-4 text-right font-semibold text-slate-700">Discount Usage</td>
+<td class="cell-neg-high p-4 text-center rounded">-1.0</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.69</td>
+<td class="cell-pos-high p-4 text-center rounded">0.92</td>
+<td class="cell-neutral p-4 text-center rounded">0.00</td>
+<td class="cell-pos-med p-4 text-center rounded">0.74</td>
+<td class="cell-neg-med p-4 text-center rounded">-0.78</td>
+<td class="cell-neutral p-4 text-center rounded">1.00</td>
+</tr>
+</tbody>
+</table>
+<!-- Heatmap Legend (Optional Enhancement) -->
+<div class="mt-12 flex items-center justify-center gap-6 text-[10px] text-slate-500 uppercase tracking-widest">
+<span>Negative (Inverse)</span>
+<div class="flex h-3 w-48 rounded overflow-hidden">
+<div class="flex-1 bg-slate-800"></div>
+<div class="flex-1 bg-slate-500"></div>
+<div class="flex-1 bg-slate-200"></div>
+<div class="flex-1 bg-red-200"></div>
+<div class="flex-1 bg-red-400"></div>
+<div class="flex-1 bg-red-600"></div>
+</div>
+<span>Positive (Correlated)</span>
+</div>
+</div>
+</div>
+<!-- END: MatrixContainer -->
+</div>
+</main>
+<!-- END: MainContent -->
+<footer class="mt-auto py-8 text-center text-slate-400 text-sm">
+    © 2023 Synthesis ML. All rights reserved. Precision Analytics Module v2.4.
+  </footer>
+</body></html>

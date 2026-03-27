@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insight Curator | Team Collaboration Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#ffd7ce",
+              "inverse-surface": "#e2e2e7",
+              "surface-tint": "#ffb4a4",
+              "primary-fixed": "#ffdad3",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary-fixed": "#001d35",
+              "on-secondary": "#15324e",
+              "secondary-container": "#304b68",
+              "on-primary": "#601305",
+              "outline-variant": "#43474d",
+              "primary": "#ffb4a4",
+              "error": "#ffb4ab",
+              "surface-dim": "#111317",
+              "on-tertiary": "#003731",
+              "surface-container": "#1e2024",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#005048",
+              "primary-fixed-dim": "#ffb4a4",
+              "secondary": "#adc9eb",
+              "on-background": "#e2e2e7",
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "secondary-fixed": "#d0e4ff",
+              "on-tertiary-fixed": "#00201c",
+              "outline": "#8d9198",
+              "primary-container": "#a44531",
+              "surface-container-highest": "#333539",
+              "on-primary-fixed-variant": "#7f2a18",
+              "on-primary-fixed": "#3e0500",
+              "tertiary": "#67d9c9",
+              "error-container": "#93000a",
+              "surface-container-high": "#282a2e",
+              "tertiary-container": "#006f64",
+              "on-tertiary-container": "#81f2e2",
+              "tertiary-fixed": "#85f6e5",
+              "on-secondary-container": "#9fbbdd",
+              "surface-container-low": "#1a1c20",
+              "inverse-on-surface": "#2e3035",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface": "#111317",
+              "surface-bright": "#37393d",
+              "background": "#111317",
+              "secondary-fixed-dim": "#adc9eb",
+              "tertiary-fixed-dim": "#67d9c9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background: rgba(17, 19, 23, 0.8);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .coral-gradient {
+        background: linear-gradient(135deg, #ffb4a4 0%, #a44531 100%);
+      }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar Component -->
+<header class="w-full sticky top-0 z-50 bg-[#111317] dark:bg-[#111317] shadow-[0_40px_40px_-10px_rgba(226,226,231,0.06)]">
+<div class="flex items-center justify-between px-8 h-20 w-full mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold text-[#ffb4a4] tracking-tighter font-headline">Insight Curator</span>
+<nav class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Dashboard</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Projects</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Data</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors active:scale-95 duration-150" href="#">Models</a>
+<a class="text-[#ffb4a4] border-b-2 border-[#ffb4a4] pb-1 active:scale-95 duration-150" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-[#C3C6CE] group-hover:text-primary transition-colors cursor-pointer">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-[#C3C6CE] hover:text-primary transition-colors cursor-pointer">settings</span>
+<div class="h-10 w-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User profile" data-alt="Close-up portrait of a professional man in his 30s with short hair and a focused expression against a neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9rlEg6ytXDVopTKOMb1QQ35Qn40lo0LVAljwLP2V86OYwW9sOCzJv0_4p8wyZWxQyTLPcym5eKMEeAz3GqQB22A9LGBr6ufRhVkDRXBzFVxTgYJHS5paZbCXtCFGCJqU3r7qbzPHuAc8CBnnpBSni3onb1qVJZsqyekJMtMya_SvLba3e634CyDBU2TySY7aiZpQuAQkIMZHvm2gnRFoMFeyddWUdc898A_O2zBj120PagaAU-IsvictDcH20ehS1q6BiBanYrUs"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-80px)]">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-24 bg-[#111317]/80 backdrop-blur-xl flex flex-col border-r border-[#43474D]/15 z-40">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl coral-gradient flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h2 class="text-[#E2E2E7] font-headline font-bold text-sm">Project Alpha</h2>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">ML Ops Pipeline</p>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl coral-gradient text-on-primary font-headline font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+                    Deploy Model
+                </button>
+</div>
+<nav class="flex-1 space-y-1 font-body text-sm font-medium">
+<a class="flex items-center gap-3 px-6 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                    Deployment
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                    Monitoring
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined">terminal</span>
+                    API Docs
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#ffb4a4]/10 to-transparent text-[#ffb4a4] border-r-2 border-[#ffb4a4] transition-all ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+                    Team
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C3C6CE] hover:bg-[#1E2024] hover:text-[#E2E2E7] transition-all ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined">tune</span>
+                    Settings
+                </a>
+</nav>
+<div class="mt-auto pb-8 border-t border-[#43474D]/15 pt-6 font-body text-sm font-medium">
+<a class="flex items-center gap-3 px-6 py-3 text-[#C3C6CE] hover:bg-[#333539] transition-all" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+                    Profile
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C3C6CE] hover:bg-[#333539] transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Support
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col">
+<div class="p-10 flex gap-8 h-full">
+<!-- Left: Activity Feed (Asymmetric Split 30/70) -->
+<section class="w-[35%] flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-2xl font-bold text-on-surface">Team Activity</h3>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold tracking-widest text-primary uppercase">Live</span>
+</div>
+<div class="flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-250px)] pr-2">
+<!-- Activity Card 1 -->
+<div class="bg-surface-container-low p-5 rounded-xl border-l-4 border-primary/40 group hover:bg-surface-container transition-all">
+<div class="flex gap-4">
+<img alt="Team member" class="w-10 h-10 rounded-full" data-alt="Portrait of a female data scientist with glasses and a friendly smile in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvI7n9R-hP_xeglfgomMYYinUdj0NbFb7z0dGo6xwQzOOTALYcP0L-uZHgx4w3zS-_E2KRBC5SyBhY4DybImGi3v8YieLEPkBLE94eSbK_u_uMVKf6c5sPKxjbkJ7ngI-TI4-BcIELHgrZ88T_BlGenF6dyzTKAqDUOb8Q2iL8jLGp8IfaL62FSJGtYXHjL2mjrSkl3grXEAdVBYXEAkaKf1GVO8FgwYWRDG7K2TAaErYSeh_I8_vfWbD8enMhk4diIudA9pGmhK8"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-on-surface">Elena Chen <span class="text-on-surface-variant font-normal">commented on</span> <span class="text-secondary font-semibold">Inference Latency</span></p>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">"We need to optimize the quantization levels for the mobile edge deployment."</p>
+<div class="mt-3 flex items-center gap-4 text-[10px] text-on-surface-variant/60 font-bold uppercase tracking-widest">
+<span>2m ago</span>
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">reply</span> Reply
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 2 -->
+<div class="bg-surface-container-low p-5 rounded-xl group hover:bg-surface-container transition-all">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-on-surface">System <span class="text-on-surface-variant font-normal">deployed</span> <span class="text-tertiary font-semibold">Model v2.4-stable</span></p>
+<div class="mt-2 flex gap-2">
+<span class="text-[10px] px-2 py-0.5 bg-surface-container-highest rounded text-on-surface-variant">Production</span>
+<span class="text-[10px] px-2 py-0.5 bg-surface-container-highest rounded text-on-surface-variant">US-East-1</span>
+</div>
+<div class="mt-3 text-[10px] text-on-surface-variant/60 font-bold uppercase tracking-widest">
+<span>45m ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 3 -->
+<div class="bg-surface-container-low p-5 rounded-xl border-l-4 border-secondary/40 group hover:bg-surface-container transition-all">
+<div class="flex gap-4">
+<img alt="Team member" class="w-10 h-10 rounded-full" data-alt="Portrait of a male engineer in a black t-shirt looking thoughtfully off-camera in a minimalist setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ_OHLV2j8fpaVczaCSu30p2mqnKwJ_rObLUYVBX6udx-ox9p67tLywWuYSTqHPSTxmEzBmJank70wqMro-Iq_5-_1hHB3WaPdv4hPfD0-xqmj571FDPtoAYsp-bjc91simwkbrFOfl5-h4Yh3Q_biapRpg0HvmMUGP8ftqZ_MyZWFIyqvxOw1Ez-h43U2gqdp3GRK8-lA_-NB3ZUsX4atJMNyBDOdQBhlJrvKQA6sYOeOiu9i91IwkY0Bp3kqG8fw18MJA9MHzj4"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-on-surface">Marcus Thorne <span class="text-on-surface-variant font-normal">flagged a</span> <span class="text-error font-semibold">Data Drift</span> <span class="text-on-surface-variant font-normal">anomaly</span></p>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">"The distribution for the 'user_tenure' feature has shifted by 14% since Monday."</p>
+<div class="mt-3 text-[10px] text-on-surface-variant/60 font-bold uppercase tracking-widest">
+<span>2h ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Members Management Section -->
+<div class="mt-4 pt-6 border-t border-outline-variant/15">
+<h4 class="font-headline text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-6">Project Members</h4>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Member" class="w-8 h-8 rounded-full" data-alt="Portrait of a female professional with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcmsb2pukRKit04cecnENlB8_pcCr0oyEL1yDHhrp5Z272CB_B0TelXARAxCNHzZth-2S8ik6ET8atpnYHj0N2demnNUOiHeHkJAZfm50BLfBWeuli0sVl-HeKHu0dirtnK-S5bhmAhfWogfYhS3c7Z-GVrj_LtAU63yYJ5od4CDblLLHMIlHauJ5d1cFE1l7YMnBhXqgdaGiDioqiOIHRXqrhJzEYYxVeolavpjU2eKelRHsNajdYmgIfThHcqAis6ZiwTEyODQM"/>
+<div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-tertiary rounded-full border-2 border-surface-container-low"></div>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Elena Chen</p>
+<p class="text-[10px] text-on-surface-variant">Lead Scientist</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">more_vert</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Member" class="w-8 h-8 rounded-full" data-alt="Portrait of a male engineer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBcBsAdckc7ugBE4f4SyFGUhKvw5xQTyB-dIWj43oFfsjvx752hLEccBc5cmI78D61DRtRl2sxzubv3-pXS6Awg-HtlXFJs1hLxbb-85iPGUMh8OY6jp_xHGeL74Zn5ccf5tJFhcSp10ZezQtpEzW8GzT-hbIQpY7UzztALhnWq95wpnnDVWRDdh4Oy_2A2KBQMT4rs3NGBlJJqjMc_t2luOrFr2noCZh2Uv6JQpCU2OHZkmluk74ErJjQhK8IqyxM3qsPI9iFDl8"/>
+<div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-tertiary rounded-full border-2 border-surface-container-low"></div>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Marcus Thorne</p>
+<p class="text-[10px] text-on-surface-variant">Sr. Dev Ops</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">more_vert</span>
+</div>
+<button class="mt-2 flex items-center justify-center gap-2 py-3 rounded-xl border border-outline-variant/20 text-on-surface-variant text-[11px] font-bold uppercase tracking-widest hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">person_add</span> Invite Member
+                            </button>
+</div>
+</div>
+</section>
+<!-- Right: Shared Analysis Dashboard (Bento Grid) -->
+<section class="flex-1 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface leading-tight">System Performance Core</h3>
+<p class="text-on-surface-variant text-sm mt-1">Shared interactive view of project metrics and drift status.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container text-on-surface text-xs font-bold transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-sm">calendar_today</span> Last 24h
+                            </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container text-on-surface text-xs font-bold transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-sm">share</span> Share View
+                            </button>
+</div>
+</div>
+<div class="grid grid-cols-12 grid-rows-6 gap-6 flex-1">
+<!-- Metric Card: Main Chart (Pinned Thread Example) -->
+<div class="col-span-8 row-span-4 bg-surface-container-low rounded-xl p-8 relative overflow-hidden flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-headline font-bold text-on-surface">Prediction Accuracy</h4>
+<p class="text-xs text-on-surface-variant">Global weighted average across 4 regions</p>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary tracking-tight">98.42%</div>
+<div class="text-[10px] text-tertiary font-bold">+1.2% from v2.3</div>
+</div>
+</div>
+<!-- Visual Chart Area -->
+<div class="flex-1 relative flex items-end gap-1">
+<div class="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-primary/5 to-transparent"></div>
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 200">
+<path d="M0,150 Q50,140 100,160 T200,130 T300,145 T400,100 T500,110 T600,80 T700,95 T800,70" fill="none" stroke="#ffb4a4" stroke-linecap="round" stroke-width="3"></path>
+<circle class="cursor-pointer hover:r-8 transition-all" cx="400" cy="100" fill="#ffb4a4" r="6"></circle>
+<circle cx="600" cy="80" fill="#67d9c9" r="4"></circle>
+</svg>
+<!-- Pinned Thread UI Overlay -->
+<div class="absolute top-[80px] left-[420px] glass-effect p-4 rounded-xl shadow-xl border border-primary/20 max-w-[200px] z-20">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Elena" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzZunGI90jCfQjCYO_zZejjihcUPtdj8MswLR815lZ_JLlR6200DsfWgziwW5lodDsHsP6lUCNyvg5blXSYUDduwGOAFCXGu6XEd0S6yDNxTt0l8F5WS1DEnpm0cyT06S3KJk7i3TdAtmwL7ntNZca3WKJqZZ5PO0cuiy04jl_Yjii1AQzqjHtOYNR-pjTMokn1_1iBCB8AdiYSIIqFlSDABX8oLP8xagSGYueiMBBH2R_k2S-vWVDu2knVwz-4w9wj0a1cwupxMM"/>
+<span class="text-[10px] font-bold text-on-surface">Elena Chen</span>
+</div>
+<p class="text-[10px] text-on-surface leading-tight italic">"This peak correlates with the new transformer layer optimization. Should we lock this param?"</p>
+<div class="mt-3 flex gap-2">
+<span class="text-[9px] px-2 py-0.5 bg-primary/20 text-primary rounded-full font-bold">In Discussion</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Bento: Drift Status -->
+<div class="col-span-4 row-span-2 bg-surface-container-low rounded-xl p-6 flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-secondary">waves</span>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-widest">Normal</span>
+</div>
+<div>
+<h4 class="text-sm font-headline font-bold text-on-surface">Data Drift PSI</h4>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-3xl font-bold text-secondary font-headline">0.082</span>
+<span class="text-[10px] text-on-surface-variant">/ 0.20 max</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary h-full w-[41%]"></div>
+</div>
+</div>
+</div>
+<!-- Side Bento: Active Tasks -->
+<div class="col-span-4 row-span-2 bg-[#1A1C20] rounded-xl p-6 border border-outline-variant/10">
+<h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">Pending Peer Review</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<p class="text-xs text-on-surface truncate">PR-402: Hyper-param tuning</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<p class="text-xs text-on-surface truncate">DATA-91: Clean validation set</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<p class="text-xs text-on-surface truncate">UI-11: Dashboard Dark Mode</p>
+</div>
+</div>
+</div>
+<!-- Bottom Bento: Latency Heatmap -->
+<div class="col-span-12 row-span-2 bg-surface-container rounded-xl p-6 flex items-center gap-12">
+<div class="flex flex-col gap-2">
+<h4 class="text-sm font-headline font-bold text-on-surface">Regional Latency</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">P99 response time</p>
+<div class="flex items-center gap-4 mt-2">
+<div class="text-center">
+<div class="text-lg font-bold text-on-surface">24ms</div>
+<div class="text-[9px] text-on-surface-variant uppercase">US-W</div>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/20"></div>
+<div class="text-center">
+<div class="text-lg font-bold text-on-surface">118ms</div>
+<div class="text-[9px] text-on-surface-variant uppercase">EU-C</div>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/20"></div>
+<div class="text-center">
+<div class="text-lg font-bold text-on-surface">210ms</div>
+<div class="text-[9px] text-error uppercase">AS-S</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex gap-2 h-16 items-end">
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[40%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[60%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[80%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[100%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[70%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[50%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[90%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[40%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[60%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[80%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[100%] hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg h-[70%] hover:bg-primary transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Component -->
+<footer class="w-full py-4 px-8 mt-auto bg-[#111317] border-t border-[#43474D]/15 flex justify-between items-center">
+<p class="font-label text-[0.6875rem] uppercase tracking-widest text-[#C3C6CE]">© 2024 Insight Curator. System Status: <span class="text-[#67d9c9]">Operational.</span></p>
+<div class="flex gap-6 font-label text-[0.6875rem] uppercase tracking-widest">
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">Terms of Service</a>
+<a class="text-[#C3C6CE] hover:text-[#E2E2E7] transition-colors" href="#">API Status</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Contextual FAB - Only for Dashboard/Home context -->
+<button class="fixed bottom-10 right-10 w-16 h-16 rounded-full coral-gradient text-on-primary shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl">add_comment</span>
+</button>
+</body></html>

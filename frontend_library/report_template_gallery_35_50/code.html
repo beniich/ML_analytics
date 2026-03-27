@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Report Templates | Insight Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#c3c6ce",
+              "on-surface": "#e2e2e7",
+              "on-secondary-fixed": "#001d35",
+              "on-primary-container": "#ffd7ce",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "on-background": "#e2e2e7",
+              "inverse-surface": "#e2e2e7",
+              "secondary": "#adc9eb",
+              "on-primary": "#601305",
+              "inverse-primary": "#9f412d",
+              "surface-variant": "#333539",
+              "surface": "#111317",
+              "on-primary-fixed-variant": "#7f2a18",
+              "primary-fixed": "#ffdad3",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-error": "#690005",
+              "surface-bright": "#37393d",
+              "secondary-container": "#304b68",
+              "surface-dim": "#111317",
+              "on-primary-fixed": "#3e0500",
+              "on-secondary-fixed-variant": "#2d4965",
+              "surface-container": "#1e2024",
+              "secondary-fixed-dim": "#adc9eb",
+              "inverse-on-surface": "#2e3035",
+              "on-tertiary-fixed": "#00201c",
+              "surface-container-high": "#282a2e",
+              "primary": "#ffb4a4",
+              "outline": "#8d9198",
+              "surface-tint": "#ffb4a4",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary": "#15324e",
+              "primary-container": "#a44531",
+              "background": "#111317",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#333539",
+              "outline-variant": "#43474d",
+              "tertiary-fixed": "#85f6e5",
+              "tertiary-container": "#006f64",
+              "surface-container-low": "#1a1c20",
+              "secondary-fixed": "#d0e4ff",
+              "on-secondary-container": "#9fbbdd",
+              "primary-fixed-dim": "#ffb4a4",
+              "tertiary-fixed-dim": "#67d9c9",
+              "on-tertiary": "#003731",
+              "tertiary": "#67d9c9",
+              "on-tertiary-container": "#81f2e2"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(30, 32, 36, 0.7);
+        backdrop-filter: blur(12px);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 bottom-0 w-64 h-full bg-[#111317]/90 backdrop-blur-lg dark:bg-[#111317]/90 flex flex-col py-6 px-4 space-y-8 border-r border-[#43474D]/15 z-50">
+<div class="flex items-center gap-3 px-2">
+<div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-[#E2E2E7] leading-none">ML Platform</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Enterprise Tier</p>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#ffb4a4] border-r-2 border-[#ffb4a4] bg-gradient-to-r from-[#ffb4a4]/10 to-transparent transition-all group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="Model_Training">model_training</span>
+<span class="font-['Inter'] font-medium text-sm">Models</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="database">database</span>
+<span class="font-['Inter'] font-medium text-sm">Datasets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="insights">insights</span>
+<span class="font-['Inter'] font-medium text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] hover:bg-[#1E2024] transition-all group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-['Inter'] font-medium text-sm">Deployments</span>
+</a>
+</div>
+<div class="pt-4 border-t border-outline-variant/10 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-semibold text-sm shadow-lg shadow-primary/10 active:scale-95 transition-transform mb-6">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Experiment
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span class="font-['Inter'] font-medium text-sm">Documentation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#C3C6CE] opacity-80 hover:text-[#E2E2E7] transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] font-medium text-sm">Support</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 flex items-center justify-between px-8 h-16 ml-64 bg-[#111317]/80 backdrop-blur-xl dark:bg-[#111317]/80 z-40 tonal-transition shadow-[0_40px_40px_-10px_rgba(226,222,231,0.06)]">
+<div class="flex items-center gap-6 flex-1">
+<div class="text-2xl font-bold tracking-tighter text-[#ffb4a4] font-['Manrope'] antialiased">Insight Curator</div>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary/20 placeholder:text-on-surface-variant/50" placeholder="Search templates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-[#1E2024] transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#1E2024] transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant/20 ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional data scientist with glasses in a soft-lit modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQj6Xa-SNEbfj-P0a0_85FpvunMIWVoMI_R2gopCoNJx681aQKpB4W_30qPtTDsEWMarB0L66zTZIBULqpHwkrKmHRddIHITfoc-KzhfLZld-E4WMiYoV_1SDRjWUzQxSsan6_0AqfoVrgYP9tKd87Nj2uNOtjkmwdOb4l674oolARP3lWo5Xq6J6TPOED1gLRnF_AiBQlXyjRBJ_Mh1pFmDYuda4IXxF-rHwxackebJFqSBpmcbOX_jk5X4UvwPmuKx3YtZdMGoo"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen bg-surface">
+<div class="max-w-7xl mx-auto px-10 py-12">
+<!-- Hero Header -->
+<div class="mb-16">
+<div class="flex items-baseline justify-between">
+<h2 class="text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-4">
+                        Report <span class="text-primary">Gallery</span>
+</h2>
+<div class="text-on-surface-variant font-medium bg-surface-container-low px-4 py-1.5 rounded-full text-sm border border-outline-variant/10">
+<span class="text-primary font-bold">35</span> / 50 Templates Available
+                    </div>
+</div>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                    Choose from our curated library of exportable PDF report templates. Professional designs tailored for ML model audits, executive summaries, and technical performance reviews.
+                </p>
+</div>
+<!-- Filter Chips -->
+<div class="flex items-center gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-sm font-semibold whitespace-nowrap">All Templates</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-sm font-medium border border-outline-variant/10 transition-colors whitespace-nowrap">Executive Summary</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-sm font-medium border border-outline-variant/10 transition-colors whitespace-nowrap">Technical Deep-dive</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-sm font-medium border border-outline-variant/10 transition-colors whitespace-nowrap">Marketing Insights</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-sm font-medium border border-outline-variant/10 transition-colors whitespace-nowrap">Compliance &amp; Audit</button>
+<div class="h-6 w-[1px] bg-outline-variant/20 mx-2"></div>
+<button class="flex items-center gap-2 text-primary text-sm font-semibold hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                    Advanced Filters
+                </button>
+</div>
+<!-- Bento Grid Gallery -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Main Featured Card (Technical) -->
+<div class="md:col-span-7 group cursor-pointer">
+<div class="relative rounded-2xl overflow-hidden bg-surface-container-low h-[480px] transition-transform duration-500 hover:-translate-y-2">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent z-10"></div>
+<img alt="Technical Report" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern minimalist editorial layout of a technical data report showing complex charts and crisp typography on clean white paper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1bmqOg9HhYFGIySVlqo7sdjnzOGjENFinyrzRWH2_gpFgD6wamg-ESDgOk2QtwA-hw0eK7fXbau0Mc5sWRRRtBE7ZA3yLQzZ5P6rgS_RJ4HCLpWtRBqvYP--Eo-vThCDvchQpIeOyOyi1dxqn0GPH7BiiHoRGQN9nQSI4SZFg1B-uEJ5JGxhRQLwSqqbY4MoC0UG7NIakBO6yZ8TB1-4BhevOAS7ehzMcvdBl5omdS1HlDVpNN_GIUpF0ZN_XKkmqDJ3259dEBSc"/>
+<div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+<div class="flex items-center gap-2 mb-3">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary text-[10px] font-bold uppercase tracking-wider rounded-md border border-tertiary/20">Technical</span>
+<span class="px-3 py-1 bg-white/5 backdrop-blur-md text-white/70 text-[10px] font-medium rounded-md border border-white/10">Popular</span>
+</div>
+<h3 class="text-3xl font-bold font-headline text-on-surface mb-2">Neural Network Audit v4</h3>
+<p class="text-on-surface-variant max-w-md">Detailed visualization of gradient flows, layer weights, and convergence metrics with vector-exportable charts.</p>
+<div class="mt-6 flex items-center gap-4">
+<button class="px-6 py-2.5 bg-primary text-on-primary rounded-xl font-bold text-sm shadow-xl shadow-primary/20">Use Template</button>
+<button class="p-2.5 rounded-xl border border-outline-variant/20 text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Cards Column -->
+<div class="md:col-span-5 flex flex-col gap-8">
+<!-- Executive Card -->
+<div class="flex-1 group cursor-pointer relative rounded-2xl overflow-hidden bg-surface-container h-[224px] transition-transform duration-500 hover:-translate-y-1 border border-outline-variant/5">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container via-surface-container/40 to-transparent z-10"></div>
+<img alt="Executive Report" class="absolute right-0 top-0 h-full w-2/3 object-cover" data-alt="Top down view of a premium executive report on a dark wooden desk with high-end fountain pen and soft bokeh lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK8MyUu19zYjKeF7yd_UNJyaM3zFpiH90HcAdOnJRYTHOfe5lbScTVio5glLRl-Jn-vDffFg6MSHs-eGrxIk-Jyj1zjeRHm7To29C0EVlfuFmfDdIF1vXqMI0eTWX9PMDAIKiNbyLPzGndfvKjetntct4KPalnZV9UZhmCCJMRHxPe1nZKBl79t6_wWeEUc0tlqnIC_BH1J5aA9iFi0rO2PPlkE5sRQrp1bSkly8LXh8bl72bufUQjN2y1NTooQYOvczAr1gFCckM"/>
+<div class="relative h-full flex flex-col justify-center p-8 z-20">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded w-fit mb-3">Executive</span>
+<h3 class="text-xl font-bold text-on-surface mb-1">Q3 Strategic ROI</h3>
+<p class="text-on-surface-variant text-sm max-w-[180px]">High-level summary for stakeholders.</p>
+</div>
+</div>
+<!-- Marketing Card -->
+<div class="flex-1 group cursor-pointer relative rounded-2xl overflow-hidden bg-surface-container-high h-[224px] transition-transform duration-500 hover:-translate-y-1 border border-outline-variant/5">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-high via-surface-container-high/40 to-transparent z-10"></div>
+<img alt="Marketing Report" class="absolute right-0 top-0 h-full w-2/3 object-cover" data-alt="Vibrant marketing analytics dashboard preview with colorful bar charts and abstract data visualizations in a clean modern style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAO7m5HbCBCUsxCp3-Up0nOS7cbI9utBULCxsUEdYfN5_YmQ84mcJvq3iZ9WgG9NzEq4As8-1lrlT7HgPKMRcGv0pNgwk0DYzInQqSMZUEsjWMpzqjj5ox9xCViuWCBQ7qybHaBzF96TcZ_TuOB95wLw2ECljderDCm-HSpZzPOHLbOvU7EnwrwnFAG7hf1f0MoPVBRh4vGJeGuQoBbUgBEQjo4no9w-CUUDHH2zus_muxfdK-WqixTj_bIxRIGUz3pdlPJxE_-DA"/>
+<div class="relative h-full flex flex-col justify-center p-8 z-20">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-wider rounded w-fit mb-3">Marketing</span>
+<h3 class="text-xl font-bold text-on-surface mb-1">Growth Dynamics</h3>
+<p class="text-on-surface-variant text-sm max-w-[180px]">Visual storytelling for user acquisition.</p>
+</div>
+</div>
+</div>
+<!-- Small Grid Items -->
+<div class="md:col-span-4 group">
+<div class="aspect-[4/3] rounded-2xl bg-surface-container-low border border-outline-variant/10 p-6 flex flex-col justify-between hover:border-primary/30 transition-all">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<h4 class="text-lg font-bold text-on-surface mb-2">Model Bias Audit</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Comprehensive fairness assessment with ethical compliance checklists and bias distribution curves.</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/5">
+<span class="text-[10px] text-on-surface-variant/60 font-medium">Updated 2d ago</span>
+<span class="material-symbols-outlined text-primary text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 group">
+<div class="aspect-[4/3] rounded-2xl bg-surface-container-low border border-outline-variant/10 p-6 flex flex-col justify-between hover:border-primary/30 transition-all">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dataset_linked</span>
+</div>
+<h4 class="text-lg font-bold text-on-surface mb-2">Dataset Lineage</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Map the entire flow of your training data from raw source to final normalized feature sets.</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/5">
+<span class="text-[10px] text-on-surface-variant/60 font-medium">Standard License</span>
+<span class="material-symbols-outlined text-primary text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 group">
+<div class="aspect-[4/3] rounded-2xl bg-surface-container-low border border-outline-variant/10 p-6 flex flex-col justify-between hover:border-primary/30 transition-all">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<h4 class="text-lg font-bold text-on-surface mb-2">Experiment Ledger</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">A chronologically ordered review of all model versions, hyperparameters, and resulting loss curves.</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/5">
+<span class="text-[10px] text-on-surface-variant/60 font-medium">New Release</span>
+<span class="material-symbols-outlined text-primary text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More Section -->
+<div class="mt-20 flex flex-col items-center">
+<p class="text-on-surface-variant text-sm mb-6">Viewing 6 of 35 templates</p>
+<button class="px-8 py-3 rounded-xl border border-outline-variant/20 hover:bg-surface-container text-on-surface font-semibold transition-colors flex items-center gap-3">
+                    Load More Templates
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary text-on-primary shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 28px;">upload_file</span>
+</button>
+</body></html>

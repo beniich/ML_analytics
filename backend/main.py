@@ -22,13 +22,12 @@ from config import (API_DESCRIPTION, API_TITLE, API_VERSION, CORS_ORIGINS,
 from database import engine, get_db, init_db
 from models import (AnalysisHistory, AnalysisReport, ApiKey, Base, MLModel,
                     User)
-from auth import (create_access_token, create_refresh_token,
-                  generate_test_token, get_current_admin, get_current_user,
-                  verify_token)
+from routers.auth_router import get_current_admin, get_current_user
 from analyzer import DataAnalyzer
 from reports import ReportGenerator
 
 # All new routers
+from routers.auth_router import router as auth_router
 from routers import (
     billing_router,
     engineering_router,
@@ -83,6 +82,7 @@ async def startup_event():
 
 
 # ── Include all routers -------------------------------------------------------
+app.include_router(auth_router)
 app.include_router(quality_router)
 app.include_router(jobs_router)
 app.include_router(transform_router)
@@ -107,91 +107,6 @@ def _load_df(content: bytes, filename: str) -> pd.DataFrame:
     elif ext == "json":
         return pd.read_json(BytesIO(content))
     raise HTTPException(status_code=400, detail=f"Unsupported format: {ext}")
-
-
-# ── AUTH -------------------------------------------------------------------
-
-@app.post("/api/auth/register", tags=["Authentication"])
-async def register(
-    username: str,
-    email: str,
-    password: str,
-    full_name: Optional[str] = None,
-    db: Session = Depends(get_db),
-):
-    """Register a new user"""
-    try:
-        existing = db.query(User).filter(
-            (User.username == username) | (User.email == email)
-        ).first()
-        if existing:
-            raise HTTPException(status_code=400, detail="Username or email already registered")
-
-        user = User(username=username, email=email, full_name=full_name, is_active=True)
-        user.set_password(password)
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-        logger.info(f"New user registered: {username}")
-        return {"id": user.id, "username": user.username, "email": user.email, "message": "User registered successfully"}
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Register error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/api/auth/login", tags=["Authentication"])
-async def login(username: str, password: str, db: Session = Depends(get_db)):
-    """User login — returns JWT access + refresh tokens"""
-    try:
-        user = db.query(User).filter(User.username == username).first()
-        if not user or not user.verify_password(password):
-            raise HTTPException(status_code=401, detail="Invalid credentials")
-        if not user.is_active:
-            raise HTTPException(status_code=403, detail="User account is inactive")
-
-        user.last_login = datetime.utcnow()
-        db.commit()
-
-        access_token = create_access_token(data={"sub": user.username})
-        refresh_token = create_refresh_token(data={"sub": user.username})
-        logger.info(f"User login: {username}")
-
-        return {
-            "access_token": access_token,
-            "refresh_token": refresh_token,
-            "token_type": "bearer",
-            "user": {
-                "id": user.id,
-                "username": user.username,
-                "email": user.email,
-                "is_admin": user.is_admin,
-            },
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/api/auth/refresh", tags=["Authentication"])
-async def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
-    """Refresh access token"""
-    try:
-        payload = verify_token(refresh_token)
-        if payload.get("type") != "refresh":
-            raise HTTPException(status_code=401, detail="Invalid token type")
-        username = payload.get("sub")
-        user = db.query(User).filter(User.username == username).first()
-        if not user or not user.is_active:
-            raise HTTPException(status_code=401, detail="User not found or inactive")
-        new_token = create_access_token(data={"sub": username})
-        return {"access_token": new_token, "token_type": "bearer"}
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ── ANALYSIS ---------------------------------------------------------------

@@ -1,9 +1,10 @@
-FROM python:3.10-slim
+FROM python:3.10-slim-bullseye
 
 WORKDIR /app
 
-# Install system dependencies for pdfkit/wkhtmltopdf
-RUN apt-get update && apt-get install -y \
+# Install system dependencies with retries
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends -o Acquire::Retries=3 \
     wkhtmltopdf \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*

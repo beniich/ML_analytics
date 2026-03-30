@@ -12,15 +12,15 @@ from sqlalchemy.orm import Session
 from database import get_db
 from models import User, AnalysisReport
 from auth import get_current_user
-from analyzer import DataAnalyzer
-from anomaly_detector import anomaly_detector
-from data_loader import MultiFormatLoader, validate_supported_format
+from services.analyzer import DataAnalyzer
+from services.anomaly_detector import anomaly_detector
+from services.data_loader import MultiFormatLoader, validate_supported_format
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/analysis", tags=["Advanced Analysis"])
 
 try:
-    from cache import cache
+    from services.cache import cache
 except:
     cache = None
 

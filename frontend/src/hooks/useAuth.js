@@ -7,7 +7,7 @@ const AuthContext = createContext();
 // Authentication is bypassed for local development.
 // The dashboard loads immediately with a mock admin user.
 // To re-enable auth, set DEV_BYPASS = false and ensure the backend is running.
-const DEV_BYPASS = false;
+const DEV_BYPASS = true;
 const MOCK_USER  = { username: 'Admin', userId: 'dev-001', role: 'admin', plan: 'Pro' };
 // ─────────────────────────────────────────────────────────────────────────────
 

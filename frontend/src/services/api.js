@@ -26,7 +26,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refreshToken = localStorage.getItem('refresh_token');
-        const res = await axios.post(`${API_BASE_URL}/auth/refresh`, { refresh_token: refreshToken });
+        const res = await axios.post(`${API_BASE_URL}/v1/auth/refresh`, { refresh_token: refreshToken });
         localStorage.setItem('access_token', res.data.access_token);
         originalRequest.headers.Authorization = `Bearer ${res.data.access_token}`;
         return api(originalRequest);
@@ -44,20 +44,21 @@ api.interceptors.response.use(
 export const ApiService = {
   // 1. Authentication
   auth: {
-    register: (data) => api.post('/auth/register', data),
-    login: (username, password) => api.post('/auth/login', null, { params: { username, password } }),
-    refresh: (token) => api.post('/auth/refresh', { refresh_token: token }),
+    register: (data) => api.post('/v1/auth/register', data),
+    login: (username, password) => api.post('/v1/auth/login', null, { params: { username, password } }),
+    refresh: (token) => api.post('/v1/auth/refresh', { refresh_token: token }),
   },
 
   // 2. Core Analysis
   analysis: {
-    basic: (file) => uploadFile('/analysis/basic', file),
-    correlation: (file) => uploadFile('/analysis/correlation', file),
-    distribution: (file) => uploadFile('/analysis/distribution', file),
-    predictive: (file, target, type) => uploadFile('/analysis/predictive', file, { target_column: target, model_type: type }),
-    outliers: (file, method) => uploadFile('/analysis/outliers', file, { method }),
-    complete: (file, format) => uploadFile('/analysis/complete', file, { report_format: format }),
-    comprehensive: (file, options) => uploadFile('/analysis/comprehensive', file, options),
+    basic: (file) => uploadFile('/v1/analysis/basic', file),
+    correlation: (file) => uploadFile('/v1/analysis/correlation', file),
+    distribution: (file) => uploadFile('/v1/analysis/distribution', file),
+    predictive: (file, target, type) => uploadFile('/v1/analysis/predictive', file, { target_column: target, model_type: type }),
+    outliers: (file, method) => uploadFile('/v1/analysis/outliers', file, { method }),
+    complete: (file, format) => uploadFile('/v1/analysis/complete', file, { report_format: format }),
+    trainModel: (algorithm, problemType, target) => api.post('/analysis/train-model', { algorithm, problem_type: problemType, target_column: target }),
+    comprehensive: (file, options) => uploadFile('/v1/analysis/comprehensive', file, options),
   },
 
   // 3. Advanced Features
@@ -78,15 +79,15 @@ export const ApiService = {
 
   // 5. Job Scheduling
   jobs: {
-    list: () => api.get('/jobs'),
-    get: (id) => api.get(`/jobs/${id}`),
-    scheduleAnalysis: (data) => api.post('/jobs/schedule-analysis', data),
-    scheduleReport: (data) => api.post('/jobs/schedule-report', data),
-    pause: (id) => api.put(`/jobs/${id}/pause`),
-    resume: (id) => api.put(`/jobs/${id}/resume`),
-    delete: (id) => api.delete(`/jobs/${id}`),
-    history: (id) => api.get(`/jobs/${id}/history`),
-    stats: () => api.get('/jobs/stats'),
+    list: () => api.get('/v1/jobs'),
+    get: (id) => api.get(`/v1/jobs/${id}`),
+    scheduleAnalysis: (data) => api.post('/v1/jobs/schedule-analysis', data),
+    scheduleReport: (data) => api.post('/v1/jobs/schedule-report', data),
+    pause: (id) => api.put(`/v1/jobs/${id}/pause`),
+    resume: (id) => api.put(`/v1/jobs/${id}/resume`),
+    delete: (id) => api.delete(`/v1/jobs/${id}`),
+    history: (id) => api.get(`/v1/jobs/${id}/history`),
+    stats: () => api.get('/v1/jobs/stats'),
   },
 
   // 6. Data Transformation (ETL)
@@ -95,6 +96,8 @@ export const ApiService = {
     aggregate: (data) => api.post('/transform/aggregate', data),
     normalize: (data) => api.post('/transform/normalize', data),
     pipeline: (data) => api.post('/transform/pipeline', data),
+    query: (data) => api.post('/transform/query', data),
+    exportCsv: (data) => api.post('/transform/export', data, { responseType: 'blob' }),
   },
 
   // 7. Time Series
@@ -131,6 +134,10 @@ export const ApiService = {
   users: {
     me: () => api.get('/users/me'),
     update: (data) => api.put('/users/me', data),
+    list: () => api.get('/users'),
+    invite: (email, role) => api.post('/users/invite', { email, role }),
+    updateRole: (id, role) => api.put(`/users/${id}/role`, { role }),
+    revoke: (id) => api.delete(`/users/${id}`),
   },
 
   // 10. Billing & Monetization
@@ -148,6 +155,12 @@ export const ApiService = {
     getChangelog: () => api.get('/support/changelog'),
     getStatus: () => api.get('/support/status'),
     submitTicket: (data) => api.post('/support/ticket', data),
+  },
+
+  // 12. AI Copilot
+  ai: {
+    chat: (message) => api.post('/v1/ai/chat', { message }),
+    summarize: (data) => api.post('/v1/ai/summarize', { data }),
   },
 };
 

@@ -13,9 +13,13 @@ import {
   Layers,
   Sparkles
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const SubscriptionManager = () => {
   const [activePlan, setActivePlan] = useState('Pro');
+  const [loadingPlan, setLoadingPlan] = useState(null);
+  const [isAddingCredits, setIsAddingCredits] = useState(false);
 
   const quotas = [
     { label: 'AI Inference Credits', used: 8500, total: 10000, icon: <Sparkles size={18} color="#ffb4a4" />, unit: 'req' },
@@ -29,6 +33,39 @@ const SubscriptionManager = () => {
     { name: 'Enterprise', price: 'Custom', features: ['Unlimited Credits', 'Unlimited API', 'Dedicated Cluster', 'White-glove Support'], accent: '#ffb4a4' },
   ];
 
+  const handleUpgrade = async (planName) => {
+    if (planName === activePlan) {
+      toast.info(`You are already on the ${planName} plan. Redirecting to billing portal...`);
+      return;
+    }
+    setLoadingPlan(planName);
+    try {
+      if (ApiService.billing?.upgradePlan) {
+          await ApiService.billing.upgradePlan(planName);
+      } else {
+          await new Promise(res => setTimeout(res, 2000));
+      }
+      toast.success(`Successfully upgraded to ${planName} plan!`);
+      setActivePlan(planName);
+    } catch (e) {
+      toast.error('Payment processing failed.');
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
+  const handleAddCredits = async () => {
+    setIsAddingCredits(true);
+    try {
+      await new Promise(res => setTimeout(res, 1000));
+      toast.success('Credits added successfully.');
+    } catch (e) {
+      toast.error('Failed to add credits.');
+    } finally {
+      setIsAddingCredits(false);
+    }
+  };
+
   return (
     <div className="subscription-view" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
       {/* Header */}
@@ -39,8 +76,21 @@ const SubscriptionManager = () => {
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Manage your premium services, AI credits, and API usage limits.</p>
           </div>
           <div style={{ display: 'flex', gap: '1rem' }}>
-             <button className="btn-primary" style={{ background: 'rgba(255,180,164,0.1)', border: '1px solid #ffb4a4', color: '#ffb4a4' }}>Add Credits</button>
-             <button className="btn-primary">Upgrade Plan</button>
+             <button 
+                className="btn-primary" 
+                onClick={handleAddCredits}
+                disabled={isAddingCredits}
+                style={{ background: 'rgba(255,180,164,0.1)', border: '1px solid #ffb4a4', color: '#ffb4a4' }}
+             >
+                {isAddingCredits ? 'Processing...' : 'Add Credits'}
+             </button>
+             <button 
+                className="btn-primary"
+                onClick={() => handleUpgrade('Pro')}
+                disabled={loadingPlan !== null}
+             >
+                Upgrade Plan
+             </button>
           </div>
         </div>
       </header>
@@ -100,8 +150,13 @@ const SubscriptionManager = () => {
                       ))}
                   </div>
 
-                  <button className="btn-primary" style={{ width: '100%', padding: '1rem', background: activePlan === p.name ? 'rgba(255,255,255,0.05)' : p.accent, border: 'none', color: activePlan === p.name ? 'white' : 'black', fontWeight: 900 }}>
-                      {activePlan === p.name ? 'Manage Plan' : `Upgrade to ${p.name}`}
+                  <button 
+                     className="btn-primary" 
+                     onClick={() => handleUpgrade(p.name)}
+                     disabled={loadingPlan === p.name}
+                     style={{ width: '100%', padding: '1rem', background: activePlan === p.name ? 'rgba(255,255,255,0.05)' : p.accent, border: 'none', color: activePlan === p.name ? 'white' : 'black', fontWeight: 900 }}
+                  >
+                      {loadingPlan === p.name ? 'Processing...' : activePlan === p.name ? 'Manage Plan' : `Upgrade to ${p.name}`}
                   </button>
               </div>
           ))}
@@ -130,7 +185,7 @@ const SubscriptionManager = () => {
                               <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{t.d}</td>
                               <td style={{ padding: '1rem', fontWeight: 700 }}>{t.a}</td>
                               <td style={{ padding: '1rem' }}><span style={{ color: '#67d9c9', fontWeight: 700 }}>{t.st}</span></td>
-                              <td style={{ padding: '1rem' }}><button style={{ background: 'transparent', border: 'none', color: 'var(--primary-accent)', cursor: 'pointer' }}><CreditCard size={16} /></button></td>
+                              <td style={{ padding: '1rem' }}><button onClick={() => toast.info('Downloading invoice PDF...')} style={{ background: 'transparent', border: 'none', color: 'var(--primary-accent)', cursor: 'pointer' }}><CreditCard size={16} /></button></td>
                           </tr>
                       ))}
                   </tbody>

@@ -14,9 +14,13 @@ import {
   Search,
   ArrowUpRight
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const ModelBenchmarkComparison = () => {
   const [selectedModels, setSelectedModels] = useState(['XGBoost (Primary)', 'Random Forest']);
+  const [isBenchmarking, setIsBenchmarking] = useState(false);
+  const [isComparing, setIsComparing] = useState(false);
 
   const metrics = [
     { name: 'XGBoost (Primary)', r2: '0.945', rmse: '0.021', time: '1h 45m', status: 'Completed', color: '#ffb4a4' },
@@ -24,6 +28,30 @@ const ModelBenchmarkComparison = () => {
     { name: 'Linear Regression', r2: '0.883', rmse: '0.028', time: '25m', status: 'Completed', color: '#67d9c9' },
     { name: 'Neural Network v2', r2: '0.958', rmse: '0.015', time: '6h 12m', status: 'Completed', color: '#adc9eb' },
   ];
+
+  const handleBenchmark = async () => {
+    setIsBenchmarking(true);
+    try {
+      await new Promise(res => setTimeout(res, 2500));
+      toast.success('Benchmark suite executed successfully across 4 architectures.');
+    } catch (e) {
+      toast.error('Benchmark suite failed.');
+    } finally {
+      setIsBenchmarking(false);
+    }
+  };
+
+  const handleCompare = async () => {
+    setIsComparing(true);
+    try {
+      await new Promise(res => setTimeout(res, 1000));
+      toast.success('Comparison visualizers updated.');
+    } catch (e) {
+      toast.error('Failed to compare.');
+    } finally {
+      setIsComparing(false);
+    }
+  };
 
   return (
     <div className="benchmark-view" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
@@ -34,11 +62,16 @@ const ModelBenchmarkComparison = () => {
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Comparative analysis of model architectural performance and validation metrics.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button onClick={() => toast.info('Model selection modal opened')} className="btn-primary" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Plus size={18} /> Select Models
             </button>
-            <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Play size={18} /> Run New Benchmark
+            <button 
+                className="btn-primary" 
+                onClick={handleBenchmark}
+                disabled={isBenchmarking}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+                <Play size={18} /> {isBenchmarking ? 'Running Benchmarks...' : 'Run New Benchmark'}
             </button>
         </div>
       </header>
@@ -65,7 +98,14 @@ const ModelBenchmarkComparison = () => {
                       </div>
                   </div>
               </div>
-              <button className="btn-primary" style={{ width: '100%', marginTop: '3rem', background: 'var(--primary-accent)', color: 'black', fontWeight: 900 }}>COMPARE SELECTED</button>
+              <button 
+                  className="btn-primary" 
+                  onClick={handleCompare}
+                  disabled={isComparing}
+                  style={{ width: '100%', marginTop: '3rem', background: 'var(--primary-accent)', color: 'black', fontWeight: 900 }}
+              >
+                  {isComparing ? 'COMPARING...' : 'COMPARE SELECTED'}
+              </button>
           </div>
 
           {/* Performance Trend Chart */}

@@ -12,9 +12,17 @@ import {
   Code,
   Download
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const SQLQueryBuilder = () => {
   const [query, setQuery] = useState(`SELECT id, username, email\nFROM users\nWHERE created_at > '2023-01-01'\nORDER BY id DESC;`);
+  
+  const [loadings, setLoadings] = useState({
+    save: false,
+    run: false,
+    export: false
+  });
 
   const schema = [
     { 
@@ -27,12 +35,39 @@ const SQLQueryBuilder = () => {
     }
   ];
 
-  const results = [
+  const [results, setResults] = useState([
     { id: 1, username: 'almin', email: 'almin01@example.com', created_at: '2023-01-01 06:58:33' },
     { id: 2, username: 'username', email: 'user@gmail.com', created_at: '2023-01-01 06:50:00' },
     { id: 3, username: 'example', email: 'ex@example.com', created_at: '2023-01-01 06:53:06' },
     { id: 4, username: 'deskltay', email: 'desk@example.com', created_at: '2023-01-01 06:59:40' }
-  ];
+  ]);
+
+  const handleAction = async (actionType, successMsg) => {
+    setLoadings(prev => ({ ...prev, [actionType]: true }));
+    try {
+      if (actionType === 'run' && ApiService.transform?.query) {
+        const response = await ApiService.transform.query({ sql: query, db_type: 'postgresql' });
+        setResults(response.data.data); // data contains the simulated rows
+        toast.success(`Query executed: ${response.data.rows_returned} rows returned.`);
+      } else if (actionType === 'export' && ApiService.transform?.exportCsv) {
+         const response = await ApiService.transform.exportCsv({ data: results, format: 'csv' });
+         const url = window.URL.createObjectURL(new Blob([response.data]));
+         const link = document.createElement('a');
+         link.href = url;
+         link.setAttribute('download', 'export.csv');
+         document.body.appendChild(link);
+         link.click();
+         toast.success('CSV downloaded');
+      } else {
+         await new Promise(res => setTimeout(res, 1000));
+         toast.success(successMsg);
+      }
+    } catch (e) {
+      toast.error(`Failed to ${actionType} query`);
+    } finally {
+      setLoadings(prev => ({ ...prev, [actionType]: false }));
+    }
+  };
 
   return (
     <div className="sql-builder-view" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', height: '100%' }}>
@@ -43,11 +78,20 @@ const SQLQueryBuilder = () => {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Directly query connected data sources to build custom ML datasets.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-           <button style={{ padding: '0.6rem 1.2rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.05)', color: 'white', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Save size={16} /> Save Query
+           <button 
+             style={{ padding: '0.6rem 1.2rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.05)', color: 'white', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+             onClick={() => handleAction('save', 'Query logic saved to project library')}
+             disabled={loadings.save}
+           >
+              <Save size={16} /> {loadings.save ? 'Saving...' : 'Save Query'}
            </button>
-           <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Play size={16} fill="white" /> Run Query
+           <button 
+             className="btn-primary" 
+             style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+             onClick={() => handleAction('run', 'Query executed successfully')}
+             disabled={loadings.run}
+           >
+              <Play size={16} fill="white" /> {loadings.run ? 'Executing...' : 'Run Query'}
            </button>
         </div>
       </header>
@@ -118,27 +162,29 @@ const SQLQueryBuilder = () => {
            <GlassCard style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
               <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                  <h3 style={{ fontSize: '0.9rem', fontWeight: 800 }}>Query Results (Top 100)</h3>
-                 <button style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
-                    <Download size={14} /> Export CSV
+                 <button 
+                   style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+                   onClick={() => handleAction('export', 'CSV file generated successfully')}
+                   disabled={loadings.export}
+                 >
+                    <Download size={14} /> {loadings.export ? 'Exporting...' : 'Export CSV'}
                  </button>
               </div>
               <div style={{ flex: 1, overflow: 'auto' }}>
                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
                     <thead>
-                       <tr style={{ background: 'rgba(255,255,255,0.02)', textAlign: 'left' }}>
-                          <th style={{ padding: '1rem', borderBottom: '1px solid var(--glass-border)' }}>ID</th>
-                          <th style={{ padding: '1rem', borderBottom: '1px solid var(--glass-border)' }}>Username</th>
-                          <th style={{ padding: '1rem', borderBottom: '1px solid var(--glass-border)' }}>Email</th>
-                          <th style={{ padding: '1rem', borderBottom: '1px solid var(--glass-border)' }}>Created At</th>
+                        <tr style={{ background: 'rgba(255,255,255,0.02)', textAlign: 'left' }}>
+                          {results.length > 0 ? Object.keys(results[0]).map(key => (
+                              <th key={key} style={{ padding: '1rem', borderBottom: '1px solid var(--glass-border)', textTransform: 'capitalize' }}>{key.replace('_', ' ')}</th>
+                          )) : <th style={{ padding: '1rem', borderBottom: '1px solid var(--glass-border)' }}>No Data</th>}
                        </tr>
                     </thead>
                     <tbody>
-                       {results.map((row) => (
-                         <tr key={row.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                            <td style={{ padding: '1rem', color: 'var(--primary-accent)', fontWeight: 700 }}>{row.id}</td>
-                            <td style={{ padding: '1rem', color: 'white' }}>{row.username}</td>
-                            <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{row.email}</td>
-                            <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{row.created_at}</td>
+                       {results.map((row, i) => (
+                         <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                            {Object.values(row).map((val, idx) => (
+                               <td key={idx} style={{ padding: '1rem', color: idx === 0 ? 'var(--primary-accent)' : 'white', fontWeight: idx === 0 ? 700 : 'normal' }}>{String(val)}</td>
+                            ))}
                          </tr>
                        ))}
                     </tbody>

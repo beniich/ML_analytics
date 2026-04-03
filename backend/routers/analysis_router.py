@@ -15,6 +15,12 @@ from models import AnalysisHistory, AnalysisReport, User
 from routers.auth_router import get_current_user
 from services.analyzer import DataAnalyzer
 from services.reports import ReportGenerator
+from pydantic import BaseModel
+
+class TrainRequest(BaseModel):
+    algorithm: str
+    target_column: Optional[str] = "target"
+    problem_type: Optional[str] = "classification"
 
 logger = logging.getLogger(__name__)
 
@@ -170,3 +176,79 @@ async def complete_analysis(
     except Exception as e:
         logger.error(traceback.format_exc())
         raise HTTPException(status_code=400, detail=str(e))
+
+@router.post("/train-model")
+async def train_mocked_live_dataset(
+    req: TrainRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Train a model on a synthetic dataset to demonstrate active Scikit-Learn training.
+    The UI calls this instead of uploading a file.
+    """
+    try:
+        from sklearn.datasets import make_classification, make_regression
+        from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+        from sklearn.linear_model import LogisticRegression, LinearRegression
+        from sklearn.svm import SVC, SVR
+        from sklearn.model_selection import train_test_split
+        from sklearn.metrics import accuracy_score, precision_score, recall_score, mean_squared_error, r2_score
+        import numpy as np
+        
+        # 1. Generate appropriate dataset
+        if req.problem_type == "classification":
+            X, y = make_classification(n_samples=1000, n_features=20, n_informative=15, random_state=42)
+        else:
+            X, y = make_regression(n_samples=1000, n_features=20, n_informative=15, random_state=42)
+            
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        # 2. Select Algorithm
+        algo = req.algorithm.lower()
+        if req.problem_type == "classification":
+            if "random forest" in algo:
+                model = RandomForestClassifier(n_estimators=50, random_state=42)
+            elif "svm" in algo or "support vector" in algo:
+                model = SVC(kernel="rbf")
+            else:
+                model = LogisticRegression()
+        else:
+            if "random forest" in algo:
+                model = RandomForestRegressor(n_estimators=50, random_state=42)
+            elif "svm" in algo or "support vector" in algo:
+                model = SVR(kernel="rbf")
+            else:
+                model = LinearRegression()
+
+        # 3. Train
+        start = datetime.now()
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        duration_ms = int((datetime.now() - start).total_seconds() * 1000)
+
+        # 4. Metrics
+        if req.problem_type == "classification":
+            metrics = {
+                "accuracy": float(accuracy_score(y_test, y_pred)),
+                "precision": float(precision_score(y_test, y_pred, average='weighted', zero_division=0)),
+                "recall": float(recall_score(y_test, y_pred, average='weighted', zero_division=0))
+            }
+        else:
+            mse = float(mean_squared_error(y_test, y_pred))
+            metrics = {
+                "mse": mse,
+                "rmse": float(np.sqrt(mse)),
+                "r2_score": float(r2_score(y_test, y_pred))
+            }
+
+        return {
+            "status": "success",
+            "algorithm_used": str(type(model).__name__),
+            "metrics": metrics,
+            "training_time_ms": duration_ms,
+            "samples": len(X)
+        }
+    except Exception as e:
+        logger.error(f"Error training model: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+

@@ -1,18 +1,29 @@
-# Build stage
-FROM node:18-slim AS build
+# frontend/Dockerfile
+
+# ── Etape 1 : Build (Node.js) ──
+FROM node:18-alpine AS builder
 
 WORKDIR /app
-
-COPY package.json .
-RUN npm install
+COPY package.json package-lock.json* ./
+RUN npm ci --silent
 
 COPY . .
+# La variable d'environnement sert à paramétrer l'URL vers l'API, 
+# bien que le proxy Nginx rende l'URL relative `/api/` suffisante.
+ENV REACT_APP_API_URL=/api/
 RUN npm run build
 
-# Serve stage
+
+# ── Etape 2 : Production Serve (Nginx) ──
 FROM nginx:alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+# Copie des artefacts buildés
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Copie de la configuration Nginx (SPA + API Proxy)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Utilisateur non-root Nginx (optionnel selon permissions)
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

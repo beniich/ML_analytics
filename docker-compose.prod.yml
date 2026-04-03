@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # ── Serveur Web (Frontend React + Proxy API Nginx) ──
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: ml-analytics-frontend:prod
+    container_name: ml-frontend-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - ml_net
+
+  # ── API (FastAPI MVC via Gunicorn) ──
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: ml-analytics-backend:prod
+    container_name: ml-backend-prod
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      jaeger:
+        condition: service_started
+    restart: always
+    networks:
+      - ml_net
+
+  # ── Base de Données (PostgreSQL) ──
+  db:
+    image: postgres:15-alpine
+    container_name: ml-postgres-prod
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - ml_net
+
+  # ── Cache & Event Bus (Redis) ──
+  redis:
+    image: redis:7-alpine
+    container_name: ml-redis-prod
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    command: redis-server --appendonly yes
+    restart: always
+    networks:
+      - ml_net
+
+  # ── Traces (Jaeger / OpenTelemetry) ──
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: ml-jaeger-prod
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: always
+    networks:
+      - ml_net
+
+networks:
+  ml_net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: ml_postgres_prod_data
+  redisdata:
+    name: ml_redis_prod_data

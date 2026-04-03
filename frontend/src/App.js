@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import AIAssistantWidget from './components/AIAssistantWidget';
 import { useAuth } from './hooks/useAuth';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
         } />
         <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
+      {isAuthenticated && <AIAssistantWidget />}
     </div>
   );
 }

@@ -8,8 +8,10 @@ from sqlalchemy.orm import Session
 from app.controllers import AuthController
 from app.schemas     import UserCreate, UserLogin, UserResponse, Token, MessageResponse
 from app.database    import get_db
-from app.dependencies import get_current_user
 from app.models      import User
+from app.dependencies import get_current_user
+from app.core.rate_limit import limiter
+from fastapi import Request
 
 router  = APIRouter(prefix="/api/v1/auth", tags=["🔐 Authentication"])
 _bearer = HTTPBearer()
@@ -21,12 +23,14 @@ _bearer = HTTPBearer()
     status_code=status.HTTP_201_CREATED,
     summary="Créer un compte utilisateur",
 )
-async def register(data: UserCreate, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+async def register(request: Request, data: UserCreate, db: Session = Depends(get_db)):
     return await AuthController(db).register(data)
 
 
 @router.post("/login", response_model=Token, summary="Se connecter")
-async def login(data: UserLogin, db: Session = Depends(get_db)):
+@limiter.limit("10/minute")
+async def login(request: Request, data: UserLogin, db: Session = Depends(get_db)):
     return await AuthController(db).login(data)
 
 

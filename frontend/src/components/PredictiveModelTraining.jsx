@@ -5,17 +5,23 @@ import {
   Settings2, 
   Target, 
   Cpu, 
-  Layers, 
   Activity,
-  GitMerge
+  GitMerge,
+  BarChart3,
+  CheckCircle2
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const PredictiveModelTraining = () => {
   const [selectedAlgo, setSelectedAlgo] = useState('random_forest');
+  const [isTraining, setIsTraining] = useState(false);
+  const [trainResults, setTrainResults] = useState(null);
   const [params, setParams] = useState({
     n_estimators: 400,
     max_depth: 10,
-    learning_rate: 0.052
+    learning_rate: 0.052,
+    target: 'churn'
   });
 
   const algorithms = [
@@ -29,6 +35,24 @@ const PredictiveModelTraining = () => {
     setParams(prev => ({ ...prev, [key]: value }));
   };
 
+  const handleTrainModel = async () => {
+    setIsTraining(true);
+    setTrainResults(null);
+    try {
+      const type = selectedAlgo === 'linear_regression' || selectedAlgo === 'gradient_boosting' ? 'regression' : 'classification';
+      const algoName = algorithms.find(a => a.id === selectedAlgo)?.name;
+      
+      const res = await ApiService.analysis.trainModel(algoName, type, params.target);
+      
+      setTrainResults(res);
+      toast.success(`${algoName} model trained successfully in ${res.training_time_ms}ms!`);
+    } catch (e) {
+      toast.error('Failed to train model.');
+    } finally {
+      setIsTraining(false);
+    }
+  };
+
   return (
     <div className="predictive-training-view" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', minHeight: '100%' }}>
       
@@ -38,8 +62,13 @@ const PredictiveModelTraining = () => {
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800 }}>Predictive Model Training</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Configure and launch supervised learning algorithms on processed datasets</p>
         </div>
-        <button className="btn-primary" style={{ backgroundImage: 'linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%)', border: 'none' }}>
-           <Play size={16} style={{ marginRight: '0.5rem', fill: 'currentColor' }} /> Train Model
+        <button 
+          className="btn-primary" 
+          style={{ backgroundImage: 'linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%)', border: 'none', opacity: isTraining ? 0.7 : 1 }}
+          onClick={handleTrainModel}
+          disabled={isTraining}
+        >
+           <Play size={16} style={{ marginRight: '0.5rem', fill: 'currentColor' }} /> {isTraining ? 'Training...' : 'Train Model'}
         </button>
       </header>
 
@@ -91,7 +120,9 @@ const PredictiveModelTraining = () => {
                {/* Target Column */}
                <div>
                   <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem', display: 'block' }}>Target Column</label>
-                  <select 
+                   <select 
+                    value={params.target}
+                    onChange={(e) => handleParamChange('target', e.target.value)}
                     style={{ 
                       width: '100%', 
                       maxWidth: '400px',
@@ -180,6 +211,28 @@ const PredictiveModelTraining = () => {
 
                   </div>
                </div>
+
+               {/* Results Area */}
+               {trainResults && (
+                   <div style={{ marginTop: '2rem', padding: '2rem', background: 'rgba(0, 210, 255, 0.05)', borderRadius: '16px', border: '1px solid var(--primary-accent)' }}>
+                       <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'white' }}>
+                          <CheckCircle2 color="#10b981" /> Scikit-Learn Training Complete
+                       </h3>
+                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                          {Object.entries(trainResults.metrics).map(([key, val]) => (
+                             <div key={key} style={{ background: 'rgba(255,255,255,0.05)', padding: '1.25rem', borderRadius: '12px' }}>
+                                <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 800, marginBottom: '0.5rem' }}>{key.replace('_', ' ')}</div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--primary-accent)' }}>
+                                   {typeof val === 'number' ? (val < 1 ? (val * 100).toFixed(2) + '%' : val.toFixed(4)) : val}
+                                </div>
+                             </div>
+                          ))}
+                       </div>
+                       <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                           Trained {trainResults.samples} samples using <strong style={{color: 'white'}}>{trainResults.algorithm_used}</strong> in {trainResults.training_time_ms}ms.
+                       </p>
+                   </div>
+               )}
 
             </div>
          </div>

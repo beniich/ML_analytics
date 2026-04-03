@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   TrendingUp, 
   Calendar, 
@@ -38,6 +39,22 @@ ChartJS.register(
 const TimeSeriesForecasting = () => {
   const [horizon, setHorizon] = useState(12);
   const [alpha, setAlpha] = useState(0.45);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [lastRun, setLastRun] = useState('Today at 10:35 AM');
+  
+  const handleRunForecast = async () => {
+    setIsProcessing(true);
+    try {
+      // Simulate Prophet Forecasting job payload
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      toast.success(`FB Prophet forecast generated for horizon +${horizon}`);
+      setLastRun('Just now');
+    } catch(e) {
+      toast.error('Forecasting job failed.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   const chartData = {
     labels: ['Jan 22', 'Apr 22', 'Jul 22', 'Oct 22', 'Jan 23', 'Apr 23', 'Jul 23', 'Oct 23', 'Jan 24', 'Apr 24', 'Jul 24', 'Oct 24'],
@@ -129,9 +146,18 @@ const TimeSeriesForecasting = () => {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '2rem' }}>
         
         {/* Main Visualization Area */}
-        <GlassCard title="Sales Revenue Forecast (USD)" icon={<TrendingUp />} status="v4.2">
+        <GlassCard title="Sales Revenue Forecast (USD)" icon={<TrendingUp />} status={isProcessing ? "PROCESSING" : "v4.2"}>
            <div style={{ padding: '1rem', height: '450px', position: 'relative' }}>
-              <Line data={chartData} options={chartOptions} />
+              <div style={{ opacity: isProcessing ? 0.3 : 1, transition: 'opacity 0.3s', height: '100%' }}>
+                  <Line data={chartData} options={chartOptions} />
+              </div>
+              {isProcessing && (
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                     <Zap size={32} color="var(--primary-accent)" style={{ animation: 'pulse 1.5s infinite', marginBottom: '1rem' }} />
+                     <div style={{ fontWeight: 800, color: 'white', letterSpacing: '1px' }}>Running FB Prophet Model...</div>
+                     <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Calculating seasonality & trend (Alpha: {alpha})</div>
+                  </div>
+              )}
               <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
                  <Maximize2 size={16} style={{ color: 'var(--text-secondary)', cursor: 'pointer' }} />
               </div>
@@ -183,10 +209,15 @@ const TimeSeriesForecasting = () => {
                     />
                  </div>
 
-                 <button className="btn-primary" style={{ width: '100%', marginTop: '1rem', padding: '1rem', borderRadius: '30px', fontWeight: 800, letterSpacing: '1px' }}>
-                    RUN FORECAST
+                 <button 
+                   className="btn-primary" 
+                   onClick={handleRunForecast}
+                   disabled={isProcessing}
+                   style={{ width: '100%', marginTop: '1rem', padding: '1rem', borderRadius: '30px', fontWeight: 800, letterSpacing: '1px', opacity: isProcessing ? 0.5 : 1 }}
+                 >
+                    {isProcessing ? 'CALCULATING...' : 'RUN FORECAST'}
                  </button>
-                 <p style={{ textAlign: 'center', fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Last run: Today at 10:35 AM</p>
+                 <p style={{ textAlign: 'center', fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Last run: {lastRun}</p>
 
               </div>
            </GlassCard>

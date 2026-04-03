@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   BarChart, 
   Filter, 
@@ -30,6 +31,19 @@ ChartJS.register(
 
 const DistributionAnalysis = () => {
   const [dataType, setDataType] = useState('numerical');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleTypeChange = async (type) => {
+    if(type === dataType) return;
+    setIsProcessing(true);
+    setDataType(type);
+    toast.info(`Aggregating ${type} distributions...`);
+    try {
+      await new Promise(r => setTimeout(r, 1500));
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   // Helper chart configurations
   const commonOptions = {
@@ -77,27 +91,29 @@ const DistributionAnalysis = () => {
           {/* Data Toggle */}
           <div style={{ display: 'flex', background: 'rgba(0,0,0,0.3)', borderRadius: '30px', padding: '0.25rem' }}>
              <button 
-               onClick={() => setDataType('categorical')}
-               style={{ padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, background: dataType === 'categorical' ? 'var(--primary-accent)' : 'transparent', color: dataType === 'categorical' ? '#0f172a' : 'var(--text-secondary)', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}
+               onClick={() => handleTypeChange('categorical')}
+               disabled={isProcessing}
+               style={{ padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, background: dataType === 'categorical' ? 'var(--primary-accent)' : 'transparent', color: dataType === 'categorical' ? '#0f172a' : 'var(--text-secondary)', border: 'none', cursor: 'pointer', opacity: isProcessing ? 0.7 : 1 }}
              >
                CATEGORICAL
              </button>
              <button 
-               onClick={() => setDataType('numerical')}
-               style={{ padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, background: dataType === 'numerical' ? 'var(--primary-accent)' : 'transparent', color: dataType === 'numerical' ? '#0f172a' : 'var(--text-secondary)', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}
+               onClick={() => handleTypeChange('numerical')}
+               disabled={isProcessing}
+               style={{ padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, background: dataType === 'numerical' ? 'var(--primary-accent)' : 'transparent', color: dataType === 'numerical' ? '#0f172a' : 'var(--text-secondary)', border: 'none', cursor: 'pointer', opacity: isProcessing ? 0.7 : 1 }}
              >
                NUMERICAL
              </button>
           </div>
 
-          <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button onClick={() => toast.info('Advanced filter dialog will open soon')} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Filter size={16} /> Filter Data
           </button>
         </div>
       </header>
 
       {/* Grid of Distribution Charts */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', overflowY: 'auto', paddingBottom: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', overflowY: 'auto', paddingBottom: '2rem', opacity: isProcessing ? 0.3 : 1, transition: 'opacity 0.3s' }}>
          {charts.map((chart, idx) => (
            <GlassCard key={idx} style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
               <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>

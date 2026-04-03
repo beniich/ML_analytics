@@ -1,5 +1,6 @@
 import React from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   Calendar as CalendarIcon, 
   ChevronLeft, 
@@ -153,7 +154,7 @@ const JobScheduler = () => {
                    <div key={i} style={{ padding: '0.75rem', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                          <p style={{ fontSize: '0.85rem', fontWeight: 700 }}>{task.name}</p>
-                         <MoreVertical size={14} style={{ color: 'var(--text-secondary)', cursor: 'pointer' }} />
+                         <MoreVertical onClick={() => toast.info(`Options for ${task.name} opened.`)} size={14} style={{ color: 'var(--text-secondary)', cursor: 'pointer' }} />
                       </div>
                       <div style={{ display: 'flex', gap: '1rem', fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Clock size={12} /> {task.time}</span>
@@ -214,7 +215,7 @@ const JobScheduler = () => {
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', marginBottom: '1rem', lineHeight: 1.5 }}>
                  Let AI automatically adjust your processing schedule based on server load and costs.
               </p>
-              <button style={{ background: 'transparent', border: 'none', color: 'var(--primary-accent)', fontSize: '0.75rem', fontWeight: 800, padding: 0, display: 'flex', alignItems: 'center', gap: '0.25rem', cursor: 'pointer' }}>
+              <button onClick={() => toast.success('AI Heuristics optimization enabled!')} style={{ background: 'transparent', border: 'none', color: 'var(--primary-accent)', fontSize: '0.75rem', fontWeight: 800, padding: 0, display: 'flex', alignItems: 'center', gap: '0.25rem', cursor: 'pointer' }}>
                  Enable Optimization <ArrowRight size={12} />
               </button>
            </div>

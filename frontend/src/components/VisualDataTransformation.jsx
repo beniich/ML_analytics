@@ -10,16 +10,46 @@ import {
   Clock, 
   Info 
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const VisualDataTransformation = () => {
   const [pipelineStep, setPipelineStep] = useState(2);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isApplying, setIsApplying] = useState(false);
 
-  const transformations = [
-    { id: 1, name: 'Drop Missing Values', desc: 'Identify and remove rows with null entries.', icon: <Trash2 size={16} />, type: 'Simple' },
+  const [transformations, setTransformations] = useState([
+    { id: 1, name: 'Drop Missing Values', desc: 'Identify and remove rows with null entries.', icon: <Trash2 size={16} />, type: 'Simple', active: false },
     { id: 2, name: 'Normalize Data', desc: 'Scale numeric features to [0, 1] range.', icon: <BarChart2 size={16} />, type: 'Statistical', active: true },
-    { id: 3, name: 'One-Hot Encode', desc: 'Convert categorical features into binary vectors.', icon: <Layers size={16} />, type: 'Engineering' },
-  ];
+    { id: 3, name: 'One-Hot Encode', desc: 'Convert categorical features into binary vectors.', icon: <Layers size={16} />, type: 'Engineering', active: false },
+  ]);
+
+  const toggleTransform = (id) => {
+    setTransformations(transformations.map(t => 
+      t.id === id ? { ...t, active: !t.active } : t
+    ));
+  };
+
+  const handleApply = async () => {
+    setIsApplying(true);
+    try {
+      const activeTransforms = transformations.filter(t => t.active).map(t => t.name);
+      if (activeTransforms.length === 0) {
+        toast.warn('Please select at least one transform to apply');
+        return;
+      }
+      
+      // Simulate API Call for transformations
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      toast.success(`Applied ${activeTransforms.length} transformations! proceeding to next step...`);
+      setPipelineStep(3);
+    } catch (e) {
+      toast.error('Failed to apply transformations.');
+    } finally {
+      setIsApplying(false);
+    }
+  };
 
   return (
     <div className="transformation-view" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -29,8 +59,20 @@ const VisualDataTransformation = () => {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Clean and prepare your dataset for ML training</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}>View History</button>
-          <button className="btn-primary">Apply & Proceed <ArrowRight size={16} style={{ marginLeft: '0.5rem' }} /></button>
+          <button 
+            className="btn-primary" 
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}
+            onClick={() => toast.info('Pipeline history will be shown here.')}
+          >
+            View History
+          </button>
+          <button 
+            className="btn-primary" 
+            onClick={handleApply}
+            disabled={isApplying}
+          >
+            {isApplying ? 'Processing...' : 'Apply & Proceed'} <ArrowRight size={16} style={{ marginLeft: '0.5rem' }} />
+          </button>
         </div>
       </header>
 
@@ -43,12 +85,14 @@ const VisualDataTransformation = () => {
               <span style={{ fontSize: '0.9rem' }}>1. Load Data</span>
               {pipelineStep > 1 && <CheckCircle size={14} color="#10b981" />}
             </div>
-            <div className={`step-item active`} style={{ padding: '1rem', borderRadius: '10px', background: 'rgba(0, 210, 255, 0.1)', border: '1px solid var(--primary-accent)', display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--primary-accent)' }}>2. Data Cleaning</span>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Active</span>
+            <div className={`step-item ${pipelineStep === 2 ? 'active' : pipelineStep > 2 ? 'done' : ''}`} style={{ padding: '1rem', borderRadius: '10px', background: pipelineStep === 2 ? 'rgba(0, 210, 255, 0.1)' : 'rgba(255,255,255,0.02)', border: pipelineStep === 2 ? '1px solid var(--primary-accent)' : 'none', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ fontSize: '0.9rem', fontWeight: pipelineStep === 2 ? 600 : 400, color: pipelineStep === 2 ? 'var(--primary-accent)' : 'inherit' }}>2. Data Cleaning</span>
+              {pipelineStep === 2 && <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Active</span>}
+              {pipelineStep > 2 && <CheckCircle size={14} color="#10b981" />}
             </div>
-            <div className={`step-item`} style={{ padding: '1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.01)', opacity: 0.4, display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: '0.9rem' }}>3. Feature Engineering</span>
+            <div className={`step-item ${pipelineStep === 3 ? 'active' : ''}`} style={{ padding: '1rem', borderRadius: '10px', background: pipelineStep === 3 ? 'rgba(0, 210, 255, 0.1)' : 'rgba(255,255,255,0.01)', border: pipelineStep === 3 ? '1px solid var(--primary-accent)' : 'none', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ fontSize: '0.9rem', fontWeight: pipelineStep === 3 ? 600 : 400, color: pipelineStep === 3 ? 'var(--primary-accent)' : 'inherit' }}>3. Feature Engineering</span>
+              {pipelineStep === 3 && <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Active</span>}
             </div>
           </div>
         </GlassCard>
@@ -66,16 +110,18 @@ const VisualDataTransformation = () => {
             />
           </div>
           <div className="transform-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {transformations.map(t => (
+            {transformations.filter(t => t.name.toLowerCase().includes(searchTerm.toLowerCase())).map(t => (
               <div 
                 key={t.id} 
                 className={`transform-card ${t.active ? 'active' : ''}`}
+                onClick={() => toggleTransform(t.id)}
                 style={{
                   padding: '1rem',
                   borderRadius: '12px',
                   background: t.active ? 'rgba(0, 210, 255, 0.05)' : 'rgba(255,255,255,0.02)',
                   border: `1px solid ${t.active ? 'var(--primary-accent)' : 'var(--glass-border)'}`,
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  transition: 'background 0.2s, border 0.2s'
                 }}
               >
                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>

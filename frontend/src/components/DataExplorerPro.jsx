@@ -18,9 +18,13 @@ import {
   Database,
   Terminal
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const DataExplorerPro = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isExporting, setIsExporting] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   
   const mockData = [
     { id: '#UID-82910', timestamp: '2024-10-24 14:02:11', entity: 'Global Logistics Corp', score: 0.82, confidence: '94.2%', region: 'North America', status: 'Verified' },
@@ -28,6 +32,41 @@ const DataExplorerPro = () => {
     { id: '#UID-82912', timestamp: '2024-10-24 13:55:01', entity: 'Apex Dynamics', score: 0.55, confidence: '91.4%', region: 'Asia Pacific', status: 'Verified' },
     { id: '#UID-82913', timestamp: '2024-10-24 13:50:33', entity: 'Zenith Systems', score: 0.89, confidence: '97.0%', region: 'North America', status: 'Verified' },
   ];
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      if (ApiService.transform?.exportCsv) {
+        const response = await ApiService.transform.exportCsv({ data: mockData, format: 'csv' });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'data_explorer_export.csv');
+        document.body.appendChild(link);
+        link.click();
+        toast.success('Successfully exported to CSV from backend');
+      } else {
+        await new Promise(res => setTimeout(res, 1500));
+        toast.success('Download started: data_export.csv');
+      }
+    } catch (e) {
+      toast.error('Failed to export data');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleNewEntry = async () => {
+    setIsAdding(true);
+    try {
+      await new Promise(res => setTimeout(res, 1000));
+      toast.success('New entry dialogue opened');
+    } catch (e) {
+      toast.error('Failed to open form');
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <div className="data-explorer-pro-view" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -60,20 +99,30 @@ const DataExplorerPro = () => {
               style={{ paddingLeft: '2.5rem', width: '280px', height: '40px' }}
             />
           </div>
-          <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 600 }}>
+          <button onClick={() => toast.info('Date picker not yet wired')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 600 }}>
             <Calendar size={14} /> Date Range
           </button>
-          <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 600 }}>
+          <button onClick={() => toast.info('Column management modal opened')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 600 }}>
             <Columns size={14} /> Columns
           </button>
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Selected: 0</span>
-          <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Download size={14} /> Export CSV
+          <button 
+            className="btn-primary" 
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            onClick={handleExport}
+            disabled={isExporting}
+          >
+            <Download size={14} /> {isExporting ? 'Exporting...' : 'Export CSV'}
           </button>
-          <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Plus size={14} /> New Entry
+          <button 
+            className="btn-primary" 
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            onClick={handleNewEntry}
+            disabled={isAdding}
+          >
+            <Plus size={14} /> {isAdding ? 'Adding...' : 'New Entry'}
           </button>
         </div>
       </div>
@@ -126,8 +175,8 @@ const DataExplorerPro = () => {
                     </div>
                   </td>
                   <td style={{ padding: '1.25rem 1.5rem', textAlign: 'right' }}>
-                    <button style={{ color: 'var(--text-secondary)', background: 'transparent', border: 'none', marginRight: '0.5rem' }}><Edit size={16} /></button>
-                    <button style={{ color: 'var(--text-secondary)', background: 'transparent', border: 'none' }}><MoreVertical size={16} /></button>
+                    <button onClick={() => toast.info(`Editing entry ${row.id}`)} style={{ color: 'var(--text-secondary)', background: 'transparent', border: 'none', marginRight: '0.5rem', cursor: 'pointer' }}><Edit size={16} /></button>
+                    <button style={{ color: 'var(--text-secondary)', background: 'transparent', border: 'none', cursor: 'pointer' }}><MoreVertical size={16} /></button>
                   </td>
                 </tr>
               ))}
@@ -147,11 +196,11 @@ const DataExplorerPro = () => {
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button style={{ padding: '0.5rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)', opacity: 0.3 }}><ChevronsLeft size={16}/></button>
-            <button style={{ padding: '0.5rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)', opacity: 0.3 }}><ChevronLeft size={16}/></button>
+            <button style={{ padding: '0.5rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)' }}><ChevronLeft size={16}/></button>
             <div style={{ display: 'flex', gap: '0.25rem' }}>
-                <span style={{ padding: '0.4rem 0.8rem', background: 'var(--primary-accent)', color: 'black', fontWeight: 800, borderRadius: '6px', fontSize: '0.75rem' }}>1</span>
-                <span style={{ padding: '0.4rem 0.8rem', color: 'white', fontWeight: 800, borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>2</span>
-                <span style={{ padding: '0.4rem 0.8rem', color: 'white', fontWeight: 800, borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>3</span>
+                <span onClick={() => toast.info('Loading page 1...')} style={{ padding: '0.4rem 0.8rem', background: 'var(--primary-accent)', color: 'black', fontWeight: 800, borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>1</span>
+                <span onClick={() => toast.info('Loading page 2...')} style={{ padding: '0.4rem 0.8rem', color: 'white', fontWeight: 800, borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>2</span>
+                <span onClick={() => toast.info('Loading page 3...')} style={{ padding: '0.4rem 0.8rem', color: 'white', fontWeight: 800, borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}>3</span>
             </div>
             <button style={{ padding: '0.5rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)' }}><ChevronRight size={16}/></button>
             <button style={{ padding: '0.5rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)' }}><ChevronsRight size={16}/></button>

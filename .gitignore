@@ -9,4 +9,6 @@ __pycache__/
 *.log
 mlruns/
 artifacts/
+venv/
+.venv/
 .DS_Store

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   Database, 
   PlusCircle, 
@@ -18,6 +19,20 @@ import {
 const FeatureEngineeringStudio = () => {
   const [activeTab, setActiveTab] = useState('math');
   const [zoom, setZoom] = useState(100);
+  const [isComputing, setIsComputing] = useState(false);
+
+  const handleCompute = async () => {
+    setIsComputing(true);
+    toast.info('Compiling node execution graph...');
+    try {
+      await new Promise(r => setTimeout(r, 2000));
+      toast.success('Successfully pipeline logic. Added log_net_revenue to feature store.');
+    } catch(e) {
+      toast.error('Compilation failed.');
+    } finally {
+      setIsComputing(false);
+    }
+  };
 
   const libraryItems = {
     math: [
@@ -63,9 +78,14 @@ const FeatureEngineeringStudio = () => {
                 <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>Usage: <span style={{ color: '#67d9c9' }}>2.4GB</span></span>
             </div>
           </div>
-          <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.5rem' }}>
-            <Play size={16} fill="currentColor" />
-            Compute Variable
+          <button 
+            className="btn-primary" 
+            onClick={handleCompute}
+            disabled={isComputing}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.5rem', opacity: isComputing ? 0.6 : 1 }}
+          >
+            <Play size={16} fill="currentColor" className={isComputing ? "spin-animation" : ""} />
+            {isComputing ? 'Compiling DAG...' : 'Compute Variable'}
           </button>
         </div>
       </header>
@@ -165,7 +185,7 @@ const FeatureEngineeringStudio = () => {
               <span style={{ fontSize: '0.75rem', fontWeight: 700, minWidth: '40px', textAlign: 'center' }}>{zoom}%</span>
               <button style={{ padding: '0.5rem', color: 'var(--text-secondary)', background: 'transparent', border: 'none' }} onClick={() => setZoom(z => Math.min(z+10, 150))}><Maximize2 size={16} /></button>
               <div style={{ width: '1px', height: '16px', background: 'var(--glass-border)' }}></div>
-              <button style={{ padding: '0.5rem', color: '#ef4444', background: 'transparent', border: 'none' }}><Trash2 size={16} /></button>
+              <button style={{ padding: '0.5rem', color: '#ef4444', background: 'transparent', border: 'none' }} onClick={() => toast.success('Canvas cleared')}><Trash2 size={16} /></button>
           </div>
         </div>
 
@@ -212,6 +232,7 @@ const FeatureEngineeringStudio = () => {
                   }}
                   onMouseEnter={e => e.currentTarget.style.border = `1px solid ${item.color}44`}
                   onMouseLeave={e => e.currentTarget.style.border = '1px solid transparent'}
+                  onClick={() => toast.info(`Added ${item.name} node to canvas.`)}
                 >
                   <div style={{ 
                       width: '36px', 

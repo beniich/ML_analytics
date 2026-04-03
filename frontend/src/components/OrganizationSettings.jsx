@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import GlassCard from './common/GlassCard';
 import { 
   Building2, 
   Upload, 
@@ -14,12 +13,41 @@ import {
   Save,
   Trash2
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { ApiService } from '../services/api';
 
 const OrganizationSettings = () => {
   const [orgName, setOrgName] = useState('Quantum Dynamics Inc.');
   const [predictiveEnabled, setPredictiveEnabled] = useState(true);
   const [syncingEnabled, setSyncingEnabled] = useState(false);
   const [anonymizationEnabled, setAnonymizationEnabled] = useState(true);
+  
+  const [loadings, setLoadings] = useState({
+    save: false,
+    upload: false
+  });
+
+  const handleSaveProfile = async () => {
+    setLoadings(prev => ({ ...prev, save: true }));
+    try {
+      // Use real API Service to update profile
+      await ApiService.users.update({ org_name: orgName });
+      toast.success('Organization profile updated successfully');
+    } catch (e) {
+      toast.error('Failed to update organization profile. Please try again.');
+    } finally {
+      setLoadings(prev => ({ ...prev, save: false }));
+    }
+  };
+
+  const handleLogoSelect = () => {
+    // In a real scenario we'd trigger a file input here
+    setLoadings(prev => ({ ...prev, upload: true }));
+    setTimeout(() => {
+      setLoadings(prev => ({ ...prev, upload: false }));
+      toast.info('Logo upload dialogue would open here');
+    }, 500);
+  };
 
   return (
     <div className="org-settings-view" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
@@ -70,9 +98,14 @@ const OrganizationSettings = () => {
                     />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1.5rem' }}>
-                    <button style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', fontWeight: 700 }}>Discard</button>
-                    <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Save size={18} /> Save Profile
+                    <button style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', fontWeight: 700 }} onClick={() => toast.info('Changes discarded')}>Discard</button>
+                    <button 
+                      className="btn-primary" 
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                      onClick={handleSaveProfile}
+                      disabled={loadings.save}
+                    >
+                        <Save size={18} /> {loadings.save ? 'Saving...' : 'Save Profile'}
                     </button>
                 </div>
             </div>
@@ -97,7 +130,14 @@ const OrganizationSettings = () => {
                 <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-secondary)', marginTop: '0.5rem', textTransform: 'uppercase' }}>Logo Upload</span>
             </div>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '2.5rem' }}>Preferred size is 512x512px with transparent background.</p>
-            <button className="btn-primary" style={{ width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>Select Logo File</button>
+            <button 
+              className="btn-primary" 
+              style={{ width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}
+              onClick={handleLogoSelect}
+              disabled={loadings.upload}
+            >
+              {loadings.upload ? 'Opening...' : 'Select Logo File'}
+            </button>
         </div>
 
       </div>
@@ -174,7 +214,10 @@ const OrganizationSettings = () => {
                 <Shield size={60} style={{ position: 'absolute', right: '-15px', bottom: '-15px', opacity: 0.1, color: '#67d9c9' }} />
                 <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Security Status</span>
                 <div style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0.5rem 0' }}>Tier 3 Encryption</div>
-                <button style={{ color: '#67d9c9', background: 'transparent', border: 'none', fontSize: '0.7rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', marginTop: '0.5rem' }}>
+                <button 
+                  style={{ color: '#67d9c9', background: 'transparent', border: 'none', fontSize: '0.7rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', marginTop: '0.5rem' }}
+                  onClick={() => toast.info('Loading audit logs...')}
+                >
                     VIEW AUDIT LOGS <ChevronRight size={14} />
                 </button>
              </div>

@@ -1,4 +1,4 @@
-fastapi==0.95.0
+fastapi>=0.100.0
 uvicorn==0.21.1
 python-multipart==0.0.6
 pandas>=2.0.0
@@ -15,7 +15,7 @@ qdrant-client
 sqlalchemy
 jinja2==3.1.2
 python-dotenv==1.0.0
-pydantic==1.10.4
+pydantic>=2.0.0
 mlflow
 
 # System monitoring
@@ -28,4 +28,29 @@ pyarrow
 aiohttp
 psycopg2-binary
 mysql-connector-python
-python-email-validator
+email-validator
+passlib[bcrypt]
+
+# === AMÉLIORATION 2 — Cache multi-niveaux ===
+cachetools>=5.3.0
+
+# === AMÉLIORATION 3 — Event Bus Redis Streams ===
+# redis déjà présent
+
+# === AMÉLIORATION 4 — OpenTelemetry ===
+opentelemetry-sdk>=1.24.0
+opentelemetry-instrumentation-fastapi>=0.45b0
+opentelemetry-exporter-otlp>=1.24.0
+opentelemetry-instrumentation-sqlalchemy>=0.45b0
+
+# === AMÉLIORATION 6 — Feature Flags LaunchDarkly ===
+launchdarkly-server-sdk>=9.0.0
+
+# === AMÉLIORATION 7 — SAST / sécurité ===
+bandit>=1.7.9
+safety>=3.2.0
+cyclonedx-bom>=4.4.0
+gunicorn>=21.2.0
+slowapi>=0.1.9
+redis>=5.0.0
+

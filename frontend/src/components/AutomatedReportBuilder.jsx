@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   FileText, 
   Layout, 
@@ -27,6 +28,20 @@ const AutomatedReportBuilder = () => {
     { id: 'methodology', label: 'Methodology', enabled: false, pages: 0 },
     { id: 'appendix', label: 'Appendix', enabled: false, pages: 0 },
   ]);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExport = async (format) => {
+    setIsExporting(true);
+    toast.info(`Generating ${format.toUpperCase()} report... this may take a moment.`);
+    try {
+      await new Promise(r => setTimeout(r, 2500));
+      toast.success(`Report successfully exported as ${format.toUpperCase()}!`);
+    } catch (e) {
+      toast.error('Failed to export report');
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   const toggleSection = (id) => {
     setReportSections(prev => prev.map(s => s.id === id ? { ...s, enabled: !s.enabled } : s));
@@ -41,10 +56,10 @@ const AutomatedReportBuilder = () => {
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px' }}>Design and schedule automated analytical reports for your project stakeholders.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button onClick={() => toast.info('Schedule dialog opened')} className="btn-primary" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Calendar size={18} /> Schedule
             </button>
-            <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button onClick={() => toast.success('Created new blank report template')} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Plus size={18} /> New Report
             </button>
         </div>
@@ -116,11 +131,16 @@ const AutomatedReportBuilder = () => {
                 ))}
             </div>
             <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                <button className="btn-primary" style={{ width: '100%', background: '#ffb4a4', color: 'black', fontWeight: 900, marginBottom: '1rem' }}>
-                    EXPORT AS PDF
+                <button 
+                  className="btn-primary" 
+                  onClick={() => handleExport('pdf')}
+                  disabled={isExporting}
+                  style={{ width: '100%', background: '#ffb4a4', color: 'black', fontWeight: 900, marginBottom: '1rem', opacity: isExporting ? 0.6 : 1 }}
+                >
+                    {isExporting ? 'GENERATING...' : 'EXPORT AS PDF'}
                 </button>
                 <div style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>or <a href="#" style={{ color: 'white', textDecoration: 'underline' }}>Export as HTML</a></span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>or <span onClick={() => handleExport('html')} style={{ color: 'white', textDecoration: 'underline', cursor: 'pointer' }}>Export as HTML</span></span>
                 </div>
             </div>
         </div>

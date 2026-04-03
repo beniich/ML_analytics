@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   Activity, 
   Timer, 
@@ -14,8 +15,19 @@ import {
   Layers,
   ArrowUpRight
 } from 'lucide-react';
-
 const InferenceMonitoring = () => {
+  const [timeRange, setTimeRange] = useState('LIVE');
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const changeTimeRange = (range) => {
+    if (range === timeRange) return;
+    setIsRefreshing(true);
+    setTimeRange(range);
+    setTimeout(() => {
+       setIsRefreshing(false);
+       toast.success(`Metric graph updated to ${range} window.`);
+    }, 1000);
+  };
   const alerts = [
     { title: 'P99 Spike Detected', sub: 'Cluster: us-east-1a • 2m ago', val: '240ms', type: 'error' },
     { title: 'Scale Up Completed', sub: 'Nodes increased to 12 • 15m ago', val: '100% Health', type: 'success' },
@@ -99,14 +111,14 @@ const InferenceMonitoring = () => {
                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Real-time inference response times across clusters</p>
                 </div>
                 <div style={{ display: 'flex', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', padding: '0.25rem' }}>
-                    <button style={{ padding: '0.4rem 1rem', fontSize: '0.7rem', fontWeight: 800, background: 'rgba(103, 217, 201, 0.1)', color: '#67d9c9', border: 'none', borderRadius: '8px' }}>LIVE</button>
-                    <button style={{ padding: '0.4rem 1rem', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'transparent', border: 'none' }}>1H</button>
-                    <button style={{ padding: '0.4rem 1rem', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'transparent', border: 'none' }}>6H</button>
+                    <button onClick={() => changeTimeRange('LIVE')} style={{ padding: '0.4rem 1rem', fontSize: '0.7rem', fontWeight: 800, background: timeRange === 'LIVE' ? 'rgba(103, 217, 201, 0.1)' : 'transparent', color: timeRange === 'LIVE' ? '#67d9c9' : 'var(--text-secondary)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>LIVE</button>
+                    <button onClick={() => changeTimeRange('1H')} style={{ padding: '0.4rem 1rem', fontSize: '0.7rem', fontWeight: 800, background: timeRange === '1H' ? 'rgba(103, 217, 201, 0.1)' : 'transparent', color: timeRange === '1H' ? '#67d9c9' : 'var(--text-secondary)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>1H</button>
+                    <button onClick={() => changeTimeRange('6H')} style={{ padding: '0.4rem 1rem', fontSize: '0.7rem', fontWeight: 800, background: timeRange === '6H' ? 'rgba(103, 217, 201, 0.1)' : 'transparent', color: timeRange === '6H' ? '#67d9c9' : 'var(--text-secondary)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>6H</button>
                 </div>
             </div>
-            <div style={{ height: '220px', position: 'relative' }}>
+            <div style={{ height: '220px', position: 'relative', opacity: isRefreshing ? 0.3 : 1, transition: 'opacity 0.2s' }}>
                 <svg style={{ width: '100%', height: '100%' }} viewBox="0 0 1000 200" preserveAspectRatio="none">
-                    <path d="M0,150 Q50,140 100,160 T200,130 T300,145 T400,120 T500,155 T600,110 T700,140 T800,90 T900,120 T1000,100" fill="none" stroke="var(--primary-accent)" strokeWidth="3" />
+                    <path d={timeRange === 'LIVE' ? "M0,150 Q50,140 100,160 T200,130 T300,145 T400,120 T500,155 T600,110 T700,140 T800,90 T900,120 T1000,100" : timeRange === '1H' ? "M0,120 Q100,130 200,100 T400,150 T600,110 T800,140 T1000,130" : "M0,140 Q150,160 300,110 T600,130 T900,150 T1000,140"} fill="none" stroke="var(--primary-accent)" strokeWidth="3" />
                 </svg>
             </div>
          </div>
@@ -131,7 +143,7 @@ const InferenceMonitoring = () => {
                     </div>
                 ))}
             </div>
-            <button className="btn-primary" style={{ width: '100%', marginTop: '2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+            <button onClick={() => toast.info('Loading complete history log...')} className="btn-primary" style={{ width: '100%', marginTop: '2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.1em' }}>
                 VIEW ALL HISTORY
             </button>
          </div>

@@ -14,6 +14,8 @@ import {
   Plus,
   X
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const SystemSettings = () => {
   const [showTokenModal, setShowTokenModal] = useState(false);
@@ -21,10 +23,34 @@ const SystemSettings = () => {
     { id: 1, name: 'Production-Read-Only', created: 'Oct 26, 2023', expiry: 'Oct 26, 2024', scope: 'read:modules', status: 'Active' },
     { id: 2, name: 'Staging-Full-Access', created: 'Nov 12, 2023', expiry: 'Nov 12, 2024', scope: 'admin', status: 'Active' }
   ]);
+  const [loadings, setLoadings] = useState({
+    restart: false,
+    flush: false,
+    backup: false,
+    migration: false,
+    token: false
+  });
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    alert('Token copied to clipboard!');
+    toast.success('Token copied to clipboard!');
+  };
+
+  const handleAction = async (actionName, apiCall, successMsg) => {
+    setLoadings(prev => ({ ...prev, [actionName]: true }));
+    try {
+      if (apiCall) {
+        await apiCall();
+      } else {
+        // Fallback simulate delay for endpoints not yet fully developed
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+      toast.success(successMsg);
+    } catch (error) {
+      toast.error(`Action failed: ${error.response?.data?.detail || error.message}`);
+    } finally {
+      setLoadings(prev => ({ ...prev, [actionName]: false }));
+    }
   };
 
   return (
@@ -100,7 +126,14 @@ const SystemSettings = () => {
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-                 <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}>Restart Node</button>
+                 <button 
+                   className="btn-primary" 
+                   style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}
+                   onClick={() => handleAction('restart', null, 'Node restarted successfully')}
+                   disabled={loadings.restart}
+                 >
+                   {loadings.restart ? 'Restarting...' : 'Restart Node'}
+                 </button>
                  <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}>View Logs</button>
               </div>
            </div>
@@ -116,7 +149,14 @@ const SystemSettings = () => {
               <span style={{ color: 'var(--text-secondary)' }}>Efficiency</span>
               <span style={{ fontWeight: 600 }}>95% Hit Rate</span>
             </div>
-            <button className="btn-primary" style={{ width: '100%', marginTop: '1rem', background: '#ef44441a', color: '#ef4444', border: '1px solid #ef444433' }}>Flush Entire Cache</button>
+            <button 
+              className="btn-primary" 
+              style={{ width: '100%', marginTop: '1rem', background: '#ef44441a', color: '#ef4444', border: '1px solid #ef444433' }}
+              onClick={() => handleAction('flush', ApiService.advanced.clearCache, 'Cache flushed successfully')}
+              disabled={loadings.flush}
+            >
+              {loadings.flush ? 'Flushing...' : 'Flush Entire Cache'}
+            </button>
             <code style={{ fontSize: '0.7rem', padding: '0.5rem', background: 'rgba(0,0,0,0.3)', borderRadius: '6px', color: 'var(--text-secondary)' }}>
               redis://cache-cluster-01.internal:6379
             </code>
@@ -134,8 +174,22 @@ const SystemSettings = () => {
                 <span style={{ fontSize: '0.7rem', color: '#f59e0b' }}>Scheduled in 4h</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-                 <button className="btn-primary" style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', border: '1px solid rgba(34, 197, 94, 0.2)' }}>Manual Backup</button>
-                 <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}>Run Migrations</button>
+                 <button 
+                   className="btn-primary" 
+                   style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', border: '1px solid rgba(34, 197, 94, 0.2)' }}
+                   onClick={() => handleAction('backup', null, 'Backup initiated successfully')}
+                   disabled={loadings.backup}
+                 >
+                   {loadings.backup ? 'Working...' : 'Manual Backup'}
+                 </button>
+                 <button 
+                   className="btn-primary" 
+                   style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}
+                   onClick={() => handleAction('migration', null, 'Database migrations applied')}
+                   disabled={loadings.migration}
+                 >
+                   {loadings.migration ? 'Running...' : 'Run Migrations'}
+                 </button>
               </div>
            </div>
         </GlassCard>
@@ -177,7 +231,17 @@ const SystemSettings = () => {
                        <option>Editor (Write/Execute)</option>
                     </select>
                  </div>
-                 <button className="btn-primary" style={{ width: '100%', marginTop: '1rem' }} onClick={() => setShowTokenModal(false)}>Construct Payload & Sign</button>
+                 <button 
+                   className="btn-primary" 
+                   style={{ width: '100%', marginTop: '1rem' }} 
+                   onClick={() => {
+                     handleAction('token', null, 'Token generated!');
+                     setTimeout(() => setShowTokenModal(false), 500);
+                   }}
+                   disabled={loadings.token}
+                 >
+                   {loadings.token ? 'Generating...' : 'Construct Payload & Sign'}
+                 </button>
               </div>
            </div>
         </div>

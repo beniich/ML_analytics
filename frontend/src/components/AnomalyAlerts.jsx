@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   AlertTriangle, 
   Activity, 
@@ -16,14 +17,28 @@ import {
 
 const AnomalyAlerts = () => {
   const [activeFilter, setActiveFilter] = useState('All');
-
-  const alerts = [
+  const [alerts, setAlerts] = useState([
     { id: 1, type: 'High', msg: "Model Performance Drop: 'Fraud Detection Model v3' F1-score decreased significantly.", ref: 'Transaction Logs', time: 'Today, 09:15 AM', color: '#ffb4a4' },
     { id: 2, type: 'Medium', msg: "Data Anomaly: Unusual spike in 'Login Attempts' detected.", ref: 'User Access Logs', time: 'Yesterday, 04:30 PM', color: 'var(--primary-accent)' },
     { id: 3, type: 'Low', msg: "Data Quality Issue: Missing values in 'Customer Demographics' exceed threshold.", ref: 'Customer Records', time: 'Oct 27, 11:45 AM', color: '#67d9c9' },
     { id: 4, type: 'High', msg: "Drift Detected: 'Recommendation Engine' input data distribution has shifted.", ref: 'Product Interaction Data', time: 'Oct 26, 02:00 PM', color: '#ffb4a4' },
     { id: 5, type: 'Medium', msg: "Latency Warning: Real-time inference response time above SLA.", ref: 'API Gateway Metrics', time: 'Oct 25, 10:10 AM', color: 'var(--primary-accent)' },
-  ];
+  ]);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const handleAcknowledge = (id) => {
+    setAlerts(prev => prev.filter(a => a.id !== id));
+    toast.success('Alert acknowledged and archived.');
+  };
+
+  const handlePause = () => {
+    setIsPaused(!isPaused);
+    if (!isPaused) {
+      toast.warning('Monitoring paused. Production drift tracking suspended.', { autoClose: 5000 });
+    } else {
+      toast.success('Monitoring resumed.');
+    }
+  };
 
   return (
     <div className="anomaly-alerts-view" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
@@ -34,8 +49,14 @@ const AnomalyAlerts = () => {
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Real-time surveillance of model performance and data integrity across all production nodes.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="btn-primary" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>Pause Monitoring</button>
-            <button className="btn-primary">Alert Settings</button>
+            <button 
+               onClick={handlePause} 
+               className="btn-primary" 
+               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', color: isPaused ? '#ffb4a4' : 'white' }}
+            >
+               {isPaused ? 'Resume Monitoring' : 'Pause Monitoring'}
+            </button>
+            <button onClick={() => toast.info('Alert settings panel opened.')} className="btn-primary">Alert Settings</button>
         </div>
       </header>
 
@@ -128,10 +149,16 @@ const AnomalyAlerts = () => {
                               <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Clock size={12}/> {alert.time}</span>
                           </div>
                       </div>
-                      <button className="btn-primary" style={{ padding: '0.6rem 1.25rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>Analysis</button>
-                      <button className="btn-primary" style={{ padding: '0.6rem 1.25rem' }}>Acknowledge</button>
+                      <button onClick={() => toast.info('Navigating to detailed incident analysis...')} className="btn-primary" style={{ padding: '0.6rem 1.25rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>Analysis</button>
+                      <button onClick={() => handleAcknowledge(alert.id)} className="btn-primary" style={{ padding: '0.6rem 1.25rem', background: 'var(--primary-accent)', color: 'black' }}>Acknowledge</button>
                   </div>
               ))}
+              {alerts.length === 0 && (
+                  <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                      <CheckCircle2 size={48} color="#67d9c9" style={{ margin: '0 auto 1rem auto' }} />
+                      <p>All clear! No active alerts pending acknowledgement.</p>
+                  </div>
+              )}
           </div>
           <div style={{ marginTop: '2rem', textAlign: 'center' }}>
               <button style={{ color: 'var(--text-secondary)', background: 'transparent', border: 'none', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>View Older Alerts</button>

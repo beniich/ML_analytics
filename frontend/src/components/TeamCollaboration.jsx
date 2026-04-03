@@ -16,6 +16,7 @@ import {
   MoreVertical,
   UserPlus
 } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const TeamCollaboration = () => {
   const activities = [
@@ -97,7 +98,7 @@ const TeamCollaboration = () => {
                        <div style={{ display: 'flex', gap: '1rem', marginTop: '0.75rem', fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
                           <span>{act.time}</span>
                           {act.type === 'comment' && (
-                            <button style={{ background: 'transparent', border: 'none', color: 'var(--primary-accent)', display: 'flex', alignItems: 'center', gap: '0.2rem', padding: 0, fontWeight: 800, cursor: 'pointer' }}>
+                            <button onClick={() => toast.info('Reply modal opened.')} style={{ background: 'transparent', border: 'none', color: 'var(--primary-accent)', display: 'flex', alignItems: 'center', gap: '0.2rem', padding: 0, fontWeight: 800, cursor: 'pointer' }}>
                                <Reply size={12} /> Reply
                             </button>
                           )}
@@ -126,7 +127,7 @@ const TeamCollaboration = () => {
                     <MoreVertical size={14} color="var(--text-secondary)" cursor="pointer" />
                  </div>
                ))}
-               <button style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', borderRadius: '8px', border: '1px dashed var(--glass-border)', background: 'transparent', color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+               <button onClick={() => toast.success('Invitation link copied to clipboard.')} style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', borderRadius: '8px', border: '1px dashed var(--glass-border)', background: 'transparent', color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                   <UserPlus size={14} /> Invite Member
                </button>
             </div>
@@ -141,10 +142,10 @@ const TeamCollaboration = () => {
                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Shared interactive view of project metrics and drift status.</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem' }}>
-               <button style={{ padding: '0.6rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', color: 'white', fontSize: '0.75rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+               <button onClick={() => toast.info('Filtering view: Last 24h')} style={{ padding: '0.6rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', color: 'white', fontSize: '0.75rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                   <CalendarDays size={14} /> Last 24h
                </button>
-               <button style={{ padding: '0.6rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', color: 'white', fontSize: '0.75rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+               <button onClick={() => toast.success('View snapshot link generated!')} style={{ padding: '0.6rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', color: 'white', fontSize: '0.75rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                   <Share2 size={14} /> Share View
                </button>
             </div>
@@ -241,7 +242,9 @@ const TeamCollaboration = () => {
       </section>
 
       {/* Floating Action Button */}
-      <button style={{ 
+      <button 
+        onClick={() => toast.info('Opening new discussion thread...')}
+        style={{ 
         position: 'fixed', bottom: '2rem', right: '2rem', 
         width: '60px', height: '60px', borderRadius: '50%', 
         background: 'linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)',

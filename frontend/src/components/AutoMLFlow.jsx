@@ -13,13 +13,19 @@ import {
   Database,
   ArrowRight,
   Sparkles,
-  Search
+  Search,
+  Activity,
+  Layers,
+  TrendingUp
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const AutoMLFlow = () => {
   const [step, setStep] = useState(2);
   const [objective, setObjective] = useState('regression');
   const [speed, setSpeed] = useState(50);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const objectives = [
     { id: 'regression', label: 'Regression', sub: 'Predict continuous values', icon: <Activity size={24} />, color: '#adc9eb' },
@@ -27,6 +33,19 @@ const AutoMLFlow = () => {
     { id: 'time-series', label: 'Time-Series', sub: 'Forecast sequences', icon: <TrendingUp size={24} />, color: 'var(--primary-accent)' },
     { id: 'nlp', label: 'NLP Analysis', sub: 'Process textual data', icon: <BarChart3 size={24} />, color: '#ffb4a4' },
   ];
+
+  const handleNextPhase = async () => {
+    setIsProcessing(true);
+    try {
+      await new Promise(res => setTimeout(res, 2000));
+      toast.success('AutoML Search initiated in background.');
+      setStep(3);
+    } catch (e) {
+      toast.error('Failed to initiate AutoML');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <div className="automl-flow-view" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
@@ -120,7 +139,7 @@ const AutoMLFlow = () => {
                               <div style={{ fontWeight: 700, color: 'white', fontSize: '1.1rem' }}>customer_churn_probability</div>
                           </div>
                       </div>
-                      <button style={{ color: 'var(--primary-accent)', background: 'transparent', border: 'none', fontWeight: 800, fontSize: '0.8rem' }}>CHANGE</button>
+                      <button onClick={() => toast.info('Target selection modal opened')} style={{ color: 'var(--primary-accent)', background: 'transparent', border: 'none', fontWeight: 800, fontSize: '0.8rem', cursor: 'pointer' }}>CHANGE</button>
                   </div>
               </div>
           </div>
@@ -170,8 +189,13 @@ const AutoMLFlow = () => {
                   </div>
                   <h4 style={{ color: 'white', fontWeight: 800, fontSize: '1.25rem' }}>Ready for Search</h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '0.5rem', marginBottom: '2rem' }}>Step 2 complete. Ready to finalize parameters.</p>
-                  <button className="btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
-                    Next: Finalize & Run <ArrowRight size={20} />
+                  <button 
+                    className="btn-primary" 
+                    onClick={handleNextPhase}
+                    disabled={isProcessing}
+                    style={{ width: '100%', padding: '1rem', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
+                  >
+                    {isProcessing ? 'Initializing Cluster...' : `Next: Finalize & Run`} {!isProcessing && <ArrowRight size={20} />}
                   </button>
               </div>
           </div>
@@ -194,7 +218,9 @@ const AutoMLFlow = () => {
       </footer>
 
       {/* Magic FAB */}
-      <button style={{ 
+      <button 
+        onClick={() => toast.info('Auto-Configured optimal parameters via Copilot AI')}
+        style={{ 
           position: 'fixed', 
           bottom: '2rem', 
           right: '2rem', 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlassCard from './common/GlassCard';
+import { toast } from 'react-toastify';
 import { 
   Network, 
   Settings2, 
@@ -11,6 +12,29 @@ import {
 
 const CorrelationMatrix = () => {
   const [method, setMethod] = useState('pearson');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [activeVars, setActiveVars] = useState({
+    0: true, 1: true, 2: true, 3: true, 4: true, 5: false, 6: false
+  });
+
+  const handleMethodChange = async (newMethod) => {
+    setIsProcessing(true);
+    setMethod(newMethod);
+    try {
+       await new Promise(r => setTimeout(r, 1200));
+       toast.success(`${newMethod === 'pearson' ? 'Pearson' : 'Spearman'} correlation recalculated`);
+    } finally {
+       setIsProcessing(false);
+    }
+  };
+
+  const toggleVar = async (index, name) => {
+    const newState = !activeVars[index];
+    setActiveVars(prev => ({ ...prev, [index]: newState }));
+    toast.info(`Updating matrix for ${name}...`, { autoClose: 1000 });
+    setIsProcessing(true);
+    setTimeout(() => setIsProcessing(false), 800);
+  };
   
   const variables = [
     'Customer Age', 'Purchase Freq', 'Product Rating', 'Site Visits', 
@@ -65,8 +89,13 @@ const CorrelationMatrix = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                {variables.map((v, i) => (
                  <label key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
-                    <input type="checkbox" defaultChecked={i < 5} style={{ accentColor: 'var(--primary-accent)' }} />
-                    <span style={{ color: i < 5 ? 'white' : 'inherit' }}>{v}</span>
+                    <input 
+                      type="checkbox" 
+                      checked={activeVars[i]} 
+                      onChange={() => toggleVar(i, v)}
+                      style={{ accentColor: 'var(--primary-accent)' }} 
+                    />
+                    <span style={{ color: activeVars[i] ? 'white' : 'inherit' }}>{v}</span>
                  </label>
                ))}
             </div>
@@ -76,12 +105,12 @@ const CorrelationMatrix = () => {
             <h3 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--primary-accent)', textTransform: 'uppercase', marginBottom: '1rem' }}>Correlation Method</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', cursor: 'pointer' }}>
-                  <input type="radio" name="method" checked={method === 'pearson'} onChange={() => setMethod('pearson')} style={{ accentColor: 'var(--primary-accent)' }} />
-                  <span>Pearson (Linear)</span>
+                  <input type="radio" name="method" checked={method === 'pearson'} onChange={() => handleMethodChange('pearson')} style={{ accentColor: 'var(--primary-accent)' }} />
+                  <span style={{ color: method === 'pearson' ? 'white' : 'var(--text-secondary)' }}>Pearson (Linear)</span>
                </label>
-               <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
-                  <input type="radio" name="method" checked={method === 'spearman'} onChange={() => setMethod('spearman')} style={{ accentColor: 'var(--primary-accent)' }} />
-                  <span>Spearman (Rank-based)</span>
+               <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', cursor: 'pointer' }}>
+                  <input type="radio" name="method" checked={method === 'spearman'} onChange={() => handleMethodChange('spearman')} style={{ accentColor: 'var(--primary-accent)' }} />
+                  <span style={{ color: method === 'spearman' ? 'white' : 'var(--text-secondary)' }}>Spearman (Rank-based)</span>
                </label>
             </div>
           </GlassCard>
@@ -94,13 +123,13 @@ const CorrelationMatrix = () => {
               <Maximize2 size={16} style={{ color: 'var(--text-secondary)', cursor: 'pointer' }} />
            </div>
 
-           <div style={{ overflow: 'auto', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '2rem' }}>
+           <div style={{ overflow: 'auto', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '2rem', transition: 'opacity 0.3s', opacity: isProcessing ? 0.3 : 1 }}>
               
               <table style={{ borderSpacing: '6px', borderCollapse: 'separate' }}>
                 <thead>
                   <tr>
                     <th style={{ width: '120px' }}></th>
-                    {variables.map((v, i) => (
+                    {variables.map((v, i) => activeVars[i] && (
                       <th key={i} style={{ height: '100px', verticalAlign: 'bottom', paddingBottom: '0.5rem' }}>
                          <div style={{ writingMode: 'vertical-rl', transform: 'rotate(225deg)', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600, whiteSpace: 'nowrap' }}>
                             {v}
@@ -110,12 +139,12 @@ const CorrelationMatrix = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {variables.map((rowVar, rIdx) => (
+                  {variables.map((rowVar, rIdx) => activeVars[rIdx] && (
                     <tr key={rIdx}>
                        <td style={{ textAlign: 'right', paddingRight: '1rem', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
                           {rowVar}
                        </td>
-                       {mockData[rIdx].map((val, cIdx) => (
+                       {mockData[rIdx].map((val, cIdx) => activeVars[cIdx] && (
                          <td key={cIdx} style={{ padding: 0 }}>
                             <div 
                               style={{ 
@@ -134,6 +163,7 @@ const CorrelationMatrix = () => {
                                 transition: 'transform 0.1s'
                               }}
                               title={`${rowVar} vs ${variables[cIdx]}: ${val}`}
+                              onClick={() => toast.info(`Detailed view for ${rowVar} & ${variables[cIdx]} not available in preview.`)}
                               className="matrix-cell-hover"
                             >
                                {val > 0 && val !== 1.00 ? `+${val}` : val.toFixed(2)}

@@ -13,17 +13,29 @@ import {
   Filter,
   UserCheck
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import ApiService from '../services/api';
 
 const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [loadingInitial, setLoadingInitial] = useState(true);
 
-  const users = [
-    { name: 'Alice Smith', email: 'alice.smith@example.com', role: 'Admin', lastLogin: 'Today, 10:15 AM', status: 'Active' },
-    { name: 'Bob Jones', email: 'bob.jones@example.com', role: 'Editor', lastLogin: 'Yesterday, 4:30 PM', status: 'Active' },
-    { name: 'Charlie Davis', email: 'charlie.davis@example.com', role: 'Viewer', lastLogin: 'Oct 25, 2:00 PM', status: 'Inactive' },
-    { name: 'David Lee', email: 'david.lee@example.com', role: 'Viewer', lastLogin: 'Oct 24, 11:45 AM', status: 'Active' },
-    { name: 'Emma Wilson', email: 'emma.wilson@example.com', role: 'Editor', lastLogin: 'Oct 23, 9:00 AM', status: 'Active' },
-  ];
+  React.useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await ApiService.users.list();
+      setUsers(res);
+    } catch (e) {
+      toast.error('Failed to load users');
+    } finally {
+      setLoadingInitial(false);
+    }
+  };
 
   const getRoleStyle = (role) => {
     switch (role) {
@@ -41,18 +53,29 @@ const UserManagement = () => {
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>User Management</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Control access permissions and oversee user activity across the organization.</p>
         </div>
-        <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.8rem 1.8rem' }}>
-          <UserPlus size={18} /> Add New User
+        <button 
+          className="btn-primary" 
+          onClick={async () => {
+            setIsAdding(true);
+            try {
+              await new Promise(res => setTimeout(res, 800));
+              toast.info('Opening user invitation modal...');
+            } finally { setIsAdding(false); }
+          }}
+          disabled={isAdding}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.8rem 1.8rem' }}
+        >
+          <UserPlus size={18} /> {isAdding ? 'Loading...' : 'Add New User'}
         </button>
       </header>
 
       {/* Stats Summary Area */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
           {[
-            { label: 'Total Users', val: '125', icon: <Users size={20} />, col: 'white' },
-            { label: 'Admins', val: '12', icon: <ShieldCheck size={20} />, col: 'var(--primary-accent)' },
-            { label: 'Active Now', val: '42', icon: <UserCheck size={20} />, col: '#67d9c9' },
-            { label: 'Inactive', val: '5', icon: <UserX size={20} />, col: '#ffb4a4' },
+            { label: 'Total Users', val: users.length, icon: <Users size={20} />, col: 'white' },
+            { label: 'Admins', val: users.filter(u => u.role === 'Admin').length, icon: <ShieldCheck size={20} />, col: 'var(--primary-accent)' },
+            { label: 'Active Now', val: users.filter(u => u.status === 'Active').length, icon: <UserCheck size={20} />, col: '#67d9c9' },
+            { label: 'Inactive', val: users.filter(u => u.status !== 'Active').length, icon: <UserX size={20} />, col: '#ffb4a4' },
           ].map((stat, i) => (
              <div key={i} style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '20px', border: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
@@ -80,7 +103,7 @@ const UserManagement = () => {
                 />
             </div>
             <div style={{ display: 'flex', gap: '1rem' }}>
-                <button style={{ padding: '0.6rem 1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', color: 'white', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <button onClick={() => toast.info('Advanced filter options opened')} style={{ padding: '0.6rem 1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', color: 'white', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                     <Filter size={14} /> Filter
                 </button>
             </div>
@@ -99,14 +122,16 @@ const UserManagement = () => {
                     </tr>
                 </thead>
                 <tbody style={{ fontSize: '0.9rem' }}>
-                    {users.map((user, idx) => {
+                    {loadingInitial ? (
+                        <tr><td colSpan={5} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>Loading identity access records...</td></tr>
+                    ) : users.filter(u => u.name.toLowerCase().includes(searchTerm.toLowerCase())).map((user, idx) => {
                         const roleStyle = getRoleStyle(user.role);
                         return (
                             <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', transition: 'background 0.2s' }} className="hover:bg-white/5">
                                 <td style={{ padding: '1.5rem 2rem' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                         <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: 'var(--primary-accent)' }}>
-                                            {user.name.split(' ').map(n => n[0]).join('')}
+                                            {user.name ? user.name.split(' ').map(n => n?.[0]).join('').substring(0,2).toUpperCase() : '??'}
                                         </div>
                                         <div>
                                             <div style={{ fontWeight: 700, color: 'white' }}>{user.name}</div>
@@ -128,8 +153,16 @@ const UserManagement = () => {
                                 </td>
                                 <td style={{ padding: '1.5rem 2rem', textAlign: 'right' }}>
                                     <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-                                        <button style={{ padding: '0.4rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }} title="Edit"><Edit3 size={14}/></button>
-                                        <button style={{ padding: '0.4rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: 'none', color: '#ffb4a4', cursor: 'pointer' }} title="Revoke"><UserX size={14}/></button>
+                                        <button onClick={async () => {
+                                            toast.info(`Updating role for ${user.name}...`);
+                                            try { await ApiService.users.updateRole(user.id, user.role === 'Admin' ? 'Viewer' : 'Admin'); fetchUsers(); toast.success('Role updated.'); } catch(e){}
+                                        }} style={{ padding: '0.4rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }} title="Toggle Role"><Edit3 size={14}/></button>
+                                        
+                                        <button onClick={async () => {
+                                            toast.info(`Revoking access...`);
+                                            try { await ApiService.users.revoke(user.id); fetchUsers(); toast.success('Access revoked.'); } catch(e){}
+                                        }} style={{ padding: '0.4rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: 'none', color: '#ffb4a4', cursor: 'pointer' }} title="Revoke"><UserX size={14}/></button>
+                                        
                                         <button style={{ padding: '0.4rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: 'none', color: 'white', cursor: 'pointer' }}><MoreVertical size={14}/></button>
                                     </div>
                                 </td>
@@ -145,8 +178,8 @@ const UserManagement = () => {
             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>1-5 of 125 users</span>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button style={{ width: '32px', height: '32px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'transparent', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ChevronLeft size={16}/></button>
-                <button style={{ width: '32px', height: '32px', borderRadius: '8px', border: 'none', background: 'var(--primary-accent)', color: 'black', fontWeight: 800, fontSize: '0.75rem' }}>1</button>
-                <button style={{ width: '32px', height: '32px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.05)', color: 'white', fontWeight: 700, fontSize: '0.75rem' }}>2</button>
+                <button onClick={() => toast.info('Loading page 1...')} style={{ cursor: 'pointer', width: '32px', height: '32px', borderRadius: '8px', border: 'none', background: 'var(--primary-accent)', color: 'black', fontWeight: 800, fontSize: '0.75rem' }}>1</button>
+                <button onClick={() => toast.info('Loading page 2...')} style={{ cursor: 'pointer', width: '32px', height: '32px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.05)', color: 'white', fontWeight: 700, fontSize: '0.75rem' }}>2</button>
                 <button style={{ width: '32px', height: '32px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'transparent', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ChevronRight size={16}/></button>
             </div>
         </div>

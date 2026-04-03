@@ -12,6 +12,8 @@ from database import get_db
 from models import User, AnalysisHistory
 from auth import get_current_user
 from pydantic import BaseModel
+from fastapi.responses import StreamingResponse
+import io
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/transform", tags=["Data Transformation"])
@@ -40,6 +42,16 @@ class NormalizeRequest(BaseModel):
 class PipelineRequest(BaseModel):
     data: List[Dict[str, Any]]
     steps: List[Dict[str, Any]]
+
+
+class QueryRequest(BaseModel):
+    sql: str
+    db_type: str = "postgresql"
+
+
+class ExportRequest(BaseModel):
+    data: List[Dict[str, Any]]
+    format: str = "csv"
 
 
 @router.post("/filter")
@@ -186,3 +198,56 @@ async def run_pipeline(
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/query")
+async def run_sql_query(
+    req: QueryRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """Execute arbitrary SQL query (Simulation for OpenSource Excel/DataExplorer)"""
+    try:
+        # In a real app we'd run this using sqlalchemy against a connected warehouse
+        # Here we mock it based on the ML_analytics nature.
+        simulated_results = [
+            {"id": 1, "username": "almin", "email": "almin01@example.com", "created_at": "2023-01-01 06:58:33"},
+            {"id": 2, "username": "jane_doe", "email": "jane@gmail.com", "created_at": "2023-01-02 12:45:00"},
+            {"id": 3, "username": "bob_builder", "email": "bob@example.com", "created_at": "2023-01-03 08:30:00"},
+            {"id": 4, "username": "alex", "email": "alex@analytics.co", "created_at": "2023-01-04 18:20:10"}
+        ]
+        
+        # Log the query for audit purposes
+        logger.info(f"User {current_user.id} ran SQL query: {req.sql}")
+        
+        return {
+            "query": req.sql,
+            "status": "success",
+            "rows_returned": len(simulated_results),
+            "data": simulated_results
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/export")
+async def export_data(
+    req: ExportRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """Export tabular data to CSV or JSON format"""
+    try:
+        df = pd.DataFrame(req.data)
+        
+        if req.format == "csv":
+            stream = io.StringIO()
+            df.to_csv(stream, index=False)
+            response = StreamingResponse(iter([stream.getvalue()]), media_type="text/csv")
+            response.headers["Content-Disposition"] = "attachment; filename=export.csv"
+            return response
+        elif req.format == "json":
+            return df.to_dict(orient="records")
+        else:
+            raise HTTPException(status_code=400, detail="Unsupported export format.")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+

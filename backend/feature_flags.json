@@ -1,0 +1,10 @@
+{
+  "enable_comprehensive_analysis": true,
+  "enable_job_scheduler":          true,
+  "enable_ml_predictions":         false,
+  "enable_redis_cache":            false,
+  "enable_event_bus":              true,
+  "enable_api_v2":                 false,
+  "enable_2fa":                    true,
+  "enable_rate_limiting":          false
+}
